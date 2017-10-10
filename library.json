@@ -1,0 +1,32 @@
+{
+  "machineName": "H5P.ThreeImage",
+  "title": "Interactive Explorer",
+  "description": "Explore an interactive world in 3d. (much cooler than it sounds)",
+  "license": "MIT",
+  "author": "Joubel AS (icc)",
+  "majorVersion": 0,
+  "minorVersion": 1,
+  "patchVersion": 0,
+  "runnable": 1,
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 14
+  },
+  "preloadedJs": [
+    {
+      "path": "scripts/three-image.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "styles/three-image.css"
+    }
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.ThreeSixty",
+      "majorVersion": 0,
+      "minorVersion": 1
+    }
+  ]
+}
