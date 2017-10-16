@@ -42,6 +42,17 @@ H5P.ThreeImage = (function (EventDispatcher, ThreeSixty) {
       threeSixty = new H5P.ThreeSixty(this, 16 / 9);
       wrapper.appendChild(threeSixty.element);
       threeSixty.resize();
+
+      var tim = document.createElement('div');
+      tim.classList.add('tim');
+      tim.innerText = 'This is Tim!';
+
+      var head = document.createElement('img');
+      head.classList.add('head');
+      head.src = 'tim.png';
+
+      threeSixty.add(tim, {yaw: -3.2303426535897932, pitch: 0.1375}, true);
+      threeSixty.add(head, {yaw: -3.201592653589793, pitch: 0.028749999999999994}, true);
     };
 
     /**
@@ -59,6 +70,13 @@ H5P.ThreeImage = (function (EventDispatcher, ThreeSixty) {
       $container[0].classList.add('h5p-three-image');
     };
 
+    // Handle resize
+    self.on('resize', function () {
+      wrapper.style.height = (wrapper.getBoundingClientRect().width * (9/16)) + 'px';
+      if (threeSixty) {
+        threeSixty.resize();
+      }
+    });
   }
 
   return ThreeImage;

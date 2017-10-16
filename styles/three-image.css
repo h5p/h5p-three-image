@@ -1,4 +1,15 @@
 .h5p-three-image {
-  width: 958px;
-  height: 538.875px;
+}
+.tim {
+  padding: 0.5em 1em;
+  background: rgba(0,0,0,0.8);
+  color: #BadA55;
+}
+.debug-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: blue;
+  background: rgba(255,255,255,0.75);
+  padding: 2px 4px;
 }
