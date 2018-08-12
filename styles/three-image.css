@@ -1,15 +1,144 @@
 .h5p-three-image {
 }
-.tim {
-  padding: 0.5em 1em;
-  background: rgba(0,0,0,0.8);
-  color: #BadA55;
-}
-.debug-text {
+
+
+.outer-nav-button {
   position: absolute;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: white;
+  width: 4.5em;
+  height: 4.5em;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #fff;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+}
+
+.nav-button-pulsar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 4.5em;
+  height: 4.5em;
+  border: 0.3em solid #fff;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.nav-button-pulsar:hover {
+  animation: nav-button-pulse 1.5s linear infinite;
+}
+
+@keyframes nav-button-pulse {
+  0% {
+    width: 4.5em;
+    height: 4.5em;
+    opacity: 1;
+  }
+
+  75% {
+    width: 5.5em;
+    height: 5.5em;
+    opacity: 0;
+  }
+
+  100% {
+    width: 5.5em;
+    height: 5.5em;
+    opacity: 0;
+  }
+}
+
+.nav-button-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.5em;
+}
+
+.h5p-image-popup {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   left: 0;
-  color: blue;
-  background: rgba(255,255,255,0.75);
-  padding: 2px 4px;
+  top: 0;
+  background: black;
+}
+
+.h5p-image {
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.h5p-close-button {
+  position: absolute;
+  left: 1em;
+  top: 0.75em;
+  width: 2em;
+  height: 2em;
+}
+
+.h5p-close-button .nav-button-pulsar,
+.h5p-close-button .outer-nav-button {
+  width: 2em;
+  height: 2em;
+}
+
+.h5p-close-button .nav-button-pulsar {
+  border: 0.15em solid #fff;
+}
+
+.h5p-close-button .nav-button {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.h5p-close-button .nav-button-icon {
+  width: 0.5em;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.h5p-close-button .nav-button-pulsar:hover {
+  animation: close-button-pulsars 1s linear infinite;
+}
+
+@keyframes close-button-pulsars {
+  0% {
+    width: 2em;
+    height: 2em;
+    opacity: 1;
+  }
+
+  75% {
+    width: 2.5em;
+    height: 2.5em;
+    opacity: 0;
+  }
+
+  100% {
+    width: 2.5em;
+    height: 2.5em;
+    opacity: 0;
+  }
 }

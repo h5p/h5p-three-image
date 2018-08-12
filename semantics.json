@@ -1,8 +1,184 @@
 [
   {
-    "name": "file",
-    "type": "image",
-    "label": "Sphere Image",
-    "importance": "high"
+    "name": "startimage",
+    "type": "group",
+    "label": "Start image",
+    "fields": [
+      {
+        "name": "enablestartimage",
+        "type": "boolean",
+        "label": "Enable start image",
+        "default": false
+      },
+      {
+        "name": "startimages",
+        "type": "list",
+        "label": "Start images",
+        "entity": "Start image",
+        "min": 0,
+        "max": 10,
+        "field": {
+          "name": "imagegrp",
+          "type": "group",
+          "label": "Image group",
+          "fields": [
+            {
+              "name": "imagesrc",
+              "type": "image",
+              "label": "Image source"
+            },
+            {
+              "name": "imagepos",
+              "type": "text",
+              "label": "Image position"
+            },
+            {
+              "name": "imagetexts",
+              "type": "list",
+              "label": "Image texts",
+              "entity": "Image text",
+              "min": 0,
+              "max": 10,
+              "field": {
+                "name": "textgrp",
+                "type": "group",
+                "label": "Text group",
+                "fields": [
+                  {
+                    "name": "imagetext",
+                    "type": "text",
+                    "label": "Image text"
+                  },
+                  {
+                    "name": "textpos",
+                    "type": "text",
+                    "label": "Text position"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "scenes",
+    "type": "list",
+    "label": "Scenes",
+    "entity": "Scene",
+    "min": 1,
+    "mix": 20,
+    "widgets": [
+      {
+        "name": "VerticalTabs",
+        "label": "Default"
+      }
+    ],
+    "field": {
+      "name": "scene",
+      "type": "group",
+      "fields": [
+        {
+          "name": "scenename",
+          "type": "text",
+          "label": "Scene name",
+          "description": "Must be unique, used for navigation between scenes"
+        },
+        {
+          "name": "scenesrc",
+          "type": "image",
+          "label": "Scene source"
+        },
+        {
+          "name": "scenedescription",
+          "type": "text",
+          "label": "Scene description",
+          "optional": true
+        },
+        {
+          "name": "navigationhotspots",
+          "type": "list",
+          "label": "Navigation hotspots",
+          "entity": "Navigation hotspot",
+          "min": 0,
+          "max": 10,
+          "field": {
+            "name": "navigationgroup",
+            "type": "group",
+            "label": "Navigation group",
+            "fields": [
+              {
+                "name": "toscene",
+                "type": "text",
+                "label": "Name of scene",
+                "description": "Must match a scene's name exactly to work"
+              },
+              {
+                "name": "hotspotpos",
+                "type": "text",
+                "label": "Hotspot position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "sceneimages",
+          "type": "list",
+          "label": "Scene images",
+          "entity": "Scene image",
+          "min": 0,
+          "max": 10,
+          "field": {
+            "name": "imagegrp",
+            "type": "group",
+            "label": "Image group",
+            "fields": [
+              {
+                "name": "imagesrc",
+                "type": "image",
+                "label": "Image source"
+              },
+              {
+                "name": "imagepos",
+                "type": "text",
+                "label": "Image position"
+              },
+              {
+                "name": "imagetexts",
+                "type": "list",
+                "label": "Image texts",
+                "entity": "Image text",
+                "min": 0,
+                "max": 10,
+                "field": {
+                  "name": "textgrp",
+                  "type": "group",
+                  "label": "Text group",
+                  "fields": [
+                    {
+                      "name": "imagetext",
+                      "type": "text",
+                      "label": "Image text"
+                    },
+                    {
+                      "name": "textpos",
+                      "type": "text",
+                      "label": "Text position"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "audio",
+    "type": "audio",
+    "label": "Audio track",
+    "optional": true
   }
 ]
