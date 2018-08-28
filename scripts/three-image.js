@@ -2,7 +2,10 @@ H5P.ThreeImage = (function (
   EventDispatcher,
   Scene,
   ImagePopup,
-  SceneDescription
+  SceneDescription,
+  TextDialog,
+  Audio,
+  StartScreen
 ) {
 
   /**
@@ -33,22 +36,63 @@ H5P.ThreeImage = (function (
       self.imageButtonIcon = self.getLibraryFilePath('assets/image.svg');
       self.navButtonIcon = self.getLibraryFilePath('assets/navigation.svg');
       self.infoButtonIcon = self.getLibraryFilePath('assets/info.svg');
+      self.closeButtonIcon = self.getLibraryFilePath('assets/close.svg');
+      self.audioOnButtonIcon = self.getLibraryFilePath('assets/soundon.svg');
+      self.audioOffButtonIcon = self.getLibraryFilePath('assets/soundoff.svg');
 
       // Create wrapper
       wrapper = document.createElement('div');
       wrapper.classList.add('h5p-three-sixty-wrapper');
 
-      self.sceneDescription = new SceneDescription();
       self.imagePopup = new ImagePopup(wrapper, self.navButtonIcon);
+      self.textDialog = new TextDialog(wrapper, self.closeButtonIcon);
+      self.imageTextDialog = new TextDialog(wrapper, self.closeButtonIcon);
+      self.sceneDescription = new SceneDescription(
+        wrapper,
+        self.textDialog,
+        self.infoButtonIcon
+      );
+      if (parameters.audio && parameters.audio[0] && parameters.audio[0].path) {
+        self.audio = new Audio(
+          H5P.getPath(parameters.audio[0].path, contentId),
+          wrapper,
+          self.audioOnButtonIcon,
+          self.audioOffButtonIcon
+        );
+      }
       console.log("what are my parameters today ?", parameters);
 
-      if (!parameters.scenes) {
-        return;
-      }
+      if (parameters.startimage && parameters.startimage.enablestartimage) {
+        self.startScreen = new StartScreen(
+          wrapper,
+          parameters.startimage,
+          contentId,
+          self.navButtonIcon,
+          self.imageButtonIcon,
+          self.infoButtonIcon,
+          self.closeButtonIcon
+        );
 
-      parameters.scenes.forEach(function (sceneParams, sceneIndex) {
-        self.initScene(sceneParams, sceneIndex);
-      });
+        self.startScreen.on('exit', function () {
+          if (!parameters.scenes) {
+            return;
+          }
+
+          parameters.scenes.forEach(function (sceneParams, sceneIndex) {
+            self.initScene(sceneParams, sceneIndex);
+          });
+        })
+
+      }
+      else {
+        if (!parameters.scenes) {
+          return;
+        }
+
+        parameters.scenes.forEach(function (sceneParams, sceneIndex) {
+          self.initScene(sceneParams, sceneIndex);
+        });
+      }
     };
 
     self.initScene = function (sceneParams, sceneIndex) {
@@ -82,19 +126,34 @@ H5P.ThreeImage = (function (
 
       // Listen for images
       scene.on('showImage', function (e) {
-        self.imagePopup.setImage(H5P.getPath(e.data, contentId));
+        self.sceneDescription.hide();
+        var image = e.data;
+        var src = image.imagesrc.path;
+        self.imagePopup.setImage(H5P.getPath(src, contentId));
+        self.imagePopup.setImageTexts(
+          image.imagetexts,
+          self.imageTextDialog,
+          self.infoButtonIcon,
+          self.closeButtonIcon
+        );
         self.imagePopup.show();
+      });
+
+      self.imagePopup.on('hideImage', function () {
+        self.sceneDescription.show();
       });
     };
 
     self.navigateToScene = function (sceneName) {
-      // Remove all children
-      while (wrapper.firstChild) {
-        wrapper.removeChild(wrapper.firstChild);
-      }
-
-      // Make sure all other scenes have stopped rendering
+      // Make sure all other scenes have stopped rendering and been removed
       self.scenes.forEach(function (scene) {
+        if (scene.isActive) {
+          var activeScene = scene.getElement();
+          if (activeScene) {
+            wrapper.removeChild(scene.getElement());
+          }
+        }
+
         scene.stop();
       });
 
@@ -111,12 +170,15 @@ H5P.ThreeImage = (function (
 
     self.setSceneText = function (scene) {
       var text = scene.getText();
+      self.sceneDescription.setText(text);
 
       if (text) {
         // Set text and display text icon
+        self.sceneDescription.show();
       }
       else {
         // Remove text
+        self.sceneDescription.hide();
       }
     };
 
@@ -146,5 +208,6 @@ H5P.ThreeImage = (function (
 
   return ThreeImage;
 })(H5P.EventDispatcher, H5P.ThreeImage.Scene, H5P.ThreeImage.ImagePopup,
-  H5P.ThreeImage.SceneDescription
+  H5P.ThreeImage.SceneDescription, H5P.ThreeImage.TextDialog,
+  H5P.ThreeImage.Audio, H5P.ThreeImage.StartScreen
 );

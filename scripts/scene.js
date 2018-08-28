@@ -15,7 +15,7 @@ H5P.ThreeImage.Scene = (function (EventDispatcher) {
       return;
     }
 
-    self.addImageButtonToScene = function (yaw, pitch, imagePath) {
+    self.addImageButtonToScene = function (yaw, pitch, image) {
       var navButtonWrapper = document.createElement('div');
       navButtonWrapper.classList.add('nav-button-wrapper');
 
@@ -35,7 +35,7 @@ H5P.ThreeImage.Scene = (function (EventDispatcher) {
       var navButtonPulsar = document.createElement('div');
       navButtonPulsar.classList.add('nav-button-pulsar');
       navButtonPulsar.addEventListener('click', function () {
-        self.trigger('showImage', imagePath);
+        self.trigger('showImage', image);
       });
       navButtonWrapper.appendChild(navButtonPulsar);
 
@@ -74,7 +74,7 @@ H5P.ThreeImage.Scene = (function (EventDispatcher) {
     };
 
     self.resize = function () {
-      if (self.isActive) {
+      if (self.isActive && self.scene) {
         self.scene.resize();
       }
     };
@@ -133,10 +133,13 @@ H5P.ThreeImage.Scene = (function (EventDispatcher) {
         var pos = image.imagepos.split(',');
         var yaw = pos[0];
         var pitch = pos[1];
-        var path = image.imagesrc.path;
-        self.addImageButtonToScene(yaw, pitch, path);
+        self.addImageButtonToScene(yaw, pitch, image);
       });
     };
+
+    self.getText = function () {
+      return self.params.scenedescription;
+    }
   }
 
 

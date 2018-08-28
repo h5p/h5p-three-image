@@ -1,11 +1,19 @@
 H5P.ThreeImage = H5P.ThreeImage || {};
 
-H5P.ThreeImage.SceneDescription = (function () {
+H5P.ThreeImage.Audio = (function () {
+  function Audio(audioSrc, wrapper, audioOnIcon, audioOffIcon) {
+    var self = this;
+    self.isPlaying = false;
 
-  function SceneDescription(wrapper, textDialog, infoButtonIconSrc) {
-    // Info button
+    // Image button
     var navButtonWrapper = document.createElement('div');
     navButtonWrapper.classList.add('nav-button-wrapper');
+
+    var audio = document.createElement('audio');
+    audio.src = audioSrc;
+    audio.loop = true;
+    audio.classList.add('hidden-audio');
+    wrapper.appendChild(audio);
 
     var outerNavButton = document.createElement('div');
     outerNavButton.classList.add('outer-nav-button');
@@ -16,7 +24,7 @@ H5P.ThreeImage.SceneDescription = (function () {
     navButtonWrapper.appendChild(navButton);
 
     var navButtonIcon = document.createElement('img');
-    navButtonIcon.src = infoButtonIconSrc;
+    navButtonIcon.src = audioOnIcon;
     navButtonIcon.classList.add('nav-button-icon');
     navButton.appendChild(navButtonIcon);
 
@@ -24,31 +32,27 @@ H5P.ThreeImage.SceneDescription = (function () {
     navButtonPulsar.classList.add('nav-button-pulsar');
     navButtonPulsar.classList.add('no-pulse');
     navButtonPulsar.addEventListener('click', function () {
-      textDialog.show();
+      if (self.isPlaying) {
+        navButtonWrapper.classList.remove('mute');
+        navButtonIcon.src = audioOnIcon;
+        self.isPlaying = false;
+        audio.pause();
+      }
+      else {
+        navButtonWrapper.classList.add('mute');
+        navButtonIcon.src = audioOffIcon;
+        self.isPlaying = true;
+        audio.play();
+      }
     });
     navButtonWrapper.appendChild(navButtonPulsar);
 
     navButtonWrapper.classList.add('h5p-static-button');
     navButtonWrapper.classList.add('h5p-info-button');
+    navButtonWrapper.classList.add('h5p-audio-button');
     wrapper.appendChild(navButtonWrapper);
-
-    this.setText = function (text) {
-      self.text = text;
-      if (text) {
-        textDialog.setText(text);
-      }
-    };
-
-    this.show = function () {
-      if (self.text) {
-        navButtonWrapper.classList.add('show');
-      }
-    };
-
-    this.hide = function () {
-      navButtonWrapper.classList.remove('show');
-    };
+    navButtonWrapper.classList.add('show');
   }
 
-  return SceneDescription;
+  return Audio;
 })();

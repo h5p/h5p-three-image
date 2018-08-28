@@ -11,12 +11,33 @@
         "default": false
       },
       {
+        "name": "imagesrc",
+        "type": "image",
+        "label": "Image source"
+      },
+      {
+        "name": "starttext",
+        "type": "text",
+        "widget": "html",
+        "label": "Start text",
+        "tags": [
+          "p",
+          "br",
+          "strong",
+          "em"
+        ]
+      },
+      {
+        "name": "exitpos",
+        "type": "text",
+        "label": "Exit position"
+      },
+      {
         "name": "startimages",
         "type": "list",
         "label": "Start images",
         "entity": "Start image",
         "min": 0,
-        "max": 10,
         "field": {
           "name": "imagegrp",
           "type": "group",
@@ -38,7 +59,6 @@
               "label": "Image texts",
               "entity": "Image text",
               "min": 0,
-              "max": 10,
               "field": {
                 "name": "textgrp",
                 "type": "group",
@@ -47,7 +67,14 @@
                   {
                     "name": "imagetext",
                     "type": "text",
-                    "label": "Image text"
+                    "widget": "html",
+                    "label": "Image text",
+                    "tags": [
+                      "p",
+                      "br",
+                      "strong",
+                      "em"
+                    ]
                   },
                   {
                     "name": "textpos",
@@ -93,8 +120,15 @@
         {
           "name": "scenedescription",
           "type": "text",
+          "widget": "html",
           "label": "Scene description",
-          "optional": true
+          "optional": true,
+          "tags": [
+            "p",
+            "br",
+            "strong",
+            "em"
+          ]
         },
         {
           "name": "navigationhotspots",
@@ -102,7 +136,6 @@
           "label": "Navigation hotspots",
           "entity": "Navigation hotspot",
           "min": 0,
-          "max": 10,
           "field": {
             "name": "navigationgroup",
             "type": "group",
@@ -128,7 +161,6 @@
           "label": "Scene images",
           "entity": "Scene image",
           "min": 0,
-          "max": 10,
           "field": {
             "name": "imagegrp",
             "type": "group",
@@ -150,7 +182,6 @@
                 "label": "Image texts",
                 "entity": "Image text",
                 "min": 0,
-                "max": 10,
                 "field": {
                   "name": "textgrp",
                   "type": "group",
@@ -159,12 +190,20 @@
                     {
                       "name": "imagetext",
                       "type": "text",
-                      "label": "Image text"
+                      "widget": "html",
+                      "label": "Image text",
+                      "tags": [
+                        "p",
+                        "br",
+                        "strong",
+                        "em"
+                      ]
                     },
                     {
                       "name": "textpos",
                       "type": "text",
-                      "label": "Text position"
+                      "label": "Text position",
+                      "description": "Screen position in percentages"
                     }
                   ]
                 }
