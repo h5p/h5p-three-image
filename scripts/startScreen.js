@@ -1,8 +1,7 @@
-// TODO: Refactor this copy pasta...
-H5P.ThreeImage = H5P.ThreeImage || {};
+import TextDialog from './textDialog';
 
-H5P.ThreeImage.StartScreen = (function (EventDispatcher, TextDialog) {
-  function StartScreen(
+export default class StartScreen {
+  constructor(
     wrapper,
     params,
     contentId,
@@ -12,13 +11,13 @@ H5P.ThreeImage.StartScreen = (function (EventDispatcher, TextDialog) {
     closeButtonIcon
   ) {
     var self = this;
-    EventDispatcher.call(this);
+    H5P.EventDispatcher.call(this);
 
     // Show start image
     var popup = document.createElement('div');
     popup.classList.add('h5p-image-popup');
 
-    self.startScreenTextDialog = new TextDialog(popup, closeButtonIcon);
+    // self.startScreenTextDialog = new TextDialog(popup, closeButtonIcon);
     self.imageTextButtons = [];
 
     var img = document.createElement('img');
@@ -121,7 +120,6 @@ H5P.ThreeImage.StartScreen = (function (EventDispatcher, TextDialog) {
         var navButtonPulsar = document.createElement('div');
         navButtonPulsar.classList.add('nav-button-pulsar');
         navButtonPulsar.addEventListener('click', function () {
-          console.log("closing image...");
           self.imageTextButtons.forEach(function (imageTextButton) {
             wrapper.removeChild(imageTextButton);
           });
@@ -162,8 +160,8 @@ H5P.ThreeImage.StartScreen = (function (EventDispatcher, TextDialog) {
           imageTextPulsar.classList.add('no-pulse');
           imageTextPulsar.addEventListener('click', function () {
             console.log("opening text dialog");
-            self.startScreenTextDialog.setText(imageText.imagetext);
-            self.startScreenTextDialog.show();
+            // self.startScreenTextDialog.setText(imageText.imagetext);
+            // self.startScreenTextDialog.show();
           });
           imageTextWrapper.appendChild(imageTextPulsar);
 
@@ -187,6 +185,4 @@ H5P.ThreeImage.StartScreen = (function (EventDispatcher, TextDialog) {
 
     wrapper.appendChild(popup);
   }
-
-  return StartScreen;
-})(H5P.EventDispatcher, H5P.ThreeImage.TextDialog);
+}

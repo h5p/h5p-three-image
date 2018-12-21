@@ -1,0 +1,33 @@
+{
+  "name": "h5p-three-image",
+  "version": "1.0.0",
+  "description": "Create 360 image content",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h5p/h5p-three-image.git"
+  },
+  "author": "thomasmars",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/h5p/h5p-three-image/issues"
+  },
+  "homepage": "https://github.com/h5p/h5p-three-image#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  }
+}

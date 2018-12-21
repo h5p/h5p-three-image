@@ -1,7 +1,5 @@
-H5P.ThreeImage = H5P.ThreeImage || {};
-
-H5P.ThreeImage.Audio = (function () {
-  function Audio(audioSrc, wrapper, audioOnIcon, audioOffIcon) {
+export default class Audio {
+  constructor(audioSrc, wrapper, audioOnIcon, audioOffIcon) {
     var self = this;
     self.isPlaying = false;
 
@@ -53,6 +51,4 @@ H5P.ThreeImage.Audio = (function () {
     wrapper.appendChild(navButtonWrapper);
     navButtonWrapper.classList.add('show');
   }
-
-  return Audio;
-})();
+}

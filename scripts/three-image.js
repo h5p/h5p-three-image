@@ -1,15 +1,16 @@
-H5P.ThreeImage = (function (
-  EventDispatcher,
-  Scene,
-  ImagePopup,
-  SceneDescription,
-  TextDialog,
-  Audio,
-  StartScreen
-) {
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Scene from './scene';
+import ImagePopup from './imagePopup';
+import SceneDescription from './sceneDescription';
+import TextDialog from './textDialog';
+import Audio from './audio';
+import StartScreen from './startScreen';
+
+export default class ThreeImage {
 
   /**
-   * The 360 degree panorama viewer with support for virtual reality.
+   * 360 image view.
    *
    * @class H5P.ThreeSixty
    * @extends H5P.EventDispatcher
@@ -17,15 +18,17 @@ H5P.ThreeImage = (function (
    * @param {number} ratio Display ratio of the viewport
    * @param {Function} [sourceNeedsUpdate] Determines if the source texture needs to be rerendered.
    */
-  function ThreeImage(parameters, contentId) {
+  constructor(h5pWrapper, parameters, contentId) {
     /** @alias H5P.ThreeImage# */
     var self = this;
     self.scenes = [];
 
     // Initialize event inheritance
-    EventDispatcher.call(self);
+    H5P.EventDispatcher.call(self);
 
     var wrapper;
+    let src;
+    let textDialogText = '';
 
     /**
      * Create the needed DOM elements
@@ -33,24 +36,29 @@ H5P.ThreeImage = (function (
      * @private
      */
     var createElements = function () {
-      self.imageButtonIcon = self.getLibraryFilePath('assets/image.svg');
-      self.navButtonIcon = self.getLibraryFilePath('assets/navigation.svg');
-      self.infoButtonIcon = self.getLibraryFilePath('assets/info.svg');
-      self.closeButtonIcon = self.getLibraryFilePath('assets/close.svg');
-      self.audioOnButtonIcon = self.getLibraryFilePath('assets/soundon.svg');
-      self.audioOffButtonIcon = self.getLibraryFilePath('assets/soundoff.svg');
+      self.imageButtonIcon = h5pWrapper.getLibraryFilePath('assets/image.svg');
+      self.navButtonIcon = h5pWrapper.getLibraryFilePath('assets/navigation.svg');
+      self.infoButtonIconSrc = h5pWrapper.getLibraryFilePath('assets/info.svg');
+      self.closeButtonIcon = h5pWrapper.getLibraryFilePath('assets/close.svg');
+      self.audioOnButtonIcon = h5pWrapper.getLibraryFilePath('assets/soundon.svg');
+      self.audioOffButtonIcon = h5pWrapper.getLibraryFilePath('assets/soundoff.svg');
 
       // Create wrapper
       wrapper = document.createElement('div');
       wrapper.classList.add('h5p-three-sixty-wrapper');
 
-      self.imagePopup = new ImagePopup(wrapper, self.navButtonIcon);
-      self.textDialog = new TextDialog(wrapper, self.closeButtonIcon);
-      self.imageTextDialog = new TextDialog(wrapper, self.closeButtonIcon);
+      const reactWrapper = document.createElement('div');
+      self.reactWrapper = reactWrapper;
+      wrapper.appendChild(reactWrapper);
+
+      // self.imagePopup = new ImagePopup(wrapper, self.navButtonIcon);
+      // self.textDialog = new TextDialog(wrapper, self.closeButtonIcon);
+      // self.imageTextDialog = new TextDialog(wrapper, self.closeButtonIcon);
       self.sceneDescription = new SceneDescription(
         wrapper,
-        self.textDialog,
-        self.infoButtonIcon
+        // self.textDialog,
+        null,
+        self.infoButtonIconSrc
       );
       if (parameters.audio && parameters.audio[0] && parameters.audio[0].path) {
         self.audio = new Audio(
@@ -60,7 +68,6 @@ H5P.ThreeImage = (function (
           self.audioOffButtonIcon
         );
       }
-      console.log("what are my parameters today ?", parameters);
 
       if (parameters.startimage && parameters.startimage.enablestartimage) {
         self.startScreen = new StartScreen(
@@ -69,7 +76,7 @@ H5P.ThreeImage = (function (
           contentId,
           self.navButtonIcon,
           self.imageButtonIcon,
-          self.infoButtonIcon,
+          self.infoButtonIconSrc,
           self.closeButtonIcon
         );
 
@@ -93,6 +100,74 @@ H5P.ThreeImage = (function (
           self.initScene(sceneParams, sceneIndex);
         });
       }
+    };
+
+    self.showTextDialog = function (text) {
+      textDialogText = text;
+      ReactDOM.render(
+        <div>
+          <ImagePopup
+            showing={true}
+            navButtonIcon={self.navButtonIcon}
+            infoButtonIconSrc={self.infoButtonIconSrc}
+            onHidePopup={self.onHidePopup}
+            imageSrc={H5P.getPath(src, contentId)}
+            imageTexts={self.image.imagetexts}
+            showTextDialog={self.showTextDialog}
+          />
+          <TextDialog
+            showing={true}
+            onHideTextDialog={self.onHideTextDialog}
+            closeButtonIconSrc={self.closeButtonIcon}
+            text={textDialogText}
+          />
+        </div>, self.reactWrapper);
+    };
+
+    self.onHidePopup = function () {
+      ReactDOM.render(
+        <div>
+          <ImagePopup
+            showing={false}
+            navButtonIcon={self.navButtonIcon}
+            infoButtonIconSrc={self.infoButtonIconSrc}
+            onHidePopup={self.onHidePopup}
+            imageSrc={H5P.getPath(src, contentId)}
+            imageTexts={self.image.imagetexts}
+            showTextDialog={self.showTextDialog}
+          />
+          <TextDialog
+            showing={false}
+            onHideTextDialog={self.onHideTextDialog}
+            closeButtonIconSrc={self.closeButtonIcon}
+            text={textDialogText}
+          />
+        </div>, self.reactWrapper);
+      self.sceneDescription.show();
+    };
+
+    self.onHideTextDialog = function () {
+      console.log("hiding text dialog...");
+      ReactDOM.render(
+        <div>
+          <ImagePopup
+            showing={true}
+            navButtonIcon={self.navButtonIcon}
+            infoButtonIconSrc={self.infoButtonIconSrc}
+            onHidePopup={self.onHidePopup}
+            imageSrc={H5P.getPath(src, contentId)}
+            imageTexts={self.image.imagetexts}
+            showTextDialog={self.showTextDialog}
+          />
+          <TextDialog
+            showing={false}
+            onHideTextDialog={self.onHideTextDialog}
+            closeButtonIconSrc={self.closeButtonIcon}
+            text={textDialogText}
+          />
+        </div>,
+        self.reactWrapper
+      )
     };
 
     self.initScene = function (sceneParams, sceneIndex) {
@@ -128,19 +203,39 @@ H5P.ThreeImage = (function (
       scene.on('showImage', function (e) {
         self.sceneDescription.hide();
         var image = e.data;
-        var src = image.imagesrc.path;
-        self.imagePopup.setImage(H5P.getPath(src, contentId));
-        self.imagePopup.setImageTexts(
-          image.imagetexts,
-          self.imageTextDialog,
-          self.infoButtonIcon,
-          self.closeButtonIcon
+        src = image.imagesrc.path;
+        self.image = image;
+        console.log("show image...");
+        console.log("what is image texts", image.imagetexts);
+        ReactDOM.render(
+          <div>
+            <ImagePopup
+              showing={true}
+              navButtonIcon={self.navButtonIcon}
+              infoButtonIconSrc={self.infoButtonIconSrc}
+              onHidePopup={self.onHidePopup}
+              imageSrc={H5P.getPath(src, contentId)}
+              imageTexts={self.image.imagetexts}
+              showTextDialog={self.showTextDialog}
+            />
+            <TextDialog
+              showing={false}
+              closeButtonIconSrc={self.closeButtonIcon}
+              onHideTextDialog={self.onHideTextDialog}
+              text={textDialogText}
+            />
+          </div>,
+          self.reactWrapper
         );
-        self.imagePopup.show();
-      });
+        // console.log("image text dialog", self.imageTextDialog);
 
-      self.imagePopup.on('hideImage', function () {
-        self.sceneDescription.show();
+        // self.imagePopup.setImageTexts(
+        //   image.imagetexts,
+        //   self.imageTextDialog,
+        //   self.infoButtonIcon,
+        //   self.closeButtonIcon
+        // );
+        // self.imagePopup.show();
       });
     };
 
@@ -205,9 +300,4 @@ H5P.ThreeImage = (function (
       });
     });
   }
-
-  return ThreeImage;
-})(H5P.EventDispatcher, H5P.ThreeImage.Scene, H5P.ThreeImage.ImagePopup,
-  H5P.ThreeImage.SceneDescription, H5P.ThreeImage.TextDialog,
-  H5P.ThreeImage.Audio, H5P.ThreeImage.StartScreen
-);
+}

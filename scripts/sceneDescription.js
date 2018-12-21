@@ -1,8 +1,6 @@
-H5P.ThreeImage = H5P.ThreeImage || {};
+export default class SceneDescription {
 
-H5P.ThreeImage.SceneDescription = (function () {
-
-  function SceneDescription(wrapper, textDialog, infoButtonIconSrc) {
+  constructor(wrapper, textDialog, infoButtonIconSrc) {
     // Info button
     var navButtonWrapper = document.createElement('div');
     navButtonWrapper.classList.add('nav-button-wrapper');
@@ -24,7 +22,7 @@ H5P.ThreeImage.SceneDescription = (function () {
     navButtonPulsar.classList.add('nav-button-pulsar');
     navButtonPulsar.classList.add('no-pulse');
     navButtonPulsar.addEventListener('click', function () {
-      textDialog.show();
+      // textDialog.show();
     });
     navButtonWrapper.appendChild(navButtonPulsar);
 
@@ -35,7 +33,7 @@ H5P.ThreeImage.SceneDescription = (function () {
     this.setText = function (text) {
       self.text = text;
       if (text) {
-        textDialog.setText(text);
+        // textDialog.setText(text);
       }
     };
 
@@ -49,6 +47,4 @@ H5P.ThreeImage.SceneDescription = (function () {
       navButtonWrapper.classList.remove('show');
     };
   }
-
-  return SceneDescription;
-})();
+}

@@ -1,15 +1,13 @@
-H5P.ThreeImage = H5P.ThreeImage || {};
+export default class Scene {
 
-H5P.ThreeImage.Scene = (function (EventDispatcher) {
-
-  function Scene(params, imageButtonIcon, navButtonIcon) {
+  constructor(params, imageButtonIcon, navButtonIcon) {
     var self = this;
     self.isActive = false;
     self.scene = null;
     self.params = params;
     self.imageButtonIcon = imageButtonIcon;
     self.navButtonIcon = navButtonIcon;
-    EventDispatcher.call(self);
+    H5P.EventDispatcher.call(self);
 
     if (!params || !params.scenesrc || !params.scenesrc.path) {
       return;
@@ -139,9 +137,6 @@ H5P.ThreeImage.Scene = (function (EventDispatcher) {
 
     self.getText = function () {
       return self.params.scenedescription;
-    }
+    };
   }
-
-
-  return Scene;
-})(H5P.EventDispatcher);
+}
