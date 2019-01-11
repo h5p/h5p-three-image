@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavigationHotspot from "./Scene/NavigationHotspot";
-import ImageButton from "./Scene/ImageButton";
+import NavigationButton from "../Shared/NavigationButton";
+import imageButtonIcon from '../../../assets/image.svg';
+import navButtonIcon from '../../../assets/navigation.svg';
 
 export default class Scene extends React.Component {
   constructor(props) {
@@ -54,9 +55,9 @@ export default class Scene extends React.Component {
   addNavButtonToScene(yaw, pitch, sceneName) {
     const navButtonWrapper = document.createElement('div');
     ReactDOM.render(
-      <NavigationHotspot
-        handleNavigation={this.props.navigateToScene.bind(this, sceneName)}
-        navButtonIcon={this.props.navButtonIcon}
+      <NavigationButton
+        clickHandler={this.props.navigateToScene.bind(this, sceneName)}
+        buttonIcon={navButtonIcon}
       />,
       navButtonWrapper
     );
@@ -84,9 +85,9 @@ export default class Scene extends React.Component {
   addImageButtonToScene(yaw, pitch, image) {
     const imageButtonWrapper = document.createElement('div');
     ReactDOM.render(
-      <ImageButton
-        showImage={this.props.showImage.bind(this, image)}
-        imageButtonIcon={this.props.imageButtonIcon}
+      <NavigationButton
+        clickHandler={this.props.showImage.bind(this, image)}
+        buttonIcon={imageButtonIcon}
       />,
       imageButtonWrapper
     );

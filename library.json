@@ -21,11 +21,6 @@
       "path": "dist/dist.js"
     }
   ],
-  "preloadedCss": [
-    {
-      "path": "styles/three-image.css"
-    }
-  ],
   "preloadedDependencies": [
     {
       "machineName": "H5P.ThreeSixty",

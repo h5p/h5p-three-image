@@ -1,5 +1,8 @@
 import React from 'react';
-import ImageText from "./imageText";
+import ImageText from "./ImageText";
+import NavigationButton from "../Shared/NavigationButton";
+import './ImagePopup.scss';
+import navButtonIcon from '../../../assets/navigation.svg';
 
 export default class ImagePopup extends React.Component {
 
@@ -26,19 +29,17 @@ export default class ImagePopup extends React.Component {
                 key={i}
                 textpos={imageText.textpos}
                 text={imageText.imagetext}
-                infoButtonIconSrc={this.props.infoButtonIconSrc}
                 showTextDialog={this.props.showTextDialog}
               />
             );
           })}
         </div>
-        <div className='nav-button-wrapper h5p-static-button' >
-          <div className='outer-nav-button' />
-          <div className='nav-button'>
-            <img className='nav-button-icon' src={this.props.navButtonIcon} />
-            <div className='nav-button-pulsar' onClick={this.props.onHidePopup} />
-          </div>
-        </div>
+        <NavigationButton
+          isStatic={true}
+          buttonClasses={['back-button']}
+          buttonIcon={navButtonIcon}
+          clickHandler={this.props.onHidePopup}
+        />
       </div>
     );
   }

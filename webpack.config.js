@@ -28,7 +28,10 @@ var config = {
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        include: path.resolve(__dirname, 'scripts'),
+        include: [
+          path.resolve(__dirname, 'scripts'),
+          path.resolve(__dirname, 'assets')
+        ],
         loader: 'url-loader?limit=100000'
       }
     ]

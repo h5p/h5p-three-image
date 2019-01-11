@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Scene from './scene';
-import ImagePopup from './imagePopup';
-import SceneDescription from './sceneDescription';
-import TextDialog from './textDialog';
-import Audio from './audio';
+import Scene from './components/Scene/Scene';
+import ImagePopup from './components/ImageScene/ImagePopup';
+import SceneDescription from './components/Scene/SceneDescription';
+import TextDialog from './components/Shared/TextDialog';
+import Audio from './components/Scene/Audio';
 
 export default class ThreeImage {
 
@@ -31,7 +31,6 @@ export default class ThreeImage {
     H5P.EventDispatcher.call(self);
 
     var wrapper;
-    let src;
     let textDialogText = '';
 
     // Parameters has been wrapped in the threeImage widget group
@@ -45,13 +44,6 @@ export default class ThreeImage {
      * @private
      */
     var createElements = function () {
-      self.imageButtonIcon = h5pWrapper.getLibraryFilePath('assets/image.svg');
-      self.navButtonIcon = h5pWrapper.getLibraryFilePath('assets/navigation.svg');
-      self.infoButtonIconSrc = h5pWrapper.getLibraryFilePath('assets/info.svg');
-      self.closeButtonIcon = h5pWrapper.getLibraryFilePath('assets/close.svg');
-      self.audioOnButtonIcon = h5pWrapper.getLibraryFilePath('assets/soundon.svg');
-      self.audioOffButtonIcon = h5pWrapper.getLibraryFilePath('assets/soundoff.svg');
-
       // Create wrapper
       wrapper = document.createElement('div');
       wrapper.classList.add('h5p-three-sixty-wrapper');
@@ -79,12 +71,16 @@ export default class ThreeImage {
       wrapper.appendChild(self.sceneWrapper);
 
 
+      const isShowingAudio = parameters.audio
+        && parameters.audio[0]
+        && parameters.audio[0].path;
+
       if (parameters.audio && parameters.audio[0] && parameters.audio[0].path) {
+        const audioSrc = H5P.getPath(parameters.audio[0].path, contentId);
+
         ReactDOM.render(
           <Audio
             audioSrc={H5P.getPath(parameters.audio[0].path, contentId)}
-            audioOnIcon={self.audioOnButtonIcon}
-            audioOffIcon={self.audioOffButtonIcon}
           />,
           self.audioWrapper
         );
@@ -112,8 +108,6 @@ export default class ThreeImage {
                   isActive={sceneIndex === startScene}
                   sceneParams={sceneParams}
                   imageSrc={H5P.getPath(sceneParams.scenesrc.path, contentId)}
-                  imageButtonIcon={self.imageButtonIcon}
-                  navButtonIcon={self.navButtonIcon}
                   navigateToScene={self.navigateToScene}
                   showImage={self.showImage}
                 />
@@ -129,7 +123,6 @@ export default class ThreeImage {
       ReactDOM.render(
         <SceneDescription
           showing={true}
-          infoButtonIconSrc={self.infoButtonIconSrc}
           text={description}
           showTextDialog={self.showTextDialog.bind(self)}
         />,
@@ -143,8 +136,6 @@ export default class ThreeImage {
       ReactDOM.render(
         <ImagePopup
           showing={true}
-          navButtonIcon={self.navButtonIcon}
-          infoButtonIconSrc={self.infoButtonIconSrc}
           onHidePopup={self.onHidePopup}
           imageSrc={H5P.getPath(src, contentId)}
           imageTexts={image.imagetexts}
@@ -181,8 +172,6 @@ export default class ThreeImage {
                   isActive={isActive}
                   sceneParams={sceneParams}
                   imageSrc={H5P.getPath(sceneParams.scenesrc.path, contentId)}
-                  imageButtonIcon={self.imageButtonIcon}
-                  navButtonIcon={self.navButtonIcon}
                   navigateToScene={self.navigateToScene}
                   showImage={self.showImage}
                 />
@@ -200,7 +189,6 @@ export default class ThreeImage {
         <TextDialog
           showing={true}
           onHideTextDialog={self.onHideTextDialog}
-          closeButtonIconSrc={self.closeButtonIcon}
           text={textDialogText}
         />, self.reactWrapper);
     };
@@ -215,7 +203,6 @@ export default class ThreeImage {
         <TextDialog
           showing={false}
           onHideTextDialog={self.onHideTextDialog}
-          closeButtonIconSrc={self.closeButtonIcon}
           text={textDialogText}
         />, self.reactWrapper);
 
@@ -224,7 +211,6 @@ export default class ThreeImage {
       ReactDOM.render(
         <SceneDescription
           showing={true}
-          infoButtonIconSrc={self.infoButtonIconSrc}
           text={description}
           showTextDialog={self.showTextDialog.bind(self)}
         />,

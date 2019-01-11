@@ -1,4 +1,7 @@
 import React from 'react';
+import NavigationButton from "./NavigationButton";
+import './TextDialog.scss';
+import closeButtonIcon from '../../../assets/close.svg';
 
 export default class TextDialog extends React.Component {
   constructor(props) {
@@ -17,19 +20,11 @@ export default class TextDialog extends React.Component {
               className='h5p-text-body'
               dangerouslySetInnerHTML={{__html: this.props.text }}/>
           </div>
-          <div className='nav-button-wrapper h5p-static-button'>
-            <div className='outer-nav-button' />
-            <div className='nav-button'>
-              <img
-                className='nav-button-icon'
-                src={this.props.closeButtonIconSrc}
-              />
-            </div>
-            <div
-              className='nav-button-pulsar'
-              onClick={this.props.onHideTextDialog}
-            />
-          </div>
+          <NavigationButton
+            clickHandler={this.props.onHideTextDialog}
+            buttonIcon={closeButtonIcon}
+            isStatic={true}
+          />
         </div>
       </div>
     );

@@ -1,4 +1,8 @@
 import React from 'react';
+import NavigationButton from "../Shared/NavigationButton";
+import './Audio.scss';
+import audioOnIcon from '../../../assets/soundon.svg';
+import audioOffIcon from '../../../assets/soundoff.svg';
 
 export default class Audio extends React.Component {
   constructor(props) {
@@ -26,21 +30,18 @@ export default class Audio extends React.Component {
   }
 
   render() {
-    const navWrapperClasses = [
-      'nav-button-wrapper',
-      'h5p-static-button',
-      'h5p-info-button',
+    const buttonClasses = [
       'h5p-audio-button',
-      'show',
+      'bottom-row',
     ];
 
     if (this.state.isPlaying) {
-      navWrapperClasses.push('mute');
+      buttonClasses.push('mute');
     }
 
     const audioIcon = this.state.isPlaying
-      ? this.props.audioOffIcon
-      : this.props.audioOnIcon;
+      ? audioOffIcon
+      : audioOnIcon;
 
     return (
       <div className='audio-wrapper'>
@@ -50,16 +51,13 @@ export default class Audio extends React.Component {
           src={this.props.audioSrc}
           loop={true}
         />
-        <div className={navWrapperClasses.join(' ')}>
-          <div className='outer-nav-button'/>
-          <div className='nav-button'>
-            <img className='nav-button-icon' src={audioIcon}/>
-          </div>
-          <div
-            className='nav-button-pulsar no-pulse'
-            onClick={this.toggleAudio.bind(this)}
-          />
-        </div>
+        <NavigationButton
+          isStatic={true}
+          hasNoPulse={true}
+          buttonIcon={audioIcon}
+          buttonClasses={buttonClasses}
+          clickHandler={this.toggleAudio.bind(this)}
+        />
       </div>
     );
   }
