@@ -1,142 +1,144 @@
-export default class Scene {
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavigationHotspot from "./Scene/NavigationHotspot";
+import ImageButton from "./Scene/ImageButton";
 
-  constructor(params, imageButtonIcon, navButtonIcon) {
-    var self = this;
-    self.isActive = false;
-    self.scene = null;
-    self.params = params;
-    self.imageButtonIcon = imageButtonIcon;
-    self.navButtonIcon = navButtonIcon;
-    H5P.EventDispatcher.call(self);
+export default class Scene extends React.Component {
+  constructor(props) {
+    super(props);
 
-    if (!params || !params.scenesrc || !params.scenesrc.path) {
+    this.sceneRef = React.createRef();
+
+    this.state = {
+      hasInitialized: false,
+    };
+  }
+
+  initializeScene() {
+    var imageElement = document.createElement('img');
+    imageElement.addEventListener('load', () => {
+      this.scene = new H5P.ThreeSixty(imageElement, 16 / 9);
+
+      if (this.props.isActive) {
+        this.sceneRef.current.appendChild(this.scene.element);
+        this.scene.resize();
+        this.scene.startRendering();
+      }
+
+      this.setState({
+        hasInitialized: true,
+      });
+
+      // Add buttons to scene
+      this.addNavigationHotspots(this.props.sceneParams.navigationhotspots);
+      this.addImageHotspots(this.props.sceneParams.sceneimages);
+    });
+    imageElement.src = this.props.imageSrc;
+  }
+
+  addNavigationHotspots(hotspots) {
+    if (!hotspots) {
       return;
     }
 
-    self.addImageButtonToScene = function (yaw, pitch, image) {
-      var navButtonWrapper = document.createElement('div');
-      navButtonWrapper.classList.add('nav-button-wrapper');
+    hotspots.forEach((hotspot) => {
+      var pos = hotspot.hotspotpos.split(',');
+      var yaw = pos[0];
+      var pitch = pos[1];
 
-      var outerNavButton = document.createElement('div');
-      outerNavButton.classList.add('outer-nav-button');
-      navButtonWrapper.appendChild(outerNavButton);
+      this.addNavButtonToScene(yaw, pitch, hotspot.toscene);
+    });
 
-      var navButton = document.createElement('div');
-      navButton.classList.add('nav-button');
-      navButtonWrapper.appendChild(navButton);
+  }
 
-      var navButtonIcon = document.createElement('img');
-      navButtonIcon.src = self.imageButtonIcon;
-      navButtonIcon.classList.add('nav-button-icon');
-      navButton.appendChild(navButtonIcon);
+  addNavButtonToScene(yaw, pitch, sceneName) {
+    const navButtonWrapper = document.createElement('div');
+    ReactDOM.render(
+      <NavigationHotspot
+        handleNavigation={this.props.navigateToScene.bind(this, sceneName)}
+        navButtonIcon={this.props.navButtonIcon}
+      />,
+      navButtonWrapper
+    );
 
-      var navButtonPulsar = document.createElement('div');
-      navButtonPulsar.classList.add('nav-button-pulsar');
-      navButtonPulsar.addEventListener('click', function () {
-        self.trigger('showImage', image);
-      });
-      navButtonWrapper.appendChild(navButtonPulsar);
+    this.scene.add(
+      navButtonWrapper,
+      {yaw: yaw, pitch: pitch},
+      false
+    );
+  }
 
-      self.scene.add(navButtonWrapper, {yaw: yaw, pitch: pitch}, false);
-    };
+  addImageHotspots(images) {
+    if (!images) {
+      return;
+    }
 
-    self.addNavButtonToScene = function (yaw, pitch, sceneName) {
-      var navButtonWrapper = document.createElement('div');
-      navButtonWrapper.classList.add('nav-button-wrapper');
+    images.forEach((image) => {
+      var pos = image.imagepos.split(',');
+      var yaw = pos[0];
+      var pitch = pos[1];
+      this.addImageButtonToScene(yaw, pitch, image);
+    });
+  }
 
-      var outerNavButton = document.createElement('div');
-      outerNavButton.classList.add('outer-nav-button');
-      navButtonWrapper.appendChild(outerNavButton);
+  addImageButtonToScene(yaw, pitch, image) {
+    const imageButtonWrapper = document.createElement('div');
+    ReactDOM.render(
+      <ImageButton
+        showImage={this.props.showImage.bind(this, image)}
+        imageButtonIcon={this.props.imageButtonIcon}
+      />,
+      imageButtonWrapper
+    );
 
-      var navButton = document.createElement('div');
-      navButton.classList.add('nav-button');
-      navButtonWrapper.appendChild(navButton);
+    this.scene.add(
+      imageButtonWrapper,
+      {yaw: yaw, pitch: pitch},
+      false
+    );
+  }
 
-      var navButtonIcon = document.createElement('img');
-      navButtonIcon.src = self.navButtonIcon;
-      navButtonIcon.classList.add('nav-button-icon');
-      navButton.appendChild(navButtonIcon);
+  componentDidMount() {
+    // Already initialized
+    if (this.state.isInitialized) {
+      return;
+    }
 
-      var navButtonPulsar = document.createElement('div');
-      navButtonPulsar.classList.add('nav-button-pulsar');
-      navButtonPulsar.addEventListener('click', function () {
-        self.trigger('navigate', sceneName)
-      });
-      navButtonWrapper.appendChild(navButtonPulsar);
+    this.initializeScene();
+  }
 
-      self.scene.add(navButtonWrapper, {yaw: yaw, pitch: pitch}, false);
-    };
+  componentDidUpdate(prevProps) {
+    // Check if active state was transitioned
+    if (prevProps.isActive === this.props.isActive) {
+      return;
+    }
 
-    self.getElement = function () {
-      return self.scene.element;
-    };
-
-    self.resize = function () {
-      if (self.isActive && self.scene) {
-        self.scene.resize();
+    // Remove any lingering elements
+    if (this.sceneRef.current) {
+      while (this.sceneRef.current.firstChild) {
+        this.sceneRef.current.removeChild(this.sceneRef.current.firstChild);
       }
-    };
+    }
 
-    self.activate = function () {
-      self.isActive = true;
-      self.scene.resize();
-      self.scene.startRendering();
-    };
+    // Toggle activity for scene
+    if (this.props.isActive) {
+      this.sceneRef.current.appendChild(this.scene.element);
+      this.scene.resize();
+      this.scene.startRendering();
 
-    self.stop = function () {
-      self.isActive = false;
-      self.scene.stopRendering();
-    };
+    }
+    else {
+      this.scene.stopRendering();
+    }
+  }
 
-    self.getName = function () {
-      return params.scenename;
-    };
+  render() {
+    if (!this.props.isActive) {
+      return null;
+    }
 
-    self.init = function (imageSrc, callback) {
-      var imageElement = document.createElement('img');
-      imageElement.addEventListener('load', function () {
-        self.scene = new H5P.ThreeSixty(this, 16 / 9);
-
-        // Add buttons to scene
-        self.addNavigationHotspots(params.navigationhotspots);
-        self.addImageHotspots(params.sceneimages);
-
-        if (callback) {
-          callback();
-        }
-      });
-      imageElement.src = imageSrc;
-    };
-
-    self.addNavigationHotspots = function (hotspots) {
-      if (!hotspots) {
-        return;
-      }
-
-      hotspots.forEach(function (hotspot) {
-        var pos = hotspot.hotspotpos.split(',');
-        var yaw = pos[0];
-        var pitch = pos[1];
-
-        self.addNavButtonToScene(yaw, pitch, hotspot.toscene);
-      });
-    };
-
-    self.addImageHotspots = function (images) {
-      if (!images) {
-        return;
-      }
-
-      images.forEach(function (image) {
-        var pos = image.imagepos.split(',');
-        var yaw = pos[0];
-        var pitch = pos[1];
-        self.addImageButtonToScene(yaw, pitch, image);
-      });
-    };
-
-    self.getText = function () {
-      return self.params.scenedescription;
-    };
+    return (
+      <div ref={this.sceneRef}/>
+    );
   }
 }

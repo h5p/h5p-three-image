@@ -21,7 +21,6 @@ export default class ImagePopup extends React.Component {
         }
         <div className='h5p-image-texts-container'>
           {this.props.imageTexts.map((imageText, i) => {
-            console.log("creating image text...");
             return (
               <ImageText
                 key={i}

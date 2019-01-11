@@ -4,8 +4,8 @@ import ThreeImage from "./three-image";
 H5P = H5P || {};
 H5P.ThreeImage = (function () {
 
-  function Wrapper(params, contentId) {
-    const threeImage = new ThreeImage(this, params, contentId);
+  function Wrapper(params, contentId, extras) {
+    const threeImage = new ThreeImage(this, params, contentId, extras);
 
 
     this.attach = function ($container) {

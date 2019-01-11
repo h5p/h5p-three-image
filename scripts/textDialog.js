@@ -9,7 +9,6 @@ export default class TextDialog extends React.Component {
     if (!this.props.showing) {
       return null;
     }
-
     return (
       <div className='h5p-text-overlay'>
         <div className='h5p-text-dialog'>

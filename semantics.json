@@ -1,223 +1,135 @@
 [
   {
-    "name": "startimage",
+    "name": "threeImage",
     "type": "group",
-    "label": "Start image",
+    "widget": "threeImage",
+    "label": "Three Image Editor",
+    "importance": "high",
     "fields": [
       {
-        "name": "enablestartimage",
-        "type": "boolean",
-        "label": "Enable start image",
-        "default": false
-      },
-      {
-        "name": "imagesrc",
-        "type": "image",
-        "label": "Image source"
-      },
-      {
-        "name": "starttext",
-        "type": "text",
-        "widget": "html",
-        "label": "Start text",
-        "tags": [
-          "p",
-          "br",
-          "strong",
-          "em"
-        ]
-      },
-      {
-        "name": "exitpos",
-        "type": "text",
-        "label": "Exit position"
-      },
-      {
-        "name": "startimages",
+        "name": "scenes",
         "type": "list",
-        "label": "Start images",
-        "entity": "Start image",
+        "label": "Scenes",
+        "entity": "Scene",
         "min": 0,
         "field": {
-          "name": "imagegrp",
+          "name": "scene",
           "type": "group",
-          "label": "Image group",
           "fields": [
             {
-              "name": "imagesrc",
-              "type": "image",
-              "label": "Image source"
-            },
-            {
-              "name": "imagepos",
+              "name": "scenename",
               "type": "text",
-              "label": "Image position"
+              "label": "Scene name",
+              "description": "Must be unique, used for navigation between scenes"
             },
             {
-              "name": "imagetexts",
+              "name": "scenesrc",
+              "type": "image",
+              "label": "Scene source"
+            },
+            {
+              "name": "scenedescription",
+              "type": "text",
+              "widget": "html",
+              "label": "Scene description",
+              "optional": true,
+              "tags": [
+                "p",
+                "br",
+                "strong",
+                "em"
+              ]
+            },
+            {
+              "name": "navigationhotspots",
               "type": "list",
-              "label": "Image texts",
-              "entity": "Image text",
+              "label": "Navigation hotspots",
+              "entity": "Navigation hotspot",
               "min": 0,
               "field": {
-                "name": "textgrp",
+                "name": "navigationgroup",
                 "type": "group",
-                "label": "Text group",
+                "label": "Navigation group",
                 "fields": [
                   {
-                    "name": "imagetext",
+                    "name": "toscene",
                     "type": "text",
-                    "widget": "html",
-                    "label": "Image text",
-                    "tags": [
-                      "p",
-                      "br",
-                      "strong",
-                      "em"
-                    ]
+                    "label": "Name of scene",
+                    "description": "Must match a scene's name exactly to work"
                   },
                   {
-                    "name": "textpos",
+                    "name": "hotspotpos",
                     "type": "text",
-                    "label": "Text position"
+                    "label": "Hotspot position"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "sceneimages",
+              "type": "list",
+              "label": "Scene images",
+              "entity": "Scene image",
+              "min": 0,
+              "field": {
+                "name": "imagegrp",
+                "type": "group",
+                "label": "Image group",
+                "fields": [
+                  {
+                    "name": "imagesrc",
+                    "type": "image",
+                    "label": "Image source"
+                  },
+                  {
+                    "name": "imagepos",
+                    "type": "text",
+                    "label": "Image position"
+                  },
+                  {
+                    "name": "imagetexts",
+                    "type": "list",
+                    "label": "Image texts",
+                    "entity": "Image text",
+                    "min": 0,
+                    "field": {
+                      "name": "textgrp",
+                      "type": "group",
+                      "label": "Text group",
+                      "fields": [
+                        {
+                          "name": "imagetext",
+                          "type": "text",
+                          "widget": "html",
+                          "label": "Image text",
+                          "tags": [
+                            "p",
+                            "br",
+                            "strong",
+                            "em"
+                          ]
+                        },
+                        {
+                          "name": "textpos",
+                          "type": "text",
+                          "label": "Text position",
+                          "description": "Screen position in percentages"
+                        }
+                      ]
+                    }
                   }
                 ]
               }
             }
           ]
         }
+      },
+      {
+        "name": "audio",
+        "type": "audio",
+        "label": "Audio track",
+        "optional": true
       }
     ]
-  },
-  {
-    "name": "scenes",
-    "type": "list",
-    "label": "Scenes",
-    "entity": "Scene",
-    "min": 1,
-    "mix": 20,
-    "widgets": [
-      {
-        "name": "VerticalTabs",
-        "label": "Default"
-      }
-    ],
-    "field": {
-      "name": "scene",
-      "type": "group",
-      "fields": [
-        {
-          "name": "scenename",
-          "type": "text",
-          "label": "Scene name",
-          "description": "Must be unique, used for navigation between scenes"
-        },
-        {
-          "name": "scenesrc",
-          "type": "image",
-          "label": "Scene source"
-        },
-        {
-          "name": "scenedescription",
-          "type": "text",
-          "widget": "html",
-          "label": "Scene description",
-          "optional": true,
-          "tags": [
-            "p",
-            "br",
-            "strong",
-            "em"
-          ]
-        },
-        {
-          "name": "navigationhotspots",
-          "type": "list",
-          "label": "Navigation hotspots",
-          "entity": "Navigation hotspot",
-          "min": 0,
-          "field": {
-            "name": "navigationgroup",
-            "type": "group",
-            "label": "Navigation group",
-            "fields": [
-              {
-                "name": "toscene",
-                "type": "text",
-                "label": "Name of scene",
-                "description": "Must match a scene's name exactly to work"
-              },
-              {
-                "name": "hotspotpos",
-                "type": "text",
-                "label": "Hotspot position"
-              }
-            ]
-          }
-        },
-        {
-          "name": "sceneimages",
-          "type": "list",
-          "label": "Scene images",
-          "entity": "Scene image",
-          "min": 0,
-          "field": {
-            "name": "imagegrp",
-            "type": "group",
-            "label": "Image group",
-            "fields": [
-              {
-                "name": "imagesrc",
-                "type": "image",
-                "label": "Image source"
-              },
-              {
-                "name": "imagepos",
-                "type": "text",
-                "label": "Image position"
-              },
-              {
-                "name": "imagetexts",
-                "type": "list",
-                "label": "Image texts",
-                "entity": "Image text",
-                "min": 0,
-                "field": {
-                  "name": "textgrp",
-                  "type": "group",
-                  "label": "Text group",
-                  "fields": [
-                    {
-                      "name": "imagetext",
-                      "type": "text",
-                      "widget": "html",
-                      "label": "Image text",
-                      "tags": [
-                        "p",
-                        "br",
-                        "strong",
-                        "em"
-                      ]
-                    },
-                    {
-                      "name": "textpos",
-                      "type": "text",
-                      "label": "Text position",
-                      "description": "Screen position in percentages"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
-  },
-  {
-    "name": "audio",
-    "type": "audio",
-    "label": "Audio track",
-    "optional": true
   }
 ]

@@ -1,54 +1,66 @@
-export default class Audio {
-  constructor(audioSrc, wrapper, audioOnIcon, audioOffIcon) {
-    var self = this;
-    self.isPlaying = false;
+import React from 'react';
 
-    // Image button
-    var navButtonWrapper = document.createElement('div');
-    navButtonWrapper.classList.add('nav-button-wrapper');
+export default class Audio extends React.Component {
+  constructor(props) {
+    super(props);
 
-    var audio = document.createElement('audio');
-    audio.src = audioSrc;
-    audio.loop = true;
-    audio.classList.add('hidden-audio');
-    wrapper.appendChild(audio);
+    this.audioRef = React.createRef();
+    this.state = {
+      isPlaying: false,
+    };
+  }
 
-    var outerNavButton = document.createElement('div');
-    outerNavButton.classList.add('outer-nav-button');
-    navButtonWrapper.appendChild(outerNavButton);
-
-    var navButton = document.createElement('div');
-    navButton.classList.add('nav-button');
-    navButtonWrapper.appendChild(navButton);
-
-    var navButtonIcon = document.createElement('img');
-    navButtonIcon.src = audioOnIcon;
-    navButtonIcon.classList.add('nav-button-icon');
-    navButton.appendChild(navButtonIcon);
-
-    var navButtonPulsar = document.createElement('div');
-    navButtonPulsar.classList.add('nav-button-pulsar');
-    navButtonPulsar.classList.add('no-pulse');
-    navButtonPulsar.addEventListener('click', function () {
-      if (self.isPlaying) {
-        navButtonWrapper.classList.remove('mute');
-        navButtonIcon.src = audioOnIcon;
-        self.isPlaying = false;
-        audio.pause();
+  toggleAudio() {
+    this.setState((prevState) => {
+      if (prevState.isPlaying) {
+        this.audioRef.current.pause();
       }
       else {
-        navButtonWrapper.classList.add('mute');
-        navButtonIcon.src = audioOffIcon;
-        self.isPlaying = true;
-        audio.play();
+        this.audioRef.current.play();
       }
-    });
-    navButtonWrapper.appendChild(navButtonPulsar);
 
-    navButtonWrapper.classList.add('h5p-static-button');
-    navButtonWrapper.classList.add('h5p-info-button');
-    navButtonWrapper.classList.add('h5p-audio-button');
-    wrapper.appendChild(navButtonWrapper);
-    navButtonWrapper.classList.add('show');
+      return {
+        isPlaying: !prevState.isPlaying,
+      };
+    });
+  }
+
+  render() {
+    const navWrapperClasses = [
+      'nav-button-wrapper',
+      'h5p-static-button',
+      'h5p-info-button',
+      'h5p-audio-button',
+      'show',
+    ];
+
+    if (this.state.isPlaying) {
+      navWrapperClasses.push('mute');
+    }
+
+    const audioIcon = this.state.isPlaying
+      ? this.props.audioOffIcon
+      : this.props.audioOnIcon;
+
+    return (
+      <div className='audio-wrapper'>
+        <audio
+          ref={this.audioRef}
+          className='hidden-audio'
+          src={this.props.audioSrc}
+          loop={true}
+        />
+        <div className={navWrapperClasses.join(' ')}>
+          <div className='outer-nav-button'/>
+          <div className='nav-button'>
+            <img className='nav-button-icon' src={audioIcon}/>
+          </div>
+          <div
+            className='nav-button-pulsar no-pulse'
+            onClick={this.toggleAudio.bind(this)}
+          />
+        </div>
+      </div>
+    );
   }
 }

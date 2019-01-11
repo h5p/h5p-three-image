@@ -1,50 +1,35 @@
-export default class SceneDescription {
+import React from 'react';
 
-  constructor(wrapper, textDialog, infoButtonIconSrc) {
-    // Info button
-    var navButtonWrapper = document.createElement('div');
-    navButtonWrapper.classList.add('nav-button-wrapper');
+export default class SceneDescription extends React.Component {
 
-    var outerNavButton = document.createElement('div');
-    outerNavButton.classList.add('outer-nav-button');
-    navButtonWrapper.appendChild(outerNavButton);
+  enterSceneDescription(text) {
+    // Show text dialog with special message
+    this.props.showTextDialog(text);
+  }
 
-    var navButton = document.createElement('div');
-    navButton.classList.add('nav-button');
-    navButtonWrapper.appendChild(navButton);
+  render() {
+    if (!this.props.showing) {
+      return null;
+    }
 
-    var navButtonIcon = document.createElement('img');
-    navButtonIcon.src = infoButtonIconSrc;
-    navButtonIcon.classList.add('nav-button-icon');
-    navButton.appendChild(navButtonIcon);
+    const navButtonWrapperClasses = [
+      'nav-button-wrapper',
+      'h5p-static-button',
+      'h5p-info-button',
+      'show'
+    ];
 
-    var navButtonPulsar = document.createElement('div');
-    navButtonPulsar.classList.add('nav-button-pulsar');
-    navButtonPulsar.classList.add('no-pulse');
-    navButtonPulsar.addEventListener('click', function () {
-      // textDialog.show();
-    });
-    navButtonWrapper.appendChild(navButtonPulsar);
-
-    navButtonWrapper.classList.add('h5p-static-button');
-    navButtonWrapper.classList.add('h5p-info-button');
-    wrapper.appendChild(navButtonWrapper);
-
-    this.setText = function (text) {
-      self.text = text;
-      if (text) {
-        // textDialog.setText(text);
-      }
-    };
-
-    this.show = function () {
-      if (self.text) {
-        navButtonWrapper.classList.add('show');
-      }
-    };
-
-    this.hide = function () {
-      navButtonWrapper.classList.remove('show');
-    };
+    return (
+      <div className={navButtonWrapperClasses.join(' ')}>
+        <div className='outer-nav-button' />
+        <div className='nav-button'>
+          <img className='nav-button-icon' src={this.props.infoButtonIconSrc} />
+        </div>
+        <div
+          className='nav-button-pulsar no-pulse'
+          onClick={this.enterSceneDescription.bind(this, this.props.text)}
+        />
+      </div>
+    );
   }
 }
