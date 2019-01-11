@@ -8,7 +8,7 @@ H5P.ThreeImage = (function () {
 
   function Wrapper(params, contentId, extras) {
     extras = extras || {};
-    self.forceStartScreen = (extras.forceStartScreen !== undefined
+    this.forceStartScreen = (extras.forceStartScreen !== undefined
       && extras.forceStartScreen >= 0)
       ? extras.forceStartScreen : null;
 
@@ -29,7 +29,7 @@ H5P.ThreeImage = (function () {
 
       ReactDOM.render(
         <Main
-          forceStartScreen={self.forceStartScreen}
+          forceStartScreen={this.forceStartScreen}
           parameters={params}
           contentId={contentId}
         />,
