@@ -111,7 +111,7 @@ export default class Scene extends React.Component {
     }
 
     interactions.forEach((interaction) => {
-      const pos = interaction.interactionspos.split(',');
+      const pos = interaction.interactionpos.split(',');
       const yaw = pos[0];
       const pitch = pos[1];
       this.addInteractionButtonToScene(yaw, pitch);

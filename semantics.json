@@ -120,6 +120,35 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "interactions",
+              "type": "list",
+              "label": "Interactions",
+              "entity": "Interaction",
+              "min": 0,
+              "field": {
+                "name": "interaction",
+                "type": "group",
+                "fields": [
+                  {
+                    "name": "action",
+                    "type": "library",
+                    "label": "Interaction",
+                    "description": "Hotspot with an interaction",
+                    "options": [
+                      "H5P.AdvancedText 1.1",
+                      "H5P.Image 1.1"
+                    ]
+                  },
+                  {
+                    "name": "interactionpos",
+                    "type": "text",
+                    "label": "Interaction position",
+                    "description": "Interaction position in pitch and yaw"
+                  }
+                ]
+              }
             }
           ]
         }
