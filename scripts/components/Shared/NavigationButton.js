@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavigationButton.scss';
+import {H5PContext} from "../../context/H5PContext";
 
 export default class NavigationButton extends React.Component {
   getStyle() {
@@ -49,10 +50,20 @@ export default class NavigationButton extends React.Component {
           </div>
           <div
             className={pulseButtonClasses.join(' ')}
-            onClick={this.props.clickHandler.bind(this)}
+            onClick={() => {
+              if (!this.context.extras.isEditor) {
+                this.props.clickHandler();
+              }
+            }}
+            onDoubleClick={() => {
+              if (this.props.doubleClickHandler) {
+                this.props.doubleClickHandler();
+              }
+            }}
           />
         </div>
       </div>
     );
   }
 }
+NavigationButton.contextType = H5PContext;

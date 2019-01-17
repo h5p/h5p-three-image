@@ -4,6 +4,8 @@ import Scene from "./Scene/Scene";
 import ImagePopup from "./ImageScene/ImagePopup";
 import TextDialog from "./Shared/TextDialog";
 import SceneDescription from "./Scene/SceneDescription";
+import Dialog from "./Dialog/Dialog";
+import InteractionContent from "./Dialog/InteractionContent";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -28,6 +30,8 @@ export default class Main extends React.Component {
       showingTextDialog: false,
       currentText: null,
       isShowingAudio: isShowingAudio,
+      showingInteraction: false,
+      currentInteraction: null,
     };
   }
 
@@ -70,6 +74,20 @@ export default class Main extends React.Component {
     });
   }
 
+  showInteraction(interactionIndex) {
+    this.setState({
+      showingInteraction: true,
+      currentInteraction: interactionIndex,
+    });
+  }
+
+  hideInteraction() {
+    this.setState({
+      showingInteraction: false,
+      currentInteraction: null,
+    });
+  }
+
   addScene(scene) {
     this.threeJsScenes.push(scene);
 
@@ -106,6 +124,18 @@ export default class Main extends React.Component {
           />
         }
         {
+          this.state.showingInteraction &&
+          this.state.currentInteraction !== null &&
+            <Dialog
+              onHideTextDialog={this.hideInteraction.bind(this)}
+            >
+              <InteractionContent
+                currentScene={this.state.currentScene}
+                currentInteraction={this.state.currentInteraction}
+              />
+            </Dialog>
+        }
+        {
           this.state.showingTextDialog && this.state.currentText &&
           <TextDialog
             onHideTextDialog={this.hideTextDialog.bind(this)}
@@ -136,6 +166,7 @@ export default class Main extends React.Component {
                 navigateToScene={this.navigateToScene.bind(this)}
                 showImage={this.showImage.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
+                showInteraction={this.showInteraction.bind(this)}
               />
             );
           })

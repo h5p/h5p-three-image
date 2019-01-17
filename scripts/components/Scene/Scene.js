@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton from "../Shared/NavigationButton";
 import imageButtonIcon from '../../../assets/image.svg';
 import navButtonIcon from '../../../assets/navigation.svg';
+import {H5PContext} from '../../context/H5PContext';
 
 export default class Scene extends React.Component {
   constructor(props) {
@@ -61,10 +62,12 @@ export default class Scene extends React.Component {
   addNavButtonToScene(yaw, pitch, sceneName) {
     const navButtonWrapper = document.createElement('div');
     ReactDOM.render(
-      <NavigationButton
-        clickHandler={this.props.navigateToScene.bind(this, sceneName)}
-        buttonIcon={navButtonIcon}
-      />,
+      <H5PContext.Provider value={this.context}>
+        <NavigationButton
+          clickHandler={this.props.navigateToScene.bind(this, sceneName)}
+          buttonIcon={navButtonIcon}
+        />
+      </H5PContext.Provider>,
       navButtonWrapper
     );
 
@@ -91,10 +94,12 @@ export default class Scene extends React.Component {
   addImageButtonToScene(yaw, pitch, image) {
     const imageButtonWrapper = document.createElement('div');
     ReactDOM.render(
-      <NavigationButton
-        clickHandler={this.props.showImage.bind(this, image)}
-        buttonIcon={imageButtonIcon}
-      />,
+      <H5PContext.Provider value={this.context}>
+        <NavigationButton
+          clickHandler={this.props.showImage.bind(this, image)}
+          buttonIcon={imageButtonIcon}
+        />
+      </H5PContext.Provider>,
       imageButtonWrapper
     );
 
@@ -110,20 +115,25 @@ export default class Scene extends React.Component {
       return;
     }
 
-    interactions.forEach((interaction) => {
+    interactions.forEach((interaction, index) => {
       const pos = interaction.interactionpos.split(',');
       const yaw = pos[0];
       const pitch = pos[1];
-      this.addInteractionButtonToScene(yaw, pitch);
+      this.addInteractionButtonToScene(yaw, pitch, index);
     });
   }
 
-  addInteractionButtonToScene(yaw, pitch) {
+  addInteractionButtonToScene(yaw, pitch, index) {
     const interactionButtonWrapper = document.createElement('div');
     ReactDOM.render(
-      <NavigationButton
-        clickHandler={() => {console.log("clicked interaction button")}}
-      />,
+      <H5PContext.Provider value={this.context}>
+        <NavigationButton
+          clickHandler={this.props.showInteraction.bind(this, index)}
+          doubleClickHandler={() => {
+            this.context.trigger('doubleClickedInteraction', index);
+          }}
+        />
+      </H5PContext.Provider>,
       interactionButtonWrapper
     );
 
@@ -178,3 +188,4 @@ export default class Scene extends React.Component {
     );
   }
 }
+Scene.contextType = H5PContext;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import Main from "./components/Main";
+import {H5PContext} from './context/H5PContext';
 
 // Load library
 H5P = H5P || {};
@@ -23,6 +24,9 @@ H5P.ThreeImage = (function () {
     if (params.threeImage) {
       params = params.threeImage;
     }
+    this.params = params;
+    this.contentId = contentId;
+    this.extras = extras;
 
     const setCurrentScene = (scene) => {
       this.currentScene = scene;
@@ -32,15 +36,16 @@ H5P.ThreeImage = (function () {
       wrapper = document.createElement('div');
       wrapper.classList.add('h5p-three-sixty-wrapper');
 
-
       ReactDOM.render(
-        <Main
-          forceStartScreen={this.forceStartScreen}
-          forceStartCamera={this.forceStartCamera}
-          parameters={params}
-          contentId={contentId}
-          setCurrentScene={setCurrentScene}
-        />,
+        <H5PContext.Provider value={this}>
+          <Main
+            forceStartScreen={this.forceStartScreen}
+            forceStartCamera={this.forceStartCamera}
+            parameters={params}
+            contentId={contentId}
+            setCurrentScene={setCurrentScene}
+          />
+        </H5PContext.Provider>,
         wrapper
       );
     };
