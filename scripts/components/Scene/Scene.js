@@ -21,7 +21,10 @@ export default class Scene extends React.Component {
       this.scene = new H5P.ThreeSixty(imageElement, 16 / 9);
 
       if (this.props.isActive) {
-        this.sceneRef.current.appendChild(this.scene.element);
+        this.sceneRef.current.appendChild(this.scene.getElement());
+        if (this.props.forceStartCamera) {
+          this.scene.setStartCamera(this.props.forceStartCamera);
+        }
         this.scene.resize();
         this.scene.startRendering();
       }
@@ -30,9 +33,12 @@ export default class Scene extends React.Component {
         hasInitialized: true,
       });
 
+      this.props.addScene(this.scene);
+
       // Add buttons to scene
       this.addNavigationHotspots(this.props.sceneParams.navigationhotspots);
       this.addImageHotspots(this.props.sceneParams.sceneimages);
+      this.addInteractionHotspots(this.props.sceneParams.interactions);
     });
     imageElement.src = this.props.imageSrc;
   }
@@ -95,7 +101,36 @@ export default class Scene extends React.Component {
     this.scene.add(
       imageButtonWrapper,
       {yaw: yaw, pitch: pitch},
-      false
+      true
+    );
+  }
+
+  addInteractionHotspots(interactions) {
+    if (!interactions) {
+      return;
+    }
+
+    interactions.forEach((interaction) => {
+      const pos = interaction.interactionspos.split(',');
+      const yaw = pos[0];
+      const pitch = pos[1];
+      this.addInteractionButtonToScene(yaw, pitch);
+    });
+  }
+
+  addInteractionButtonToScene(yaw, pitch) {
+    const interactionButtonWrapper = document.createElement('div');
+    ReactDOM.render(
+      <NavigationButton
+        clickHandler={() => {console.log("clicked interaction button")}}
+      />,
+      interactionButtonWrapper
+    );
+
+    this.scene.add(
+      interactionButtonWrapper,
+      {yaw: yaw, pitch: pitch},
+      true
     );
   }
 

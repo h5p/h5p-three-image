@@ -12,6 +12,9 @@ H5P.ThreeImage = (function () {
       && extras.forceStartScreen >= 0)
       ? extras.forceStartScreen : null;
 
+    this.forceStartCamera = extras.forceStartCamera !== undefined
+      ? extras.forceStartCamera : null;
+
     // Initialize event inheritance
     H5P.EventDispatcher.call(self);
 
@@ -21,6 +24,9 @@ H5P.ThreeImage = (function () {
       params = params.threeImage;
     }
 
+    const setCurrentScene = (scene) => {
+      this.currentScene = scene;
+    };
 
     const createElements = () => {
       wrapper = document.createElement('div');
@@ -30,8 +36,10 @@ H5P.ThreeImage = (function () {
       ReactDOM.render(
         <Main
           forceStartScreen={this.forceStartScreen}
+          forceStartCamera={this.forceStartCamera}
           parameters={params}
           contentId={contentId}
+          setCurrentScene={setCurrentScene}
         />,
         wrapper
       );
@@ -50,6 +58,17 @@ H5P.ThreeImage = (function () {
     this.on('resize', () => {
       wrapper.style.height = (wrapper.getBoundingClientRect().width * (9 / 16)) + 'px';
     });
+
+    this.getCamera = () => {
+      if (!this.currentScene) {
+        return;
+      }
+
+      return {
+        camera: this.currentScene.getCurrentPosition(),
+        fov: this.currentScene.getCurrentFov(),
+      };
+    };
   }
 
   return Wrapper;

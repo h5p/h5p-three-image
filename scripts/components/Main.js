@@ -19,6 +19,8 @@ export default class Main extends React.Component {
       && this.props.parameters.audio[0]
       && this.props.parameters.audio[0].path;
 
+    this.threeJsScenes = [];
+
     this.state = {
       currentScene: startScene,
       currentImage: null,
@@ -37,6 +39,7 @@ export default class Main extends React.Component {
     this.setState({
       currentScene: newScene,
     });
+    this.props.setCurrentScene(this.threeJsScenes[newScene]);
   }
 
   showImage(image) {
@@ -65,6 +68,15 @@ export default class Main extends React.Component {
       showingTextDialog: false,
       currentText: null,
     });
+  }
+
+  addScene(scene) {
+    this.threeJsScenes.push(scene);
+
+    // Set current scene when it is first added
+    if (this.threeJsScenes.length - 1 === this.currentScene) {
+      this.props.setCurrentScene(this.threeJsScenes[this.currentScene]);
+    }
   }
 
   render() {
@@ -119,9 +131,11 @@ export default class Main extends React.Component {
                 key={sceneIndex}
                 isActive={sceneIndex === this.state.currentScene}
                 sceneParams={sceneParams}
+                addScene={this.addScene.bind(this)}
                 imageSrc={H5P.getPath(sceneParams.scenesrc.path, this.props.contentId)}
                 navigateToScene={this.navigateToScene.bind(this)}
                 showImage={this.showImage.bind(this)}
+                forceStartCamera={this.props.forceStartCamera}
               />
             );
           })
