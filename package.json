@@ -12,8 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/h5p/h5p-three-image.git"
   },
-  "author": "thomasmars",
+  "author": "Joubel AS <contact@joubel.com> (https://joubel.com)",
   "license": "MIT",
+  "contributors": [
+    "Frode Petterson <frode.petterson@joubel.com> (https://github.com/icc)",
+    "Thomas Marstrander <thomas.marstrander@joubel.com> (https://github.com/thomasmars)"
+  ],
   "bugs": {
     "url": "https://github.com/h5p/h5p-three-image/issues"
   },
