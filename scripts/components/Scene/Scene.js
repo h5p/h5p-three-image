@@ -30,6 +30,10 @@ export default class Scene extends React.Component {
         this.scene.startRendering();
       }
 
+      this.scene.on('movestop', e => {
+        this.context.trigger('movestop', e.data);
+      });
+
       this.setState({
         hasInitialized: true,
       });
@@ -74,7 +78,7 @@ export default class Scene extends React.Component {
     this.scene.add(
       navButtonWrapper,
       {yaw: yaw, pitch: pitch},
-      false
+      this.context.extras.isEditor
     );
   }
 
@@ -106,7 +110,7 @@ export default class Scene extends React.Component {
     this.scene.add(
       imageButtonWrapper,
       {yaw: yaw, pitch: pitch},
-      true
+      this.context.extras.isEditor
     );
   }
 
@@ -140,7 +144,7 @@ export default class Scene extends React.Component {
     this.scene.add(
       interactionButtonWrapper,
       {yaw: yaw, pitch: pitch},
-      true
+      this.context.extras.isEditor
     );
   }
 
