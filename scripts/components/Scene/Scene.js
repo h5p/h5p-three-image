@@ -129,6 +129,11 @@ export default class Scene extends React.Component {
 
   addInteractionButtonToScene(yaw, pitch, index) {
     const interactionButtonWrapper = document.createElement('div');
+
+    // TODO:  Different libraries should be displayed with different navigation
+    //        button icons. NavigationButton component should be able to handle
+    //        this.
+
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         <NavigationButton

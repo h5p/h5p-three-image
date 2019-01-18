@@ -137,6 +137,7 @@
                     "label": "Interaction",
                     "description": "Hotspot with an interaction",
                     "options": [
+                      "H5P.GoToScene 0.1",
                       "H5P.AdvancedText 1.1",
                       "H5P.Image 1.1"
                     ]

@@ -6,6 +6,7 @@ import TextDialog from "./Shared/TextDialog";
 import SceneDescription from "./Scene/SceneDescription";
 import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
+import {H5PContext} from "../context/H5PContext";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -15,7 +16,6 @@ export default class Main extends React.Component {
     if (this.props.forceStartScreen) {
       startScene = this.props.forceStartScreen;
     }
-    this.currentScene = startScene;
 
     const isShowingAudio = this.props.parameters.audio
       && this.props.parameters.audio[0]
@@ -75,10 +75,30 @@ export default class Main extends React.Component {
   }
 
   showInteraction(interactionIndex) {
-    this.setState({
-      showingInteraction: true,
-      currentInteraction: interactionIndex,
-    });
+
+    // TODO:  Special libraries such as GoToScene and Audio needs special
+    //        handling and should not open up into posters.
+
+    const scenes = this.context.params.scenes[this.state.currentScene];
+    const interaction = scenes.interactions[interactionIndex];
+
+    const library = H5P.libraryFromString(interaction.action.library);
+    const machineName = library.machineName;
+
+    if (machineName === 'H5P.GoToScene') {
+      const nextSceneId = interaction.action.params.nextSceneId;
+      this.navigateToScene(nextSceneId);
+    }
+    else if (machineName === 'H5P.Audio') {
+      // TODO: Handle Audio logic
+    }
+    else {
+      // Show interaction in dialog by default
+      this.setState({
+        showingInteraction: true,
+        currentInteraction: interactionIndex,
+      });
+    }
   }
 
   hideInteraction() {
@@ -92,8 +112,8 @@ export default class Main extends React.Component {
     this.threeJsScenes.push(scene);
 
     // Set current scene when it is first added
-    if (this.threeJsScenes.length - 1 === this.currentScene) {
-      this.props.setCurrentScene(this.threeJsScenes[this.currentScene]);
+    if (this.threeJsScenes.length - 1 === this.state.currentScene) {
+      this.props.setCurrentScene(this.threeJsScenes[this.state.currentScene]);
     }
   }
 
@@ -126,14 +146,14 @@ export default class Main extends React.Component {
         {
           this.state.showingInteraction &&
           this.state.currentInteraction !== null &&
-            <Dialog
-              onHideTextDialog={this.hideInteraction.bind(this)}
-            >
-              <InteractionContent
-                currentScene={this.state.currentScene}
-                currentInteraction={this.state.currentInteraction}
-              />
-            </Dialog>
+          <Dialog
+            onHideTextDialog={this.hideInteraction.bind(this)}
+          >
+            <InteractionContent
+              currentScene={this.state.currentScene}
+              currentInteraction={this.state.currentInteraction}
+            />
+          </Dialog>
         }
         {
           this.state.showingTextDialog && this.state.currentText &&
@@ -176,3 +196,4 @@ export default class Main extends React.Component {
   }
 }
 
+Main.contextType = H5PContext;
