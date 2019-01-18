@@ -1,0 +1,18 @@
+.image-scene-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: black;
+  display: flex;
+
+  .image-scene-wrapper {
+    margin: auto;
+    height: 100%;
+  }
+
+  .image-scene {
+    max-height: 100%;
+  }
+}

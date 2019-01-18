@@ -46,13 +46,6 @@ export default class Main extends React.Component {
     this.props.setCurrentScene(this.threeJsScenes[newScene]);
   }
 
-  showImage(image) {
-    this.setState({
-      currentImage: image,
-      showingImagePopup: true,
-    });
-  }
-
   hidePopup() {
     this.setState({
       currentImage: null,
@@ -184,7 +177,6 @@ export default class Main extends React.Component {
                 addScene={this.addScene.bind(this)}
                 imageSrc={H5P.getPath(sceneParams.scenesrc.path, this.props.contentId)}
                 navigateToScene={this.navigateToScene.bind(this)}
-                showImage={this.showImage.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
               />
