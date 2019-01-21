@@ -35,10 +35,15 @@
               "default": "360"
             },
             {
+              "name": "sceneId",
+              "type": "number",
+              "label": "Unique scene id",
+              "description": "Must be unique, used for navigation between scenes"
+            },
+            {
               "name": "scenename",
               "type": "text",
-              "label": "Scene name",
-              "description": "Must be unique, used for navigation between scenes"
+              "label": "Scene name"
             },
             {
               "name": "scenesrc",

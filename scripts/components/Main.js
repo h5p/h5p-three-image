@@ -12,38 +12,22 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    let startScene = 0;
-    if (this.props.forceStartScreen) {
-      startScene = this.props.forceStartScreen;
-    }
-
-    const isShowingAudio = this.props.parameters.audio
-      && this.props.parameters.audio[0]
-      && this.props.parameters.audio[0].path;
-
-    this.threeJsScenes = [];
-
     this.state = {
-      currentScene: startScene,
       currentImage: null,
       showingImagePopup: false,
       showingTextDialog: false,
       currentText: null,
-      isShowingAudio: isShowingAudio,
       showingInteraction: false,
       currentInteraction: null,
     };
   }
 
-  navigateToScene(sceneName) {
-    const newScene = this.props.parameters.scenes.findIndex(scene => {
-      return scene.scenename === sceneName;
+  navigateToScene(sceneId) {
+    const nextScene = this.context.params.scenes.findIndex(scene => {
+      return scene.sceneId === sceneId;
     });
 
-    this.setState({
-      currentScene: newScene,
-    });
-    this.props.setCurrentScene(this.threeJsScenes[newScene]);
+    this.props.setCurrentSceneIndex(nextScene);
   }
 
   hidePopup() {
@@ -72,14 +56,14 @@ export default class Main extends React.Component {
     // TODO:  Special libraries such as GoToScene and Audio needs special
     //        handling and should not open up into posters.
 
-    const scenes = this.context.params.scenes[this.state.currentScene];
+    const scenes = this.context.params.scenes[this.props.currentScene];
     const interaction = scenes.interactions[interactionIndex];
 
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
 
     if (machineName === 'H5P.GoToScene') {
-      const nextSceneId = interaction.action.params.nextSceneId;
+      const nextSceneId = parseInt(interaction.action.params.nextSceneId);
       this.navigateToScene(nextSceneId);
     }
     else if (machineName === 'H5P.Audio') {
@@ -101,22 +85,21 @@ export default class Main extends React.Component {
     });
   }
 
-  addScene(scene) {
-    this.threeJsScenes.push(scene);
-
-    // Set current scene when it is first added
-    if (this.threeJsScenes.length - 1 === this.state.currentScene) {
-      this.props.setCurrentScene(this.threeJsScenes[this.state.currentScene]);
-    }
+  addScene(scene, sceneId) {
+    this.props.addScene(scene, sceneId);
   }
 
   render() {
-    const sceneParams = this.props.parameters.scenes;
-    const description = sceneParams[this.state.currentScene].scenedescription;
+    const sceneParams = this.context.params.scenes;
+    const description = sceneParams[this.props.currentScene].scenedescription;
 
     const isShowingSceneDescription = !this.state.showingTextDialog
       && !this.state.showingImagePopup
       && description;
+
+    const isShowingAudio = this.context.params.audio
+      && this.context.params.audio[0]
+      && this.context.params.audio[0].path;
 
     return (
       <div>
@@ -128,11 +111,11 @@ export default class Main extends React.Component {
           />
         }
         {
-          this.state.isShowingAudio &&
+          isShowingAudio &&
           <Audio
             audioSrc={H5P.getPath(
-              this.props.parameters.audio[0].path,
-              this.props.contentId
+              this.context.params.audio[0].path,
+              this.context.contentId
             )}
           />
         }
@@ -143,7 +126,7 @@ export default class Main extends React.Component {
             onHideTextDialog={this.hideInteraction.bind(this)}
           >
             <InteractionContent
-              currentScene={this.state.currentScene}
+              currentScene={this.props.currentScene}
               currentInteraction={this.state.currentInteraction}
             />
           </Dialog>
@@ -161,21 +144,27 @@ export default class Main extends React.Component {
             onHidePopup={this.hidePopup.bind(this)}
             imageSrc={H5P.getPath(
               this.state.currentImage.imagesrc.path,
-              this.props.contentId
+              this.context.contentId
             )}
             imageTexts={this.state.currentImage.imagetexts}
             showTextDialog={this.showTextDialog.bind(this)}
           />
         }
         {
-          this.props.parameters.scenes.map((sceneParams, sceneIndex) => {
+          this.context.params.scenes.map((sceneParams, sceneIndex) => {
+            const imageSrc = H5P.getPath(
+              sceneParams.scenesrc.path,
+              this.context.contentId
+            );
+
             return (
               <Scene
                 key={sceneIndex}
-                isActive={sceneIndex === this.state.currentScene}
+                id={sceneIndex}
+                isActive={sceneIndex === this.props.currentScene}
                 sceneParams={sceneParams}
                 addScene={this.addScene.bind(this)}
-                imageSrc={H5P.getPath(sceneParams.scenesrc.path, this.props.contentId)}
+                imageSrc={imageSrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}

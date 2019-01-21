@@ -8,6 +8,7 @@ export default class ThreeSixtyScene extends React.Component {
     super(props);
 
     this.sceneRef = React.createRef();
+    this.renderedInteractions = 0;
 
     this.state = {
       hasInitialized: false,
@@ -32,14 +33,14 @@ export default class ThreeSixtyScene extends React.Component {
         this.context.trigger('movestop', e.data);
       });
 
-      this.setState({
-        hasInitialized: true,
-      });
-
-      this.props.addScene(this.scene);
+      this.props.addScene(this.scene, this.props.id);
 
       // Add buttons to scene
       this.addInteractionHotspots(this.props.sceneParams.interactions);
+
+      this.setState({
+        hasInitialized: true,
+      });
     });
     imageElement.src = this.props.imageSrc;
   }
@@ -48,12 +49,14 @@ export default class ThreeSixtyScene extends React.Component {
     if (!interactions) {
       return;
     }
+    this.renderedInteractions = 0;
 
     interactions.forEach((interaction, index) => {
       const pos = interaction.interactionpos.split(',');
       const yaw = pos[0];
       const pitch = pos[1];
       this.addInteractionButtonToScene(yaw, pitch, index);
+      this.renderedInteractions += 1;
     });
   }
 
@@ -83,9 +86,13 @@ export default class ThreeSixtyScene extends React.Component {
     );
   }
 
+  removeInteractions() {
+    this.scene.removeElements();
+  }
+
   componentDidMount() {
     // Already initialized
-    if (this.state.isInitialized) {
+    if (this.state.hasInitialized) {
       return;
     }
 
@@ -93,10 +100,29 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Check if active state was transitioned
-    if (prevProps.isActive === this.props.isActive) {
+    if (!this.state.hasInitialized) {
       return;
     }
+
+    const hasChangedInteractions = this.props.sceneParams.interactions
+      && (this.renderedInteractions
+        !== this.props.sceneParams.interactions.length);
+
+    // Check if active state was transitioned
+    const hasNoChanges = !hasChangedInteractions
+      && (prevProps.isActive === this.props.isActive);
+
+    if (hasNoChanges) {
+      return;
+    }
+
+    if (hasChangedInteractions) {
+      this.removeInteractions();
+      this.addInteractionHotspots(this.props.sceneParams.interactions);
+      return;
+    }
+    // TODO:  If the actual scene image has changed make a function for changing
+    //        only the scene image
 
     // Remove any lingering elements
     if (this.sceneRef.current) {

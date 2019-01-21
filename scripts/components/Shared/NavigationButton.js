@@ -60,6 +60,14 @@ export default class NavigationButton extends React.Component {
                 this.props.doubleClickHandler();
               }
             }}
+            onMouseDown={e => {
+              const hasMouseDownHandler = this.context.extras.isEditor
+                && this.props.mouseDownHandler;
+
+              if (hasMouseDownHandler) {
+                this.props.mouseDownHandler(e);
+              }
+            }}
           />
         </div>
       </div>

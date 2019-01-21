@@ -8,11 +8,17 @@
   display: flex;
 
   .image-scene-wrapper {
+    display: inline-block;
     margin: auto;
     height: 100%;
+    position: relative;
   }
 
   .image-scene {
     max-height: 100%;
+  }
+
+  .interaction {
+    background: white;
   }
 }

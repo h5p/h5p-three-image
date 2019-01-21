@@ -27,23 +27,69 @@ H5P.ThreeImage = (function () {
     this.params = params;
     this.contentId = contentId;
     this.extras = extras;
+    this.threeJsScenes = [];
 
-    const setCurrentScene = (scene) => {
-      this.currentScene = scene;
-    };
-
-    const createElements = () => {
-      wrapper = document.createElement('div');
-      wrapper.classList.add('h5p-three-sixty-wrapper');
+    const setCurrentSceneIndex = (sceneIndex) => {
+      this.currentScene = sceneIndex;
 
       ReactDOM.render(
         <H5PContext.Provider value={this}>
           <Main
             forceStartScreen={this.forceStartScreen}
             forceStartCamera={this.forceStartCamera}
-            parameters={params}
-            contentId={contentId}
-            setCurrentScene={setCurrentScene}
+            currentScene={this.currentScene}
+            setCurrentSceneIndex={setCurrentSceneIndex}
+            addScene={addScene}
+          />
+        </H5PContext.Provider>,
+        wrapper
+      );
+    };
+
+    const addScene = (scene, sceneId) => {
+      this.threeJsScenes.push({
+        scene: scene,
+        sceneId: sceneId,
+      });
+    };
+
+    const createElements = () => {
+      wrapper = document.createElement('div');
+      wrapper.classList.add('h5p-three-sixty-wrapper');
+
+      this.currentScene = 0;
+      if (this.forceStartScreen) {
+        this.currentScene = this.forceStartScreen;
+      }
+
+      ReactDOM.render(
+        <H5PContext.Provider value={this}>
+          <Main
+            forceStartScreen={this.forceStartScreen}
+            forceStartCamera={this.forceStartCamera}
+            currentScene={this.currentScene}
+            setCurrentSceneIndex={setCurrentSceneIndex}
+            addScene={addScene}
+          />
+        </H5PContext.Provider>,
+        wrapper
+      );
+    };
+
+    this.reDraw = (forceStartScreen) => {
+      if (forceStartScreen !== this.currentScene) {
+        setCurrentSceneIndex(forceStartScreen);
+        return;
+      }
+
+      ReactDOM.render(
+        <H5PContext.Provider value={this}>
+          <Main
+            forceStartScreen={this.forceStartScreen}
+            forceStartCamera={this.forceStartCamera}
+            currentScene={this.currentScene}
+            setCurrentSceneIndex={setCurrentSceneIndex}
+            addScene={addScene}
           />
         </H5PContext.Provider>,
         wrapper
@@ -65,13 +111,17 @@ H5P.ThreeImage = (function () {
     });
 
     this.getCamera = () => {
-      if (!this.currentScene) {
+      if (this.currentScene === null) {
         return;
       }
 
+      const scene = this.threeJsScenes.find(scene => {
+        return scene.sceneId === this.currentScene;
+      }).scene;
+
       return {
-        camera: this.currentScene.getCurrentPosition(),
-        fov: this.currentScene.getCurrentFov(),
+        camera: scene.getCurrentPosition(),
+        fov: scene.getCurrentFov(),
       };
     };
   }
