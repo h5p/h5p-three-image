@@ -80,6 +80,12 @@
               }
             },
             {
+              "name": "cameraStartPosition",
+              "type": "text",
+              "label": "Initial camera position",
+              "description": "Camera position in pitch and yaw"
+            },
+            {
               "name": "interactions",
               "type": "list",
               "label": "Interactions",
@@ -111,6 +117,12 @@
             }
           ]
         }
+      },
+      {
+        "name": "startSceneId",
+        "type": "number",
+        "label": "Start scene id",
+        "default": 0
       },
       {
         "name": "audio",

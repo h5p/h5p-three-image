@@ -59,7 +59,7 @@ H5P.ThreeImage = (function () {
       wrapper = document.createElement('div');
       wrapper.classList.add('h5p-three-sixty-wrapper');
 
-      this.currentScene = 0;
+      this.currentScene = this.params.startSceneId;
       if (this.forceStartScreen) {
         this.currentScene = this.forceStartScreen;
       }

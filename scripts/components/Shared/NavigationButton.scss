@@ -74,6 +74,10 @@
   z-index: 2;
 }
 
+.h5p-static-button.disabled {
+  opacity: 0.5;
+}
+
 .bottom-row {
   top: auto;
   left: 4em;

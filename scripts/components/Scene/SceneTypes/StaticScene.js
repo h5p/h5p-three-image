@@ -153,6 +153,15 @@ export default class StaticScene extends React.Component {
     document.body.removeEventListener('mousemove', this.onMove);
     document.body.removeEventListener('mouseup', this.stoppedDragging);
 
+    // State has not been updated, most likely a double-click
+    if (this.state.x === null || this.state.y === null) {
+      this.setState({
+        draggingInteractionIndex: null,
+        draggingElement: null,
+      });
+      return;
+    }
+
     const interaction = this.getDraggingInteraction();
     interaction.interactionpos = [
       this.state.x + '%',
@@ -168,7 +177,9 @@ export default class StaticScene extends React.Component {
   }
 
   goToPreviousScene() {
-    this.props.navigateToScene(this.props.previousScene);
+    if (this.props.previousScene !== null) {
+      this.props.navigateToScene(this.props.previousScene);
+    }
   }
 
   render() {
@@ -178,8 +189,9 @@ export default class StaticScene extends React.Component {
 
     const interactions = this.props.sceneParams.interactions || [];
 
+    const hasPreviousScene = this.props.previousScene !== null;
     const isShowingBackButton = this.props.sceneParams.showBackButton
-      && this.props.previousScene !== null;
+      && (hasPreviousScene || this.context.extras.isEditor);
 
     return (
       <div className='image-scene-overlay'>
@@ -226,6 +238,7 @@ export default class StaticScene extends React.Component {
             isStatic={true}
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
+            isDisabled={this.context.extras.isEditor && !hasPreviousScene}
           />
         }
       </div>

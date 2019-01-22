@@ -24,6 +24,10 @@ export default class NavigationButton extends React.Component {
       navButtonClasses.push('h5p-static-button');
     }
 
+    if (this.props.isDisabled) {
+      navButtonClasses.push('disabled');
+    }
+
     if (this.props.buttonClasses) {
       navButtonClasses = navButtonClasses.concat(this.props.buttonClasses);
     }
