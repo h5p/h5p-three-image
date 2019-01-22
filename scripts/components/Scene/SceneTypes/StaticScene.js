@@ -167,12 +167,19 @@ export default class StaticScene extends React.Component {
     });
   }
 
+  goToPreviousScene() {
+    this.props.navigateToScene(this.props.previousScene);
+  }
+
   render() {
     if (!this.props.isActive) {
       return null;
     }
 
     const interactions = this.props.sceneParams.interactions || [];
+
+    const isShowingBackButton = this.props.sceneParams.showBackButton
+      && this.props.previousScene !== null;
 
     return (
       <div className='image-scene-overlay'>
@@ -213,6 +220,14 @@ export default class StaticScene extends React.Component {
             })
           }
         </div>
+        {
+          isShowingBackButton &&
+          <NavigationButton
+            isStatic={true}
+            clickHandler={this.goToPreviousScene.bind(this)}
+            forceClickHandler={true}
+          />
+        }
       </div>
     );
   }

@@ -19,7 +19,16 @@ export default class Main extends React.Component {
       currentText: null,
       showingInteraction: false,
       currentInteraction: null,
+      previousScene: null,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentScene !== prevProps.currentScene) {
+      this.setState({
+        previousScene: prevProps.currentScene,
+      });
+    }
   }
 
   navigateToScene(sceneId) {
@@ -168,6 +177,7 @@ export default class Main extends React.Component {
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
+                previousScene={this.state.previousScene}
               />
             );
           })

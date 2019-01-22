@@ -32,6 +32,8 @@ H5P.ThreeImage = (function () {
     const setCurrentSceneIndex = (sceneIndex) => {
       this.currentScene = sceneIndex;
 
+      this.trigger('changedScene', sceneIndex);
+
       ReactDOM.render(
         <H5PContext.Provider value={this}>
           <Main

@@ -3,15 +3,15 @@ import {H5PContext} from '../../context/H5PContext';
 import ThreeSixtyScene from "./SceneTypes/ThreeSixtyScene";
 import StaticScene from "./SceneTypes/StaticScene";
 
-const sceneTypes = {
-  threeSixty: '360',
-  static: 'static'
+const SceneTypes = {
+  THREE_SIXTY_SCENE: '360',
+  STATIC_SCENE: 'static',
 };
 
 export default class Scene extends React.Component {
 
   render() {
-    if (this.props.sceneParams.sceneType === sceneTypes.static) {
+    if (this.props.sceneParams.sceneType === SceneTypes.STATIC_SCENE) {
       return (
         <StaticScene
           id={this.props.id}
@@ -20,6 +20,7 @@ export default class Scene extends React.Component {
           imageSrc={this.props.imageSrc}
           navigateToScene={this.props.navigateToScene.bind(this)}
           showInteraction={this.props.showInteraction.bind(this)}
+          previousScene={this.props.previousScene}
         />
       );
     }

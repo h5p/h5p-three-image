@@ -51,7 +51,10 @@ export default class NavigationButton extends React.Component {
           <div
             className={pulseButtonClasses.join(' ')}
             onClick={() => {
-              if (!this.context.extras.isEditor) {
+              const hasClickHandler = this.props.forceClickHandler
+                || !this.context.extras.isEditor;
+
+              if (hasClickHandler) {
                 this.props.clickHandler();
               }
             }}
