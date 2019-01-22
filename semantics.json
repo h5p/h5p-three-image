@@ -64,6 +64,22 @@
               ]
             },
             {
+              "name": "showBackButton",
+              "type": "boolean",
+              "label": "Show back button",
+              "description": "Will show a back button for static image scenes if checked",
+              "default": true,
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "sceneType",
+                    "equals": "static"
+                  }
+                ]
+              }
+            },
+            {
               "name": "interactions",
               "type": "list",
               "label": "Interactions",
