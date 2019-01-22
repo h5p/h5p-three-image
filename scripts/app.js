@@ -76,7 +76,7 @@ H5P.ThreeImage = (function () {
       );
     };
 
-    this.reDraw = (forceStartScreen) => {
+    this.reDraw = (forceStartScreen = this.currentScene) => {
       if (forceStartScreen !== this.currentScene) {
         setCurrentSceneIndex(forceStartScreen);
         return;
