@@ -35,39 +35,10 @@
               "default": "360"
             },
             {
-              "name": "sceneId",
-              "type": "number",
-              "label": "Unique scene id",
-              "description": "Must be unique, used for navigation between scenes"
-            },
-            {
-              "name": "scenename",
-              "type": "text",
-              "label": "Scene name"
-            },
-            {
-              "name": "scenesrc",
-              "type": "image",
-              "label": "Scene source"
-            },
-            {
-              "name": "scenedescription",
-              "type": "text",
-              "widget": "html",
-              "label": "Scene description",
-              "optional": true,
-              "tags": [
-                "p",
-                "br",
-                "strong",
-                "em"
-              ]
-            },
-            {
               "name": "showBackButton",
               "type": "boolean",
-              "label": "Show back button",
-              "description": "Will show a back button for static image scenes if checked",
+              "label": "Display \"Back\" button",
+              "description": "Display button for navigating back to your previous scene",
               "default": true,
               "widget": "showWhen",
               "showWhen": {
@@ -78,6 +49,37 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "sceneId",
+              "type": "number",
+              "label": "Unique scene id",
+              "description": "Must be unique, used for navigation between scenes"
+            },
+            {
+              "name": "scenename",
+              "type": "text",
+              "label": "Scene Title",
+              "description": "Used to identify the scene for authors"
+            },
+            {
+              "name": "scenesrc",
+              "type": "image",
+              "label": "Scene Background"
+            },
+            {
+              "name": "scenedescription",
+              "type": "text",
+              "widget": "html",
+              "label": "Scene Description",
+              "description": "A text that can describe the scene for the end-user",
+              "optional": true,
+              "tags": [
+                "p",
+                "br",
+                "strong",
+                "em"
+              ]
             },
             {
               "name": "cameraStartPosition",

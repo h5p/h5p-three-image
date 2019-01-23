@@ -18,13 +18,23 @@ export default class ThreeSixtyScene extends React.Component {
   initializeScene() {
     var imageElement = document.createElement('img');
     imageElement.addEventListener('load', () => {
-      this.scene = new H5P.ThreeSixty(imageElement, 16 / 9);
+      const startPosition = this.props.sceneParams.cameraStartPosition
+        .split(',')
+        .map(parseFloat);
+
+      const yaw = startPosition[0];
+      const pitch = startPosition[1];
+
+      this.scene = new H5P.ThreeSixty(imageElement, {
+        ratio: 16/9,
+        cameraStartPosition: {
+          yaw: -yaw,
+          pitch: pitch,
+        },
+      });
 
       if (this.props.isActive) {
         this.sceneRef.current.appendChild(this.scene.getElement());
-        if (this.props.forceStartCamera) {
-          this.scene.setStartCamera(this.props.forceStartCamera);
-        }
         this.scene.resize();
         this.scene.startRendering();
       }
