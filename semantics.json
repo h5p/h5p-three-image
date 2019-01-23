@@ -116,6 +116,12 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "sceneAudio",
+              "type": "audio",
+              "label": "Scene Audio",
+              "optional": true
             }
           ]
         }
