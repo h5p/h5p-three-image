@@ -9,6 +9,7 @@ export default class ThreeSixtyScene extends React.Component {
 
     this.sceneRef = React.createRef();
     this.renderedInteractions = 0;
+    this.initializeScene = this.initializeScene.bind(this);
 
     this.state = {
       hasInitialized: false,
@@ -16,43 +17,56 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   initializeScene() {
-    var imageElement = document.createElement('img');
-    imageElement.addEventListener('load', () => {
-      const startPosition = this.props.sceneParams.cameraStartPosition
-        .split(',')
-        .map(parseFloat);
+    const startPosition = this.props.sceneParams.cameraStartPosition
+      .split(',')
+      .map(parseFloat);
 
-      const yaw = startPosition[0];
-      const pitch = startPosition[1];
+    const yaw = startPosition[0];
+    const pitch = startPosition[1];
 
-      this.scene = new H5P.ThreeSixty(imageElement, {
-        ratio: 16/9,
-        cameraStartPosition: {
-          yaw: -yaw,
-          pitch: pitch,
-        },
-      });
+    this.scene = new H5P.ThreeSixty(this.imageElement, {
+      ratio: 16/9,
+      cameraStartPosition: {
+        yaw: -yaw,
+        pitch: pitch,
+      },
+    }, () => {
+      // Determine if image source has changed
+      const hasChangedImage = this.props.imageSrc
+        !== this.imageElement.src;
 
-      if (this.props.isActive) {
-        this.sceneRef.current.appendChild(this.scene.getElement());
-        this.scene.resize();
-        this.scene.startRendering();
+      if (hasChangedImage) {
+        this.imageElement.src = this.props.imageSrc;
       }
 
-      this.scene.on('movestop', e => {
-        this.context.trigger('movestop', e.data);
-      });
-
-      this.props.addScene(this.scene, this.props.id);
-
-      // Add buttons to scene
-      this.addInteractionHotspots(this.props.sceneParams.interactions);
-
-      this.setState({
-        hasInitialized: true,
-      });
+      return hasChangedImage;
     });
-    imageElement.src = this.props.imageSrc;
+
+    if (this.props.isActive) {
+      this.sceneRef.current.appendChild(this.scene.getElement());
+      this.scene.resize();
+      this.scene.startRendering();
+    }
+
+    this.scene.on('movestop', e => {
+      this.context.trigger('movestop', e.data);
+    });
+
+    this.props.addScene(this.scene, this.props.id);
+
+    // Add buttons to scene
+    this.addInteractionHotspots(this.props.sceneParams.interactions);
+
+    this.setState({
+      hasInitialized: true,
+    });
+    this.imageElement.removeEventListener('load', this.initializeScene);
+  }
+
+  loadScene() {
+    this.imageElement = document.createElement('img');
+    this.imageElement.addEventListener('load', this.initializeScene);
+    this.imageElement.src = this.props.imageSrc;
   }
 
   addInteractionHotspots(interactions) {
@@ -106,7 +120,7 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
-    this.initializeScene();
+    this.loadScene();
   }
 
   componentDidUpdate(prevProps) {
@@ -118,19 +132,17 @@ export default class ThreeSixtyScene extends React.Component {
       && (this.renderedInteractions
         !== this.props.sceneParams.interactions.length);
 
-    // Check if active state was transitioned
-    const hasNoChanges = !hasChangedInteractions
-      && (prevProps.isActive === this.props.isActive);
-
-    if (hasNoChanges) {
-      return;
-    }
-
     if (hasChangedInteractions) {
       this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
       return;
     }
+
+    // Check if active state was transitioned
+    if (prevProps.isActive === this.props.isActive) {
+      return;
+    }
+
     // TODO:  If the actual scene image has changed make a function for changing
     //        only the scene image
 
