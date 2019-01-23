@@ -1,6 +1,6 @@
 import React from 'react';
 import Audio from "./Scene/Audio";
-import Scene from "./Scene/Scene";
+import Scene, {SceneTypes} from "./Scene/Scene";
 import TextDialog from "./Shared/TextDialog";
 import SceneDescription from "./Scene/SceneDescription";
 import Dialog from "./Dialog/Dialog";
@@ -16,22 +16,43 @@ export default class Main extends React.Component {
       currentText: null,
       showingInteraction: false,
       currentInteraction: null,
-      previousScene: null,
+      sceneHistory: [],
     };
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.currentScene !== prevProps.currentScene) {
+
+      // We skip adding to history if we navigated backwards
+      if (this.skipHistory) {
+        this.skipHistory = false;
+        return;
+      }
+
       this.setState({
-        previousScene: prevProps.currentScene,
+        sceneHistory: [
+          ...this.state.sceneHistory,
+          prevProps.currentScene,
+        ],
       });
     }
   }
 
   navigateToScene(sceneId) {
-    const nextScene = this.context.params.scenes.findIndex(scene => {
-      return scene.sceneId === sceneId;
-    });
+    let nextScene = null;
+    if (sceneId === SceneTypes.PREVIOUS_SCENE) {
+      const history = [...this.state.sceneHistory];
+      nextScene = history.pop();
+      this.skipHistory = true;
+      this.setState({
+        sceneHistory: history,
+      });
+    }
+    else {
+      nextScene = this.context.params.scenes.findIndex(scene => {
+        return scene.sceneId === sceneId;
+      });
+    }
 
     this.props.setCurrentSceneIndex(nextScene);
   }
@@ -154,7 +175,7 @@ export default class Main extends React.Component {
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
-                previousScene={this.state.previousScene}
+                sceneHistory={this.state.sceneHistory}
               />
             );
           })

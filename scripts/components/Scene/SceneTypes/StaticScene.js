@@ -2,6 +2,7 @@ import React from 'react';
 import './StaticScene.scss';
 import NavigationButton from "../../Shared/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
+import {SceneTypes} from "../Scene";
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -177,8 +178,8 @@ export default class StaticScene extends React.Component {
   }
 
   goToPreviousScene() {
-    if (this.props.previousScene !== null) {
-      this.props.navigateToScene(this.props.previousScene);
+    if (this.props.sceneHistory.length > 0) {
+      this.props.navigateToScene(SceneTypes.PREVIOUS_SCENE);
     }
   }
 
@@ -189,7 +190,7 @@ export default class StaticScene extends React.Component {
 
     const interactions = this.props.sceneParams.interactions || [];
 
-    const hasPreviousScene = this.props.previousScene !== null;
+    const hasPreviousScene = this.props.sceneHistory.length > 0;
     const isShowingBackButton = this.props.sceneParams.showBackButton
       && (hasPreviousScene || this.context.extras.isEditor);
 

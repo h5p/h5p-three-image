@@ -3,9 +3,10 @@ import {H5PContext} from '../../context/H5PContext';
 import ThreeSixtyScene from "./SceneTypes/ThreeSixtyScene";
 import StaticScene from "./SceneTypes/StaticScene";
 
-const SceneTypes = {
+export const SceneTypes = {
   THREE_SIXTY_SCENE: '360',
   STATIC_SCENE: 'static',
+  PREVIOUS_SCENE: -1,
 };
 
 export default class Scene extends React.Component {
@@ -20,7 +21,7 @@ export default class Scene extends React.Component {
           imageSrc={this.props.imageSrc}
           navigateToScene={this.props.navigateToScene.bind(this)}
           showInteraction={this.props.showInteraction.bind(this)}
-          previousScene={this.props.previousScene}
+          sceneHistory={this.props.sceneHistory}
         />
       );
     }
