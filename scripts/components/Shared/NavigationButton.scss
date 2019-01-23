@@ -18,6 +18,13 @@
   width: 1.5em;
 }
 
+.nav-button-wrapper {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .outer-nav-button {
   position: absolute;
   top: 50%;

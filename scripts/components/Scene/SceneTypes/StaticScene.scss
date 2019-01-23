@@ -16,6 +16,10 @@
 
   .image-scene {
     max-height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .interaction {
