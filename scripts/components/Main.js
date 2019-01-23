@@ -1,7 +1,6 @@
 import React from 'react';
 import Audio from "./Scene/Audio";
 import Scene from "./Scene/Scene";
-import ImagePopup from "./ImageScene/ImagePopup";
 import TextDialog from "./Shared/TextDialog";
 import SceneDescription from "./Scene/SceneDescription";
 import Dialog from "./Dialog/Dialog";
@@ -13,8 +12,6 @@ export default class Main extends React.Component {
     super(props);
 
     this.state = {
-      currentImage: null,
-      showingImagePopup: false,
       showingTextDialog: false,
       currentText: null,
       showingInteraction: false,
@@ -37,13 +34,6 @@ export default class Main extends React.Component {
     });
 
     this.props.setCurrentSceneIndex(nextScene);
-  }
-
-  hidePopup() {
-    this.setState({
-      currentImage: null,
-      showingImagePopup: false,
-    });
   }
 
   showTextDialog(text) {
@@ -103,7 +93,6 @@ export default class Main extends React.Component {
     const description = sceneParams[this.props.currentScene].scenedescription;
 
     const isShowingSceneDescription = !this.state.showingTextDialog
-      && !this.state.showingImagePopup
       && description;
 
     const isShowingAudio = this.context.params.audio
@@ -145,18 +134,6 @@ export default class Main extends React.Component {
           <TextDialog
             onHideTextDialog={this.hideTextDialog.bind(this)}
             text={this.state.currentText}
-          />
-        }
-        {
-          this.state.showingImagePopup && this.state.currentImage &&
-          <ImagePopup
-            onHidePopup={this.hidePopup.bind(this)}
-            imageSrc={H5P.getPath(
-              this.state.currentImage.imagesrc.path,
-              this.context.contentId
-            )}
-            imageTexts={this.state.currentImage.imagetexts}
-            showTextDialog={this.showTextDialog.bind(this)}
           />
         }
         {
