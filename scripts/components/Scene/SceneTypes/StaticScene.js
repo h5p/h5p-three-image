@@ -15,6 +15,7 @@ export default class StaticScene extends React.Component {
       x: null,
       y: null,
       draggingInteractionIndex: null,
+      isDragDelayed: true,
       draggingElement: null,
       isVerticalImage: false,
     };
@@ -139,11 +140,21 @@ export default class StaticScene extends React.Component {
     this.setState({
       draggingInteractionIndex: interactionIndex,
       draggingElement: e.target,
+      isDragDelayed: true,
     });
+
+    // Small delay to not accidentally drag interactions when double clicking
+    setTimeout(() => {
+      this.setState({
+        isDragDelayed: false,
+      });
+    }, 50);
   }
 
   onMove(e) {
-    if (this.state.draggingInteractionIndex === null) {
+    const isDragging = this.state.draggingInteractionIndex !== null;
+    const isDragDelayed = this.state.isDragDelayed;
+    if (!isDragging || isDragDelayed) {
       return;
     }
     this.setState(this.getNewInteractionPositions(e));
@@ -160,8 +171,11 @@ export default class StaticScene extends React.Component {
     // State has not been updated, most likely a double-click
     if (this.state.x === null || this.state.y === null) {
       this.setState({
+        x: null,
+        y: null,
         draggingInteractionIndex: null,
         draggingElement: null,
+        isDragDelayed: true,
       });
       return;
     }
@@ -177,6 +191,7 @@ export default class StaticScene extends React.Component {
       y: null,
       draggingInteractionIndex: null,
       draggingElement: null,
+      isDragDelayed: true,
     });
   }
 
