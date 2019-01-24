@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaticScene.scss';
-import NavigationButton from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction, Icons} from "../../Shared/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 
@@ -194,6 +194,11 @@ export default class StaticScene extends React.Component {
     const isShowingBackButton = this.props.sceneParams.showBackButton
       && (hasPreviousScene || this.context.extras.isEditor);
 
+    const backButtonClasses = this.context.extras.isEditor
+      && !hasPreviousScene
+      ? ['disabled']
+      : [];
+
     return (
       <div className='image-scene-overlay'>
         <div
@@ -221,10 +226,10 @@ export default class StaticScene extends React.Component {
                 <NavigationButton
                   key={index}
                   title={interaction.action.metadata.title}
+                  icon={getIconFromInteraction(interaction)}
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
-                  isStatic={true}
                   clickHandler={this.props.showInteraction.bind(this, index)}
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
@@ -238,10 +243,10 @@ export default class StaticScene extends React.Component {
           isShowingBackButton &&
           <NavigationButton
             title='Back'
-            isStatic={true}
+            icon={Icons.GO_BACK}
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
-            isDisabled={this.context.extras.isEditor && !hasPreviousScene}
+            buttonClasses={backButtonClasses}
           />
         }
       </div>

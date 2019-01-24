@@ -1,16 +1,13 @@
 import React from 'react';
-import NavigationButton from "../Shared/NavigationButton";
-import infoButtonIcon from '../../../assets/info.svg';
+import NavigationButton, {Icons} from "../Shared/NavigationButton";
 
 export default class SceneDescription extends React.Component {
   render() {
     return (
       <NavigationButton
         title='Scene description'
-        isStatic={true}
-        hasNoPulse={true}
-        buttonClasses={['bottom-row']}
-        buttonIcon={infoButtonIcon}
+        icon={Icons.SCENE_DESCRIPTION}
+        buttonClasses={['bottom']}
         clickHandler={this.props.showTextDialog.bind(this, this.props.text)}
       />
     );

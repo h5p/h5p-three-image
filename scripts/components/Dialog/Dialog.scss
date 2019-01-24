@@ -1,3 +1,5 @@
+@import '../../styles/icons';
+
 .h5p-text-dialog .nav-button-wrapper {
   top: -1em;
   right: -1em;
@@ -33,6 +35,36 @@
   padding: 2em 3em;
   display: flex;
   box-sizing: border-box;
+
+  .close-button-wrapper {
+    position: absolute;
+    font-size: 1em;
+    box-sizing: content-box;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+
+    top: -1em;
+    right: -1em;
+
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    border: 8px solid #fff;
+    background-color: #ebebeb;
+    border-radius: 50%;
+    transition: background 0.5s linear;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .close-button-wrapper:hover {
+    background: #d6d6d6;
+  }
+
+  .close-button-wrapper:before {
+    font-family: "360-image";
+    content: $close;
+    vertical-align: text-bottom;
+  }
 }
 
 .h5p-text-content {

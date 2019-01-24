@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavigationButton from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 
 export default class ThreeSixtyScene extends React.Component {
@@ -79,23 +79,20 @@ export default class ThreeSixtyScene extends React.Component {
       const pos = interaction.interactionpos.split(',');
       const yaw = pos[0];
       const pitch = pos[1];
-      const title = interaction.action.metadata.title;
-      this.addInteractionButtonToScene(yaw, pitch, index, title);
+      this.addInteractionButtonToScene(yaw, pitch, index, interaction);
       this.renderedInteractions += 1;
     });
   }
 
-  addInteractionButtonToScene(yaw, pitch, index, title) {
+  addInteractionButtonToScene(yaw, pitch, index, interaction) {
     const interactionButtonWrapper = document.createElement('div');
-
-    // TODO:  Different libraries should be displayed with different navigation
-    //        button icons. NavigationButton component should be able to handle
-    //        this.
 
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         <NavigationButton
-          title={title}
+          title={interaction.action.metadata.title}
+          buttonClasses={['three-sixty']}
+          icon={getIconFromInteraction(interaction)}
           clickHandler={this.props.showInteraction.bind(this, index)}
           doubleClickHandler={() => {
             this.context.trigger('doubleClickedInteraction', index);

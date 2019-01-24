@@ -1,11 +1,11 @@
 import React from 'react';
 import Audio from "./Scene/Audio";
 import Scene, {SceneTypes} from "./Scene/Scene";
-import TextDialog from "./Shared/TextDialog";
 import SceneDescription from "./Scene/SceneDescription";
 import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
+import './Main.scss';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -152,10 +152,9 @@ export default class Main extends React.Component {
         }
         {
           this.state.showingTextDialog && this.state.currentText &&
-          <TextDialog
-            onHideTextDialog={this.hideTextDialog.bind(this)}
-            text={this.state.currentText}
-          />
+          <Dialog onHideTextDialog={this.hideTextDialog.bind(this)}>
+            <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
+          </Dialog>
         }
         {
           this.context.params.scenes.map((sceneParams, sceneIndex) => {
