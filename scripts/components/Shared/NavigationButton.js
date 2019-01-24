@@ -3,8 +3,8 @@ import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 
 export const Icons = {
-  INFO: 'h5p-info-button',
-  QUESTION: 'h5p-question-button',
+  INFO: 'h5p-info-button h5p-interaction-button',
+  QUESTION: 'h5p-question-button h5p-interaction-button',
   GO_TO_SCENE: 'h5p-go-to-scene-button',
   GO_BACK: 'h5p-go-back-button',
   SCENE_DESCRIPTION: 'h5p-scene-description-button',
