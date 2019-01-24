@@ -110,6 +110,21 @@ H5P.ThreeImage = (function () {
 
     this.on('resize', () => {
       wrapper.style.height = (wrapper.getBoundingClientRect().width * (9 / 16)) + 'px';
+
+      // Resize scene
+      if (this.currentScene === null) {
+        return;
+      }
+
+      const scene = this.threeJsScenes.find(scene => {
+        return scene.sceneId === this.currentScene;
+      });
+
+      if (!scene) {
+        return;
+      }
+
+      scene.scene.resize();
     });
 
     this.getCamera = () => {

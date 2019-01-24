@@ -8,14 +8,26 @@
   display: flex;
 
   .image-scene-wrapper {
-    display: inline-block;
+    display: block;
     margin: auto;
-    height: 100%;
     position: relative;
+    width: 100%;
+  }
+
+  .image-scene-wrapper.vertical {
+    height: 100%;
+    width: auto;
+
+    .image-scene {
+      height: 100%;
+      width: auto;
+    }
   }
 
   .image-scene {
-    max-height: 100%;
+    align-self: center;
+    width: 100%;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

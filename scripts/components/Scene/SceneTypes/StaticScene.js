@@ -9,11 +9,14 @@ export default class StaticScene extends React.Component {
     super(props);
 
     this.sceneWrapperRef = React.createRef();
+    this.imageElementRef = React.createRef();
+
     this.state = {
       x: null,
       y: null,
       draggingInteractionIndex: null,
       draggingElement: null,
+      isVerticalImage: false,
     };
 
     /**
@@ -183,6 +186,15 @@ export default class StaticScene extends React.Component {
     }
   }
 
+  onSceneLoaded() {
+    const imageElement = this.imageElementRef.current;
+    const ratio = imageElement.naturalWidth / imageElement.naturalHeight;
+    const viewRatio = 16 / 9;
+    this.setState({
+      isVerticalImage: ratio < viewRatio,
+    });
+  }
+
   render() {
     if (!this.props.isActive) {
       return null;
@@ -199,15 +211,22 @@ export default class StaticScene extends React.Component {
       ? ['disabled']
       : [];
 
+    const imageSceneClasses = ['image-scene-wrapper'];
+    if (this.state.isVerticalImage) {
+      imageSceneClasses.push('vertical');
+    }
+
     return (
       <div className='image-scene-overlay'>
         <div
-          className='image-scene-wrapper'
+          className={imageSceneClasses.join(' ')}
           ref={this.sceneWrapperRef}
         >
           <img
             className='image-scene'
             src={this.props.imageSrc}
+            onLoad={this.onSceneLoaded.bind(this)}
+            ref={this.imageElementRef}
           />
           {
             interactions.map((interaction, index) => {
