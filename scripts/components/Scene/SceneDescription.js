@@ -6,6 +6,7 @@ export default class SceneDescription extends React.Component {
   render() {
     return (
       <NavigationButton
+        title='Scene description'
         isStatic={true}
         hasNoPulse={true}
         buttonClasses={['bottom-row']}

@@ -52,6 +52,7 @@ export default class Audio extends React.Component {
           loop={true}
         />
         <NavigationButton
+          title={this.state.isPlaying ? 'Pause audio' : 'Play audio'}
           isStatic={true}
           hasNoPulse={true}
           buttonIcon={audioIcon}

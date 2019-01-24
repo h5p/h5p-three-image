@@ -17,6 +17,7 @@ export default class Dialog extends React.Component {
             {this.props.children}
           </div>
           <NavigationButton
+            title='Close'
             clickHandler={this.props.onHideTextDialog}
             buttonIcon={closeButtonIcon}
             isStatic={true}

@@ -79,12 +79,13 @@ export default class ThreeSixtyScene extends React.Component {
       const pos = interaction.interactionpos.split(',');
       const yaw = pos[0];
       const pitch = pos[1];
-      this.addInteractionButtonToScene(yaw, pitch, index);
+      const title = interaction.action.metadata.title;
+      this.addInteractionButtonToScene(yaw, pitch, index, title);
       this.renderedInteractions += 1;
     });
   }
 
-  addInteractionButtonToScene(yaw, pitch, index) {
+  addInteractionButtonToScene(yaw, pitch, index, title) {
     const interactionButtonWrapper = document.createElement('div');
 
     // TODO:  Different libraries should be displayed with different navigation
@@ -94,6 +95,7 @@ export default class ThreeSixtyScene extends React.Component {
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         <NavigationButton
+          title={title}
           clickHandler={this.props.showInteraction.bind(this, index)}
           doubleClickHandler={() => {
             this.context.trigger('doubleClickedInteraction', index);

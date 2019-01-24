@@ -18,6 +18,7 @@ export default class TextDialog extends React.Component {
               dangerouslySetInnerHTML={{__html: this.props.text }}/>
           </div>
           <NavigationButton
+            title='Close'
             clickHandler={this.props.onHideTextDialog}
             buttonIcon={closeButtonIcon}
             isStatic={true}

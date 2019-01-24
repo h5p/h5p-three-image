@@ -42,7 +42,11 @@ export default class NavigationButton extends React.Component {
 
     return (
       <div>
-        <div className={navButtonClasses.join(' ')} style={this.getStyle()}>
+        <div
+          title={this.props.title ? this.props.title : ''}
+          className={navButtonClasses.join(' ')}
+          style={this.getStyle()}
+        >
           <div className='outer-nav-button' />
           <div className='nav-button'>
             {

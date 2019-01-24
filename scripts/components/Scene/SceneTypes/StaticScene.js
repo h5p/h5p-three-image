@@ -220,6 +220,7 @@ export default class StaticScene extends React.Component {
               return (
                 <NavigationButton
                   key={index}
+                  title={interaction.action.metadata.title}
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
@@ -236,6 +237,7 @@ export default class StaticScene extends React.Component {
         {
           isShowingBackButton &&
           <NavigationButton
+            title='Back'
             isStatic={true}
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
