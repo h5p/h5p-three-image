@@ -30,7 +30,9 @@ export default class InteractionContent extends React.Component {
       this.contentRef.current.removeChild(this.contentRef.current.firstChild);
     }
 
-    const scene = this.context.params.scenes[this.props.currentScene];
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.currentScene;
+    });
     const interaction = scene.interactions[this.props.currentInteraction];
     const library = interaction.action;
 

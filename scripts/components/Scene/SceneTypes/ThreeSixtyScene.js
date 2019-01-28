@@ -52,7 +52,7 @@ export default class ThreeSixtyScene extends React.Component {
       this.context.trigger('movestop', e.data);
     });
 
-    this.props.addScene(this.scene, this.props.id);
+    this.props.addScene(this.scene, this.props.sceneParams.sceneId);
 
     // Add buttons to scene
     this.addInteractionHotspots(this.props.sceneParams.interactions);
@@ -130,15 +130,19 @@ export default class ThreeSixtyScene extends React.Component {
     const hasChangedInteractions = this.props.sceneParams.interactions
       && (this.renderedInteractions
         !== this.props.sceneParams.interactions.length);
+    const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
     if (hasChangedInteractions) {
       this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
-      return;
+
+      if (!hasChangedVisibility) {
+        return;
+      }
     }
 
     // Check if active state was transitioned
-    if (prevProps.isActive === this.props.isActive) {
+    if (!hasChangedVisibility) {
       return;
     }
 

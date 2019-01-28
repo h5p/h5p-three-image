@@ -72,12 +72,10 @@ export default class Main extends React.Component {
   }
 
   showInteraction(interactionIndex) {
-
-    // TODO:  Special libraries such as GoToScene and Audio needs special
-    //        handling and should not open up into posters.
-
-    const scenes = this.context.params.scenes[this.props.currentScene];
-    const interaction = scenes.interactions[interactionIndex];
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.currentScene;
+    });
+    const interaction = scene.interactions[interactionIndex];
 
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
@@ -111,7 +109,10 @@ export default class Main extends React.Component {
 
   render() {
     const sceneParams = this.context.params.scenes;
-    const description = sceneParams[this.props.currentScene].scenedescription;
+    const scene = sceneParams.find(scene => {
+      return scene.sceneId === this.props.currentScene;
+    });
+    const description = scene.scenedescription;
 
     const isShowingSceneDescription = !this.state.showingTextDialog
       && description;
@@ -157,7 +158,7 @@ export default class Main extends React.Component {
           </Dialog>
         }
         {
-          this.context.params.scenes.map((sceneParams, sceneIndex) => {
+          this.context.params.scenes.map(sceneParams => {
             const imageSrc = H5P.getPath(
               sceneParams.scenesrc.path,
               this.context.contentId
@@ -165,9 +166,8 @@ export default class Main extends React.Component {
 
             return (
               <Scene
-                key={sceneIndex}
-                id={sceneIndex}
-                isActive={sceneIndex === this.props.currentScene}
+                key={sceneParams.sceneId}
+                isActive={sceneParams.sceneId === this.props.currentScene}
                 sceneParams={sceneParams}
                 addScene={this.addScene.bind(this)}
                 imageSrc={imageSrc}

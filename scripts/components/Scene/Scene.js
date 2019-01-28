@@ -15,7 +15,6 @@ export default class Scene extends React.Component {
     if (this.props.sceneParams.sceneType === SceneTypes.STATIC_SCENE) {
       return (
         <StaticScene
-          id={this.props.id}
           isActive={this.props.isActive}
           sceneParams={this.props.sceneParams}
           imageSrc={this.props.imageSrc}
@@ -28,7 +27,6 @@ export default class Scene extends React.Component {
 
     return (
       <ThreeSixtyScene
-        id={this.props.id}
         isActive={this.props.isActive}
         sceneParams={this.props.sceneParams}
         addScene={this.props.addScene.bind(this)}
