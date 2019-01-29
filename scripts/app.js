@@ -20,6 +20,10 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     let wrapper;
+    this.behavior = params.behaviour;
+    this.l10n = {
+      playAudioTrack: 'Play Audio Track' // TODO: Add to semantics.json
+    };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
       params = params.threeImage;

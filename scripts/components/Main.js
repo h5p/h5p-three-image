@@ -6,6 +6,7 @@ import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
 import './Main.scss';
+import HUD from "./HUD/HUD";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -157,6 +158,9 @@ export default class Main extends React.Component {
             <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
           </Dialog>
         }
+        <HUD
+          scene={ scene }
+        />
         {
           this.context.params.scenes.map(sceneParams => {
             const imageSrc = H5P.getPath(
