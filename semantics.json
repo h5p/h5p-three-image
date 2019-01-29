@@ -121,10 +121,15 @@
               }
             },
             {
-              "name": "sceneAudio",
+              "name": "audio",
               "type": "audio",
-              "label": "Scene Audio",
-              "optional": true
+              "importance": "high",
+              "label": "Audio Track",
+              "description": "Add an audio track that's specific for this scene.",
+              "optional": true,
+              "extraTabs": [
+                "AudioRecorder"
+              ]
             }
           ]
         }
@@ -140,6 +145,27 @@
         "type": "audio",
         "label": "Audio track",
         "optional": true
+      }
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behavioural settings",
+    "importance": "low",
+    "description": "These options will let you control how the world behaves.",
+    "optional": true,
+    "fields": [
+      {
+        "name": "audio",
+        "type": "audio",
+        "importance": "high",
+        "label": "Global Audio",
+        "description": "Add an audio track that's available for all of the scenes by default.",
+        "optional": true,
+        "extraTabs": [
+          "AudioRecorder"
+        ]
       }
     ]
   },

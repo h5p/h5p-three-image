@@ -1,0 +1,25 @@
+.hud-button {
+  pointer-events: auto;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  width: 2em;
+  height: 2em;
+  line-height: 2;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+
+  &:before {
+    font-family: "360-image";
+    content: "\e90a";
+  }
+  &.active:before {
+    content: "\e904";
+  }
+
+  &[aria-disabled=true] {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
