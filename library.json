@@ -14,7 +14,7 @@
   ],
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 14
+    "minorVersion": 20
   },
   "preloadedJs": [
     {
@@ -46,6 +46,11 @@
     },
     {
       "machineName": "H5PEditor.ShowWhen",
+      "majorVersion": 1,
+      "minorVersion": 0
+    },
+    {
+      "machineName": "H5PEditor.AudioRecorder",
       "majorVersion": 1,
       "minorVersion": 0
     }
