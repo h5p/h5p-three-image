@@ -21,6 +21,29 @@ export default class Main extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const validScenes = this.context.params.scenes.map(scene => {
+      return scene.sceneId;
+    });
+
+    const prunedHistory = this.state.sceneHistory.filter(sceneId => {
+      return validScenes.includes(sceneId);
+    });
+
+    // Scene has been removed from params, but not yet from history
+    if (this.state.sceneHistory.length !== prunedHistory.length) {
+      let lastElement = prunedHistory[prunedHistory.length - 1];
+      // Remove current scene if it is at the top of the history
+      while (lastElement === this.props.currentScene) {
+        prunedHistory.pop();
+        lastElement = prunedHistory.length
+          ? prunedHistory[prunedHistory.length - 1]
+          : null;
+      }
+      this.setState({
+        sceneHistory: prunedHistory,
+      });
+    }
+
     if (this.props.currentScene !== prevProps.currentScene) {
 
       // We skip adding to history if we navigated backwards
@@ -39,22 +62,22 @@ export default class Main extends React.Component {
   }
 
   navigateToScene(sceneId) {
-    let nextScene = null;
+    let nextSceneId = null;
     if (sceneId === SceneTypes.PREVIOUS_SCENE) {
       const history = [...this.state.sceneHistory];
-      nextScene = history.pop();
+      nextSceneId = history.pop();
       this.skipHistory = true;
       this.setState({
         sceneHistory: history,
       });
     }
     else {
-      nextScene = this.context.params.scenes.findIndex(scene => {
+      nextSceneId = this.context.params.scenes.find(scene => {
         return scene.sceneId === sceneId;
-      });
+      }).sceneId;
     }
 
-    this.props.setCurrentSceneIndex(nextScene);
+    this.props.setCurrentSceneId(nextSceneId);
   }
 
   showTextDialog(text) {

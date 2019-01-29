@@ -29,10 +29,10 @@ H5P.ThreeImage = (function () {
     this.extras = extras;
     this.threeJsScenes = [];
 
-    const setCurrentSceneIndex = (sceneIndex) => {
-      this.currentScene = sceneIndex;
+    const setCurrentSceneId = (sceneId) => {
+      this.currentScene = sceneId;
 
-      this.trigger('changedScene', sceneIndex);
+      this.trigger('changedScene', sceneId);
 
       ReactDOM.render(
         <H5PContext.Provider value={this}>
@@ -40,7 +40,7 @@ H5P.ThreeImage = (function () {
             forceStartScreen={this.forceStartScreen}
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
-            setCurrentSceneIndex={setCurrentSceneIndex}
+            setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
           />
         </H5PContext.Provider>,
@@ -70,7 +70,7 @@ H5P.ThreeImage = (function () {
             forceStartScreen={this.forceStartScreen}
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
-            setCurrentSceneIndex={setCurrentSceneIndex}
+            setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
           />
         </H5PContext.Provider>,
@@ -80,7 +80,7 @@ H5P.ThreeImage = (function () {
 
     this.reDraw = (forceStartScreen = this.currentScene) => {
       if (forceStartScreen !== this.currentScene) {
-        setCurrentSceneIndex(forceStartScreen);
+        setCurrentSceneId(forceStartScreen);
         return;
       }
 
@@ -90,7 +90,7 @@ H5P.ThreeImage = (function () {
             forceStartScreen={this.forceStartScreen}
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
-            setCurrentSceneIndex={setCurrentSceneIndex}
+            setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
           />
         </H5PContext.Provider>,
