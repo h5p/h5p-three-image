@@ -134,16 +134,18 @@ export default class AudioButton extends React.Component {
   render() {
     const type = ('audio-track' + (this.state.isPlaying ? ' active' : ''));
     const hasPlayer = !!this.getPlayerId(this.props)
-    if (hasPlayer) {
-      return (
-        <Button
-          type={ type }
-          label={ this.context.l10n.playAudioTrack }
-          onClick={ this.handleClick }
-        >
-        </Button>
-      );
+    if (!hasPlayer) {
+      return null;
     }
+
+    return (
+      <Button
+        type={ type }
+        label={ this.context.l10n.playAudioTrack }
+        onClick={ this.handleClick }
+      >
+      </Button>
+    );
   }
 
   /**
