@@ -136,6 +136,10 @@ export default class Main extends React.Component {
     const scene = sceneParams.find(scene => {
       return scene.sceneId === this.props.currentScene;
     });
+    if (!scene) {
+      return null;
+    }
+
     const description = scene.scenedescription;
 
     const isShowingSceneDescription = !this.state.showingTextDialog
