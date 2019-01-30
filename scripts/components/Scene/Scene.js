@@ -21,6 +21,8 @@ export default class Scene extends React.Component {
           navigateToScene={this.props.navigateToScene.bind(this)}
           showInteraction={this.props.showInteraction.bind(this)}
           sceneHistory={this.props.sceneHistory}
+          audioIsPlaying={ this.props.audioIsPlaying }
+          sceneId={ this.props.sceneId }
         />
       );
     }
@@ -34,6 +36,8 @@ export default class Scene extends React.Component {
         navigateToScene={this.props.navigateToScene.bind(this)}
         forceStartCamera={this.props.forceStartCamera}
         showInteraction={this.props.showInteraction.bind(this)}
+        audioIsPlaying={ this.props.audioIsPlaying }
+        sceneId={ this.props.sceneId }
       />
     );
   }

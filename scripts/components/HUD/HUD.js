@@ -15,12 +15,17 @@ export default class HUD extends React.Component {
    * @return {Object}
    */
   getSceneAudioTrack = (scene) => {
+    const props = {
+      isPlaying: this.props.audioIsPlaying,
+      onIsPlaying: this.props.onAudioIsPlaying
+    };
+
     if (scene && scene.audio && scene.audio.length) {
-      return {
-        sceneAudioTrack: scene.audio,
-        sceneId: scene.sceneId
-      };
+      props.sceneAudioTrack = scene.audio;
+      props.sceneId = scene.sceneId;
     }
+
+    return props;
   }
 
   render() {

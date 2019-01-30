@@ -256,6 +256,11 @@ export default class StaticScene extends React.Component {
                 posY = this.state.y;
               }
 
+              const buttonClasses = [];
+              if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
+                buttonClasses.push('active');
+              }
+
               return (
                 <NavigationButton
                   key={index}
@@ -268,6 +273,7 @@ export default class StaticScene extends React.Component {
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
                   }}
+                  buttonClasses={ buttonClasses }
                 />
               );
             })

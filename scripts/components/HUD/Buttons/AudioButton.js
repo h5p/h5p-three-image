@@ -9,10 +9,6 @@ export default class AudioButton extends React.Component {
 
     // Separate players for the different scenes
     this.players = {};
-
-    this.state = {
-      isPlaying: false
-    };
   }
 
   /**
@@ -43,6 +39,7 @@ export default class AudioButton extends React.Component {
   /**
    * Get the audio player for the current track.
    *
+   * @param {string} id
    * @return {AudioElement} or 'null' if track isn't playable.
    */
   getPlayer = (id) => {
@@ -51,8 +48,13 @@ export default class AudioButton extends React.Component {
       this.players[id] = AudioButton.createAudioPlayer(
         this.context.contentId,
         this.getTrack(id),
-        this.handlePlay,
-        this.handleStop
+        () => this.props.onIsPlaying(id),
+        () => {
+          if (this.props.isPlaying === id) {
+            this.props.onIsPlaying(null);
+          }
+        },
+        true
       );
     }
 
@@ -71,7 +73,7 @@ export default class AudioButton extends React.Component {
 
     const player = this.getPlayer(id);
     if (player) {
-      if (this.state.isPlaying) {
+      if (id === this.props.isPlaying) {
         // Pause and reset the player
         player.pause();
         player.currentTime = 0;
@@ -105,18 +107,33 @@ export default class AudioButton extends React.Component {
    * React - runs after render.
    */
   componentDidUpdate(prevProps) {
-    if (this.state.isPlaying) {
-      const lastPlayerId = this.getPlayerId(prevProps);
-      const currentPlayerId = this.getPlayerId(this.props);
+    if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
+      // The Audio Player has changed
 
-      if (lastPlayerId !== currentPlayerId) {
-        // The scene has a new audio track
-        // stop the previous player
-        const lastPlayer = this.getPlayer(lastPlayerId);
+      if (AudioButton.isSceneAudio(prevProps.isPlaying)) {
+        // Thas last player was us, we need to stop it
+
+        const lastPlayer = this.getPlayer(prevProps.isPlaying);
         if (lastPlayer) {
-          // Pause and reset last player
+          // Pause and reset the last player
           lastPlayer.pause();
           lastPlayer.currentTime = 0;
+        }
+      }
+    }
+
+    if (AudioButton.isSceneAudio(this.props.isPlaying)) {
+      // We are playing something
+
+      const currentPlayerId = this.getPlayerId(this.props);
+      if (this.props.isPlaying !== currentPlayerId) {
+        // We are playing the audio track from another scene... we need to change track!
+
+        const isPlayer = this.getPlayer(this.props.isPlaying);
+        if (isPlayer) {
+          // Pause and reset last player
+          isPlayer.pause();
+          isPlayer.currentTime = 0;
         }
 
         // and start the current player
@@ -132,12 +149,12 @@ export default class AudioButton extends React.Component {
    * React - adds dom elements.
    */
   render() {
-    const type = ('audio-track' + (this.state.isPlaying ? ' active' : ''));
-    const hasPlayer = !!this.getPlayerId(this.props)
-    if (!hasPlayer) {
+    const id = this.getPlayerId(this.props);
+    if (!id) {
       return null;
     }
 
+    const type = ('audio-track' + (this.props.isPlaying === id ? ' active' : ''));
     return (
       <Button
         type={ type }
@@ -149,14 +166,35 @@ export default class AudioButton extends React.Component {
   }
 
   /**
+   * Determine if the ID of the player belongs to a scene audio track.
+   *
+   * @param {string} id
+   * @return {boolean}
+   */
+  static isSceneAudio(id) {
+    return id && (id === 'global' || id.substr(0, 6) === 'scene-');
+  }
+
+  /**
+   * Determine if the ID of the player belongs to a scene audio track.
+   *
+   * @param {string} id
+   * @return {boolean}
+   */
+  static isInteractionAudio(id) {
+    return id && (id.substr(0, 12) === 'interaction-');
+  }
+
+  /**
    * Help create the audio player and find the approperiate source.
    *
    * @param {number} id Content ID
    * @param {Array} sources
    * @param {function} onPlay Callback
    * @param {function} onStop Callback
+   * @param {boolean} loop
    */
-  static createAudioPlayer(id, sources, onPlay, onStop) {
+  static createAudioPlayer(id, sources, onPlay, onStop, loop) {
     // Check if browser supports audio.
     const player = document.createElement('audio');
     if (player.canPlayType !== undefined) {
@@ -177,7 +215,7 @@ export default class AudioButton extends React.Component {
     else {
       player.controls = false;
       player.preload = 'auto';
-      player.loop = true;
+      player.loop = loop;
       player.addEventListener('play', onPlay);
       player.addEventListener('ended', onStop);
       player.addEventListener('pause', onStop);
