@@ -6,11 +6,14 @@ import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
 import './Main.scss';
-import HUD from "./HUD/HUD";
+import HUD from './HUD/HUD';
+import AudioButton from './HUD/Buttons/AudioButton';
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
+
+    this.audioPlayers = {};
 
     this.state = {
       showingTextDialog: false,
@@ -18,10 +21,11 @@ export default class Main extends React.Component {
       showingInteraction: false,
       currentInteraction: null,
       sceneHistory: [],
+      audioIsPlaying: null
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const validScenes = this.context.params.scenes.map(scene => {
       return scene.sceneId;
     });
@@ -44,7 +48,6 @@ export default class Main extends React.Component {
         sceneHistory: prunedHistory,
       });
     }
-
     if (this.props.currentScene !== prevProps.currentScene) {
 
       // We skip adding to history if we navigated backwards
@@ -59,6 +62,21 @@ export default class Main extends React.Component {
           prevProps.currentScene,
         ],
       });
+    }
+
+    if (this.state.audioIsPlaying && this.state.audioIsPlaying !== prevState.audioIsPlaying) {
+      // Something is playing audio
+
+      if (AudioButton.isInteractionAudio(prevState.audioIsPlaying)) {
+        // Thas last player was us, we need to stop it
+
+        const lastPlayer = this.getAudioPlayer(prevState.audioIsPlaying);
+        if (lastPlayer) {
+          // Pause and reset the last player
+          lastPlayer.pause();
+          lastPlayer.currentTime = 0;
+        }
+      }
     }
   }
 
@@ -95,6 +113,42 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+   * Get the audio player for the current track.
+   *
+   * @param {string} id
+   * @param {Object} [interaction] Parameters (Only needed initially)
+   * @return {AudioElement} or 'null' if track isn't playable.
+   */
+  getAudioPlayer = (id, interaction) => {
+    // Create player if none exist
+    if (this.audioPlayers[id] === undefined) {
+      if (!interaction || !interaction.action || !interaction.action.params ||
+          !interaction.action.params.files ||
+          !interaction.action.params.files.length) {
+        return; // No track to play
+      }
+      this.audioPlayers[id] = AudioButton.createAudioPlayer(
+        this.context.contentId,
+        interaction.action.params.files,
+        () => {
+          this.setState({
+            audioIsPlaying: id // Set state on starting to play
+          });
+        },
+        () => {
+          if (this.state.audioIsPlaying === id) {
+            this.setState({
+              audioIsPlaying: null  // Clear state on playing ended
+            });
+          }
+        },
+        false
+      );
+    }
+    return this.audioPlayers[id];
+  }
+
   showInteraction(interactionIndex) {
     const scene = this.context.params.scenes.find(scene => {
       return scene.sceneId === this.props.currentScene;
@@ -109,7 +163,22 @@ export default class Main extends React.Component {
       this.navigateToScene(nextSceneId);
     }
     else if (machineName === 'H5P.Audio') {
-      // TODO: Handle Audio logic
+      const playerId = 'interaction-' + scene.sceneId + '-' + interactionIndex;
+      if (this.state.audioIsPlaying === playerId) {
+        // Pause and reset player
+        const lastPlayer = this.getAudioPlayer(playerId);
+        if (lastPlayer) {
+          lastPlayer.pause();
+          lastPlayer.currentTime = 0;
+        }
+      }
+      else {
+        // Start current audio playback
+        const player = this.getAudioPlayer(playerId, interaction);
+        if (player) {
+          player.play();
+        }
+      }
     }
     else {
       // Show interaction in dialog by default
@@ -129,6 +198,12 @@ export default class Main extends React.Component {
 
   addScene(scene, sceneId) {
     this.props.addScene(scene, sceneId);
+  }
+
+  handleAudioIsPlaying = (id) => {
+    this.setState({
+      audioIsPlaying: id // Change the player
+    });
   }
 
   render() {
@@ -187,6 +262,8 @@ export default class Main extends React.Component {
         }
         <HUD
           scene={ scene }
+          audioIsPlaying={ this.state.audioIsPlaying }
+          onAudioIsPlaying={ this.handleAudioIsPlaying }
         />
         {
           this.context.params.scenes.map(sceneParams => {
@@ -206,6 +283,8 @@ export default class Main extends React.Component {
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
                 sceneHistory={this.state.sceneHistory}
+                audioIsPlaying={ this.state.audioIsPlaying }
+                sceneId={sceneParams.sceneId}
               />
             );
           })

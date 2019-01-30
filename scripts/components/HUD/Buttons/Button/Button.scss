@@ -1,3 +1,5 @@
+@import '../../../../styles/icons';
+
 .hud-button {
   pointer-events: auto;
   border-radius: 50%;
@@ -12,10 +14,10 @@
 
   &:before {
     font-family: "360-image";
-    content: "\e90a";
+    content: $audioOn;
   }
   &.active:before {
-    content: "\e904";
+    content: $audioOff;
   }
 
   &[aria-disabled=true] {

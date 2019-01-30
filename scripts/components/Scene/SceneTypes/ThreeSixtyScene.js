@@ -86,12 +86,21 @@ export default class ThreeSixtyScene extends React.Component {
 
   addInteractionButtonToScene(yaw, pitch, index, interaction) {
     const interactionButtonWrapper = document.createElement('div');
+    const className = ['three-sixty'];
+    if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
+      className.push('active');
+    }
 
+    // TODO: Is there a way we could improve this so that the elements that
+    // stay the same are updated instead of removed and added again?
+    // E.g. Put the whole interactions.forEach into render with key="" for each
+    // element and then use ref="" to add it to the scene ?
+    // Ideally it should run each time componentDidUpdate does...
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         <NavigationButton
           title={interaction.action.metadata.title}
-          buttonClasses={['three-sixty']}
+          buttonClasses={ className }
           icon={getIconFromInteraction(interaction)}
           clickHandler={this.props.showInteraction.bind(this, index)}
           doubleClickHandler={() => {
@@ -127,12 +136,15 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
+    // Need to respond to audio in order to update the icon of the interaction
+    const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
+
     const hasChangedInteractions = this.props.sceneParams.interactions
       && (this.renderedInteractions
         !== this.props.sceneParams.interactions.length);
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
-    if (hasChangedInteractions) {
+    if (hasChangedInteractions || audioHasChanged) {
       this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
 

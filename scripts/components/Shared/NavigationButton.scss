@@ -84,6 +84,9 @@
 .h5p-audio-button:before {
   content: $audioOn;
 }
+.h5p-audio-button.active:before {
+  content: $audioOff;
+}
 
 .h5p-go-back-button {
   top: 0.5em;
