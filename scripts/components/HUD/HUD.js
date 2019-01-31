@@ -50,9 +50,9 @@ export default class HUD extends React.Component {
             />
           }
           <Button
-            type={ 'rotate' }
-            label={ this.context.l10n.rotate }
-            onClick={ this.props.onRotate }
+            type={ 'reset' }
+            label={ this.context.l10n.reset }
+            onClick={ this.props.onReset }
           />
           <Button
             type={ 'submit-dialog' }

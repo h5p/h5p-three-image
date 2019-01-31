@@ -12,25 +12,16 @@ export default class AudioButton extends React.Component {
     }
   }
 
-  handleKeyPress = (e) => {
-    if (e.which === 32 || e.which === 13) {
-      this.handleClick();
-      e.preventDefault();
-    }
-  }
-
   render() {
     return (
-      <div
-        role="button"
-        tabIndex={ this.props.disabled ? '-1' : '0' }
-        className={ 'hud-button ' + this.props.type }
-        onClick={ this.handleClick }
-        onKeyPress={ this.handleKeyPress }
-        aria-label={ this.props.label }
-        aria-disabled={ !!this.props.disabled }
-      >
-        <div className="tooltip">
+      <div className="btn-wrap">
+        <button
+          className={ 'hud-btn ' + this.props.type }
+          onClick={ this.handleClick }
+          aria-label={ this.props.label }
+          disabled={ !!this.props.disabled }
+        />
+        <div className="tooltip" aria-hidden="true">
           <div className="text-wrap">{ this.props.label }</div>
         </div>
       </div>

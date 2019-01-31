@@ -1,57 +1,13 @@
 @import '../../../../styles/icons';
 
-.hud-button {
+.btn-wrap {
+  pointer-events: auto;
   position: relative;
   float: left;
-  pointer-events: auto;
-  border-radius: 50%;
-  background: #000;
-  color: #fff;
-  width: 2em;
-  height: 2em;
-  line-height: 2;
-  cursor: pointer;
-  text-align: center;
-  margin-right: 0.5em;
-  outline: 0;
-
-  &:before {
-    font-family: "360-image";
-    content: $noicon;
-  }
-
-  &.audio-track:before {
-    content: $audioOn;
-  }
-  &.audio-track.active:before {
-    content: $audioOff;
-  }
-
-  &.scene-description:before {
-    content: $sceneDescription;
-  }
-  &.rotate:before {
-    content: $rotate;
-  }
-  &.submit-dialog:before {
-    content: $submitdialog;
-  }
-
-  &:focus {
-    box-shadow: 0 0 0.25em 0.125em #00BFFF;
-  }
-  &:active {
-    box-shadow: 0 0 0.25em 0.125em #1E90FF;
-  }
-
-  &[aria-disabled=true] {
-    cursor: default;
-    opacity: 0.5;
-  }
 
   .tooltip {
     padding: 0.25em 1em;
-    font-size: 0.875em;
+    font-size: 0.4375em;
     background: #000;
     color: #fff;
     position: absolute;
@@ -90,5 +46,66 @@
     opacity: 1;
     transition-delay: 0s;
     bottom: 140%;
+  }
+}
+.hud-btn {
+  font-size: 1em;
+  background: #000;
+  border-radius: 50%;
+  border: 0.125em solid transparent;
+  color: #fff;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+  margin-right: 0.5em;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  opacity: 0.85;
+  transition: border-color 100ms, opacity 100ms;
+
+  &:before {
+    font-family: "360-image";
+    content: $noicon;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 40%;
+  }
+
+  &.audio-track:before {
+    content: $audioOn;
+  }
+  &.audio-track.active:before {
+    content: $audioOff;
+  }
+
+  &.scene-description:before {
+    content: $sceneDescription;
+  }
+  &.reset:before {
+    content: $reset;
+  }
+  &.submit-dialog:before {
+    content: " ";
+    background-image: url('../../../../../assets/the-h5p-star.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+  &:active {
+    border-color: #808080;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.5;
   }
 }

@@ -256,7 +256,7 @@ export default class Main extends React.Component {
           audioIsPlaying={ this.state.audioIsPlaying }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
-          onRotate={ () => console.error('Please implement Rotate') }
+          onReset={ () => console.error('Please implement Reset') }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
         />
         {
