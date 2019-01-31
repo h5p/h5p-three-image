@@ -238,7 +238,7 @@ export default class Main extends React.Component {
         {
           this.state.showingInteraction &&
           this.state.currentInteraction !== null &&
-          <Dialog onHideTextDialog={ this.handleCloseTextDialog }>
+          <Dialog onHideTextDialog={this.hideInteraction.bind(this)}>
             <InteractionContent
               currentScene={this.props.currentScene}
               currentInteraction={this.state.currentInteraction}
