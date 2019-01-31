@@ -126,7 +126,7 @@
               "label": "Audio Track",
               "description": "Add an audio track that's specific for this scene.",
               "optional": true,
-              "extraTabs": [
+              "widgetExtensions": [
                 "AudioRecorder"
               ]
             }
@@ -161,7 +161,7 @@
         "label": "Global Audio",
         "description": "Add an audio track that's available for all of the scenes by default.",
         "optional": true,
-        "extraTabs": [
+        "widgetExtensions": [
           "AudioRecorder"
         ]
       }
