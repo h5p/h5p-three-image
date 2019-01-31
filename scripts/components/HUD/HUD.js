@@ -1,7 +1,9 @@
 import React from 'react';
 import './HUD.scss';
 
+import { H5PContext } from '../../context/H5PContext';
 import AudioButton from './Buttons/AudioButton';
+import Button from './Buttons/Button/Button';
 
 export default class HUD extends React.Component {
   constructor(props) {
@@ -28,13 +30,39 @@ export default class HUD extends React.Component {
     return props;
   }
 
+  handleSceneDescription = () => {
+    this.props.onSceneDescription(this.props.scene.scenedescription);
+  }
+
+  /**
+   * React - create DOM elements
+   */
   render() {
     return (
       <div className="hud">
         <div className="hud-bottom-left">
           <AudioButton { ...this.getSceneAudioTrack(this.props.scene) }/>
+          { this.props.scene.scenedescription &&
+            <Button
+              type={ 'scene-description' }
+              label={ this.context.l10n.sceneDescription }
+              onClick={ this.handleSceneDescription }
+            />
+          }
+          <Button
+            type={ 'rotate' }
+            label={ this.context.l10n.rotate }
+            onClick={ this.props.onRotate }
+          />
+          <Button
+            type={ 'submit-dialog' }
+            label={ this.context.l10n.submitDialog }
+            onClick={ this.props.onSubmitDialog}
+          />
         </div>
       </div>
     );
   }
 }
+
+HUD.contextType = H5PContext;

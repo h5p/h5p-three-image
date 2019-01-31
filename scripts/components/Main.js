@@ -99,14 +99,23 @@ export default class Main extends React.Component {
     this.props.setCurrentSceneId(nextSceneId);
   }
 
-  showTextDialog(text) {
+
+  /**
+   * The user wants to see the scene description, handling it.
+   *
+   * @param {string} text Scene description
+   */
+  handleSceneDescription = (text) => {
     this.setState({
       showingTextDialog: true,
       currentText: text,
     });
   }
 
-  hideTextDialog() {
+  /**
+   * The user wants to close the text dialog, handling it.
+   */
+  handleCloseTextDialog = () => {
     this.setState({
       showingTextDialog: false,
       currentText: null,
@@ -227,27 +236,9 @@ export default class Main extends React.Component {
     return (
       <div>
         {
-          isShowingSceneDescription &&
-          <SceneDescription
-            text={description}
-            showTextDialog={this.showTextDialog.bind(this)}
-          />
-        }
-        {
-          isShowingAudio &&
-          <Audio
-            audioSrc={H5P.getPath(
-              this.context.params.audio[0].path,
-              this.context.contentId
-            )}
-          />
-        }
-        {
           this.state.showingInteraction &&
           this.state.currentInteraction !== null &&
-          <Dialog
-            onHideTextDialog={this.hideInteraction.bind(this)}
-          >
+          <Dialog onHideTextDialog={ this.handleCloseTextDialog }>
             <InteractionContent
               currentScene={this.props.currentScene}
               currentInteraction={this.state.currentInteraction}
@@ -256,7 +247,7 @@ export default class Main extends React.Component {
         }
         {
           this.state.showingTextDialog && this.state.currentText &&
-          <Dialog onHideTextDialog={this.hideTextDialog.bind(this)}>
+          <Dialog onHideTextDialog={  this.handleCloseTextDialog  }>
             <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
           </Dialog>
         }
@@ -264,6 +255,9 @@ export default class Main extends React.Component {
           scene={ scene }
           audioIsPlaying={ this.state.audioIsPlaying }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
+          onSceneDescription={ this.handleSceneDescription }
+          onRotate={ () => console.error('Please implement Rotate') }
+          onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
         />
         {
           this.context.params.scenes.map(sceneParams => {

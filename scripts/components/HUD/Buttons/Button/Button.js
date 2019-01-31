@@ -29,7 +29,11 @@ export default class AudioButton extends React.Component {
         onKeyPress={ this.handleKeyPress }
         aria-label={ this.props.label }
         aria-disabled={ !!this.props.disabled }
-      />
+      >
+        <div class="tooltip">
+          <div class="text-wrap">{ this.props.label }</div>
+        </div>
+      </div>
     );
   }
 }

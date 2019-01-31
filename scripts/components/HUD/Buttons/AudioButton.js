@@ -160,8 +160,7 @@ export default class AudioButton extends React.Component {
         type={ type }
         label={ this.context.l10n.playAudioTrack }
         onClick={ this.handleClick }
-      >
-      </Button>
+      />
     );
   }
 
