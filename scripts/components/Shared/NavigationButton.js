@@ -8,7 +8,7 @@ export const Icons = {
   GO_TO_SCENE: 'h5p-go-to-scene-button',
   GO_BACK: 'h5p-go-back-button',
   SCENE_DESCRIPTION: 'h5p-scene-description-button',
-  AUDIO: 'h5p-audio-button',
+  AUDIO: 'h5p-audio-button h5p-interaction-button',
 };
 
 const infoInteractions = [
