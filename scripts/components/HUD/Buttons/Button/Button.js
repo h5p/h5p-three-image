@@ -30,8 +30,8 @@ export default class AudioButton extends React.Component {
         aria-label={ this.props.label }
         aria-disabled={ !!this.props.disabled }
       >
-        <div class="tooltip">
-          <div class="text-wrap">{ this.props.label }</div>
+        <div className="tooltip">
+          <div className="text-wrap">{ this.props.label }</div>
         </div>
       </div>
     );

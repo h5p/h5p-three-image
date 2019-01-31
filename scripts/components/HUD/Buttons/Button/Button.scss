@@ -13,6 +13,7 @@
   cursor: pointer;
   text-align: center;
   margin-right: 0.5em;
+  outline: 0;
 
   &:before {
     font-family: "360-image";
@@ -34,6 +35,13 @@
   }
   &.submit-dialog:before {
     content: $submitdialog;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0.25em 0.125em #00BFFF;
+  }
+  &:active {
+    box-shadow: 0 0 0.25em 0.125em #1E90FF;
   }
 
   &[aria-disabled=true] {
