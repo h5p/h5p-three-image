@@ -38,6 +38,7 @@ export default class Scene extends React.Component {
         showInteraction={this.props.showInteraction.bind(this)}
         audioIsPlaying={ this.props.audioIsPlaying }
         sceneId={ this.props.sceneId }
+        toggleCenterScene={ this.props.toggleCenterScene }
       />
     );
   }

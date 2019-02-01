@@ -12,16 +12,14 @@
     background: #000;
     color: #fff;
     position: absolute;
-    bottom: 200%;
     z-index: 11;
-    left: -0.25em;
     line-height: 1.75;
     box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
     pointer-events: none;
 
     opacity: 0;
     visibility: hidden;
-    transition: visibility 0s linear 0.1s, opacity 0.1s linear, bottom 0.1s linear;
+    transition: visibility 0s linear 0.1s, opacity 0.1s linear, bottom 0.1s linear, top 0.1s linear;
 
     .text-wrap {
       max-width: 30em;
@@ -38,15 +36,11 @@
     width: 0.75em;
     height: 0.75em;
     position: absolute;
-    left: 0;
-    top: 100%;
-    transform: translateX(130%) translateY(-50%) rotate(45deg);
   }
   &:hover .tooltip {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
-    bottom: 140%;
   }
 }
 .hud-btn {
@@ -58,7 +52,6 @@
   width: 1em;
   height: 1em;
   cursor: pointer;
-  margin-right: 0.5em;
   overflow: hidden;
   position: relative;
   display: block;
@@ -96,6 +89,13 @@
     width: 1em;
     height: 1em;
   }
+  &.center-scene {
+    border-radius: 0;
+
+    &:before {
+      content: $centerscene;
+    }
+  }
 
   &:hover,
   &:focus {
@@ -108,5 +108,38 @@
   &[disabled] {
     cursor: default;
     opacity: 0.5;
+  }
+}
+.hud-bottom-left {
+  .hud-btn {
+    margin-right: 0.5em;
+  }
+  .tooltip {
+    left: -0.25em;
+    bottom: 200%;
+
+    &:after {
+      left: 0;
+      top: 100%;
+      transform: translateX(130%) translateY(-50%) rotate(45deg);
+    }
+  }
+  .btn-wrap:hover .tooltip {
+    bottom: 140%;
+  }
+}
+.hud-top-right {
+  .tooltip {
+    right: 0.25em;
+    top: 200%;
+
+    &:after {
+      right: 0;
+      bottom: 100%;
+      transform: translateX(-70%) translateY(50%) rotate(45deg);
+    }
+  }
+  .btn-wrap:hover .tooltip {
+    top: 140%;
   }
 }

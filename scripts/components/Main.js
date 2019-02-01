@@ -21,7 +21,8 @@ export default class Main extends React.Component {
       showingInteraction: false,
       currentInteraction: null,
       sceneHistory: [],
-      audioIsPlaying: null
+      audioIsPlaying: null,
+      toggleCenterScene: false
     };
   }
 
@@ -260,6 +261,7 @@ export default class Main extends React.Component {
           onSceneDescription={ this.handleSceneDescription }
           onReset={ () => console.error('Please implement Reset') }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
+          onCenterScene={ () => this.setState({toggleCenterScene: !this.state.toggleCenterScene}) }
         />
         {
           this.context.params.scenes.map(sceneParams => {
@@ -281,6 +283,7 @@ export default class Main extends React.Component {
                 sceneHistory={this.state.sceneHistory}
                 audioIsPlaying={ this.state.audioIsPlaying }
                 sceneId={sceneParams.sceneId}
+                toggleCenterScene={ this.state.toggleCenterScene }
               />
             );
           })

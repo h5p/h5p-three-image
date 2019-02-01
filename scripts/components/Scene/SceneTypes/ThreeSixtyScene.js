@@ -135,6 +135,10 @@ export default class ThreeSixtyScene extends React.Component {
     if (!this.state.hasInitialized) {
       return;
     }
+    if (this.props.toggleCenterScene !== prevProps.toggleCenterScene) {
+      const pos = this.props.sceneParams.cameraStartPosition.split(',');
+      this.scene.setCameraPosition(pos[0], pos[1]);
+    }
 
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);

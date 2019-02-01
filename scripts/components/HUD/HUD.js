@@ -40,6 +40,15 @@ export default class HUD extends React.Component {
   render() {
     return (
       <div className="hud">
+        <div className="hud-top-right">
+          { this.context.extras.isEditor && /* TODO: Only 360 */
+            <Button
+              type={ 'center-scene' }
+              label={ 'Center scene' }
+              onClick={ this.props.onCenterScene }
+            />
+          }
+        </div>
         <div className="hud-bottom-left">
           <AudioButton { ...this.getSceneAudioTrack(this.props.scene) }/>
           { this.props.scene.scenedescription &&
