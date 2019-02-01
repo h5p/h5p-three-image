@@ -18,7 +18,7 @@ export default class AudioButton extends React.Component {
    * @return {string}
    */
   getPlayerId = (props) => {
-    if (props.sceneId && props.sceneAudioTrack && props.sceneAudioTrack.length) {
+    if (props.sceneId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
       return 'scene-' + props.sceneId;
     }
     if (this.context.behavior && this.context.behavior.length) {
