@@ -185,6 +185,16 @@ export default class AudioButton extends React.Component {
   }
 
   /**
+   * Determine if the ID of the player belongs to a video interaction.
+   *
+   * @param {string} id
+   * @return {boolean}
+   */
+  static isVideoAudio(id) {
+    return id && (id.substr(0, 6) === 'video-');
+  }
+
+  /**
    * Help create the audio player and find the approperiate source.
    *
    * @param {number} id Content ID

@@ -242,6 +242,8 @@ export default class Main extends React.Component {
             <InteractionContent
               currentScene={this.props.currentScene}
               currentInteraction={this.state.currentInteraction}
+              audioIsPlaying={ this.state.audioIsPlaying }
+              onAudioIsPlaying={ this.handleAudioIsPlaying }
             />
           </Dialog>
         }

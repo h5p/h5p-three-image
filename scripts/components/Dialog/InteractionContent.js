@@ -1,6 +1,7 @@
 import React from 'react';
 import './InteractionContent.scss';
 import {H5PContext} from '../../context/H5PContext';
+import AudioButton from '../HUD/Buttons/AudioButton';
 
 export default class InteractionContent extends React.Component {
   constructor(props) {
@@ -18,9 +19,18 @@ export default class InteractionContent extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (!this.state.isInitialized) {
       this.initializeContent();
+    }
+
+    if (this.props.audioIsPlaying && this.props.audioIsPlaying !== prevProps.audioIsPlaying) {
+      // The Audio Player has changed
+
+      if (AudioButton.isVideoAudio(prevProps.audioIsPlaying)) {
+        // Thas last player was us, we need to stop it
+        this.instance.pause();
+      }
     }
   }
 
@@ -41,6 +51,14 @@ export default class InteractionContent extends React.Component {
       this.context.contentId,
       H5P.jQuery(this.contentRef.current)
     );
+
+    if (library.library.split(' ')[0] === 'H5P.Video') {
+      this.instance.on('stateChange', e => {
+        if (e.data === H5P.Video.PLAYING) {
+          this.props.onAudioIsPlaying('video-' + scene.sceneId + '-' + this.props.currentInteraction);
+        }
+      });
+    }
 
     this.setState({
       isInitialized: true,
