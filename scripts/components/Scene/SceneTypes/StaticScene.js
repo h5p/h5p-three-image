@@ -261,10 +261,21 @@ export default class StaticScene extends React.Component {
                 buttonClasses.push('active');
               }
 
+              let title = interaction.action.metadata.title;
+              const library = H5P.libraryFromString(interaction.action.library);
+              const machineName = library.machineName;
+
+              if (machineName === 'H5P.GoToScene') {
+                const nextScene = this.context.params.scenes.find(scene => {
+                  return scene.sceneId === interaction.action.params.nextSceneId;
+                });
+                title = nextScene.scenename;
+              }
+
               return (
                 <NavigationButton
                   key={index}
-                  title={interaction.action.metadata.title}
+                  title={title}
                   icon={getIconFromInteraction(interaction)}
                   topPosition={posY}
                   leftPosition={posX}
