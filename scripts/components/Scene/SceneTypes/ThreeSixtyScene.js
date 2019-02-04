@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 
+export const sceneRenderingQualityMapping = {
+  high: 128,
+  medium: 64,
+  low: 16,
+};
+
 export default class ThreeSixtyScene extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +36,7 @@ export default class ThreeSixtyScene extends React.Component {
         yaw: -yaw,
         pitch: pitch,
       },
+      segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
     }, () => {
       // Determine if image source has changed
       const hasChangedImage = this.props.imageSrc
