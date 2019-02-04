@@ -58,13 +58,11 @@ export default class HUD extends React.Component {
               onClick={ this.handleSceneDescription }
             />
           }
-          { false &&
-            <Button
-              type={ 'reset' }
-              label={ this.context.l10n.reset }
-              onClick={ this.props.onReset }
-            />
-          }
+          <Button
+            type={ 'reset' }
+            label={ this.context.l10n.resetCamera }
+            onClick={ this.props.onCenterScene }
+          />
           { false &&
             <Button
               type={ 'submit-dialog' }

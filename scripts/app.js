@@ -25,7 +25,7 @@ H5P.ThreeImage = (function () {
     this.l10n = {
       playAudioTrack: 'Play Audio Track', // TODO: Add to semantics.json
       sceneDescription: 'Scene Description', // TODO: Add to semantics.json
-      reset: 'Reset', // TODO: Add to semantics.json
+      resetCamera: 'Reset Camera', // TODO: Add to semantics.json
       submitDialog: 'Submit Dialog' // TODO: Add to semantics.json
     };
     // Parameters has been wrapped in the threeImage widget group
