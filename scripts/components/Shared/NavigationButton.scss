@@ -19,6 +19,7 @@
   user-select: none;
   z-index: 1;
   box-shadow: 0.2em 0.2em 0.3em rgba(0,0,0,0.2);
+  transition: border 100ms linear;
 
   &:hover {
     background: $hoverBg;
@@ -26,7 +27,7 @@
 
   &:active {
     background: $activeBg;
-    border: 0.3em solid $activeBorder;
+    border: 0.25em solid $activeBorder;
   }
 }
 
@@ -66,6 +67,7 @@
   z-index: 1;
   color: white;
   font-size: 1.25em;
+  height: 1.025em;
 }
 
 .h5p-question-button:before {
@@ -93,7 +95,6 @@
   left: 1em;
   width: 2em;
   height: 2em;
-  border: 0.1em solid;
 }
 
 .h5p-go-back-button:before {
