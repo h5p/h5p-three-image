@@ -218,6 +218,10 @@ export default class Main extends React.Component {
 
   render() {
     const sceneParams = this.context.params.scenes;
+    if (!sceneParams) {
+      return <div>Please add a scene in the editor</div>;
+    }
+
     const scene = sceneParams.find(scene => {
       return scene.sceneId === this.props.currentScene;
     });
