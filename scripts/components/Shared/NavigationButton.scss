@@ -89,12 +89,20 @@
 }
 
 .h5p-go-back-button {
-  top: 0.5em;
-  left: 0.75em;
+  top: 1em;
+  left: 1em;
+  width: 2em;
+  height: 2em;
+  border: 0.1em solid;
 }
 
 .h5p-go-back-button:before {
   content: $goBack;
+  font-size: 1em;
+}
+
+.h5p-go-back-button:active {
+  border-color: $activeBorder;
 }
 
 .h5p-scene-description-button:before {

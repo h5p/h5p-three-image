@@ -229,15 +229,6 @@ export default class Main extends React.Component {
       return null;
     }
 
-    const description = scene.scenedescription;
-
-    const isShowingSceneDescription = !this.state.showingTextDialog
-      && description;
-
-    const isShowingAudio = this.context.params.audio
-      && this.context.params.audio[0]
-      && this.context.params.audio[0].path;
-
     return (
       <div>
         {
