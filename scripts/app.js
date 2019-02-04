@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import Main from "./components/Main";
 import {H5PContext} from './context/H5PContext';
+import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeSixtyScene";
 
 // Load library
 H5P = H5P || {};
@@ -35,6 +36,7 @@ H5P.ThreeImage = (function () {
     this.contentId = contentId;
     this.extras = extras;
     this.threeJsScenes = [];
+    this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
 
     const setCurrentSceneId = (sceneId) => {
       this.currentScene = sceneId;
@@ -86,6 +88,11 @@ H5P.ThreeImage = (function () {
     };
 
     this.reDraw = (forceStartScreen = this.currentScene) => {
+      const sceneRenderingQuality = this.behavior.sceneRenderingQuality;
+      if (sceneRenderingQuality !== this.sceneRenderingQuality) {
+        this.setSceneRenderingQuality(sceneRenderingQuality);
+      }
+
       if (forceStartScreen !== this.currentScene) {
         setCurrentSceneId(forceStartScreen);
         return;
@@ -147,6 +154,14 @@ H5P.ThreeImage = (function () {
         camera: scene.getCurrentPosition(),
         fov: scene.getCurrentFov(),
       };
+    };
+
+    this.setSceneRenderingQuality = (quality) => {
+      const segments = sceneRenderingQualityMapping[quality];
+      this.threeJsScenes.forEach(scene => {
+        scene.scene.setRenderingQuality(segments);
+      });
+      this.sceneRenderingQuality = quality;
     };
   }
 
