@@ -21,7 +21,7 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     let wrapper;
-    this.behavior = params.behaviour;
+    this.behavior = params.behaviour || {};
     this.l10n = {
       playAudioTrack: 'Play Audio Track', // TODO: Add to semantics.json
       sceneDescription: 'Scene Description', // TODO: Add to semantics.json
