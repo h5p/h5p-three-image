@@ -47,7 +47,7 @@
   font-size: 1em;
   background: #000;
   border-radius: 50%;
-  border: 0.125em solid transparent;
+  border: 0.1em solid transparent;
   color: #fff;
   width: 1em;
   height: 1em;
@@ -55,7 +55,6 @@
   overflow: hidden;
   position: relative;
   display: block;
-  opacity: 0.85;
   transition: border-color 100ms, opacity 100ms;
 
   &:before {
@@ -99,10 +98,11 @@
 
   &:hover,
   &:focus {
-    opacity: 1;
+    background-color: #2b2b2b;
   }
   &:active {
-    border-color: #808080;
+    background-color: black;
+    border-color: #6d6d6d;
   }
 
   &[disabled] {
@@ -112,7 +112,7 @@
 }
 .hud-bottom-left {
   .hud-btn {
-    margin-right: 0.5em;
+    margin-right: 0.25em;
   }
   .tooltip {
     left: -0.25em;
