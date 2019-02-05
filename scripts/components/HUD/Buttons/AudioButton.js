@@ -33,7 +33,7 @@ export default class AudioButton extends React.Component {
    * @return {Array}
    */
   getTrack = (id) => {
-    return (id === 'global' ? this.context.behavior : this.props.sceneAudioTrack);
+    return (id === 'global' ? this.context.behavior.audio : this.props.sceneAudioTrack);
   }
 
   /**
