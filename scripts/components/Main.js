@@ -8,6 +8,7 @@ import {H5PContext} from "../context/H5PContext";
 import './Main.scss';
 import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
+import NoScene from "./Scene/NoScene";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -219,7 +220,7 @@ export default class Main extends React.Component {
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
-      return <div>Please add a scene in the editor</div>;
+      return <NoScene />;
     }
 
     const scene = sceneParams.find(scene => {

@@ -1,0 +1,28 @@
+@import "../../styles/icons";
+
+.no-scene-container {
+  height: 100%;
+  background-color: #1b1d2c;
+  color: #fff;
+}
+.no-scene-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 1.5;
+
+  &:before {
+    content: $noscene;
+    font-family: "360-image";
+    font-size: 10em;
+    color: #8d8f98;
+    line-height: 0.75;
+    padding-left: 0.125em;
+  }
+
+  .title {
+    font-size: 2em;
+  }
+}
