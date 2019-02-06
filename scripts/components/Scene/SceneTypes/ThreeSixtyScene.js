@@ -98,6 +98,14 @@ export default class ThreeSixtyScene extends React.Component {
       className.push('active');
     }
 
+    let title = interaction.action.metadata.title;
+    if (interaction.action.library.split(' ')[0] === 'H5P.GoToScene') {
+      const gotoScene = this.context.params.scenes.find(scene => {
+        return scene.sceneId === interaction.action.params.nextSceneId;
+      });
+      title = gotoScene.scenename; // Use scenename as title.
+    }
+
     // TODO: Is there a way we could improve this so that the elements that
     // stay the same are updated instead of removed and added again?
     // E.g. Put the whole interactions.forEach into render with key="" for each
@@ -106,7 +114,7 @@ export default class ThreeSixtyScene extends React.Component {
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         <NavigationButton
-          title={interaction.action.metadata.title}
+          title={title}
           buttonClasses={ className }
           icon={getIconFromInteraction(interaction)}
           clickHandler={this.props.showInteraction.bind(this, index)}
