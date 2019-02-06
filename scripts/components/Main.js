@@ -23,7 +23,6 @@ export default class Main extends React.Component {
       currentInteraction: null,
       sceneHistory: [],
       audioIsPlaying: null,
-      toggleCenterScene: false
     };
   }
 
@@ -217,6 +216,18 @@ export default class Main extends React.Component {
     });
   }
 
+  centerScene() {
+    const sceneParams = this.context.params.scenes;
+    const scene = sceneParams.find(scene => {
+      return scene.sceneId === this.props.currentScene;
+    });
+    if (!scene) {
+      return;
+    }
+
+    this.props.onSetCameraPos(scene.cameraStartPosition);
+  }
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -256,7 +267,7 @@ export default class Main extends React.Component {
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
-          onCenterScene={ () => this.setState({toggleCenterScene: !this.state.toggleCenterScene}) }
+          onCenterScene={ this.centerScene.bind(this) }
         />
         {
           this.context.params.scenes.map(sceneParams => {
@@ -278,7 +289,6 @@ export default class Main extends React.Component {
                 sceneHistory={this.state.sceneHistory}
                 audioIsPlaying={ this.state.audioIsPlaying }
                 sceneId={sceneParams.sceneId}
-                toggleCenterScene={ this.state.toggleCenterScene }
               />
             );
           })

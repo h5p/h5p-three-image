@@ -52,6 +52,7 @@ H5P.ThreeImage = (function () {
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
+            onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
         wrapper
@@ -82,6 +83,7 @@ H5P.ThreeImage = (function () {
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
+            onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
         wrapper
@@ -107,6 +109,7 @@ H5P.ThreeImage = (function () {
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
             addScene={addScene}
+            onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
         wrapper
@@ -141,6 +144,19 @@ H5P.ThreeImage = (function () {
 
       scene.scene.resize();
     });
+
+    const setCameraPosition = (cameraPosition) => {
+      if (this.currentScene === null) {
+        return;
+      }
+
+      const scene = this.threeJsScenes.find(scene => {
+        return scene.sceneId === this.currentScene;
+      }).scene;
+
+      const [yaw, pitch] = cameraPosition.split(',');
+      scene.setCameraPosition(parseFloat(yaw), parseFloat(pitch));
+    };
 
     this.getCamera = () => {
       if (this.currentScene === null) {

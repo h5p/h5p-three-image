@@ -33,7 +33,7 @@ export default class ThreeSixtyScene extends React.Component {
     this.scene = new H5P.ThreeSixty(this.imageElement, {
       ratio: 16/9,
       cameraStartPosition: {
-        yaw: -yaw,
+        yaw: yaw,
         pitch: pitch,
       },
       segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
@@ -141,10 +141,6 @@ export default class ThreeSixtyScene extends React.Component {
   componentDidUpdate(prevProps) {
     if (!this.state.hasInitialized) {
       return;
-    }
-    if (this.props.toggleCenterScene !== prevProps.toggleCenterScene) {
-      const pos = this.props.sceneParams.cameraStartPosition.split(',');
-      this.scene.setCameraPosition(pos[0], pos[1]);
     }
 
     // Need to respond to audio in order to update the icon of the interaction

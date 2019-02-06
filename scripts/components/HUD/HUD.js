@@ -4,6 +4,7 @@ import './HUD.scss';
 import { H5PContext } from '../../context/H5PContext';
 import AudioButton from './Buttons/AudioButton';
 import Button from './Buttons/Button/Button';
+import {SceneTypes} from "../Scene/Scene";
 
 export default class HUD extends React.Component {
   constructor(props) {
@@ -38,10 +39,13 @@ export default class HUD extends React.Component {
    * React - create DOM elements
    */
   render() {
+    const isThreeSixty = this.props.scene.sceneType
+      === SceneTypes.THREE_SIXTY_SCENE;
+
     return (
       <div className="hud">
         <div className="hud-top-right">
-          { this.context.extras.isEditor && /* TODO: Only 360 */
+          { this.context.extras.isEditor && isThreeSixty &&
             <Button
               type={ 'center-scene' }
               label={ 'Center scene' }
@@ -58,11 +62,14 @@ export default class HUD extends React.Component {
               onClick={ this.handleSceneDescription }
             />
           }
-          <Button
-            type={ 'reset' }
-            label={ this.context.l10n.resetCamera }
-            onClick={ this.props.onCenterScene }
-          />
+          {
+            isThreeSixty &&
+            <Button
+              type={ 'reset' }
+              label={ this.context.l10n.resetCamera }
+              onClick={ this.props.onCenterScene }
+            />
+          }
           { false &&
             <Button
               type={ 'submit-dialog' }
