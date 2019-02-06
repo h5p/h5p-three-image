@@ -186,21 +186,5 @@
         "default": "high"
       }
     ]
-  },
-  {
-    "name": "l10n",
-    "type": "group",
-    "label": "Localization",
-    "importance": "low",
-    "common": true,
-    "fields": [
-      {
-        "name": "startScreenButtonText",
-        "label": "Text for the button on the start screen",
-        "type": "text",
-        "importance": "low",
-        "default": "Start the course"
-      }
-    ]
   }
 ]
