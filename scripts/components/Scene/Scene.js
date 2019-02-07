@@ -23,6 +23,8 @@ export default class Scene extends React.Component {
           sceneHistory={this.props.sceneHistory}
           audioIsPlaying={ this.props.audioIsPlaying }
           sceneId={ this.props.sceneId }
+          onBlurInteraction={this.props.onBlurInteraction}
+          focusedInteraction={this.props.focusedInteraction}
         />
       );
     }
@@ -40,6 +42,8 @@ export default class Scene extends React.Component {
         sceneId={ this.props.sceneId }
         toggleCenterScene={ this.props.toggleCenterScene }
         onSetCameraPos={ this.props.onSetCameraPos }
+        onBlurInteraction={this.props.onBlurInteraction}
+        focusedInteraction={this.props.focusedInteraction}
       />
     );
   }

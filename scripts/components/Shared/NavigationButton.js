@@ -41,6 +41,81 @@ export const getIconFromInteraction = (interaction) => {
 };
 
 export default class NavigationButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.navButtonWrapper = React.createRef();
+    this.navButton = React.createRef();
+    this.onBlur = this.onBlur.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+
+    this.state = {
+      isFocused: this.props.isFocused,
+    };
+  }
+
+  addFocusListener() {
+    if (this.navButton) {
+      this.navButton.current.addEventListener('focus', this.onFocus);
+    }
+  }
+
+  onFocus() {
+    // Already focused
+    if (this.state.isFocused) {
+      return;
+    }
+
+    this.setState({
+      isFocused: true,
+    });
+
+    window.addEventListener('mousedown', this.onBlur);
+  }
+
+  onBlur(e) {
+    // If clicked element is not a child we remove focus
+    const isChildTarget = this.navButtonWrapper.current
+      .contains(e.target);
+
+    if (isChildTarget) {
+      return;
+    }
+
+    this.setState({
+      isFocused: false,
+    });
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
+
+    window.removeEventListener('mousedown', this.onBlur);
+  }
+
+  componentDidMount() {
+    this.addFocusListener();
+    if (this.state.isFocused) {
+      window.addEventListener('mousedown', this.onBlur);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isFocused && !prevProps.isFocused) {
+      this.setState({
+        isFocused: true,
+      });
+
+      window.addEventListener('mousedown', this.onBlur);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.onBlur);
+    if (this.navButton) {
+      this.navButton.current.removeEventListener('focus', this.onFocus);
+    }
+  }
+
   getStyle() {
     const style = {};
     if (this.props.topPosition !== undefined) {
@@ -84,28 +159,38 @@ export default class NavigationButton extends React.Component {
   }
 
   render() {
-    let navButtonClasses = [
-      'nav-button',
+    let wrapperClasses = [
+      'nav-button-wrapper',
     ];
 
     if (this.props.buttonClasses) {
-      navButtonClasses = navButtonClasses.concat(this.props.buttonClasses);
+      wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
     }
 
     if (this.props.icon) {
-      navButtonClasses.push(this.props.icon);
+      wrapperClasses.push(this.props.icon);
+    }
+
+    if (this.state.isFocused) {
+      wrapperClasses.push('focused');
     }
 
     return (
-      <button
-        title={this.props.title ? this.props.title : ''}
-        className={navButtonClasses.join(' ')}
+      <div
+        ref={this.navButtonWrapper}
+        className={wrapperClasses.join(' ')}
         style={this.getStyle()}
-        onClick={this.onClick.bind(this)}
-        onDoubleClick={this.onDoubleClick.bind(this)}
-        onMouseDown={this.onMouseDown.bind(this)}
-        onFocus={ this.handleFocus }
-      />
+      >
+        <button
+          ref={this.navButton}
+          title={this.props.title ? this.props.title : ''}
+          className='nav-button'
+          onClick={this.onClick.bind(this)}
+          onDoubleClick={this.onDoubleClick.bind(this)}
+          onMouseDown={this.onMouseDown.bind(this)}
+        onFocus={ this.handleFocus }/>
+        {this.props.children}
+      </div>
     );
   }
 }
