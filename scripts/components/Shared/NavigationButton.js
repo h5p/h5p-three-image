@@ -77,6 +77,12 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  handleFocus = () => {
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
+  }
+
   render() {
     let navButtonClasses = [
       'nav-button',
@@ -98,6 +104,7 @@ export default class NavigationButton extends React.Component {
         onClick={this.onClick.bind(this)}
         onDoubleClick={this.onDoubleClick.bind(this)}
         onMouseDown={this.onMouseDown.bind(this)}
+        onFocus={ this.handleFocus }
       />
     );
   }

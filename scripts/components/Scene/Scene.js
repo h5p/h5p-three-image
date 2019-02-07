@@ -39,6 +39,7 @@ export default class Scene extends React.Component {
         audioIsPlaying={ this.props.audioIsPlaying }
         sceneId={ this.props.sceneId }
         toggleCenterScene={ this.props.toggleCenterScene }
+        onSetCameraPos={ this.props.onSetCameraPos }
       />
     );
   }

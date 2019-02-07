@@ -91,6 +91,10 @@ export default class ThreeSixtyScene extends React.Component {
     });
   }
 
+  handleInteractionFocus = (interaction) => {
+    this.props.onSetCameraPos(interaction.interactionpos);
+  }
+
   addInteractionButtonToScene(yaw, pitch, index, interaction) {
     const interactionButtonWrapper = document.createElement('div');
     const className = ['three-sixty'];
@@ -121,6 +125,7 @@ export default class ThreeSixtyScene extends React.Component {
           doubleClickHandler={() => {
             this.context.trigger('doubleClickedInteraction', index);
           }}
+          onFocus={ () => { this.handleInteractionFocus(interaction) } }
         />
       </H5PContext.Provider>,
       interactionButtonWrapper

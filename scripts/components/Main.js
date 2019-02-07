@@ -289,6 +289,7 @@ export default class Main extends React.Component {
                 sceneHistory={this.state.sceneHistory}
                 audioIsPlaying={ this.state.audioIsPlaying }
                 sceneId={sceneParams.sceneId}
+                onSetCameraPos={ this.props.onSetCameraPos }
               />
             );
           })
