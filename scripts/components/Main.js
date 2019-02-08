@@ -243,7 +243,7 @@ export default class Main extends React.Component {
       return;
     }
 
-    this.props.onSetCameraPos(scene.cameraStartPosition);
+    this.props.onSetCameraPos(scene.cameraStartPosition, true);
   }
 
   render() {
