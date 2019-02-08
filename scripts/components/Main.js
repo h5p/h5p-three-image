@@ -1,7 +1,5 @@
 import React from 'react';
-import Audio from "./Scene/Audio";
 import Scene, {SceneTypes} from "./Scene/Scene";
-import SceneDescription from "./Scene/SceneDescription";
 import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
@@ -23,7 +21,17 @@ export default class Main extends React.Component {
       currentInteraction: null,
       sceneHistory: [],
       audioIsPlaying: null,
+      focusedInteraction: null,
     };
+  }
+
+  componentDidMount() {
+    // Listen for focus to interaction
+    this.context.on('focusInteraction', (e) => {
+      this.setState({
+        focusedInteraction: e.data,
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -79,6 +87,11 @@ export default class Main extends React.Component {
         }
       }
     }
+  }
+  blurInteraction() {
+    this.setState({
+      focusedInteraction: null,
+    });
   }
 
   navigateToScene(sceneId) {
@@ -297,6 +310,8 @@ export default class Main extends React.Component {
                 audioIsPlaying={ this.state.audioIsPlaying }
                 sceneId={sceneParams.sceneId}
                 onSetCameraPos={ this.props.onSetCameraPos }
+                onBlurInteraction={this.blurInteraction.bind(this)}
+                focusedInteraction={this.state.focusedInteraction}
               />
             );
           })

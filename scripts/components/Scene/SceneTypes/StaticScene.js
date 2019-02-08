@@ -3,6 +3,7 @@ import './StaticScene.scss';
 import NavigationButton, {getIconFromInteraction, Icons} from "../../Shared/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
+import ContextMenu from "../../Shared/ContextMenu";
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -264,11 +265,16 @@ export default class StaticScene extends React.Component {
                 buttonClasses.push('active');
               }
 
+              if (posX > 91.5) {
+                buttonClasses.push('left-aligned');
+              }
+
               let title = interaction.action.metadata.title;
               const library = H5P.libraryFromString(interaction.action.library);
               const machineName = library.machineName;
 
-              if (machineName === 'H5P.GoToScene') {
+              const isGoToSceneInteraction = machineName === 'H5P.GoToScene';
+              if (isGoToSceneInteraction) {
                 const nextScene = this.context.params.scenes.find(scene => {
                   return scene.sceneId === interaction.action.params.nextSceneId;
                 });
@@ -289,7 +295,17 @@ export default class StaticScene extends React.Component {
                     this.context.trigger('doubleClickedInteraction', index);
                   }}
                   buttonClasses={ buttonClasses }
-                />
+                  onBlur={this.props.onBlurInteraction}
+                  isFocused={this.props.focusedInteraction === index}
+                >
+                  {
+                    this.context.extras.isEditor &&
+                    <ContextMenu
+                      isGoToScene={isGoToSceneInteraction}
+                      interactionIndex={index}
+                    />
+                  }
+                </NavigationButton>
               );
             })
           }

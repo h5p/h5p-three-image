@@ -1,8 +1,12 @@
 @import '../../styles/icons';
 @import '../../styles/colors';
 
-.nav-button {
+.nav-button-wrapper {
   position: absolute;
+}
+
+.nav-button {
+  position: relative;
   font-size: 1em;
   width: 2.5em;
   height: 2.5em;
@@ -31,7 +35,7 @@
   }
 }
 
-.nav-button.h5p-interaction-button {
+.h5p-interaction-button .nav-button {
   background: $interactionBg;
 
   &:hover {
@@ -44,15 +48,15 @@
   }
 }
 
-.nav-button.disabled {
+.disabled .nav-button {
   opacity: 0.5;
 }
 
-.nav-button.three-sixty {
+.three-sixty .nav-button {
   font-size: 1.75em;
 }
 
-.nav-button.bottom {
+.bottom .nav-button {
   top: auto;
   left: 0.75em;
   bottom: 0.5em;
@@ -70,43 +74,46 @@
   height: 1.025em;
 }
 
-.h5p-question-button:before {
+.h5p-question-button .nav-button:before {
   content: $question;
 }
 
-.h5p-info-button:before {
+.h5p-info-button .nav-button:before {
   content: $info;
   font-size: 1.6em;
 }
 
-.h5p-go-to-scene-button:before {
+.h5p-go-to-scene-button .nav-button:before {
   content: $goToScene;
 }
 
-.h5p-audio-button:before {
+.h5p-audio-button .nav-button:before {
   content: $audioOn;
 }
-.h5p-audio-button.active:before {
+.h5p-audio-button.active .nav-button:before {
   content: $audioOff;
 }
 
 .h5p-go-back-button {
   top: 1em;
   left: 1em;
+}
+
+.h5p-go-back-button .nav-button {
   width: 2em;
   height: 2em;
   border-width: 0.2em;
 }
 
-.h5p-go-back-button:before {
+.h5p-go-back-button .nav-button:before {
   content: $goBack;
   font-size: 1em;
 }
 
-.h5p-go-back-button:active {
+.h5p-go-back-button .nav-button:active {
   border-color: $activeBorder;
 }
 
-.h5p-scene-description-button:before {
+.h5p-scene-description-button .nav-button:before {
   content: $sceneDescription;
 }

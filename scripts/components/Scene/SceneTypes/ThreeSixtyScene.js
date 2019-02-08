@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
+import ContextMenu from "../../Shared/ContextMenu";
 
 export const sceneRenderingQualityMapping = {
   high: 128,
@@ -105,7 +106,8 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     let title = interaction.action.metadata.title;
-    if (interaction.action.library.split(' ')[0] === 'H5P.GoToScene') {
+    const isGoToSceneInteraction = interaction.action.library.split(' ')[0] === 'H5P.GoToScene';
+    if (isGoToSceneInteraction) {
       const gotoScene = this.context.params.scenes.find(scene => {
         return scene.sceneId === interaction.action.params.nextSceneId;
       });
@@ -129,7 +131,17 @@ export default class ThreeSixtyScene extends React.Component {
             this.context.trigger('doubleClickedInteraction', index);
           }}
           onFocus={ () => { this.handleInteractionFocus(interaction) } }
-        />
+          onBlur={this.props.onBlurInteraction}
+          isFocused={this.props.focusedInteraction === index}
+        >
+          {
+            this.context.extras.isEditor &&
+            <ContextMenu
+              isGoToScene={isGoToSceneInteraction}
+              interactionIndex={index}
+            />
+          }
+        </NavigationButton>
       </H5PContext.Provider>,
       interactionButtonWrapper
     );
@@ -168,13 +180,15 @@ export default class ThreeSixtyScene extends React.Component {
 
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
+    const hasChangedFocus = prevProps.focusedInteraction
+      !== this.props.focusedInteraction;
 
     const hasChangedInteractions = this.props.sceneParams.interactions
       && (this.renderedInteractions
         !== this.props.sceneParams.interactions.length);
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
-    if (hasChangedInteractions || audioHasChanged || isHiddenBehindOverlayHasChanged) {
+    if (hasChangedInteractions || audioHasChanged || hasChangedFocus || isHiddenBehindOverlayHasChanged) {
       this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
 
