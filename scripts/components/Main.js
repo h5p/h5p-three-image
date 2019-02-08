@@ -253,13 +253,31 @@ export default class Main extends React.Component {
     if (!scene) {
       return null;
     }
+    const isShowingInteraction = this.state.showingInteraction &&
+      this.state.currentInteraction !== null;
+
+    let dialogClasses = [];
+    if (isShowingInteraction) {
+      const scene = this.context.params.scenes.find(scene => {
+        return scene.sceneId === this.props.currentScene;
+      });
+      const interaction = scene.interactions[this.state.currentInteraction];
+      const library = H5P.libraryFromString(interaction.action.library);
+      const interactionClass = library.machineName
+        .replace('.', '-')
+        .toLowerCase();
+
+      dialogClasses.push(interactionClass);
+    }
 
     return (
       <div>
         {
-          this.state.showingInteraction &&
-          this.state.currentInteraction !== null &&
-          <Dialog onHideTextDialog={this.hideInteraction.bind(this)}>
+          isShowingInteraction &&
+          <Dialog
+            onHideTextDialog={this.hideInteraction.bind(this)}
+            dialogClasses={dialogClasses}
+          >
             <InteractionContent
               currentScene={this.props.currentScene}
               currentInteraction={this.state.currentInteraction}
