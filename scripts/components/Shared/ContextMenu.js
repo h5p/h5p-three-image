@@ -25,7 +25,7 @@ export default class ContextMenu extends Component {
             className='go-to-scene'
             onClick={this.goToScene.bind(this)}
           >
-            <div className='tooltip'>Go To Scene</div>
+            <div className='tooltip'>Go to scene</div>
           </button>
         }
         <button
