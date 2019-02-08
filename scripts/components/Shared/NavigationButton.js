@@ -171,7 +171,8 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push(this.props.icon);
     }
 
-    if (this.state.isFocused) {
+    // only apply custom focus if we have children that are shown on focus
+    if (this.state.isFocused && this.props.children) {
       wrapperClasses.push('focused');
     }
 
@@ -188,7 +189,8 @@ export default class NavigationButton extends React.Component {
           onClick={this.onClick.bind(this)}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
-        onFocus={ this.handleFocus }/>
+          onFocus={ this.handleFocus }
+        />
         {this.props.children}
       </div>
     );
