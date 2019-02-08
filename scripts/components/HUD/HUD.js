@@ -9,6 +9,8 @@ import {SceneTypes} from "../Scene/Scene";
 export default class HUD extends React.Component {
   constructor(props) {
     super(props);
+
+    this.buttons = {};
   }
 
   /**
@@ -21,7 +23,8 @@ export default class HUD extends React.Component {
     const props = {
       isPlaying: this.props.audioIsPlaying,
       onIsPlaying: this.props.onAudioIsPlaying,
-      isHiddenBehindOverlay: this.props.isHiddenBehindOverlay
+      isHiddenBehindOverlay: this.props.isHiddenBehindOverlay,
+      nextFocus: this.props.nextFocus
     };
 
     if (scene && scene.audio && scene.audio.length) {
@@ -51,6 +54,7 @@ export default class HUD extends React.Component {
               type={ 'center-scene' }
               label={ 'Center scene' }
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
               onClick={ this.props.onCenterScene }
             />
           }
@@ -62,6 +66,7 @@ export default class HUD extends React.Component {
               type={ 'scene-description' }
               label={ this.context.l10n.sceneDescription }
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
               onClick={ this.handleSceneDescription }
             />
           }
@@ -71,6 +76,7 @@ export default class HUD extends React.Component {
               type={ 'reset' }
               label={ this.context.l10n.resetCamera }
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
               onClick={ this.props.onCenterScene }
             />
           }
@@ -79,6 +85,7 @@ export default class HUD extends React.Component {
               type={ 'submit-dialog' }
               label={ this.context.l10n.submitDialog }
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
               onClick={ this.props.onSubmitDialog}
             />
           }

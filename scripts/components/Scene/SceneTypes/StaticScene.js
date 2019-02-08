@@ -286,7 +286,9 @@ export default class StaticScene extends React.Component {
                   key={index}
                   title={title}
                   icon={getIconFromInteraction(interaction)}
+                  type={ 'interaction-' + index }
                   isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+                  nextFocus={ this.props.nextFocus }
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
