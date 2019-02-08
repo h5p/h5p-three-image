@@ -20,6 +20,7 @@ export default class AudioButton extends React.Component {
           onClick={ this.handleClick }
           aria-label={ this.props.label }
           disabled={ !!this.props.disabled }
+          tabIndex={ this.props.isHiddenBehindOverlay ? '-1' : undefined }
         />
         <div className="tooltip" aria-hidden="true">
           <div className="text-wrap">{ this.props.label }</div>

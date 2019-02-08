@@ -105,6 +105,7 @@ export default class NavigationButton extends React.Component {
         onDoubleClick={this.onDoubleClick.bind(this)}
         onMouseDown={this.onMouseDown.bind(this)}
         onFocus={ this.handleFocus }
+        tabIndex={ this.props.isHiddenBehindOverlay ? '-1' : undefined }
       />
     );
   }

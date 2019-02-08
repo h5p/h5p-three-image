@@ -1,19 +1,27 @@
 import React from 'react';
 import './Dialog.scss';
+import { H5PContext } from "../../context/H5PContext";
 
 export default class Dialog extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    // Focus must be set to the first focusable element
+    this.closeButton.focus();
+  }
+
   render() {
     return (
-      <div className='h5p-text-overlay'>
+      <div className='h5p-text-overlay' role="dialog" aria-label={ this.props.title }>
         <div className='h5p-text-dialog'>
           <div className='h5p-text-content'>
             {this.props.children}
           </div>
           <button
+            ref={ el => this.closeButton = el }
+            aria-label={ this.context.l10n.closeDialog }
             className='close-button-wrapper'
             onClick={this.props.onHideTextDialog}
           />
@@ -22,3 +30,5 @@ export default class Dialog extends React.Component {
     );
   }
 }
+
+Dialog.contextType = H5PContext;
