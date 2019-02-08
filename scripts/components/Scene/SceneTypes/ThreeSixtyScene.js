@@ -50,6 +50,8 @@ export default class ThreeSixtyScene extends React.Component {
       return hasChangedImage;
     });
 
+    this.scene.setAriaLabel(this.props.sceneParams.scenename);
+
     if (this.props.isActive) {
       this.sceneRef.current.appendChild(this.scene.getElement());
       this.scene.resize();
@@ -123,6 +125,7 @@ export default class ThreeSixtyScene extends React.Component {
           title={title}
           buttonClasses={ className }
           icon={getIconFromInteraction(interaction)}
+          isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
           clickHandler={this.props.showInteraction.bind(this, index)}
           doubleClickHandler={() => {
             this.context.trigger('doubleClickedInteraction', index);
@@ -168,6 +171,13 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
+    // Need to respond to dialog toggling in order to hide the buttons under the overlay
+    const isHiddenBehindOverlayHasChanged = (this.props.isHiddenBehindOverlay !== prevProps.isHiddenBehindOverlay);
+    if (isHiddenBehindOverlayHasChanged) {
+      // TODO: Update scene element
+      this.scene.setTabIndex(false);
+    }
+
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
     const hasChangedFocus = prevProps.focusedInteraction
@@ -178,7 +188,7 @@ export default class ThreeSixtyScene extends React.Component {
         !== this.props.sceneParams.interactions.length);
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
-    if (hasChangedInteractions || audioHasChanged || hasChangedFocus) {
+    if (hasChangedInteractions || audioHasChanged || hasChangedFocus || isHiddenBehindOverlayHasChanged) {
       this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
 
@@ -207,7 +217,9 @@ export default class ThreeSixtyScene extends React.Component {
       this.sceneRef.current.appendChild(this.scene.element);
       this.scene.resize();
       this.scene.startRendering();
-
+      if (!prevProps.isActive) {
+        this.scene.focus();
+      }
     }
     else {
       this.scene.stopRendering();
@@ -220,7 +232,7 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div ref={this.sceneRef}/>
+      <div ref={this.sceneRef} aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }/>
     );
   }
 }

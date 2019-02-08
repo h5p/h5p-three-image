@@ -209,6 +209,7 @@ export default class StaticScene extends React.Component {
     this.setState({
       isVerticalImage: ratio < viewRatio,
     });
+    imageElement.focus();
   }
 
   render() {
@@ -233,12 +234,14 @@ export default class StaticScene extends React.Component {
     }
 
     return (
-      <div className='image-scene-overlay'>
+      <div className='image-scene-overlay' aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
         <div
           className={imageSceneClasses.join(' ')}
           ref={this.sceneWrapperRef}
         >
           <img
+            tabIndex='-1'
+            alt={ this.props.sceneParams.scenename }
             className='image-scene'
             src={this.props.imageSrc}
             onLoad={this.onSceneLoaded.bind(this)}
@@ -283,6 +286,7 @@ export default class StaticScene extends React.Component {
                   key={index}
                   title={title}
                   icon={getIconFromInteraction(interaction)}
+                  isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
@@ -311,6 +315,7 @@ export default class StaticScene extends React.Component {
           <NavigationButton
             title='Back'
             icon={Icons.GO_BACK}
+            isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
             buttonClasses={backButtonClasses}

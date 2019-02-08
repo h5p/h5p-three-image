@@ -186,6 +186,7 @@ export default class NavigationButton extends React.Component {
           ref={this.navButton}
           title={this.props.title ? this.props.title : ''}
           className='nav-button'
+          tabIndex={ this.props.isHiddenBehindOverlay ? '-1' : undefined }
           onClick={this.onClick.bind(this)}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}

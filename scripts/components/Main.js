@@ -270,11 +270,22 @@ export default class Main extends React.Component {
       dialogClasses.push(interactionClass);
     }
 
+    const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
+    const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
+
+    // Whenever a dialog is shown we need to hide all the elements behind the overlay
+    const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
+
+    let dialogTitle;
+    if (showInteractionDialog) {
+      dialogTitle = scene.interactions[this.state.currentInteraction].action.metadata.title;
+    }
+
     return (
-      <div>
-        {
-          isShowingInteraction &&
+      <div role="document" aria-label={ this.context.l10n.title }>
+        { showInteractionDialog &&
           <Dialog
+            title={ dialogTitle }
             onHideTextDialog={this.hideInteraction.bind(this)}
             dialogClasses={dialogClasses}
           >
@@ -286,20 +297,14 @@ export default class Main extends React.Component {
             />
           </Dialog>
         }
-        {
-          this.state.showingTextDialog && this.state.currentText &&
-          <Dialog onHideTextDialog={  this.handleCloseTextDialog  }>
+        { showTextDialog &&
+          <Dialog
+            title={ this.context.l10n.sceneDescription }
+            onHideTextDialog={  this.handleCloseTextDialog  }
+          >
             <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
           </Dialog>
         }
-        <HUD
-          scene={ scene }
-          audioIsPlaying={ this.state.audioIsPlaying }
-          onAudioIsPlaying={ this.handleAudioIsPlaying }
-          onSceneDescription={ this.handleSceneDescription }
-          onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
-          onCenterScene={ this.centerScene.bind(this) }
-        />
         {
           this.context.params.scenes.map(sceneParams => {
             const imageSrc = H5P.getPath(
@@ -311,6 +316,7 @@ export default class Main extends React.Component {
               <Scene
                 key={sceneParams.sceneId}
                 isActive={sceneParams.sceneId === this.props.currentScene}
+                isHiddenBehindOverlay={ isHiddenBehindOverlay }
                 sceneParams={sceneParams}
                 addScene={this.addScene.bind(this)}
                 imageSrc={imageSrc}
@@ -327,6 +333,15 @@ export default class Main extends React.Component {
             );
           })
         }
+        <HUD
+          scene={ scene }
+          audioIsPlaying={ this.state.audioIsPlaying }
+          isHiddenBehindOverlay={ isHiddenBehindOverlay }
+          onAudioIsPlaying={ this.handleAudioIsPlaying }
+          onSceneDescription={ this.handleSceneDescription }
+          onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
+          onCenterScene={ this.centerScene.bind(this) }
+        />
       </div>
     );
   }

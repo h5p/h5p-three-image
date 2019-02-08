@@ -158,7 +158,8 @@ export default class AudioButton extends React.Component {
     return (
       <Button
         type={ type }
-        label={ this.context.l10n.playAudioTrack }
+        label={ this.props.isPlaying === id ? this.context.l10n.pauseAudioTrack : this.context.l10n.playAudioTrack }
+        isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         onClick={ this.handleClick }
       />
     );

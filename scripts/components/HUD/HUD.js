@@ -20,7 +20,8 @@ export default class HUD extends React.Component {
   getSceneAudioTrack = (scene) => {
     const props = {
       isPlaying: this.props.audioIsPlaying,
-      onIsPlaying: this.props.onAudioIsPlaying
+      onIsPlaying: this.props.onAudioIsPlaying,
+      isHiddenBehindOverlay: this.props.isHiddenBehindOverlay
     };
 
     if (scene && scene.audio && scene.audio.length) {
@@ -43,12 +44,13 @@ export default class HUD extends React.Component {
       === SceneTypes.THREE_SIXTY_SCENE;
 
     return (
-      <div className="hud">
+      <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
         <div className="hud-top-right">
           { this.context.extras.isEditor && isThreeSixty &&
             <Button
               type={ 'center-scene' }
               label={ 'Center scene' }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               onClick={ this.props.onCenterScene }
             />
           }
@@ -59,6 +61,7 @@ export default class HUD extends React.Component {
             <Button
               type={ 'scene-description' }
               label={ this.context.l10n.sceneDescription }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               onClick={ this.handleSceneDescription }
             />
           }
@@ -67,6 +70,7 @@ export default class HUD extends React.Component {
             <Button
               type={ 'reset' }
               label={ this.context.l10n.resetCamera }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               onClick={ this.props.onCenterScene }
             />
           }
@@ -74,6 +78,7 @@ export default class HUD extends React.Component {
             <Button
               type={ 'submit-dialog' }
               label={ this.context.l10n.submitDialog }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               onClick={ this.props.onSubmitDialog}
             />
           }
