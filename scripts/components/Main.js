@@ -253,6 +253,22 @@ export default class Main extends React.Component {
     if (!scene) {
       return null;
     }
+    const isShowingInteraction = this.state.showingInteraction &&
+      this.state.currentInteraction !== null;
+
+    let dialogClasses = [];
+    if (isShowingInteraction) {
+      const scene = this.context.params.scenes.find(scene => {
+        return scene.sceneId === this.props.currentScene;
+      });
+      const interaction = scene.interactions[this.state.currentInteraction];
+      const library = H5P.libraryFromString(interaction.action.library);
+      const interactionClass = library.machineName
+        .replace('.', '-')
+        .toLowerCase();
+
+      dialogClasses.push(interactionClass);
+    }
 
     const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
     const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
@@ -271,6 +287,7 @@ export default class Main extends React.Component {
           <Dialog
             title={ dialogTitle }
             onHideTextDialog={this.hideInteraction.bind(this)}
+            dialogClasses={dialogClasses}
           >
             <InteractionContent
               currentScene={this.props.currentScene}
