@@ -23,6 +23,9 @@ export default class ThreeSixtyScene extends React.Component {
     };
   }
 
+  /**
+   * 
+   */
   initializeScene() {
     const startPosition = this.props.sceneParams.cameraStartPosition
       .split(',')
@@ -79,27 +82,36 @@ export default class ThreeSixtyScene extends React.Component {
     this.imageElement.src = this.props.imageSrc;
   }
 
+  /**
+   * Create, add and render all interactions in the 3D world.
+   *
+   * @param {Array} interactions
+   */
   addInteractionHotspots(interactions) {
     if (!interactions) {
       return;
     }
-    this.renderedInteractions = 0;
 
-    interactions.forEach((interaction, index) => {
-      const pos = interaction.interactionpos.split(',');
-      const yaw = pos[0];
-      const pitch = pos[1];
-      this.addInteractionButtonToScene(yaw, pitch, index, interaction);
-      this.renderedInteractions += 1;
-    });
+    const list = interactions.map(this.createInteraction);
+    this.renderedInteractions = list.length;
+
+    ReactDOM.render(
+      <H5PContext.Provider value={this.context}>
+        { list }
+      </H5PContext.Provider>,
+      this.scene.getCameraElement()
+    );
   }
 
-  handleInteractionFocus = (interaction) => {
-    this.props.onSetCameraPos(interaction.interactionpos);
-  }
+  /**
+   * Creates a button for each interaction
+   *
+   * @param {Object} interaction
+   * @param {number} index
+   * @return {NavigationButton}
+   */
+  createInteraction = (interaction, index) => {
 
-  addInteractionButtonToScene(yaw, pitch, index, interaction) {
-    const interactionButtonWrapper = document.createElement('div');
     const className = ['three-sixty'];
     if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
       className.push('active');
@@ -114,51 +126,66 @@ export default class ThreeSixtyScene extends React.Component {
       title = gotoScene.scenename; // Use scenename as title.
     }
 
-    // TODO: Is there a way we could improve this so that the elements that
-    // stay the same are updated instead of removed and added again?
-    // E.g. Put the whole interactions.forEach into render with key="" for each
-    // element and then use ref="" to add it to the scene ?
-    // Ideally it should run each time componentDidUpdate does...
-    ReactDOM.render(
-      <H5PContext.Provider value={this.context}>
-        <NavigationButton
-          title={title}
-          buttonClasses={ className }
-          icon={getIconFromInteraction(interaction)}
-          isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-          nextFocus={ this.props.nextFocus }
-          type={ 'interaction-' + index }
-          clickHandler={this.props.showInteraction.bind(this, index)}
-          doubleClickHandler={() => {
-            this.context.trigger('doubleClickedInteraction', index);
-          }}
-          onFocus={ () => { this.handleInteractionFocus(interaction) } }
-          onBlur={this.props.onBlurInteraction}
-          isFocused={this.props.focusedInteraction === index}
-        >
-          {
-            this.context.extras.isEditor &&
-            <ContextMenu
-              isGoToScene={isGoToSceneInteraction}
-              interactionIndex={index}
-            />
-          }
-        </NavigationButton>
-      </H5PContext.Provider>,
-      interactionButtonWrapper
-    );
-
-    this.scene.add(
-      interactionButtonWrapper,
-      {yaw: yaw, pitch: pitch},
-      this.context.extras.isEditor
+    return (
+      <NavigationButton
+        key={'interaction-' + index}
+        ref={ el => this.handleInteractionRef(el, interaction) }
+        title={title}
+        buttonClasses={ className }
+        icon={getIconFromInteraction(interaction)}
+        isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+        nextFocus={ this.props.nextFocus }
+        type={ 'interaction-' + index }
+        clickHandler={this.props.showInteraction.bind(this, index)}
+        doubleClickHandler={() => {
+          this.context.trigger('doubleClickedInteraction', index);
+        }}
+        onFocus={ () => { this.handleInteractionFocus(interaction) } }
+        onBlur={this.props.onBlurInteraction}
+        isFocused={this.props.focusedInteraction === index}
+      >
+        {
+          this.context.extras.isEditor &&
+          <ContextMenu
+            isGoToScene={isGoToSceneInteraction}
+            interactionIndex={index}
+          />
+        }
+      </NavigationButton>
     );
   }
 
-  removeInteractions() {
-    this.scene.removeElements();
+  /**
+   * Once rendered position the element in the 3D scene.
+   *
+   * @param {NavigationButton} element
+   * @param {Object} interaction
+   */
+  handleInteractionRef = (element, interaction) => {
+    if (element === null) {
+      return;
+    }
+    const pos = interaction.interactionpos.split(',');
+    const position = {
+      yaw: pos[0],
+      pitch: pos[1]
+    };
+
+    this.scene.add(element.navButtonWrapper.current, position, this.context.extras.isEditor);
   }
 
+  /**
+   * Handle interaction focused.
+   *
+   * @param {Object} interaction
+   */
+  handleInteractionFocus = (interaction) => {
+    this.props.onSetCameraPos(interaction.interactionpos);
+  }
+
+  /**
+   * React -
+   */
   componentDidMount() {
     // Already initialized
     if (this.state.hasInitialized) {
@@ -168,6 +195,9 @@ export default class ThreeSixtyScene extends React.Component {
     this.loadScene();
   }
 
+  /**
+   * React -
+   */
   componentDidUpdate(prevProps) {
     if (!this.state.hasInitialized) {
       return;
@@ -194,7 +224,6 @@ export default class ThreeSixtyScene extends React.Component {
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
     if (hasChangedInteractions || audioHasChanged || hasChangedFocus || isHiddenBehindOverlayHasChanged) {
-      this.removeInteractions();
       this.addInteractionHotspots(this.props.sceneParams.interactions);
 
       if (!hasChangedVisibility) {
@@ -231,6 +260,9 @@ export default class ThreeSixtyScene extends React.Component {
     }
   }
 
+  /**
+   * React -
+   */
   render() {
     if (!this.props.isActive) {
       return null;
