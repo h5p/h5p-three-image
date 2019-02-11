@@ -129,6 +129,8 @@ export default class ThreeSixtyScene extends React.Component {
           buttonClasses={ className }
           icon={getIconFromInteraction(interaction)}
           isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+          nextFocus={ this.props.nextFocus }
+          type={ 'interaction-' + index }
           clickHandler={this.props.showInteraction.bind(this, index)}
           doubleClickHandler={() => {
             this.context.trigger('doubleClickedInteraction', index);
@@ -180,6 +182,9 @@ export default class ThreeSixtyScene extends React.Component {
       // TODO: Update scene element
       this.scene.setTabIndex(false);
     }
+
+    // Need to respond to focus changes in order to focus correct button after dialog closes
+    const focusHasChanged = (prevProps.nextFocus !== this.props.nextFocus);
 
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);

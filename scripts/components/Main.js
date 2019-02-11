@@ -22,6 +22,7 @@ export default class Main extends React.Component {
       sceneHistory: [],
       audioIsPlaying: null,
       focusedInteraction: null,
+      nextFocus: null,
     };
   }
 
@@ -123,6 +124,7 @@ export default class Main extends React.Component {
     this.setState({
       showingTextDialog: true,
       currentText: text,
+      nextFocus: null
     });
   }
 
@@ -133,6 +135,7 @@ export default class Main extends React.Component {
     this.setState({
       showingTextDialog: false,
       currentText: null,
+      nextFocus: 'scene-description' // Should probably come in as an arg when opening the dialog
     });
   }
 
@@ -208,15 +211,17 @@ export default class Main extends React.Component {
       this.setState({
         showingInteraction: true,
         currentInteraction: interactionIndex,
+        nextFocus: null
       });
     }
   }
 
   hideInteraction() {
-    this.setState({
+    this.setState(prevState => ({
       showingInteraction: false,
       currentInteraction: null,
-    });
+      nextFocus: 'interaction-' + prevState.currentInteraction
+    }));
   }
 
   addScene(scene, sceneId) {
@@ -238,7 +243,7 @@ export default class Main extends React.Component {
       return;
     }
 
-    this.props.onSetCameraPos(scene.cameraStartPosition);
+    this.props.onSetCameraPos(scene.cameraStartPosition, true);
   }
 
   render() {
@@ -318,6 +323,7 @@ export default class Main extends React.Component {
                 isActive={sceneParams.sceneId === this.props.currentScene}
                 isHiddenBehindOverlay={ isHiddenBehindOverlay }
                 sceneParams={sceneParams}
+                nextFocus={ this.state.nextFocus }
                 addScene={this.addScene.bind(this)}
                 imageSrc={imageSrc}
                 navigateToScene={this.navigateToScene.bind(this)}
@@ -337,6 +343,7 @@ export default class Main extends React.Component {
           scene={ scene }
           audioIsPlaying={ this.state.audioIsPlaying }
           isHiddenBehindOverlay={ isHiddenBehindOverlay }
+          nextFocus={ this.state.nextFocus }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }

@@ -148,7 +148,7 @@ H5P.ThreeImage = (function () {
       scene.scene.resize();
     });
 
-    const setCameraPosition = (cameraPosition) => {
+    const setCameraPosition = (cameraPosition, focus) => {
       if (this.currentScene === null) {
         return;
       }
@@ -159,6 +159,9 @@ H5P.ThreeImage = (function () {
 
       const [yaw, pitch] = cameraPosition.split(',');
       scene.setCameraPosition(parseFloat(yaw), parseFloat(pitch));
+      if (focus) {
+        scene.focus();
+      }
     };
 
     this.getCamera = () => {
