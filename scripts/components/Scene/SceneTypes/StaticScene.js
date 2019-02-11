@@ -32,6 +32,47 @@ export default class StaticScene extends React.Component {
     this.stoppedDragging = this.stoppedDragging.bind(this);
   }
 
+  componentDidMount() {
+    // Initialize resize logic
+    this.context.on('resize', () => {
+      this.resizeScene();
+    });
+    this.resizeScene();
+  }
+
+  resizeScene() {
+    if (!this.sceneWrapperRef || !this.sceneWrapperRef.current) {
+      return;
+    }
+
+    const wrapper = this.sceneWrapperRef.current;
+    const wrapperSize = wrapper.getBoundingClientRect();
+    const defaultSize = 938;
+    const defaultFontSize = 16;
+
+    // Only make icons smaller if necessary
+    if (wrapperSize.width > defaultSize) {
+      const currentFontSize = wrapper.style.fontSize;
+      if (parseFloat(currentFontSize) !== defaultFontSize) {
+        this.sceneWrapperRef.current.style.fontSize = `${defaultFontSize}px`;
+        this.forceUpdate();
+      }
+      return;
+    }
+
+    const minFontSize = 11;
+    const fontIncrementThreshold = 55;
+
+    const widthDiff = defaultSize - wrapperSize.width;
+    let newFontSize = defaultFontSize - (widthDiff / fontIncrementThreshold);
+    if (newFontSize < minFontSize) {
+      newFontSize = minFontSize;
+    }
+
+    this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
+    this.forceUpdate();
+  }
+
   getWrapperSize(isVertical = false) {
     let wrapper = this.sceneWrapperRef.current;
     return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
@@ -97,7 +138,7 @@ export default class StaticScene extends React.Component {
     const elementSizePercentage = (elementSize / wrapperSize) * 100;
     const positionThreshold = 100 - elementSizePercentage;
 
-    if (movedTo > positionThreshold) {
+    if (movedTo >= positionThreshold) {
       return positionThreshold;
     }
 
@@ -135,8 +176,8 @@ export default class StaticScene extends React.Component {
     this.startX = e.clientX;
     this.startY = e.clientY;
 
-    document.body.addEventListener('mousemove', this.onMove);
-    document.body.addEventListener('mouseup', this.stoppedDragging);
+    window.addEventListener('mousemove', this.onMove);
+    window.addEventListener('mouseup', this.stoppedDragging);
 
     this.setState({
       draggingInteractionIndex: interactionIndex,
@@ -166,8 +207,8 @@ export default class StaticScene extends React.Component {
       return;
     }
 
-    document.body.removeEventListener('mousemove', this.onMove);
-    document.body.removeEventListener('mouseup', this.stoppedDragging);
+    window.removeEventListener('mousemove', this.onMove);
+    window.removeEventListener('mouseup', this.stoppedDragging);
 
     // State has not been updated, most likely a double-click
     if (this.state.x === null || this.state.y === null) {
@@ -212,6 +253,31 @@ export default class StaticScene extends React.Component {
     imageElement.focus();
   }
 
+  getAdjustedInteractionPositions(posX, posY) {
+    const interactionEm = 2.5;
+    const wrapper = this.sceneWrapperRef.current;
+    const wrapperSize = wrapper.getBoundingClientRect();
+    if (!wrapperSize.width || !wrapperSize.height) {
+      return false;
+    }
+    const fontSize = parseFloat(wrapper.style.fontSize);
+    const interactionSize = interactionEm * fontSize;
+    const height = interactionSize / wrapperSize.height * 100;
+    if (posY + height > 100) {
+      posY = 100 - height;
+    }
+
+    const width = interactionSize / wrapperSize.width * 100;
+    if (posX + width > 100) {
+      posX = 100 - width;
+    }
+
+    return {
+      posX: posX,
+      posY: posY,
+    };
+  }
+
   render() {
     if (!this.props.isActive) {
       return null;
@@ -234,7 +300,10 @@ export default class StaticScene extends React.Component {
     }
 
     return (
-      <div className='image-scene-overlay' aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
+      <div
+        className='image-scene-overlay'
+        aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
+      >
         <div
           className={imageSceneClasses.join(' ')}
           ref={this.sceneWrapperRef}
@@ -267,6 +336,18 @@ export default class StaticScene extends React.Component {
 
               if (posX > 91.5) {
                 buttonClasses.push('left-aligned');
+              }
+
+              if (this.sceneWrapperRef && this.sceneWrapperRef.current) {
+                // Adjust interaction position if overflowing
+                const pos = this.getAdjustedInteractionPositions(
+                  parseFloat(posX),
+                  parseFloat(posY)
+                );
+                if (pos) {
+                  posX = pos.posX;
+                  posY = pos.posY;
+                }
               }
 
               let title = interaction.action.metadata.title;
