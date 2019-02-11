@@ -97,14 +97,6 @@ export default class NavigationButton extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.type && this.props.type === this.props.nextFocus) {
-      // TODO: Move to componentDidUpdate() when Scene starts updating instead of redrawing.
-      setTimeout(() => {
-        this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-        this.navButton.current.focus();
-      }, 1);
-    }
-
     this.addFocusListener();
     if (this.state.isFocused) {
       // TODO: Would love to not have to rely on setTimeout here
@@ -116,6 +108,11 @@ export default class NavigationButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.type && this.props.type === this.props.nextFocus) {
+      this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
+      this.navButton.current.focus();
+    }
+
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => {
         this.navButton.current.focus();
