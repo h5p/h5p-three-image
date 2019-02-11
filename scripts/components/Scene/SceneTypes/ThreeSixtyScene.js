@@ -24,7 +24,7 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * 
+   *
    */
   initializeScene() {
     const startPosition = this.props.sceneParams.cameraStartPosition

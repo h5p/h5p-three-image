@@ -9,7 +9,7 @@ export default class Dialog extends React.Component {
 
   componentDidMount() {
     // Focus must be set to the first focusable element
-    this.closeButton.focus();
+    this.title.focus();
   }
 
   render() {
@@ -20,6 +20,11 @@ export default class Dialog extends React.Component {
 
     return (
       <div className='h5p-text-overlay' role="dialog" aria-label={ this.props.title }>
+        <div
+          ref={ el => this.title = el }
+          className="h5p-dialog-focusstart"
+          tabIndex="-1"
+        ></div>
         <div className={dialogClasses.join(' ')}>
           <div className='h5p-text-content'>
             {this.props.children}
