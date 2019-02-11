@@ -24,6 +24,7 @@ export default class ContextMenu extends Component {
           <button
             className='go-to-scene'
             onClick={this.goToScene.bind(this)}
+            tabIndex="-1"
           >
             <div className='tooltip'>Go to scene</div>
           </button>
@@ -31,12 +32,14 @@ export default class ContextMenu extends Component {
         <button
           className='edit'
           onClick={this.handlEdit.bind(this)}
+          tabIndex="-1"
         >
           <div className='tooltip'>Edit</div>
         </button>
         <button
           className='delete'
           onClick={this.handleDelete.bind(this)}
+          tabIndex="-1"
         >
           <div className='tooltip'>Delete</div>
         </button>

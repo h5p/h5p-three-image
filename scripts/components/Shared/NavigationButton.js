@@ -63,6 +63,7 @@ export default class NavigationButton extends React.Component {
   onFocus() {
     // Already focused
     if (this.state.isFocused) {
+      this.navButton.current.addEventListener('blur', this.onBlur);
       return;
     }
 
@@ -70,15 +71,16 @@ export default class NavigationButton extends React.Component {
       isFocused: true,
     });
 
-    window.addEventListener('mousedown', this.onBlur);
+    this.navButton.current.addEventListener('blur', this.onBlur);
   }
 
   onBlur(e) {
-    // If clicked element is not a child we remove focus
-    const isChildTarget = this.navButtonWrapper.current
-      .contains(e.target);
+    const navButtonWrapper = this.navButtonWrapper
+      && this.navButtonWrapper.current;
 
-    if (isChildTarget) {
+    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)) {
+      // Clicked target is child of button wrapper, don't blur
+      this.navButton.current.focus();
       return;
     }
 
@@ -89,29 +91,33 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-    window.removeEventListener('mousedown', this.onBlur);
+    if (this.navButton && this.navButton.current) {
+      this.navButton.current.removeEventListener('blur', this.onBlur);
+    }
   }
 
   componentDidMount() {
     this.addFocusListener();
     if (this.state.isFocused) {
-      window.addEventListener('mousedown', this.onBlur);
+      // TODO: Would love to not have to rely on setTimeout here
+      //        but without it the element is not available.
+      setTimeout(() => {
+        this.navButton.current.focus();
+      }, 0);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.isFocused && !prevProps.isFocused) {
-      this.setState({
-        isFocused: true,
-      });
-
-      window.addEventListener('mousedown', this.onBlur);
+      setTimeout(() => {
+        this.navButton.current.focus();
+      }, 0);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousedown', this.onBlur);
     if (this.navButton) {
+      this.navButton.current.addEventListener('blur', this.onBlur);
       this.navButton.current.removeEventListener('focus', this.onFocus);
     }
   }

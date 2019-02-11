@@ -95,6 +95,9 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   handleInteractionFocus = (interaction) => {
+    if (this.context.extras.isEditor) {
+      return;
+    }
     this.props.onSetCameraPos(interaction.interactionpos);
   }
 
