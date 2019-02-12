@@ -108,6 +108,7 @@ export default class ThreeSixtyScene extends React.Component {
     if (!interactions) {
       return;
     }
+    this.scene.removeElements(true);
 
     const list = interactions.map(this.createInteraction);
     this.renderedInteractions = list.length;
