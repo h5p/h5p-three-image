@@ -49,15 +49,6 @@ export default class HUD extends React.Component {
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
         <div className="hud-top-right">
-          { this.context.extras.isEditor && isThreeSixty &&
-            <Button
-              type={ 'center-scene' }
-              label={ 'Center scene' }
-              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-              nextFocus={ this.props.nextFocus }
-              onClick={ this.props.onCenterScene }
-            />
-          }
         </div>
         <div className="hud-bottom-left">
           <AudioButton { ...this.getSceneAudioTrack(this.props.scene) }/>
