@@ -88,13 +88,6 @@
     width: 1em;
     height: 1em;
   }
-  &.center-scene {
-    border-radius: 0;
-
-    &:before {
-      content: $centerscene;
-    }
-  }
 
   &:hover,
   &:focus {
