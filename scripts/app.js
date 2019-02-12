@@ -130,7 +130,12 @@ H5P.ThreeImage = (function () {
     };
 
     this.on('resize', () => {
-      wrapper.style.height = (wrapper.getBoundingClientRect().width * (9 / 16)) + 'px';
+      const isFullscreen = wrapper.parentElement.classList.contains('h5p-fullscreen');
+      const rect = wrapper.getBoundingClientRect();
+      // Fullscreen should use all of the space
+      const ratio = (isFullscreen ? (rect.height / rect.width) : (9 / 16));
+
+      wrapper.style.height = (isFullscreen ? '100%' : ((rect.width * ratio) + 'px'));
 
       // Resize scene
       if (this.currentScene === null) {
@@ -145,8 +150,14 @@ H5P.ThreeImage = (function () {
         return;
       }
 
-      scene.scene.resize();
+      const updatedRect = wrapper.getBoundingClientRect();
+      scene.scene.resize(updatedRect.width / updatedRect.height);
     });
+
+    this.getRatio = () => {
+      const rect = wrapper.getBoundingClientRect();
+      return (rect.width / rect.height);
+    }
 
     const setCameraPosition = (cameraPosition, focus) => {
       if (this.currentScene === null) {

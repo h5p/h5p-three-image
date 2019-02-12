@@ -267,7 +267,7 @@ export default class ThreeSixtyScene extends React.Component {
     // Toggle activity for scene
     if (this.props.isActive) {
       this.sceneRef.current.appendChild(this.scene.element);
-      this.scene.resize();
+      this.scene.resize(this.context.getRatio());
       this.scene.startRendering();
       if (!prevProps.isActive) {
         this.scene.focus();

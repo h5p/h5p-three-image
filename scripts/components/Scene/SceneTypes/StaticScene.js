@@ -246,11 +246,16 @@ export default class StaticScene extends React.Component {
   onSceneLoaded() {
     const imageElement = this.imageElementRef.current;
     const ratio = imageElement.naturalWidth / imageElement.naturalHeight;
-    const viewRatio = 16 / 9;
     this.setState({
-      isVerticalImage: ratio < viewRatio,
+      isVerticalImage: ratio < this.context.getRatio(),
     });
     imageElement.focus();
+
+    this.context.on('resize', () => {
+      this.setState({
+        isVerticalImage: ratio < this.context.getRatio(),
+      });
+    });
   }
 
   getAdjustedInteractionPositions(posX, posY) {
