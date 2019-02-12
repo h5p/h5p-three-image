@@ -21,7 +21,40 @@ export default class ThreeSixtyScene extends React.Component {
 
     this.state = {
       hasInitialized: false,
+      pointerLockElement: null,
+      willPointerLock: false,
+      hasPointerLock: false,
     };
+  }
+
+  initializePointerLock(element) {
+    // Not supported
+    if (!element.requestPointerLock) {
+      return;
+    }
+
+    // Already queued
+    if (this.pointerLockTimeout && this.pointerLockTimeout.current) {
+      return;
+    }
+
+    this.setState({
+      willPointerLock: true,
+      pointerLockElement: element,
+    });
+
+    this.pointerLockTimeout = setTimeout(() => {
+      this.setState({
+        hasPointerLock: true,
+      });
+    }, 100);
+  }
+
+  cancelPointerLock() {
+    this.setState({
+      willPointerLock: false,
+      hasPointerLock: false,
+    })
   }
 
   /**
@@ -62,22 +95,27 @@ export default class ThreeSixtyScene extends React.Component {
       this.scene.startRendering();
     }
 
+    this.context.on('doubleClickedInteraction', () => {
+      this.cancelPointerLock();
+    });
+
     this.scene.on('movestart', (e) => {
       if (!this.context.extras.isEditor || e.data.isCamera) {
         return;
       }
 
-      const element = e.data.element;
-      if (element.requestPointerLock) {
-        element.requestPointerLock();
+      // Make sure we don't start movement on contextmenu actions
+      if (!e.data.target.classList.contains('nav-button')) {
+        return;
       }
+
+      const element = e.data.element;
+      this.initializePointerLock(element);
     });
 
     this.scene.on('movestop', e => {
       if (this.context.extras.isEditor) {
-        if (document.exitPointerLock) {
-          document.exitPointerLock();
-        }
+        this.cancelPointerLock();
       }
       this.context.trigger('movestop', e.data);
     });
@@ -219,6 +257,29 @@ export default class ThreeSixtyScene extends React.Component {
   componentDidUpdate(prevProps) {
     if (!this.state.hasInitialized) {
       return;
+    }
+
+    if (this.state.hasPointerLock) {
+
+      if (!this.state.willPointerLock) {
+        // canceled
+        this.setState({
+          willPointerLock: false,
+          hasPointerLock: false,
+        });
+      }
+      else {
+        this.state.pointerLockElement.requestPointerLock();
+        this.state.pointerLockElement.classList.add('dragging');
+      }
+    }
+    else {
+      if (document.exitPointerLock) {
+        if (this.state.pointerLockElement) {
+          this.state.pointerLockElement.classList.remove('dragging');
+        }
+        document.exitPointerLock();
+      }
     }
 
     // Need to respond to dialog toggling in order to hide the buttons under the overlay
