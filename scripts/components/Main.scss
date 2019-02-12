@@ -8,3 +8,17 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.h5p-three-image.h5p-fullscreen {
+  display: block;
+  background-color: black;
+
+  .h5p-three-sixty-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 100%;
+  }
+}
+
