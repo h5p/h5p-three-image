@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
+import './ThreeSixtyScene.scss';
 
 export const sceneRenderingQualityMapping = {
   high: 128,

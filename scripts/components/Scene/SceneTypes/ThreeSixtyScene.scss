@@ -1,0 +1,17 @@
+.h5p-three-sixty-scene .nav-button-wrapper.dragging {
+
+  &:before {
+    content: " ";
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 9em;
+    height: 9em;
+
+    background: url('../../../assets/moving-icon.svg');
+    background-size: 100% 100%;
+  }
+}

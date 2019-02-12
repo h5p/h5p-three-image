@@ -164,6 +164,10 @@ export default class NavigationButton extends React.Component {
   }
 
   handleFocus = () => {
+    if (this.context.extras.isEditor) {
+      return;
+    }
+
     if (this.props.onFocus) {
       if (this.skipFocus) {
         this.skipFocus = false;
@@ -178,6 +182,13 @@ export default class NavigationButton extends React.Component {
     let wrapperClasses = [
       'nav-button-wrapper',
     ];
+
+    if (this.navButtonWrapper && this.navButtonWrapper.current) {
+      const wrapper = this.navButtonWrapper.current;
+      if (wrapper.classList.contains('dragging')) {
+        wrapperClasses.push('dragging');
+      }
+    }
 
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
