@@ -62,7 +62,23 @@ export default class ThreeSixtyScene extends React.Component {
       this.scene.startRendering();
     }
 
+    this.scene.on('movestart', (e) => {
+      if (!this.context.extras.isEditor || e.data.isCamera) {
+        return;
+      }
+
+      const element = e.data.element;
+      if (element.requestPointerLock) {
+        element.requestPointerLock();
+      }
+    });
+
     this.scene.on('movestop', e => {
+      if (this.context.extras.isEditor) {
+        if (document.exitPointerLock) {
+          document.exitPointerLock();
+        }
+      }
       this.context.trigger('movestop', e.data);
     });
 

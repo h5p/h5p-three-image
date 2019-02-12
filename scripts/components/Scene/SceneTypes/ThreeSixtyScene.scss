@@ -14,4 +14,8 @@
     background: url('../../../assets/moving-icon.svg');
     background-size: 100% 100%;
   }
+
+  &.focused .context-menu {
+    display: none;
+  }
 }
