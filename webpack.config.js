@@ -27,7 +27,7 @@ var config = {
         use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/,
         include: [
           path.resolve(__dirname, 'scripts'),
           path.resolve(__dirname, 'assets')

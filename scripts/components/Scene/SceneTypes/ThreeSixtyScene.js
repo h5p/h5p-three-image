@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
+import loading from '../../../assets/loading.gif';
 import './ThreeSixtyScene.scss';
 
 export const sceneRenderingQualityMapping = {
@@ -373,7 +374,23 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div ref={this.sceneRef} aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }/>
+      <div className='three-sixty-scene-wrapper'>
+        <div
+          ref={this.sceneRef}
+          aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
+        />
+        {
+          !this.state.hasInitialized &&
+          <div className='loading-overlay'>
+            <div className='loading-wrapper'>
+              <div className='loading-image-wrapper'>
+                <img src={loading} alt='loading' />
+              </div>
+              <div className='loader'>Loading background image...</div>
+            </div>
+          </div>
+        }
+      </div>
     );
   }
 }
