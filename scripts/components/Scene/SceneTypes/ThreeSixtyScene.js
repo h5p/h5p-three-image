@@ -105,7 +105,7 @@ export default class ThreeSixtyScene extends React.Component {
       }
 
       // Make sure we don't start movement on contextmenu actions
-      if (!e.data.target.classList.contains('nav-button')) {
+      if (!e.data.target || !e.data.target.classList.contains('nav-button')) {
         return;
       }
 
