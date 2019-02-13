@@ -55,15 +55,15 @@ export default class NavigationButton extends React.Component {
   }
 
   addFocusListener() {
-    if (this.navButton) {
-      this.navButton.current.addEventListener('focus', this.onFocus);
+    if (this.navButtonWrapper) {
+      this.navButtonWrapper.current.addEventListener('focus', this.onFocus);
     }
   }
 
   onFocus() {
     // Already focused
     if (this.state.isFocused) {
-      this.navButton.current.addEventListener('blur', this.onBlur);
+      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       return;
     }
 
@@ -71,7 +71,7 @@ export default class NavigationButton extends React.Component {
       isFocused: true,
     });
 
-    this.navButton.current.addEventListener('blur', this.onBlur);
+    this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
   }
 
   onBlur(e) {
@@ -80,7 +80,7 @@ export default class NavigationButton extends React.Component {
 
     if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)) {
       // Clicked target is child of button wrapper, don't blur
-      this.navButton.current.focus();
+      this.navButtonWrapper.current.focus();
       return;
     }
 
@@ -91,8 +91,8 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-    if (this.navButton && this.navButton.current) {
-      this.navButton.current.removeEventListener('blur', this.onBlur);
+    if (this.navButtonWrapper && this.navButtonWrapper.current) {
+      this.navButtonWrapper.current.removeEventListener('blur', this.onBlur);
     }
   }
 
@@ -102,7 +102,7 @@ export default class NavigationButton extends React.Component {
       // TODO: Would love to not have to rely on setTimeout here
       //        but without it the element is not available.
       setTimeout(() => {
-        this.navButton.current.focus();
+        this.navButtonWrapper.current.focus();
       }, 0);
     }
   }
@@ -110,20 +110,20 @@ export default class NavigationButton extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButton.current.focus();
+      this.navButtonWrapper.current.focus();
     }
 
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => {
-        this.navButton.current.focus();
+        this.navButtonWrapper.current.focus();
       }, 0);
     }
   }
 
   componentWillUnmount() {
-    if (this.navButton) {
-      this.navButton.current.addEventListener('blur', this.onBlur);
-      this.navButton.current.removeEventListener('focus', this.onFocus);
+    if (this.navButtonWrapper) {
+      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
+      this.navButtonWrapper.current.removeEventListener('focus', this.onFocus);
     }
   }
 
@@ -163,12 +163,24 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  setFocus() {
+    const isFocusable = this.context.extras.isEditor
+      && this.navButtonWrapper
+      && this.navButtonWrapper.current;
+    if (isFocusable) {
+      this.navButtonWrapper.current.focus();
+    }
+  }
+
   handleFocus = () => {
     if (this.context.extras.isEditor) {
+      if (this.navButtonWrapper && this.navButtonWrapper.current) {
+        this.navButtonWrapper.current.focus();
+      }
       return;
     }
 
-    if (this.props.onFocus) {
+    if (!this.context.extras.isEditor && this.props.onFocus) {
       if (this.skipFocus) {
         this.skipFocus = false;
       }
@@ -203,21 +215,28 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push('focused');
     }
 
+    const isWrapperTabbable = this.context.extras.isEditor;
+    const isInnerButtonTabbable = !this.context.extras.isEditor
+      && !this.props.isHiddenBehindOverlay;
+
     return (
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
+        tabIndex={isWrapperTabbable ? '0' : undefined}
+        onFocus={ this.handleFocus }
+        onClick={this.onClick.bind(this)}
       >
         <button
           ref={this.navButton}
           title={this.props.title ? this.props.title : ''}
           className='nav-button'
-          tabIndex={ this.props.isHiddenBehindOverlay ? '-1' : undefined }
+          tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
-          onFocus={ this.handleFocus }
+          onMouseUp={this.setFocus.bind(this)}
         />
         {this.props.children}
       </div>
