@@ -227,7 +227,32 @@ export default class ThreeSixtyScene extends React.Component {
       pitch: pos[1]
     };
 
-    this.scene.add(element.navButtonWrapper.current, position, this.context.extras.isEditor);
+    this.scene.add(
+      element.navButtonWrapper.current,
+      position,
+      this.context.extras.isEditor,
+      (element, e) => {
+        const target = e && e.target;
+        if (!target) {
+          return true;
+        }
+
+        // Don't move when dragging context menu
+        if (target.classList.contains('context-menu')) {
+          return false;
+        }
+
+        // Don't move when dragging context menu children
+        if (target.parentNode) {
+          const parent = target.parentNode;
+          if (parent.classList.contains('context-menu')) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+    );
   }
 
   /**
