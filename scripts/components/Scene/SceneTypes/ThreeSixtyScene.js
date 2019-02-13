@@ -105,8 +105,26 @@ export default class ThreeSixtyScene extends React.Component {
         return;
       }
 
+      const target = e.data.target;
+      if (target) {
+        // Don't move when dragging context menu
+        if (target.classList.contains('context-menu')) {
+          e.defaultPrevented = true;
+          return false;
+        }
+
+        // Don't move when dragging context menu children
+        if (target.parentNode) {
+          const parent = target.parentNode;
+          if (parent.classList.contains('context-menu')) {
+            e.defaultPrevented = true;
+            return false;
+          }
+        }
+      }
+
       // Make sure we don't start movement on contextmenu actions
-      if (!e.data.target || !e.data.target.classList.contains('nav-button')) {
+      if (!target || !target.classList.contains('nav-button')) {
         return;
       }
 
@@ -231,28 +249,7 @@ export default class ThreeSixtyScene extends React.Component {
     this.scene.add(
       element.navButtonWrapper.current,
       position,
-      this.context.extras.isEditor,
-      (element, e) => {
-        const target = e && e.target;
-        if (!target) {
-          return true;
-        }
-
-        // Don't move when dragging context menu
-        if (target.classList.contains('context-menu')) {
-          return false;
-        }
-
-        // Don't move when dragging context menu children
-        if (target.parentNode) {
-          const parent = target.parentNode;
-          if (parent.classList.contains('context-menu')) {
-            return false;
-          }
-        }
-
-        return true;
-      }
+      this.context.extras.isEditor
     );
   }
 
