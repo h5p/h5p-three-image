@@ -9,7 +9,7 @@ var config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: 'three-image.js'
   },
   module: {
     rules: [
