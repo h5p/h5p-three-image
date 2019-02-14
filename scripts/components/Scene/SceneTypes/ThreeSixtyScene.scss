@@ -19,3 +19,29 @@
     display: none;
   }
 }
+
+.three-sixty-scene-wrapper {
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .loading-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .loading-image-wrapper {
+    margin: auto;
+  }
+
+  .loading-image-wrapper,
+  .loading-image-wrapper img {
+    width: 7em;
+  }
+}

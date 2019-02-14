@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
+import loading from '../../../assets/loading.gif';
 import './ThreeSixtyScene.scss';
 
 export const sceneRenderingQualityMapping = {
@@ -104,8 +105,26 @@ export default class ThreeSixtyScene extends React.Component {
         return;
       }
 
+      const target = e.data.target;
+      if (target) {
+        // Don't move when dragging context menu
+        if (target.classList.contains('context-menu')) {
+          e.defaultPrevented = true;
+          return false;
+        }
+
+        // Don't move when dragging context menu children
+        if (target.parentNode) {
+          const parent = target.parentNode;
+          if (parent.classList.contains('context-menu')) {
+            e.defaultPrevented = true;
+            return false;
+          }
+        }
+      }
+
       // Make sure we don't start movement on contextmenu actions
-      if (!e.data.target || !e.data.target.classList.contains('nav-button')) {
+      if (!target || !target.classList.contains('nav-button')) {
         return;
       }
 
@@ -230,28 +249,7 @@ export default class ThreeSixtyScene extends React.Component {
     this.scene.add(
       element.navButtonWrapper.current,
       position,
-      this.context.extras.isEditor,
-      (element, e) => {
-        const target = e && e.target;
-        if (!target) {
-          return true;
-        }
-
-        // Don't move when dragging context menu
-        if (target.classList.contains('context-menu')) {
-          return false;
-        }
-
-        // Don't move when dragging context menu children
-        if (target.parentNode) {
-          const parent = target.parentNode;
-          if (parent.classList.contains('context-menu')) {
-            return false;
-          }
-        }
-
-        return true;
-      }
+      this.context.extras.isEditor
     );
   }
 
@@ -373,7 +371,23 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div ref={this.sceneRef} aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }/>
+      <div className='three-sixty-scene-wrapper'>
+        <div
+          ref={this.sceneRef}
+          aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
+        />
+        {
+          !this.state.hasInitialized &&
+          <div className='loading-overlay'>
+            <div className='loading-wrapper'>
+              <div className='loading-image-wrapper'>
+                <img src={loading} alt='loading' />
+              </div>
+              <div className='loader'>Loading background image...</div>
+            </div>
+          </div>
+        }
+      </div>
     );
   }
 }
