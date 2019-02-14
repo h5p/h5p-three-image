@@ -32,6 +32,10 @@
     z-index: 3;
   }
 
+  .loading-overlay.no-opacity {
+    background: rgb(27, 29, 44);
+  }
+
   .loading-wrapper {
     position: absolute;
     top: 50%;

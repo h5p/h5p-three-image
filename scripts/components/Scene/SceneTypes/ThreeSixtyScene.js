@@ -383,6 +383,11 @@ export default class ThreeSixtyScene extends React.Component {
       return null;
     }
 
+    const loadingOverlayClasses = ['loading-overlay'];
+    if (!this.state.hasInitialized) {
+      loadingOverlayClasses.push('no-opacity');
+    }
+
     return (
       <div className='three-sixty-scene-wrapper'>
         <div
@@ -391,7 +396,7 @@ export default class ThreeSixtyScene extends React.Component {
         />
         {
           (!this.state.hasInitialized || isLoadingNextScene) &&
-          <div className='loading-overlay'>
+          <div className={loadingOverlayClasses.join(' ')}>
             <div className='loading-wrapper'>
               <div className='loading-image-wrapper'>
                 <img src={loading} alt='loading' />
