@@ -165,7 +165,6 @@ export default class ThreeSixtyScene extends React.Component {
     if (!interactions) {
       return;
     }
-    this.scene.removeElements(true);
 
     const list = interactions.map(this.createInteraction);
     this.renderedInteractions = list.length;
@@ -204,7 +203,16 @@ export default class ThreeSixtyScene extends React.Component {
     return (
       <NavigationButton
         key={'interaction-' + index}
-        ref={ el => this.handleInteractionRef(el, interaction) }
+        onMount={ el => this.scene.add(
+          el,
+          ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+          this.context.extras.isEditor
+        )}
+        onUnmount={ el => this.scene.remove(this.scene.find(el)) }
+        onUpdate={ el => H5P.ThreeSixty.setElementPosition(
+          this.scene.find(el),
+          ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
+        )}
         title={title}
         buttonClasses={ className }
         icon={getIconFromInteraction(interaction)}
@@ -231,26 +239,18 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * Once rendered position the element in the 3D scene.
+   * Convert params position string.
+   * TODO: Use object in params instead of convert all the time.
    *
-   * @param {NavigationButton} element
-   * @param {Object} interaction
+   * @param {string} position
+   * @return {Object} yaw, pitch
    */
-  handleInteractionRef = (element, interaction) => {
-    if (element === null) {
-      return;
-    }
-    const pos = interaction.interactionpos.split(',');
-    const position = {
-      yaw: pos[0],
-      pitch: pos[1]
+  static getPositionFromString(position) {
+    position = position.split(',');
+    return {
+      yaw: position[0],
+      pitch: position[1]
     };
-
-    this.scene.add(
-      element.navButtonWrapper.current,
-      position,
-      this.context.extras.isEditor
-    );
   }
 
   /**
@@ -391,4 +391,5 @@ export default class ThreeSixtyScene extends React.Component {
     );
   }
 }
+
 ThreeSixtyScene.contextType = H5PContext;

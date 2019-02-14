@@ -97,6 +97,11 @@ export default class NavigationButton extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.onMount) {
+      // Let parent know this element should be added to the THREE world.
+      this.props.onMount(this.navButtonWrapper.current);
+    }
+
     this.addFocusListener();
     if (this.state.isFocused) {
       // TODO: Would love to not have to rely on setTimeout here
@@ -118,12 +123,26 @@ export default class NavigationButton extends React.Component {
         this.navButtonWrapper.current.focus();
       }, 0);
     }
+
+    if (this.props.onUpdate) {
+      // Let parent know this element is updated. (Position might have changed.)
+      this.props.onUpdate(this.navButtonWrapper.current);
+    }
   }
 
   componentWillUnmount() {
     if (this.navButtonWrapper) {
       this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       this.navButtonWrapper.current.removeEventListener('focus', this.onFocus);
+    }
+
+    if (this.props.onUnmount) {
+      const el = this.navButtonWrapper.current;
+      // We want this to run after the component is removed
+      setTimeout(() => {
+          // Let parent know this element should be remove from the THREE world.
+          this.props.onUnmount(el);
+      }, 0);
     }
   }
 
