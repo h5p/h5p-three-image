@@ -1,0 +1,10 @@
+node_modules
+scripts
+.babelrc
+.gitignore
+.h5pignore
+package.json
+package-lock.json
+README.md
+TODOs.md
+webpack.config.js
