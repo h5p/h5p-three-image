@@ -31,6 +31,8 @@ export default class ThreeSixtyScene extends React.Component {
 
   initializePointerLock(element) {
     // Not supported
+    element.requestPointerLock = element.requestPointerLock
+      || element.mozRequestPointerLock;
     if (!element.requestPointerLock) {
       return;
     }
@@ -310,6 +312,8 @@ export default class ThreeSixtyScene extends React.Component {
       }
     }
     else {
+      document.exitPointerLock = document.exitPointerLock
+        || document.mozExitPointerLock;
       if (document.exitPointerLock) {
         if (this.state.pointerLockElement) {
           this.state.pointerLockElement.classList.remove('dragging');
