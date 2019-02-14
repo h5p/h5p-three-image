@@ -23,6 +23,7 @@ export default class Main extends React.Component {
       audioIsPlaying: null,
       focusedInteraction: null,
       nextFocus: null,
+      sceneWaitingForLoad: null,
     };
   }
 
@@ -96,6 +97,9 @@ export default class Main extends React.Component {
   }
 
   navigateToScene(sceneId) {
+    this.setState({
+      sceneWaitingForLoad: this.props.currentScene,
+    });
     let nextSceneId = null;
     if (sceneId === SceneTypes.PREVIOUS_SCENE) {
       const history = [...this.state.sceneHistory];
@@ -246,6 +250,12 @@ export default class Main extends React.Component {
     this.props.onSetCameraPos(scene.cameraStartPosition, true);
   }
 
+  doneLoadingNextScene() {
+    this.setState({
+      sceneWaitingForLoad: null,
+    });
+  }
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -335,6 +345,8 @@ export default class Main extends React.Component {
                 onSetCameraPos={ this.props.onSetCameraPos }
                 onBlurInteraction={this.blurInteraction.bind(this)}
                 focusedInteraction={this.state.focusedInteraction}
+                sceneWaitingForLoad={this.state.sceneWaitingForLoad}
+                doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
               />
             );
           })
