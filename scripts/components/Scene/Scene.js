@@ -27,6 +27,8 @@ export default class Scene extends React.Component {
           sceneId={ this.props.sceneId }
           onBlurInteraction={this.props.onBlurInteraction}
           focusedInteraction={this.props.focusedInteraction}
+          sceneWaitingForLoad={this.props.sceneWaitingForLoad}
+          doneLoadingNextScene={this.props.doneLoadingNextScene}
         />
       );
     }
@@ -48,6 +50,8 @@ export default class Scene extends React.Component {
         onSetCameraPos={ this.props.onSetCameraPos }
         onBlurInteraction={this.props.onBlurInteraction}
         focusedInteraction={this.props.focusedInteraction}
+        sceneWaitingForLoad={this.props.sceneWaitingForLoad}
+        doneLoadingNextScene={this.props.doneLoadingNextScene}
       />
     );
   }

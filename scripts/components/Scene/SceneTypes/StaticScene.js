@@ -38,6 +38,18 @@ export default class StaticScene extends React.Component {
       this.resizeScene();
     });
     this.resizeScene();
+
+    if (this.props.isActive && this.props.sceneWaitingForLoad !== null) {
+      // Let main know that scene is finished loading
+      this.props.doneLoadingNextScene();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.isActive && this.props.sceneWaitingForLoad !== null) {
+      // Let main know that scene is finished loading
+      this.props.doneLoadingNextScene();
+    }
   }
 
   resizeScene() {

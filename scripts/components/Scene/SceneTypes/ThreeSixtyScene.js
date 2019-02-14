@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
-import loading from '../../../assets/loading.gif';
+import loading from '../../../assets/loading.svg';
 import './ThreeSixtyScene.scss';
 
 export const sceneRenderingQualityMapping = {
@@ -25,6 +25,7 @@ export default class ThreeSixtyScene extends React.Component {
       pointerLockElement: null,
       willPointerLock: false,
       hasPointerLock: false,
+      isWaitingForNextScene: false,
     };
   }
 
@@ -78,6 +79,9 @@ export default class ThreeSixtyScene extends React.Component {
       segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
     }, () => {
       // Determine if image source has changed
+      if (this.props.sceneWaitingForLoad !== null && this.props.isActive) {
+        this.props.doneLoadingNextScene();
+      }
       const hasChangedImage = this.props.imageSrc
         !== this.imageElement.src;
 
@@ -282,6 +286,15 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
+    const isDoneLoading = this.props.sceneWaitingForLoad === null;
+    if (this.state.isWaitingForNextScene && isDoneLoading) {
+      // Done loading next scene
+      this.setState({
+        isWaitingForNextScene: false,
+      });
+      this.scene.stopRendering();
+    }
+
     if (this.state.hasPointerLock) {
 
       if (!this.state.willPointerLock) {
@@ -312,9 +325,6 @@ export default class ThreeSixtyScene extends React.Component {
       this.scene.setTabIndex(false);
     }
 
-    // Need to respond to focus changes in order to focus correct button after dialog closes
-    const focusHasChanged = (prevProps.nextFocus !== this.props.nextFocus);
-
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
     const hasChangedFocus = prevProps.focusedInteraction
@@ -338,27 +348,28 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
-    // TODO:  If the actual scene image has changed make a function for changing
-    //        only the scene image
-
-    // Remove any lingering elements
-    if (this.sceneRef.current) {
-      while (this.sceneRef.current.firstChild) {
-        this.sceneRef.current.removeChild(this.sceneRef.current.firstChild);
-      }
-    }
-
     // Toggle activity for scene
     if (this.props.isActive) {
-      this.sceneRef.current.appendChild(this.scene.element);
-      this.scene.resize(this.context.getRatio());
-      this.scene.startRendering();
-      if (!prevProps.isActive) {
-        this.scene.focus();
-      }
+      // Asynchronously update the DOM so that it's not blocking rendering
+      // of load screen
+      setTimeout(() => {
+        if (this.sceneRef.current) {
+          while (this.sceneRef.current.firstChild) {
+            this.sceneRef.current.removeChild(this.sceneRef.current.firstChild);
+          }
+        }
+        this.sceneRef.current.appendChild(this.scene.element);
+        this.scene.resize(this.context.getRatio());
+        this.scene.startRendering();
+        if (!prevProps.isActive) {
+          this.scene.focus();
+        }
+      }, 0);
     }
     else {
-      this.scene.stopRendering();
+      this.setState({
+        isWaitingForNextScene: true,
+      });
     }
   }
 
@@ -366,8 +377,15 @@ export default class ThreeSixtyScene extends React.Component {
    * React -
    */
   render() {
-    if (!this.props.isActive) {
+    const isLoadingNextScene = this.props.sceneId
+      === this.props.sceneWaitingForLoad;
+    if (!this.props.isActive && !isLoadingNextScene) {
       return null;
+    }
+
+    const loadingOverlayClasses = ['loading-overlay'];
+    if (!this.state.hasInitialized) {
+      loadingOverlayClasses.push('no-opacity');
     }
 
     return (
@@ -377,8 +395,8 @@ export default class ThreeSixtyScene extends React.Component {
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
         />
         {
-          !this.state.hasInitialized &&
-          <div className='loading-overlay'>
+          (!this.state.hasInitialized || isLoadingNextScene) &&
+          <div className={loadingOverlayClasses.join(' ')}>
             <div className='loading-wrapper'>
               <div className='loading-image-wrapper'>
                 <img src={loading} alt='loading' />
