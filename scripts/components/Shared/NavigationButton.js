@@ -80,7 +80,9 @@ export default class NavigationButton extends React.Component {
 
     if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)) {
       // Clicked target is child of button wrapper, don't blur
-      this.navButtonWrapper.current.focus();
+      this.navButtonWrapper.current.focus({
+        preventScroll: true
+      });
       return;
     }
 
@@ -106,8 +108,10 @@ export default class NavigationButton extends React.Component {
     if (this.state.isFocused) {
       // TODO: Would love to not have to rely on setTimeout here
       //        but without it the element is not available.
-      setTimeout(() => {
-        this.navButtonWrapper.current.focus();
+      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+        this.navButtonWrapper.current.focus({
+          preventScroll: true
+        });
       }, 0);
     }
   }
@@ -115,12 +119,16 @@ export default class NavigationButton extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButtonWrapper.current.focus();
+      this.navButtonWrapper.current.focus({
+        preventScroll: true
+      });
     }
 
     if (this.props.isFocused && !prevProps.isFocused) {
-      setTimeout(() => {
-        this.navButtonWrapper.current.focus();
+      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+        this.navButtonWrapper.current.focus({
+          preventScroll: true
+        });
       }, 0);
     }
 
@@ -192,14 +200,18 @@ export default class NavigationButton extends React.Component {
       && this.navButtonWrapper
       && this.navButtonWrapper.current;
     if (isFocusable) {
-      this.navButtonWrapper.current.focus();
+      this.navButtonWrapper.current.focus({
+        preventScroll: true
+      });
     }
   }
 
   handleFocus = () => {
     if (this.context.extras.isEditor) {
       if (this.navButtonWrapper && this.navButtonWrapper.current) {
-        this.navButtonWrapper.current.focus();
+        this.navButtonWrapper.current.focus({
+          preventScroll: true
+        });
       }
       return;
     }
