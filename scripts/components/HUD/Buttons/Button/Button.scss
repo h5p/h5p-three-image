@@ -56,6 +56,7 @@
   position: relative;
   display: block;
   transition: border-color 100ms, opacity 100ms;
+  padding: 0;
 
   &:before {
     font-family: "360-image";
