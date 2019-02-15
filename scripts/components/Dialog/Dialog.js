@@ -12,6 +12,12 @@ export default class Dialog extends React.Component {
     this.title.focus();
   }
 
+  handleDialogRef = (el) => {
+    if (el) {
+      el.style.height = el.getBoundingClientRect().height + 'px';
+    }
+  }
+
   render() {
     let dialogClasses = ['h5p-text-dialog'];
     if (this.props.dialogClasses) {
@@ -25,7 +31,7 @@ export default class Dialog extends React.Component {
           className="h5p-dialog-focusstart"
           tabIndex="-1"
         ></div>
-        <div className={dialogClasses.join(' ')}>
+        <div className={dialogClasses.join(' ')} ref={ this.handleDialogRef }>
           <div className='h5p-text-content'>
             {this.props.children}
           </div>
