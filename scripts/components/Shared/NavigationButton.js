@@ -170,6 +170,11 @@ export default class NavigationButton extends React.Component {
   onDoubleClick() {
     if (this.props.doubleClickHandler) {
       this.props.doubleClickHandler();
+
+      // Make sure focus is dropped when changing scenes (Edge)
+      this.setState({
+        isFocused: false,
+      });
     }
   }
 
