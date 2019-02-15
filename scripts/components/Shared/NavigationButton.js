@@ -114,6 +114,8 @@ export default class NavigationButton extends React.Component {
         });
       }, 0);
     }
+
+    this.context.on('goToScene', this.handleGoToScene);
   }
 
   componentDidUpdate(prevProps) {
@@ -152,6 +154,8 @@ export default class NavigationButton extends React.Component {
           this.props.onUnmount(el);
       }, 0);
     }
+
+    this.context.off('goToScene', this.handleGoToScene);
   }
 
   getStyle() {
@@ -178,11 +182,6 @@ export default class NavigationButton extends React.Component {
   onDoubleClick() {
     if (this.props.doubleClickHandler) {
       this.props.doubleClickHandler();
-
-      // Make sure focus is dropped when changing scenes (Edge)
-      this.setState({
-        isFocused: false,
-      });
     }
   }
 
@@ -224,6 +223,16 @@ export default class NavigationButton extends React.Component {
         this.props.onFocus();
       }
     }
+  }
+
+  /**
+   * Handle changing scenes
+   */
+  handleGoToScene = () => {
+    // Make sure focus is dropped when changing scenes (Edge)
+    this.setState({
+      isFocused: false,
+    });
   }
 
   render() {
