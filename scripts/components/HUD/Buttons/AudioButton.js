@@ -206,7 +206,7 @@ export default class AudioButton extends React.Component {
    */
   static createAudioPlayer(id, sources, onPlay, onStop, loop) {
     // Check if browser supports audio.
-    const player = document.createElement('audio');
+    let player = document.createElement('audio');
     if (player.canPlayType !== undefined) {
       // Add supported source files.
       for (var i = 0; i < sources.length; i++) {

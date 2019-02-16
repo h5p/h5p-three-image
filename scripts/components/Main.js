@@ -115,6 +115,18 @@ export default class Main extends React.Component {
       }).sceneId;
     }
 
+    // Pause any playing interaction audio on navigation
+    const isInteractionAudioPlaying = this.state.audioIsPlaying
+      && AudioButton.isInteractionAudio(this.state.audioIsPlaying);
+    if (isInteractionAudioPlaying) {
+      const lastPlayer = this.getAudioPlayer(this.state.audioIsPlaying);
+      if (lastPlayer) {
+        // Pause and reset the interaction player from last scene
+        lastPlayer.pause();
+        lastPlayer.currentTime = 0;
+      }
+    }
+
     this.props.setCurrentSceneId(nextSceneId);
   }
 
