@@ -264,6 +264,13 @@ export default class NavigationButton extends React.Component {
     const isInnerButtonTabbable = !this.context.extras.isEditor
       && !this.props.isHiddenBehindOverlay;
 
+    let title = '';
+    if (this.props.title) {
+      const titleText = document.createElement('div');
+      titleText.innerHTML = this.props.title;
+      title = titleText.textContent;
+    }
+
     return (
       <div
         ref={this.navButtonWrapper}
@@ -275,7 +282,7 @@ export default class NavigationButton extends React.Component {
       >
         <button
           ref={this.navButton}
-          title={this.props.title ? this.props.title : ''}
+          title={title}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
