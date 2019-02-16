@@ -18,9 +18,11 @@ export default class Dialog extends React.Component {
     }
 
     const fullHeight = ['h5p-video', 'h5p-image'];
-    const isFullHeight = fullHeight.some(className => {
-      return this.props.dialogClasses.includes(className);
-    });
+    const isFullHeight = this.props.dialogClasses
+      && this.props.dialogClasses.length
+      && fullHeight.some(className => {
+        return this.props.dialogClasses.includes(className);
+      });
     if (isFullHeight) {
       // Use full height
       el.style.height = '87%';
