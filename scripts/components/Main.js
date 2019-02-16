@@ -90,6 +90,13 @@ export default class Main extends React.Component {
       }
     }
   }
+
+  setFocusedInteraction(focusedInteraction) {
+    this.setState({
+      focusedInteraction: focusedInteraction,
+    });
+  }
+
   blurInteraction() {
     this.setState({
       focusedInteraction: null,
@@ -99,6 +106,7 @@ export default class Main extends React.Component {
   navigateToScene(sceneId) {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
+      focusedInteraction: null,
     });
     let nextSceneId = null;
     if (sceneId === SceneTypes.PREVIOUS_SCENE) {
@@ -356,6 +364,7 @@ export default class Main extends React.Component {
                 sceneId={sceneParams.sceneId}
                 onSetCameraPos={ this.props.onSetCameraPos }
                 onBlurInteraction={this.blurInteraction.bind(this)}
+                onFocusedInteraction={this.setFocusedInteraction.bind(this)}
                 focusedInteraction={this.state.focusedInteraction}
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}

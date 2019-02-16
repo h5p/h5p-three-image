@@ -230,6 +230,7 @@ export default class ThreeSixtyScene extends React.Component {
           this.context.trigger('doubleClickedInteraction', index);
         }}
         onFocus={ () => { this.handleInteractionFocus(interaction) } }
+        onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}
       >

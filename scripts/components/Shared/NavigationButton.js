@@ -70,6 +70,9 @@ export default class NavigationButton extends React.Component {
     this.setState({
       isFocused: true,
     });
+    if (this.props.onFocusedInteraction) {
+      this.props.onFocusedInteraction();
+    }
 
     this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
   }
@@ -114,8 +117,6 @@ export default class NavigationButton extends React.Component {
         });
       }, 0);
     }
-
-    this.context.on('goToScene', this.handleGoToScene);
   }
 
   componentDidUpdate(prevProps) {
@@ -138,6 +139,14 @@ export default class NavigationButton extends React.Component {
       // Let parent know this element is updated. (Position might have changed.)
       this.props.onUpdate(this.navButtonWrapper.current);
     }
+
+    if (prevProps.isFocused !== this.props.isFocused) {
+      if (!this.props.isFocused) {
+        this.setState({
+          isFocused: false,
+        });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -154,8 +163,6 @@ export default class NavigationButton extends React.Component {
           this.props.onUnmount(el);
       }, 0);
     }
-
-    this.context.off('goToScene', this.handleGoToScene);
   }
 
   getStyle() {
@@ -183,6 +190,9 @@ export default class NavigationButton extends React.Component {
     if (this.props.doubleClickHandler) {
       this.props.doubleClickHandler();
     }
+    this.setState({
+      isFocused: false,
+    });
   }
 
   onMouseDown(e) {

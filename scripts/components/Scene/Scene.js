@@ -26,6 +26,7 @@ export default class Scene extends React.Component {
           audioIsPlaying={ this.props.audioIsPlaying }
           sceneId={ this.props.sceneId }
           onBlurInteraction={this.props.onBlurInteraction}
+          onFocusedInteraction={this.props.onFocusedInteraction}
           focusedInteraction={this.props.focusedInteraction}
           sceneWaitingForLoad={this.props.sceneWaitingForLoad}
           doneLoadingNextScene={this.props.doneLoadingNextScene}
@@ -49,6 +50,7 @@ export default class Scene extends React.Component {
         toggleCenterScene={ this.props.toggleCenterScene }
         onSetCameraPos={ this.props.onSetCameraPos }
         onBlurInteraction={this.props.onBlurInteraction}
+        onFocusedInteraction={this.props.onFocusedInteraction}
         focusedInteraction={this.props.focusedInteraction}
         sceneWaitingForLoad={this.props.sceneWaitingForLoad}
         doneLoadingNextScene={this.props.doneLoadingNextScene}
