@@ -1,0 +1,103 @@
+{
+  "semantics": [
+    {
+      "label": "3-Afbeeldingseditor",
+      "fields": [
+        {
+          "label": "Scènes",
+          "entity": "Scène",
+          "field": {
+            "fields": [
+              {
+                "label": "Scènetype",
+                "options": [
+                  {
+                    "label": "360 graden foto"
+                  },
+                  {
+                    "label": "Statische afbeelding"
+                  }
+                ]
+              },
+              {
+                "label": "Toon \"Terug\" knop",
+                "description": "Toon knop om terug te gaan naar de vorige scene"
+              },
+              {
+                "label": "Unieke id van de scène",
+                "description": "Deze moet uniek zijn en wordt gebruikt voor het navigeren tussen de scènes"
+              },
+              {
+                "label": "Scènetitel",
+                "description": "Deze wordt gebruikt om de scène voor de auteurs te identificeren"
+              },
+              {
+                "label": "Scèneachtergrond"
+              },
+              {
+                "label": "Scèneomschrijving",
+                "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
+              },
+              {
+                "label": "Oorspronkelijke camerapositie",
+                "description": "Camerapositie in x en z stand"
+              },
+              {
+                "label": "Interacties",
+                "entity": "Interactie",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interactie",
+                      "description": "Hotspot met een interactie"
+                    },
+                    {
+                      "label": "Interactiepositie",
+                      "description": "Interactiepositie in x en z stand"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Geluidsbestand",
+                "description": "Voeg een geluidsbestand toe dat specifiek is voor deze scène."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Start scène id"
+        },
+        {
+          "label": "Audiobestand"
+        }
+      ]
+    },
+    {
+      "label": "Gedragsinstellingen",
+      "description": "Met deze opties kun je bepalen hoe de interactie zich gedraagt.",
+      "fields": [
+        {
+          "label": "Globale audio",
+          "description": "Voeg een audiobestand toe dat standaard beschikbaar is voor alle scènes."
+        },
+        {
+          "label": "Weergavekwaliteit van de scène",
+          "description": "Kies het aantal breedte- en hoogtesegmenten dat wordt gebruikt om een scène te renderen. Dit heeft direct invloed op het kwaliteitsniveau van de scène. Probeer de kwaliteit te verhogen als een scène er \"blokkerig\" uitziet of dat er \"golven\" te zien zijn tussen de scènes. Let op dat bij het laden van een hogere kwaliteit het renderen meer tijd in beslag neemt.",
+        "options": [
+            {
+              "label": "Hoge kwaliteit (128x128)"
+            },
+            {
+              "label": "Gemiddelde kwaliteit Quality (64x64)"
+            },
+            {
+              "label": "Lage kwaliteit (16x16)"
+            }
+          ],
+          "default": "hoog"
+        }
+      ]
+    }
+  ]
+}
