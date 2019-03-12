@@ -1,6 +1,7 @@
 import React from 'react';
 import './Dialog.scss';
 import { H5PContext } from "../../context/H5PContext";
+import InteractionContent from "./InteractionContent";
 
 export default class Dialog extends React.Component {
   constructor(props) {
@@ -37,11 +38,11 @@ export default class Dialog extends React.Component {
       dialogClasses = dialogClasses.concat(this.props.dialogClasses);
     }
 
-    const children = React.Children.map(this.props.children, child =>
+    const children = (this.props.children.type === 'div' ? this.props.children : React.Children.map(this.props.children, child =>
       React.cloneElement(child, {
         onResize: this.handleResize
       })
-    );
+    ));
 
     return (
       <div className='h5p-text-overlay' role="dialog" aria-label={ this.props.title }>
