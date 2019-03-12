@@ -64,6 +64,12 @@ export default class InteractionContent extends React.Component {
       isInitialized: true,
     });
 
+    if (this.instance.libraryInfo.machineName === 'H5P.Image') {
+      const img = this.contentRef.current.children[0];
+      const isWide = (this.instance.width > this.instance.height);
+      img.style.width = isWide ? '100%' : 'auto';
+      img.style.height = isWide ? 'auto' : '100%';
+    }
   }
 
   render() {

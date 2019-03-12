@@ -24,8 +24,8 @@ export default class Dialog extends React.Component {
         return this.props.dialogClasses.includes(className);
       });
     if (isFullHeight) {
-      // Use full height
-      el.style.height = '87%';
+      // Use as much height as needed
+      el.style.height = '';
     }
     else if (el) {
       el.style.height = el.getBoundingClientRect().height + 'px';

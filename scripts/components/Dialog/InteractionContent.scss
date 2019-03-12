@@ -4,6 +4,11 @@
   left: initial;
   transform: initial;
   zoom: initial;
+  height: 100%;
+  width: 100%;
+}
+.h5p-text-content > .h5p-image > img {
+  margin: 0 auto;
 }
 
 .h5p-text-content > .h5p-video {
