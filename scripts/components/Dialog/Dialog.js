@@ -13,32 +13,35 @@ export default class Dialog extends React.Component {
   }
 
   handleDialogRef = (el) => {
-    if (!el) {
-      return;
+    if (el) {
+      this.el = el;
     }
-
-    const fullHeight = ['h5p-video', 'h5p-image'];
-    const isFullHeight = this.props.dialogClasses
-      && this.props.dialogClasses.length
-      && fullHeight.some(className => {
-        return this.props.dialogClasses.includes(className);
-      });
-    if (isFullHeight) {
-      // Use as much height as needed
-      el.style.height = '';
-      // el.style.width = 'auto';
-    }
-    else if (el) {
-      el.style.height = el.getBoundingClientRect().height + 'px';
-    }
-    //el.style.width = '';
   };
+
+  handleResize = (isNarrow) => {
+    if (this.el) {
+      // Reset to allow size growth
+      this.el.style.width = '';
+      this.el.style.height = '';
+      this.el.style.height = this.el.getBoundingClientRect().height + 'px';
+      if (isNarrow) {
+        // Shrink dialog width for narrow images
+        this.el.style.width = 'auto';
+      }
+    }
+  }
 
   render() {
     let dialogClasses = ['h5p-text-dialog'];
     if (this.props.dialogClasses) {
       dialogClasses = dialogClasses.concat(this.props.dialogClasses);
     }
+
+    const children = React.Children.map(this.props.children, child =>
+      React.cloneElement(child, {
+        onResize: this.handleResize
+      })
+    );
 
     return (
       <div className='h5p-text-overlay' role="dialog" aria-label={ this.props.title }>
@@ -49,7 +52,7 @@ export default class Dialog extends React.Component {
         ></div>
         <div className={dialogClasses.join(' ')} ref={ this.handleDialogRef }>
           <div className='h5p-text-content'>
-            {this.props.children}
+            { children }
           </div>
           <button
             ref={ el => this.closeButton = el }

@@ -72,10 +72,10 @@ export default class InteractionContent extends React.Component {
       img.style.width = isWide || isTall ? '100%' : 'auto';
       img.style.height = isWide ? 'auto' : '100%';
 
-      //this.instance.on('loaded' () => {
-        // TODO: Find a React way of setting el.style.width = 'auto'; on Dialog 
-      //});
+      this.instance.on('loaded', () => this.props.onResize(!(isWide || isTall)));
     }
+
+    this.instance.on('resize', this.props.onResize);
   }
 
   render() {
