@@ -130,7 +130,7 @@ H5P.ThreeImage = (function () {
     };
 
     this.on('resize', () => {
-      const isFullscreen = wrapper.parentElement.classList.contains('h5p-fullscreen');
+      const isFullscreen = wrapper.parentElement.classList.contains('h5p-fullscreen') || wrapper.parentElement.classList.contains('h5p-semi-fullscreen');
       const rect = wrapper.getBoundingClientRect();
       // Fullscreen should use all of the space
       const ratio = (isFullscreen ? (rect.height / rect.width) : (9 / 16));
