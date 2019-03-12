@@ -26,10 +26,12 @@ export default class Dialog extends React.Component {
     if (isFullHeight) {
       // Use as much height as needed
       el.style.height = '';
+      // el.style.width = 'auto';
     }
     else if (el) {
       el.style.height = el.getBoundingClientRect().height + 'px';
     }
+    //el.style.width = '';
   };
 
   render() {
