@@ -72,6 +72,20 @@
   max-height: 100%;
   overflow-y: auto;
 }
+.h5p-text-content::-webkit-scrollbar {
+  width: 0.5em;
+  background: #fff;
+}
+.h5p-text-content::-webkit-scrollbar-thumb {
+  background: #ddd;
+}
+.h5p-text-content::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+.h5p-text-content::-webkit-scrollbar-thumb:active,
+.h5p-text-content::-webkit-scrollbar-thumb:focus {
+  background: #888;
+}
 
 .h5p-text-overlay {
   position: absolute;
