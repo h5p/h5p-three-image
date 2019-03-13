@@ -141,6 +141,14 @@ H5P.ThreeImage = (function () {
 
       wrapper.style.height = (isFullscreen ? '100%' : ((rect.width * ratio) + 'px'));
 
+      // Apply separate styles for mobile
+      if (rect.width <= 480)  {
+        wrapper.classList.add('h5p-phone-size');
+      }
+      else {
+        wrapper.classList.remove('h5p-phone-size');
+      }
+
       // Resize scene
       if (this.currentScene === null) {
         return;

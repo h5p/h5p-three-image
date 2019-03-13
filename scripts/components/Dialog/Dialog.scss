@@ -67,7 +67,10 @@
     vertical-align: text-bottom;
   }
 }
-
+.h5p-phone-size .h5p-text-dialog {
+  width: 90%;
+  padding: 0.5em;
+}
 .h5p-text-content {
   flex: 1;
   max-height: 100%;
