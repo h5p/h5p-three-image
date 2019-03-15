@@ -148,6 +148,12 @@ H5P.ThreeImage = (function () {
       else {
         wrapper.classList.remove('h5p-phone-size');
       }
+      if (rect.width < 768)  {
+        wrapper.classList.add('h5p-medium-tablet-size');
+      }
+      else {
+        wrapper.classList.remove('h5p-medium-tablet-size');
+      }
 
       // Resize scene
       if (this.currentScene === null) {
