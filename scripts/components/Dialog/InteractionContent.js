@@ -76,7 +76,7 @@ export default class InteractionContent extends React.Component {
       this.instance.on('loaded', () => this.props.onResize(!isWide));
     }
 
-    this.instance.on('resize', this.props.onResize);
+    this.instance.on('resize', () => this.props.onResize());
   }
 
   render() {
