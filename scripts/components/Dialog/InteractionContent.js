@@ -67,12 +67,13 @@ export default class InteractionContent extends React.Component {
     if (this.instance.libraryInfo.machineName === 'H5P.Image') {
       const img = this.contentRef.current.children[0];
       const rect = this.context.getRect();
-      const isTall = (rect.height > rect.width);
-      const isWide = (this.instance.width > this.instance.height);
-      img.style.width = isWide || isTall ? '100%' : 'auto';
+      const contentRatio = (rect.width / rect.height);
+      const imageRatio = (this.instance.width / this.instance.height);
+      const isWide = (imageRatio > contentRatio);
+      img.style.width = isWide ? '100%' : 'auto';
       img.style.height = isWide ? 'auto' : '100%';
 
-      this.instance.on('loaded', () => this.props.onResize(!(isWide || isTall)));
+      this.instance.on('loaded', () => this.props.onResize(!isWide));
     }
 
     this.instance.on('resize', this.props.onResize);
