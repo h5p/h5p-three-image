@@ -160,19 +160,10 @@ export default class ThreeSixtyScene extends React.Component {
     this.imageElement = document.createElement('img');
     this.imageElement.addEventListener('load', this.initializeScene);
 
-    // TODO: Fix a Core function for doing this since we're never supposed to use H5PIntegration in a content type.
-    if (H5PIntegration.crossorigin) {
-      // We have a crossorigin setting
-
-      if (H5PIntegration.crossoriginRegex) {
-        // But only for certain URLs
-        if (this.props.imageSrc.match(H5PIntegration.crossoriginRegex)) {
-          this.imageElement.setAttribute('crossorigin', H5PIntegration.crossorigin);
-        }
-      }
-      else {
-        // For all URLs
-        this.imageElement.setAttribute('crossorigin', H5PIntegration.crossorigin);
+    if (H5P.getCrossOrigin !== undefined) {
+      const crossorigin = H5P.getCrossOrigin(this.props.imageSrc);
+      if (crossorigin) {
+        this.imageElement.setAttribute('crossorigin', crossorigin);
       }
     }
 
