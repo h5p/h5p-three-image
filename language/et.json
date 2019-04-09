@@ -1,0 +1,103 @@
+{
+  "semantics": [
+    {
+      "label": "Three Image pildiredaktor",
+      "fields": [
+        {
+          "label": "Stseenid",
+          "entity": "Stseen",
+          "field": {
+            "fields": [
+              {
+                "label": "Stseeni tüüp",
+                "options": [
+                  {
+                    "label": "360 pilt"
+                  },
+                  {
+                    "label": "Staatiline pilt"
+                  }
+                ]
+              },
+              {
+                "label": "Kuva \"Tagasi\" nupp",
+                "description": "Näita Tagasi nuppu, millega saab navigeerida eelmisele stseenile"
+              },
+              {
+                "label": "Unikaalne stseeni id (arv)",
+                "description": "Peab olema unikaalne, kasutatakse stseenide vahel navigeerimiseks"
+              },
+              {
+                "label": "Stseeni tiitel",
+                "description": "Kasutatakse stseeni autorite näitamiseks"
+              },
+              {
+                "label": "Stseeni taust"
+              },
+              {
+                "label": "Stseeni kirjeldus",
+                "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
+              },
+              {
+                "label": "Algne kaamera asukoht",
+                "description": "Kaamera asukoht koordinaadistikus (pitch ja yaw)"
+              },
+              {
+                "label": "Interaktsioonid",
+                "entity": "Interaktsioon",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaktsioon",
+                      "description": "Interaktsiooniga tulipunkt"
+                    },
+                    {
+                      "label": "Interaktsiooni asukoht",
+                      "description": "Interaktsiooni asukoht koordinaadistikus (pitch ja yaw)"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Heliriba",
+                "description": "Lisa stseenile omane heliriba."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Algusstseeni id"
+        },
+        {
+          "label": "Heliriba"
+        }
+      ]
+    },
+    {
+      "label": "Käitumisseaded",
+      "description": "Need valikud määravad, kuidas maailm käitub.",
+      "fields": [
+        {
+          "label": "Üldine heli",
+          "description": "Lisa heliriba, mis on vaikimisi kättesaadav kõikidele stseenidele."
+        },
+        {
+          "label": "Stseeni renderdamise kvaliteet",
+          "description": "Vali laius- ja kõrgussegmentide arv, mida kasutatakse stseeni renderdamiseks. See mõjutab otseselt stseeni kvaliteeti. Stseeni parema välimuse saavutamiseks võid proovida kvaliteeti tõsta - samas laadib kõrgema kvaliteedi korral stseen aeglasemalt.",
+          "options": [
+            {
+              "label": "Kõrge kvaliteet (128x128)"
+            },
+            {
+              "label": "Keskmine kvaliteet (64x64)"
+            },
+            {
+              "label": "Madal kvaliteet (16x16)"
+            }
+          ],
+          "default": "kõrge"
+        }
+      ]
+    }
+  ]
+}
