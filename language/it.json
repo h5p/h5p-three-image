@@ -1,0 +1,103 @@
+{
+  "semantics": [
+    {
+      "label": "Editor di Three Image",
+      "fields": [
+        {
+          "label": "Scene",
+          "entity": "Scena",
+          "field": {
+            "fields": [
+              {
+                "label": "Tipo di scena",
+                "options": [
+                  {
+                    "label": "Immagine 360"
+                  },
+                  {
+                    "label": "Immagine statica"
+                  }
+                ]
+              },
+              {
+                "label": "Mostra il pulsante \"Indietro\"",
+                "description": "Mostra il pulsante per tornare alla scena precedente"
+              },
+              {
+                "label": "ID unico della scena",
+                "description": "Deve essere unico. Usato per navigare tra le scene"
+              },
+              {
+                "label": "Titolo della scena",
+                "description": "Usato per identificare la scena per gli autori"
+              },
+              {
+                "label": "Background della scena"
+              },
+              {
+                "label": "Descrizione della scena",
+                "description": "Testo che può descrivere la scena per l'utente finale"
+              },
+              {
+                "label": "Posizione iniziale della fotocamera",
+                "description": "Rotazione laterale e verticale della fotocamera"
+              },
+              {
+                "label": "Interazioni",
+                "entity": "Interazione",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interazione",
+                      "description": "Hotspot con un'interazione"
+                    },
+                    {
+                      "label": "Posizione dell'interazione",
+                      "description": "Posizione dell'interazione in laterale e verticale"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Traccia audio",
+                "description": "Aggiungi una traccia audio specifica per questa scena"
+              }
+            ]
+          }
+        },
+        {
+          "label": "ID di inizio scena"
+        },
+        {
+          "label": "Traccia audio"
+        }
+      ]
+    },
+    {
+      "label": "Impostazioni di esecuzione",
+      "description": "Queste opzioni ti permettono di controllare come si comporta il mondo",
+      "fields": [
+        {
+          "label": "Audio globale",
+          "description": "Aggiungi una traccia audio predefinita per tutte le scene."
+        },
+        {
+          "label": "Qualità della resa di una scena",
+          "description": "Scegli larghezza e altezza dei segmenti usati per rappresentare una scena. Ciò ha effetto diretto sul livello della qualità della scena. Prova ad aumentare la qualità se una scena sembra  \"squadrata\" o se si vedono \"onde\" nelle scene. Nota che un rendering di qualità più alta impiega più tempo a caricare.",
+          "options": [
+            {
+              "label": "Alta qualità (128x128)"
+            },
+            {
+              "label": "Media qualità (64x64)"
+            },
+            {
+              "label": "Bassa qualità (16x16)"
+            }
+          ],
+          "default": "alta"
+        }
+      ]
+    }
+  ]
+}
