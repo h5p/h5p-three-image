@@ -59,6 +59,18 @@
                 }
               },
               {
+                "label": "Button style",
+                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "options": [
+                  {
+                    "label": "New scene (arrow)"
+                  },
+                  {
+                    "label": "More information (plus)"
+                  }
+                ]
+              },
+              {
                 "label": "Traccia audio",
                 "description": "Aggiungi una traccia audio specifica per questa scena"
               }
