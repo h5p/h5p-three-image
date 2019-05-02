@@ -348,34 +348,36 @@ export default class ThreeSixtyScene extends React.Component {
         !== this.props.sceneParams.interactions.length);
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
+    let shouldUpdateInteractionHotspots = hasChangedInteractions
+        || audioHasChanged
+        || hasChangedFocus
+        || isHiddenBehindOverlayHasChanged;
+
     // Check if the scene that interactions point to has changed icon type
-    let hasChangedIconType = false;
-    this.props.sceneParams.interactions.forEach((interaction) => {
-      const library = H5P.libraryFromString(interaction.action.library);
-      const machineName = library.machineName;
-      if (machineName === 'H5P.GoToScene') {
-        const nextSceneId = interaction.action.params.nextSceneId;
-        const nextSceneIcon = this.props.sceneIcons.find(scene => {
-          return scene.id === nextSceneId;
-        });
-        const oldNextSceneIcon = prevProps.sceneIcons.find(scene => {
-          return scene.id === nextSceneId;
-        });
+    // This is only relevant when changing the icon using the H5P editor
+    if (window.H5PEditor && !shouldUpdateInteractionHotspots) {
+      shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
+        const library = H5P.libraryFromString(interaction.action.library);
+        const machineName = library.machineName;
+        if (machineName === 'H5P.GoToScene') {
+          const nextSceneId = interaction.action.params.nextSceneId;
+          const nextSceneIcon = this.props.sceneIcons.find(scene => {
+            return scene.id === nextSceneId;
+          });
+          const oldNextSceneIcon = prevProps.sceneIcons.find(scene => {
+            return scene.id === nextSceneId;
+          });
 
-        const hasChangedIcon = nextSceneIcon
-          && oldNextSceneIcon
-          && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
-        if (hasChangedIcon) {
-          hasChangedIconType = true;
+          const hasChangedIcon = nextSceneIcon
+            && oldNextSceneIcon
+            && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
+          if (hasChangedIcon) {
+            return true;
+          }
         }
-      }
-    });
-
-    const shouldUpdateInteractionHotspots = hasChangedInteractions
-      || audioHasChanged
-      || hasChangedFocus
-      || isHiddenBehindOverlayHasChanged
-      || hasChangedIconType;
+        return false;
+      });
+    }
 
     if (shouldUpdateInteractionHotspots) {
       this.addInteractionHotspots(this.props.sceneParams.interactions);
