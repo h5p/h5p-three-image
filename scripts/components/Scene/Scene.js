@@ -18,6 +18,7 @@ export default class Scene extends React.Component {
           isActive={this.props.isActive}
           isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
           nextFocus={ this.props.nextFocus }
+          sceneIcons={this.props.sceneIcons}
           sceneParams={this.props.sceneParams}
           imageSrc={this.props.imageSrc}
           navigateToScene={this.props.navigateToScene.bind(this)}
@@ -39,6 +40,7 @@ export default class Scene extends React.Component {
         isActive={this.props.isActive}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         nextFocus={ this.props.nextFocus }
+        sceneIcons={this.props.sceneIcons}
         sceneParams={this.props.sceneParams}
         addScene={this.props.addScene.bind(this)}
         imageSrc={this.props.imageSrc}

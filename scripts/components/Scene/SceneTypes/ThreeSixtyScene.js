@@ -229,7 +229,7 @@ export default class ThreeSixtyScene extends React.Component {
         )}
         title={title}
         buttonClasses={ className }
-        icon={getIconFromInteraction(interaction)}
+        icon={getIconFromInteraction(interaction, this.context.params.scenes)}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         nextFocus={ this.props.nextFocus }
         type={ 'interaction-' + index }
@@ -348,7 +348,36 @@ export default class ThreeSixtyScene extends React.Component {
         !== this.props.sceneParams.interactions.length);
     const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
 
-    if (hasChangedInteractions || audioHasChanged || hasChangedFocus || isHiddenBehindOverlayHasChanged) {
+    // Check if the scene that interactions point to has changed icon type
+    let hasChangedIconType = false;
+    this.props.sceneParams.interactions.forEach((interaction) => {
+      const library = H5P.libraryFromString(interaction.action.library);
+      const machineName = library.machineName;
+      if (machineName === 'H5P.GoToScene') {
+        const nextSceneId = interaction.action.params.nextSceneId;
+        const nextSceneIcon = this.props.sceneIcons.find(scene => {
+          return scene.id === nextSceneId;
+        });
+        const oldNextSceneIcon = prevProps.sceneIcons.find(scene => {
+          return scene.id === nextSceneId;
+        });
+
+        const hasChangedIcon = nextSceneIcon
+          && oldNextSceneIcon
+          && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
+        if (hasChangedIcon) {
+          hasChangedIconType = true;
+        }
+      }
+    });
+
+    const shouldUpdateInteractionHotspots = hasChangedInteractions
+      || audioHasChanged
+      || hasChangedFocus
+      || isHiddenBehindOverlayHasChanged
+      || hasChangedIconType;
+
+    if (shouldUpdateInteractionHotspots) {
       this.addInteractionHotspots(this.props.sceneParams.interactions);
 
       if (!hasChangedVisibility) {

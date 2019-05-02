@@ -21,12 +21,19 @@ const isInfoInteraction = (machineName) => {
   return infoInteractions.includes(machineName);
 };
 
-export const getIconFromInteraction = (interaction) => {
+export const getIconFromInteraction = (interaction, scenes) => {
   const library = interaction.action.library;
   const machineName = H5P.libraryFromString(library).machineName;
   let icon = '';
   if (machineName === 'H5P.GoToScene') {
     icon = Icons.GO_TO_SCENE;
+
+    const nextScene = scenes.find(scene => {
+      return scene.sceneId === interaction.action.params.nextSceneId;
+    });
+    if (nextScene && nextScene.iconType === 'plus') {
+      icon = Icons.INFO;
+    }
   }
   else if (machineName === 'H5P.Audio') {
     icon = Icons.AUDIO;

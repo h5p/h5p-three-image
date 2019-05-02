@@ -122,6 +122,25 @@
               }
             },
             {
+              "name": "iconType",
+              "type": "select",
+              "label": "Button style",
+              "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+              "widget": "radioGroup",
+              "alignment": "horizontal",
+              "options": [
+                {
+                  "value": "arrow",
+                  "label": "New scene (arrow)"
+                },
+                {
+                  "value": "plus",
+                  "label": "More information (plus)"
+                }
+              ],
+              "default": "arrow"
+            },
+            {
               "name": "audio",
               "type": "audio",
               "label": "Audio Track",

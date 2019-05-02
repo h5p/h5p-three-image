@@ -316,6 +316,13 @@ export default class Main extends React.Component {
       dialogTitle = scene.interactions[this.state.currentInteraction].action.metadata.title;
     }
 
+    const sceneIcons = this.context.params.scenes.map(sceneParams => {
+      return {
+        id: sceneParams.sceneId,
+        iconType: sceneParams.iconType,
+      };
+    });
+
     return (
       <div role="document" aria-label={ this.context.l10n.title }>
         { showInteractionDialog &&
@@ -352,6 +359,7 @@ export default class Main extends React.Component {
                 key={sceneParams.sceneId}
                 isActive={sceneParams.sceneId === this.props.currentScene}
                 isHiddenBehindOverlay={ isHiddenBehindOverlay }
+                sceneIcons={sceneIcons}
                 sceneParams={sceneParams}
                 nextFocus={ this.state.nextFocus }
                 addScene={this.addScene.bind(this)}
