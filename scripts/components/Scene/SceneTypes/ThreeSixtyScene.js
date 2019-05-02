@@ -355,7 +355,7 @@ export default class ThreeSixtyScene extends React.Component {
 
     // Check if the scene that interactions point to has changed icon type
     // This is only relevant when changing the icon using the H5P editor
-    if (window.H5PEditor && !shouldUpdateInteractionHotspots) {
+    if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
       shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
         const library = H5P.libraryFromString(interaction.action.library);
         const machineName = library.machineName;
