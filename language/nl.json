@@ -106,8 +106,7 @@
             {
               "label": "Lage kwaliteit (16x16)"
             }
-          ],
-          "default": "hoog"
+          ]
         }
       ]
     }

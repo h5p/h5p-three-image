@@ -106,8 +106,7 @@
             {
               "label": "Low Quality (16x16)"
             }
-          ],
-          "default": "high"
+          ]
         }
       ]
     }
