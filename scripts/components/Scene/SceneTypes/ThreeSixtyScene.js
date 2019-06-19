@@ -84,11 +84,16 @@ export default class ThreeSixtyScene extends React.Component {
       if (this.props.sceneWaitingForLoad !== null && this.props.isActive) {
         this.props.doneLoadingNextScene();
       }
-      const hasChangedImage = this.props.imageSrc
-        !== this.imageElement.src;
+
+      let path = H5P.getPath(this.props.imageSrc.path, this.context.contentId);
+      if (this.imageElement.crossOrigin !== null && H5P.addQueryParameter && H5PIntegration.crossoriginCacheBuster) {
+        path = H5P.addQueryParameter(path, H5PIntegration.crossoriginCacheBuster);
+      }
+
+      const hasChangedImage = (path !== this.imageElement.src);
 
       if (hasChangedImage) {
-        this.imageElement.src = this.props.imageSrc;
+        this.imageElement.src = path;
       }
 
       return hasChangedImage;
@@ -160,14 +165,19 @@ export default class ThreeSixtyScene extends React.Component {
     this.imageElement = document.createElement('img');
     this.imageElement.addEventListener('load', this.initializeScene);
 
-    if (H5P.getCrossOrigin !== undefined) {
-      const crossorigin = H5P.getCrossOrigin(this.props.imageSrc);
-      if (crossorigin) {
-        this.imageElement.setAttribute('crossorigin', crossorigin);
-      }
+    if (H5P.setSource !== undefined) {
+      H5P.setSource(this.imageElement, this.props.imageSrc, this.context.contentId)
     }
-
-    this.imageElement.src = this.props.imageSrc;
+    else {
+      const path = H5P.getPath(this.props.imageSrc.path, this.context.contentId);
+      if (H5P.getCrossOrigin !== undefined) {
+        const crossorigin = H5P.getCrossOrigin(path);
+        if (crossorigin) {
+          this.imageElement.setAttribute('crossorigin', crossorigin);
+        }
+      }
+      this.imageElement.src = path;
+    }
   }
 
   /**

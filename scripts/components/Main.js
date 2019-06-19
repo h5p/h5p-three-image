@@ -349,11 +349,6 @@ export default class Main extends React.Component {
         }
         {
           this.context.params.scenes.map(sceneParams => {
-            const imageSrc = H5P.getPath(
-              sceneParams.scenesrc.path,
-              this.context.contentId
-            );
-
             return (
               <Scene
                 key={sceneParams.sceneId}
@@ -363,7 +358,7 @@ export default class Main extends React.Component {
                 sceneParams={sceneParams}
                 nextFocus={ this.state.nextFocus }
                 addScene={this.addScene.bind(this)}
-                imageSrc={imageSrc}
+                imageSrc={sceneParams.scenesrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
