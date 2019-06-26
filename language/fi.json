@@ -4,107 +4,107 @@
       "label": "Three Image Editor",
       "fields": [
         {
-          "label": "Scenes",
-          "entity": "Scene",
+          "label": "Dioraamat",
+          "entity": "Dioraama",
           "field": {
             "fields": [
               {
-                "label": "Scene type",
+                "label": "Dioraaman tyyppi",
                 "options": [
                   {
-                    "label": "360 image"
+                    "label": "360-kuva"
                   },
                   {
-                    "label": "Static image"
+                    "label": "Staattinen kuva"
                   }
                 ]
               },
               {
-                "label": "Display \"Back\" button",
-                "description": "Display button for navigating back to your previous scene"
+                "label": "Näytä \"Back\" painike",
+                "description": "Näyttää painikkeen jolla voit palata takaisin päin edelliseen dioraamaan."
               },
               {
-                "label": "Unique scene id",
-                "description": "Must be unique, used for navigation between scenes"
+                "label": "Unuukki dioraaman id",
+                "description": "Tämän täytyy olla uniikkitunnisten jota käytetään dioraamojen välillä liikkumiseen."
               },
               {
-                "label": "Scene Title",
-                "description": "Used to identify the scene for authors"
+                "label": "Dioraaman otsikko",
+                "description": "Hallinoijat tunnistavat dioraaman täsät otsikosta"
               },
               {
-                "label": "Scene Background"
+                "label": "Dioraaman taustakuva"
               },
               {
-                "label": "Scene Description",
-                "description": "A text that can describe the scene for the end-user"
+                "label": "Dioraaman kuvausteksti",
+                "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
               {
-                "label": "Initial camera position",
-                "description": "Camera position in pitch and yaw"
+                "label": "Kameran aloitussijainti	",
+                "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
               },
               {
-                "label": "Interactions",
-                "entity": "Interaction",
+                "label": "Interaktiiviset elementit",
+                "entity": "Interaktio",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaction",
-                      "description": "Hotspot with an interaction"
+                      "label": "Interaktio",
+                      "description": "Hotspot interaktiolla"
                     },
                     {
-                      "label": "Interaction position",
-                      "description": "Interaction position in pitch and yaw"
+                      "label": "Interaktio sijainnilla",
+                      "description": "Interaktion sijainnin kaltevuus- ja kallistukulma"
                     }
                   ]
                 }
               },
               {
-                "label": "Button style",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "label": "Painikkeiden tyyli",
+                "description": "Voit määrittää minkätyylisiä painikkeita käytät tässä kyseisessä dioraamassa. Staattisille kuville jotka eivät johda toisiin dioraamoihin suosittelemme \"More information\" painikkeita.",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Seuraava dioraama (nuoli-ikoni)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Lisätietojapainike (plusmerkki)"
                   }
                 ]
               },
               {
-                "label": "Audio Track",
-                "description": "Add an audio track that's specific for this scene."
+                "label": "Ääniraita",
+                "description": "Lisää tälläe dioraamalle oma ääniraita"
               }
             ]
           }
         },
         {
-          "label": "Start scene id"
+          "label": "Aloittavan dioraaman id"
         },
         {
-          "label": "Audio track"
+          "label": "Ääniraita"
         }
       ]
     },
     {
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the world behaves.",
+      "label": "Lisäasetukset",
+      "description": "Nämä asetukset määrittelevät kuinka tehtävä käyttäytyy",
       "fields": [
         {
-          "label": "Global Audio",
-          "description": "Add an audio track that's available for all of the scenes by default."
+          "label": "Globaali ääniraita",
+          "description": "Lisää ääniraita joka soitetaan oletuksena jokaisen dioraaman taustalla."
         },
         {
-          "label": "Scene rendering quality",
-          "description": "Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
+          "label": "Dioraaman laatu",
+          "description": "Valitse dioraaman esittämiseen tarkoitettujen korkeus- ja pituus segmenttien lukumäärä. Tämä vaikuttaa suoraan dioraaman kuvanlaatuun, jos laatu on mielestäsi "palikkamainen" tai aaltoileva niin kokeile korottaa laatua. Mitä parempi laatu sitä kauemmin kuvan lataaminen kestää.",
           "options": [
             {
-              "label": "High Quality (128x128)"
+              "label": "Hyvä laatu (128x128)"
             },
             {
-              "label": "Medium Quality (64x64)"
+              "label": "Keskilaatu (64x64)"
             },
             {
-              "label": "Low Quality (16x16)"
+              "label": "Matala laatu (16x16)"
             }
           ]
         }
