@@ -7,23 +7,12 @@ export default class InteractionContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.contentRef = React.createRef();
     this.state = {
       isInitialized: false,
     };
   }
 
-  componentDidMount() {
-    if (!this.state.isInitialized) {
-      this.initializeContent();
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    if (!this.state.isInitialized) {
-      this.initializeContent();
-    }
-
     if (this.props.audioIsPlaying && this.props.audioIsPlaying !== prevProps.audioIsPlaying) {
       // The Audio Player has changed
 
@@ -34,10 +23,14 @@ export default class InteractionContent extends React.Component {
     }
   }
 
-  initializeContent() {
+  initializeContent(contentRef) {
+    if (!contentRef || this.state.isInitialized) {
+      return;
+    }
+
     // Remove any old content
-    while (this.contentRef.current.firstChild) {
-      this.contentRef.current.removeChild(this.contentRef.current.firstChild);
+    while (contentRef.firstChild) {
+      contentRef.removeChild(contentRef.firstChild);
     }
 
     const scene = this.context.params.scenes.find(scene => {
@@ -49,7 +42,7 @@ export default class InteractionContent extends React.Component {
     this.instance = H5P.newRunnable(
       library,
       this.context.contentId,
-      H5P.jQuery(this.contentRef.current)
+      H5P.jQuery(contentRef)
     );
 
     if (library.library.split(' ')[0] === 'H5P.Video') {
@@ -65,7 +58,7 @@ export default class InteractionContent extends React.Component {
     });
 
     if (this.instance.libraryInfo.machineName === 'H5P.Image') {
-      const img = this.contentRef.current.children[0];
+      const img = contentRef.children[0];
       const rect = this.context.getRect();
       const contentRatio = (rect.width / rect.height);
       const imageRatio = (this.instance.width / this.instance.height);
@@ -81,7 +74,7 @@ export default class InteractionContent extends React.Component {
 
   render() {
     return (
-      <div ref={this.contentRef} />
+      <div ref={ el => this.initializeContent(el) } />
     );
   }
 }
