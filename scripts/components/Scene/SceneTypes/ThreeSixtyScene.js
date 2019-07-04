@@ -18,17 +18,22 @@ export default class ThreeSixtyScene extends React.Component {
 
     this.sceneRef = React.createRef();
     this.renderedInteractions = 0;
-    this.initializeScene = this.initializeScene.bind(this);
 
     this.state = {
-      hasInitialized: false,
+      imagePath: null, // Path of current loaded image
+      isLoaded: false, // Has the image been loaded
+      isUpdated: false, // Has the scene been updated
+      isRendered: false, // Has the scene been drawn
+      cameraPosition: null, // Store current camera position between scene changes
       pointerLockElement: null,
       willPointerLock: false,
       hasPointerLock: false,
-      isWaitingForNextScene: false,
     };
   }
 
+  /**
+   * TODO
+   */
   initializePointerLock(element) {
     // Not supported
     element.requestPointerLock = element.requestPointerLock
@@ -54,6 +59,9 @@ export default class ThreeSixtyScene extends React.Component {
     }, 100);
   }
 
+  /**
+   * TODO
+   */
   cancelPointerLock() {
     this.setState({
       willPointerLock: false,
@@ -62,108 +70,120 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   *
+   * TODO
    */
-  initializeScene() {
-    const startPosition = this.props.sceneParams.cameraStartPosition
-      .split(',')
-      .map(parseFloat);
-
-    const yaw = startPosition[0];
-    const pitch = startPosition[1];
-
-    this.scene = new H5P.ThreeSixty(this.imageElement, {
-      ratio: 16/9,
-      cameraStartPosition: {
-        yaw: yaw,
-        pitch: pitch,
-      },
-      segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
-    }, () => {
-      // Determine if image source has changed
-      if (this.props.sceneWaitingForLoad !== null && this.props.isActive) {
-        this.props.doneLoadingNextScene();
-      }
-
-      let path = H5P.getPath(this.props.imageSrc.path, this.context.contentId);
-      if (this.imageElement.crossOrigin !== null && H5P.addQueryParameter && H5PIntegration.crossoriginCacheBuster) {
-        path = H5P.addQueryParameter(path, H5PIntegration.crossoriginCacheBuster);
-      }
-
-      const hasChangedImage = (path !== this.imageElement.src);
-
-      if (hasChangedImage) {
-        this.imageElement.src = path;
-      }
-
-      return hasChangedImage;
-    });
-
-    this.scene.setAriaLabel(this.props.sceneParams.scenename);
-
-    if (this.props.isActive) {
-      this.sceneRef.current.appendChild(this.scene.getElement());
-      this.scene.resize();
-      this.scene.startRendering();
+  handleSceneMoveStart = (e) => {
+    if (!this.context.extras.isEditor || e.data.isCamera) {
+      return;
     }
 
-    this.context.on('doubleClickedInteraction', () => {
-      this.cancelPointerLock();
-    });
-
-    this.scene.on('movestart', (e) => {
-      if (!this.context.extras.isEditor || e.data.isCamera) {
-        return;
+    const target = e.data.target;
+    if (target) {
+      // Don't move when dragging context menu
+      if (target.classList.contains('context-menu')) {
+        e.defaultPrevented = true;
+        return false;
       }
 
-      const target = e.data.target;
-      if (target) {
-        // Don't move when dragging context menu
-        if (target.classList.contains('context-menu')) {
+      // Don't move when dragging context menu children
+      if (target.parentNode) {
+        const parent = target.parentNode;
+        if (parent.classList.contains('context-menu')) {
           e.defaultPrevented = true;
           return false;
         }
-
-        // Don't move when dragging context menu children
-        if (target.parentNode) {
-          const parent = target.parentNode;
-          if (parent.classList.contains('context-menu')) {
-            e.defaultPrevented = true;
-            return false;
-          }
-        }
       }
+    }
 
-      // Make sure we don't start movement on contextmenu actions
-      if (!target || !target.classList.contains('nav-button')) {
-        return;
-      }
+    // Make sure we don't start movement on contextmenu actions
+    if (!target || !target.classList.contains('nav-button')) {
+      return;
+    }
 
-      const element = e.data.element;
-      this.initializePointerLock(element);
-    });
-
-    this.scene.on('movestop', e => {
-      if (this.context.extras.isEditor) {
-        this.cancelPointerLock();
-      }
-      this.context.trigger('movestop', e.data);
-    });
-
-    this.props.addScene(this.scene, this.props.sceneParams.sceneId);
-
-    // Add buttons to scene
-    this.addInteractionHotspots(this.props.sceneParams.interactions);
-
-    this.setState({
-      hasInitialized: true,
-    });
-    this.imageElement.removeEventListener('load', this.initializeScene);
+    const element = e.data.element;
+    this.initializePointerLock(element);
   }
 
+  /**
+   * TODO
+   */
+  handleSceneMoveStop = (e) => {
+    if (this.context.extras.isEditor) {
+      this.cancelPointerLock();
+    }
+    this.context.trigger('movestop', e.data);
+  }
+
+  /**
+   * TODO
+   */
+  initializeThreeSixty = () => {
+    // Determine camera position
+    let cameraPosition = this.state.cameraPosition
+    if (!cameraPosition) {
+      const startPosition = this.props.sceneParams.cameraStartPosition
+        .split(',')
+        .map(parseFloat);
+
+      cameraPosition = {
+        yaw: startPosition[0],
+        pitch: startPosition[1],
+      };
+    }
+
+    let threeSixty;
+    if (!this.props.threeSixty) {
+      // ThreeSixty has not been used, yet. Create a new instance
+      threeSixty = new H5P.ThreeSixty(this.imageElement, {
+        ratio: 16/9,
+        cameraStartPosition: cameraPosition,
+        segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
+      })
+      this.props.addThreeSixty(threeSixty);
+    }
+    else {
+      // Set texture + camera pos
+      threeSixty = this.props.threeSixty;
+      threeSixty.setSourceElement(this.imageElement);
+      threeSixty.setCameraPosition(cameraPosition.yaw, cameraPosition.pitch);
+    }
+
+    threeSixty.setAriaLabel(this.props.sceneParams.scenename);
+    this.sceneRef.current.appendChild(threeSixty.getElement());
+    threeSixty.resize(this.context.getRatio());
+
+    // Show loading screen until first render has been drawn
+    threeSixty.on('firstrender', () => {
+      this.setState({
+        isRendered: true
+      });
+      threeSixty.focus();
+    });
+
+    threeSixty.startRendering();
+    threeSixty.update();
+
+    threeSixty.on('movestart', this.handleSceneMoveStart);
+    threeSixty.on('movestop', this.handleSceneMoveStop);
+
+    // Add buttons to scene
+    this.addInteractionHotspots(threeSixty, this.props.sceneParams.interactions);
+  }
+
+  /**
+   * TODO
+   */
   loadScene() {
-    this.imageElement = document.createElement('img');
-    this.imageElement.addEventListener('load', this.initializeScene);
+    if (!this.imageElement) {
+      // Create image element used for loading on first load
+      this.imageElement = document.createElement('img');
+      this.imageElement.addEventListener('load', this.sceneLoaded);
+    }
+
+    this.setState({
+      imagePath: this.props.imageSrc.path,
+      isRendered: false
+    });
 
     if (H5P.setSource !== undefined) {
       H5P.setSource(this.imageElement, this.props.imageSrc, this.context.contentId)
@@ -181,11 +201,26 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
+   * TODO
+   */
+  sceneLoaded = () => {
+    if (this.state.isLoaded && this.state.isUpdated && this.props.isActive) {
+      // Has been loaded before, we only need to reload the texture
+      this.props.threeSixty.update();
+    }
+    else {
+      this.setState({
+        isLoaded: true // Indicates that this.imageElement can now be used
+      });
+    }
+  }
+
+  /**
    * Create, add and render all interactions in the 3D world.
    *
    * @param {Array} interactions
    */
-  addInteractionHotspots(interactions) {
+  addInteractionHotspots(threeSixty, interactions) {
     if (!interactions) {
       return;
     }
@@ -197,7 +232,7 @@ export default class ThreeSixtyScene extends React.Component {
       <H5PContext.Provider value={this.context}>
         { list }
       </H5PContext.Provider>,
-      this.scene.getCameraElement()
+      threeSixty.getCameraElement()
     );
   }
 
@@ -227,14 +262,14 @@ export default class ThreeSixtyScene extends React.Component {
     return (
       <NavigationButton
         key={'interaction-' + index}
-        onMount={ el => this.scene.add(
+        onMount={ el => this.props.threeSixty.add(
           el,
           ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
           this.context.extras.isEditor
         )}
-        onUnmount={ el => this.scene.remove(this.scene.find(el)) }
+        onUnmount={ el => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
         onUpdate={ el => H5P.ThreeSixty.setElementPosition(
-          this.scene.find(el),
+          this.props.threeSixty.find(el),
           ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
         )}
         title={title}
@@ -291,33 +326,45 @@ export default class ThreeSixtyScene extends React.Component {
    * React -
    */
   componentDidMount() {
-    // Already initialized
-    if (this.state.hasInitialized) {
-      return;
-    }
-
     this.loadScene();
+
+    this.context.on('doubleClickedInteraction', () => {
+      this.cancelPointerLock();
+    });
   }
 
   /**
    * React -
    */
   componentDidUpdate(prevProps) {
-    if (!this.state.hasInitialized) {
-      return;
+    if (this.props.isActive && this.state.isLoaded && !this.state.isUpdated) {
+      // Active and loaded, prepare the scene
+      setTimeout(() => {
+        this.initializeThreeSixty();
+      }, 40); // Using timeout to allow loading screen to render before we load WebGL
+      this.setState({
+        isUpdated: true
+      });
     }
 
-    const isDoneLoading = this.props.sceneWaitingForLoad === null;
-    if (this.state.isWaitingForNextScene && isDoneLoading) {
-      // Done loading next scene
+    if (this.state.imagePath !== this.props.imageSrc.path) {
+      this.loadScene();
+    }
+
+    if (prevProps.isActive && !this.props.isActive) {
+      // No longer active, indicate that scene must be updated
+      this.props.threeSixty.stopRendering();
+      this.props.threeSixty.off('movestart', this.handleSceneMoveStart);
+      this.props.threeSixty.off('movestop', this.handleSceneMoveStop);
+      this.props.threeSixty.off('firstrender');
       this.setState({
-        isWaitingForNextScene: false,
+        cameraPosition: this.props.threeSixty.getCurrentPosition(),
+        isUpdated: false,
+        isRendered: false
       });
-      this.scene.stopRendering();
     }
 
     if (this.state.hasPointerLock) {
-
       if (!this.state.willPointerLock) {
         // canceled
         this.setState({
@@ -343,87 +390,55 @@ export default class ThreeSixtyScene extends React.Component {
 
     // Need to respond to dialog toggling in order to hide the buttons under the overlay
     const isHiddenBehindOverlayHasChanged = (this.props.isHiddenBehindOverlay !== prevProps.isHiddenBehindOverlay);
-    if (isHiddenBehindOverlayHasChanged) {
+    if (isHiddenBehindOverlayHasChanged && this.state.isUpdated) {
       // TODO: Update scene element
-      this.scene.setTabIndex(false);
+      this.props.threeSixty.setTabIndex(false);
     }
 
-    // Need to respond to audio in order to update the icon of the interaction
-    const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
-    const hasChangedFocus = prevProps.focusedInteraction
-      !== this.props.focusedInteraction;
+    if (this.props.threeSixty && this.props.isActive) {
+      // Need to respond to audio in order to update the icon of the interaction
+      const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
+      const hasChangedFocus = prevProps.focusedInteraction
+        !== this.props.focusedInteraction;
 
-    const hasChangedInteractions = this.props.sceneParams.interactions
-      && (this.renderedInteractions
-        !== this.props.sceneParams.interactions.length);
-    const hasChangedVisibility = prevProps.isActive !== this.props.isActive;
+      const hasChangedInteractions = this.props.sceneParams.interactions
+        && (this.renderedInteractions
+          !== this.props.sceneParams.interactions.length);
 
-    let shouldUpdateInteractionHotspots = hasChangedInteractions
-        || audioHasChanged
-        || hasChangedFocus
-        || isHiddenBehindOverlayHasChanged;
+      let shouldUpdateInteractionHotspots = hasChangedInteractions
+          || audioHasChanged
+          || hasChangedFocus
+          || isHiddenBehindOverlayHasChanged;
 
-    // Check if the scene that interactions point to has changed icon type
-    // This is only relevant when changing the icon using the H5P editor
-    if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
-      shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
-        const library = H5P.libraryFromString(interaction.action.library);
-        const machineName = library.machineName;
-        if (machineName === 'H5P.GoToScene') {
-          const nextSceneId = interaction.action.params.nextSceneId;
-          const nextSceneIcon = this.props.sceneIcons.find(scene => {
-            return scene.id === nextSceneId;
-          });
-          const oldNextSceneIcon = prevProps.sceneIcons.find(scene => {
-            return scene.id === nextSceneId;
-          });
+      // Check if the scene that interactions point to has changed icon type
+      // This is only relevant when changing the icon using the H5P editor
+      if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
+        shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
+          const library = H5P.libraryFromString(interaction.action.library);
+          const machineName = library.machineName;
+          if (machineName === 'H5P.GoToScene') {
+            const nextSceneId = interaction.action.params.nextSceneId;
+            const nextSceneIcon = this.props.sceneIcons.find(scene => {
+              return scene.id === nextSceneId;
+            });
+            const oldNextSceneIcon = prevProps.sceneIcons.find(scene => {
+              return scene.id === nextSceneId;
+            });
 
-          const hasChangedIcon = nextSceneIcon
-            && oldNextSceneIcon
-            && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
-          if (hasChangedIcon) {
-            return true;
+            const hasChangedIcon = nextSceneIcon
+              && oldNextSceneIcon
+              && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
+            if (hasChangedIcon) {
+              return true;
+            }
           }
-        }
-        return false;
-      });
-    }
-
-    if (shouldUpdateInteractionHotspots) {
-      this.addInteractionHotspots(this.props.sceneParams.interactions);
-
-      if (!hasChangedVisibility) {
-        return;
+          return false;
+        });
       }
-    }
 
-    // Check if active state was transitioned
-    if (!hasChangedVisibility) {
-      return;
-    }
-
-    // Toggle activity for scene
-    if (this.props.isActive) {
-      // Asynchronously update the DOM so that it's not blocking rendering
-      // of load screen
-      setTimeout(() => {
-        if (this.sceneRef.current) {
-          while (this.sceneRef.current.firstChild) {
-            this.sceneRef.current.removeChild(this.sceneRef.current.firstChild);
-          }
-        }
-        this.sceneRef.current.appendChild(this.scene.element);
-        this.scene.resize(this.context.getRatio());
-        this.scene.startRendering();
-        if (!prevProps.isActive) {
-          this.scene.focus();
-        }
-      }, 0);
-    }
-    else {
-      this.setState({
-        isWaitingForNextScene: true,
-      });
+      if (shouldUpdateInteractionHotspots) {
+        this.addInteractionHotspots(this.props.threeSixty, this.props.sceneParams.interactions);
+      }
     }
   }
 
@@ -431,15 +446,8 @@ export default class ThreeSixtyScene extends React.Component {
    * React -
    */
   render() {
-    const isLoadingNextScene = this.props.sceneId
-      === this.props.sceneWaitingForLoad;
-    if (!this.props.isActive && !isLoadingNextScene) {
+    if (!this.props.isActive) {
       return null;
-    }
-
-    const loadingOverlayClasses = ['loading-overlay'];
-    if (!this.state.hasInitialized) {
-      loadingOverlayClasses.push('no-opacity');
     }
 
     return (
@@ -449,8 +457,8 @@ export default class ThreeSixtyScene extends React.Component {
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
         />
         {
-          (!this.state.hasInitialized || isLoadingNextScene) &&
-          <div className={loadingOverlayClasses.join(' ')}>
+          (!this.state.isRendered) &&
+          <div className='loading-overlay'>
             <div className='loading-wrapper'>
               <div className='loading-image-wrapper'>
                 <img src={loading} alt='loading' />

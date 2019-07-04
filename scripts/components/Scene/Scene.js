@@ -37,12 +37,13 @@ export default class Scene extends React.Component {
 
     return (
       <ThreeSixtyScene
+        threeSixty={this.props.threeSixty}
         isActive={this.props.isActive}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         nextFocus={ this.props.nextFocus }
         sceneIcons={this.props.sceneIcons}
         sceneParams={this.props.sceneParams}
-        addScene={this.props.addScene.bind(this)}
+        addThreeSixty={ this.props.addThreeSixty }
         imageSrc={this.props.imageSrc}
         navigateToScene={this.props.navigateToScene.bind(this)}
         forceStartCamera={this.props.forceStartCamera}
