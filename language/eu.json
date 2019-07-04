@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Hiru Irudiak Editorea",
+      "fields": [
+        {
+          "label": "Eszenak",
+          "entity": "Eszena",
+          "field": {
+            "fields": [
+              {
+                "label": "Eszena-mota",
+                "options": [
+                  {
+                    "label": "360 irudia"
+                  },
+                  {
+                    "label": "Irudi estatikoa"
+                  }
+                ]
+              },
+              {
+                "label": "Erakutsi \"Atzera\" botoia",
+                "description": "Erakutsi aurreko eszenara joateko botoia"
+              },
+              {
+                "label": "Eszenaren ID bakarra",
+                "description": "Bakarra izan behar du, eszena artean nabigatzeko erabiltzen da"
+              },
+              {
+                "label": "Eszenaren izenburua",
+                "description": "Egileentzako eszena identifikatzeko erabiltzen da"
+              },
+              {
+                "label": "Eszenaren atzeko planoa"
+              },
+              {
+                "label": "Eszenaren deskribapena",
+                "description": "Erabiltzaileari eszena deskribatzen dion testua"
+              },
+              {
+                "label": "Kameraren hasierako kokapena",
+                "description": "Kamerak hasieran izango duen kokapena"
+              },
+              {
+                "label": "Elkarrekintzak",
+                "entity": "Elkarrekintza",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Elkarrekintza",
+                      "description": "Elkarrekintza bat duen leku-beroa"
+                    },
+                    {
+                      "label": "Elkarrekintzaren kokapena",
+                      "description": "Elkarrekintzaren hasierako kokapena"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Botoi-estiloa",
+                "description": "Erabaki eszena hau erakutsiko duten botoiek izango duten itxura. Estatikoak diren eta beste eszenetara ez doazen eszenetan, \"Informazio gehiago\" botoia gomendatzen dugu.",
+                "options": [
+                  {
+                    "label": "Eszena berria (gezia)"
+                  },
+                  {
+                    "label": "Informazio gehiago (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Audio-pista",
+                "description": "Gehitu audio-pista bat eszena honentzat."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Hasierako eszenaren IDa"
+        },
+        {
+          "label": "Audio-pista"
+        }
+      ]
+    },
+    {
+      "label": "Portaeraren ezarpenak",
+      "description": "Aukera hauek munduaren portaera kontrolatzen utziko dizute.",
+      "fields": [
+        {
+          "label": "Audio globala",
+          "description": "Gehitu eszena guztietan modu lehenetsian eskuragarri egongo den audio-pista bat."
+        },
+        {
+          "label": "Eszenaren renderizatze-kalitatea",
+          "description": "Aukeratu eszena bat renderizatzeko erabiliko diren segmentuen zabalera eta altuera. Honek eszenaren kalitatean eragin zuzena dauka, saiatu zaitez kalitatea igotzen eszena pixka bat  \"pixelatua\" edo \"lausoa\" ikusten bada. Kontuan izan renderizatze-kalitate handiagoak kargatze-denbora gehiago behar duela.",
+          "options": [
+            {
+              "label": "Kalitate handia (128x128)"
+            },
+            {
+              "label": "Kalitate ertaina (64x64)"
+            },
+            {
+              "label": "Kalitate baxua (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
