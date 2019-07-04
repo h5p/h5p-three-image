@@ -76,7 +76,6 @@ export default class AudioButton extends React.Component {
       if (id === this.props.isPlaying) {
         // Pause and reset the player
         player.pause();
-        player.currentTime = 0;
       }
       else {
         // Start the playback!
@@ -117,7 +116,6 @@ export default class AudioButton extends React.Component {
         if (lastPlayer) {
           // Pause and reset the last player
           lastPlayer.pause();
-          lastPlayer.currentTime = 0;
         }
       }
     }
@@ -133,7 +131,6 @@ export default class AudioButton extends React.Component {
         if (isPlayer) {
           // Pause and reset last player
           isPlayer.pause();
-          isPlayer.currentTime = 0;
         }
 
         // and start the current player
