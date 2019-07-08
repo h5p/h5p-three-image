@@ -39,7 +39,7 @@
                 "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
               {
-                "label": "Kameran aloitussijainti	",
+                "label": "Kameran aloitussijainti",
                 "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
               },
               {
@@ -95,7 +95,7 @@
         },
         {
           "label": "Dioraaman laatu",
-          "description": "Valitse dioraaman esittämiseen tarkoitettujen korkeus- ja pituus segmenttien lukumäärä. Tämä vaikuttaa suoraan dioraaman kuvanlaatuun, jos laatu on mielestäsi "palikkamainen" tai aaltoileva niin kokeile korottaa laatua. Mitä parempi laatu sitä kauemmin kuvan lataaminen kestää.",
+          "description": "Valitse dioraaman esittämiseen tarkoitettujen korkeus- ja pituus segmenttien lukumäärä. Tämä vaikuttaa suoraan dioraaman kuvanlaatuun, jos laatu on mielestäsi \"palikkamainen\" tai aaltoileva niin kokeile korottaa laatua. Mitä parempi laatu sitä kauemmin kuvan lataaminen kestää.",
           "options": [
             {
               "label": "Hyvä laatu (128x128)"
