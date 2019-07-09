@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Three Image Editor",
+      "fields": [
+        {
+          "label": "Dioraamat",
+          "entity": "Dioraama",
+          "field": {
+            "fields": [
+              {
+                "label": "Dioraaman tyyppi",
+                "options": [
+                  {
+                    "label": "360-kuva"
+                  },
+                  {
+                    "label": "Staattinen kuva"
+                  }
+                ]
+              },
+              {
+                "label": "Näytä \"Back\" painike",
+                "description": "Näyttää painikkeen jolla voit palata takaisin päin edelliseen dioraamaan."
+              },
+              {
+                "label": "Unuukki dioraaman id",
+                "description": "Tämän täytyy olla uniikkitunnisten jota käytetään dioraamojen välillä liikkumiseen."
+              },
+              {
+                "label": "Dioraaman otsikko",
+                "description": "Hallinoijat tunnistavat dioraaman täsät otsikosta"
+              },
+              {
+                "label": "Dioraaman taustakuva"
+              },
+              {
+                "label": "Dioraaman kuvausteksti",
+                "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
+              },
+              {
+                "label": "Kameran aloitussijainti",
+                "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
+              },
+              {
+                "label": "Interaktiiviset elementit",
+                "entity": "Interaktio",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaktio",
+                      "description": "Hotspot interaktiolla"
+                    },
+                    {
+                      "label": "Interaktio sijainnilla",
+                      "description": "Interaktion sijainnin kaltevuus- ja kallistukulma"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Painikkeiden tyyli",
+                "description": "Voit määrittää minkätyylisiä painikkeita käytät tässä kyseisessä dioraamassa. Staattisille kuville jotka eivät johda toisiin dioraamoihin suosittelemme \"More information\" painikkeita.",
+                "options": [
+                  {
+                    "label": "Seuraava dioraama (nuoli-ikoni)"
+                  },
+                  {
+                    "label": "Lisätietojapainike (plusmerkki)"
+                  }
+                ]
+              },
+              {
+                "label": "Ääniraita",
+                "description": "Lisää tälläe dioraamalle oma ääniraita"
+              }
+            ]
+          }
+        },
+        {
+          "label": "Aloittavan dioraaman id"
+        },
+        {
+          "label": "Ääniraita"
+        }
+      ]
+    },
+    {
+      "label": "Lisäasetukset",
+      "description": "Nämä asetukset määrittelevät kuinka tehtävä käyttäytyy",
+      "fields": [
+        {
+          "label": "Globaali ääniraita",
+          "description": "Lisää ääniraita joka soitetaan oletuksena jokaisen dioraaman taustalla."
+        },
+        {
+          "label": "Dioraaman laatu",
+          "description": "Valitse dioraaman esittämiseen tarkoitettujen korkeus- ja pituus segmenttien lukumäärä. Tämä vaikuttaa suoraan dioraaman kuvanlaatuun, jos laatu on mielestäsi \"palikkamainen\" tai aaltoileva niin kokeile korottaa laatua. Mitä parempi laatu sitä kauemmin kuvan lataaminen kestää.",
+          "options": [
+            {
+              "label": "Hyvä laatu (128x128)"
+            },
+            {
+              "label": "Keskilaatu (64x64)"
+            },
+            {
+              "label": "Matala laatu (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
