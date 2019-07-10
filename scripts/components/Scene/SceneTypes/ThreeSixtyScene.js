@@ -221,11 +221,7 @@ export default class ThreeSixtyScene extends React.Component {
    * @param {Array} interactions
    */
   addInteractionHotspots(threeSixty, interactions) {
-    if (!interactions) {
-      return;
-    }
-
-    const list = interactions.map(this.createInteraction);
+    const list = interactions ? interactions.map(this.createInteraction) : [];
     this.renderedInteractions = list.length;
 
     ReactDOM.render(
