@@ -1,9 +1,4 @@
 .h5p-text-content > .h5p-image {
-  position: initial;
-  top: initial;
-  left: initial;
-  transform: initial;
-  zoom: initial;
   height: 100%;
   width: 100%;
 }
@@ -18,7 +13,4 @@
 .h5p-text-dialog.h5p-video .h5p-text-content {
   height: 100%;
   overflow: hidden;
-}
-.h5p-image > .h5p-text-content {
-  overflow: initial;
 }
