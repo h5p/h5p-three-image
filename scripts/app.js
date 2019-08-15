@@ -39,7 +39,6 @@ H5P.ThreeImage = (function () {
     this.params = params;
     this.contentId = contentId;
     this.extras = extras;
-    this.threeJsScenes = [];
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
 
     const setCurrentSceneId = (sceneId) => {
@@ -54,19 +53,12 @@ H5P.ThreeImage = (function () {
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
-            addScene={addScene}
+            addThreeSixty={ tS => this.threeSixty = tS }
             onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
         wrapper
       );
-    };
-
-    const addScene = (scene, sceneId) => {
-      this.threeJsScenes.push({
-        scene: scene,
-        sceneId: sceneId,
-      });
     };
 
     const createElements = () => {
@@ -85,7 +77,7 @@ H5P.ThreeImage = (function () {
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
-            addScene={addScene}
+            addThreeSixty={ tS => this.threeSixty = tS }
             onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
@@ -111,7 +103,7 @@ H5P.ThreeImage = (function () {
             forceStartCamera={this.forceStartCamera}
             currentScene={this.currentScene}
             setCurrentSceneId={setCurrentSceneId}
-            addScene={addScene}
+            addThreeSixty={ tS => this.threeSixty = tS }
             onSetCameraPos={setCameraPosition}
           />
         </H5PContext.Provider>,
@@ -156,20 +148,12 @@ H5P.ThreeImage = (function () {
       }
 
       // Resize scene
-      if (this.currentScene === null) {
-        return;
-      }
-
-      const scene = this.threeJsScenes.find(scene => {
-        return scene.sceneId === this.currentScene;
-      });
-
-      if (!scene) {
+      if (this.currentScene === null || !this.threeSixty) {
         return;
       }
 
       const updatedRect = wrapper.getBoundingClientRect();
-      scene.scene.resize(updatedRect.width / updatedRect.height);
+      this.threeSixty.resize(updatedRect.width / updatedRect.height);
     });
 
     this.getRatio = () => {
@@ -178,41 +162,31 @@ H5P.ThreeImage = (function () {
     }
 
     const setCameraPosition = (cameraPosition, focus) => {
-      if (this.currentScene === null) {
+      if (this.currentScene === null || !this.threeSixty) {
         return;
       }
 
-      const scene = this.threeJsScenes.find(scene => {
-        return scene.sceneId === this.currentScene;
-      }).scene;
-
       const [yaw, pitch] = cameraPosition.split(',');
-      scene.setCameraPosition(parseFloat(yaw), parseFloat(pitch));
+      this.threeSixty.setCameraPosition(parseFloat(yaw), parseFloat(pitch));
       if (focus) {
-        scene.focus();
+        this.threeSixty.focus();
       }
     };
 
     this.getCamera = () => {
-      if (this.currentScene === null) {
+      if (this.currentScene === null || !this.threeSixty) {
         return;
       }
 
-      const scene = this.threeJsScenes.find(scene => {
-        return scene.sceneId === this.currentScene;
-      }).scene;
-
       return {
-        camera: scene.getCurrentPosition(),
-        fov: scene.getCurrentFov(),
+        camera: this.threeSixty.getCurrentPosition(),
+        fov: this.threeSixty.getCurrentFov(),
       };
     };
 
     this.setSceneRenderingQuality = (quality) => {
       const segments = sceneRenderingQualityMapping[quality];
-      this.threeJsScenes.forEach(scene => {
-        scene.scene.setRenderingQuality(segments);
-      });
+      this.threeSixty.setSegmentNumber(segments);
       this.sceneRenderingQuality = quality;
     };
   }

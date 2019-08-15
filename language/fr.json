@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editeur Three Image",
+      "fields": [
+        {
+          "label": "Scènes",
+          "entity": "Scene",
+          "field": {
+            "fields": [
+              {
+                "label": "Type de scène",
+                "options": [
+                  {
+                    "label": "Image à 360°"
+                  },
+                  {
+                    "label": "Image statique"
+                  }
+                ]
+              },
+              {
+                "label": "Afficher un bouton \"Retour\"",
+                "description": "Affichez un bouton pour revenir à la scène précédente"
+              },
+              {
+                "label": "Identifiant unique de la scène",
+                "description": "Doit être unique, utilisé pour naviguer entre les scènes"
+              },
+              {
+                "label": "Titre de la scène",
+                "description": "Utilisé pour identifier la scène"
+              },
+              {
+                "label": "Image de fond de la scène"
+              },
+              {
+                "label": "Description de la scène",
+                "description": "Un texte pour décirire la scène à l'utilisateur final"
+              },
+              {
+                "label": "Position initiale de la caméra",
+                "description": "Position de la caméra (pitch and yaw)"
+              },
+              {
+                "label": "Interactions",
+                "entity": "Interaction",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaction",
+                      "description": "Hotspot avec une interaction"
+                    },
+                    {
+                      "label": "Position de l'interaction",
+                      "description": "Position de l'interaction (pitch and yaw)"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Style du bouton",
+                "description": "Décidez à quoi devraient ressembler les boutons pointant vers cette scène. Pour les scènes statiques qui ne conduisent pas à de nouvelles scènes, nous vous recommandons le bouton \"Plus d'informations \".",
+                "options": [
+                  {
+                    "label": "Nouvelle scène (arrow)"
+                  },
+                  {
+                    "label": "Plus d'informations (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Piste audio",
+                "description": "Ajoutez une piste audio spécifique à cette scène."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Identifiant de la scène de début"
+        },
+        {
+          "label": "Piste audio"
+        }
+      ]
+    },
+    {
+      "label": "Paramètres comportementaux",
+      "description": "Ces options vous permettront de contrôler comment le monde doit se comporter.",
+      "fields": [
+        {
+          "label": "Piste audio globale",
+          "description": "Ajoutez une piste audio globale disponible par défaut pour toutes les scènes."
+        },
+        {
+          "label": "Qualité de rendu de la scène",
+          "description": "Choisissez la résolution pour le rendu d'une scène. Ceci affecte directement le niveau de qualité de la scène. Essayez d’augmenter la qualité si une scène a l’air figée ou si des \"vagues\" sont visibles dans les scènes. Notez qu'un rendu de meilleure qualité prend plus de temps à charger.",
+          "options": [
+            {
+              "label": "Haute qualité (128x128)"
+            },
+            {
+              "label": "Moyenne qualité (64x64)"
+            },
+            {
+              "label": "Basse qualité (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

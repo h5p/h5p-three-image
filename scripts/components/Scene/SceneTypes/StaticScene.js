@@ -329,7 +329,7 @@ export default class StaticScene extends React.Component {
             tabIndex='-1'
             alt={ this.props.sceneParams.scenename }
             className='image-scene'
-            src={this.props.imageSrc}
+            src={ H5P.getPath(this.props.imageSrc.path, this.context.contentId) }
             onLoad={this.onSceneLoaded.bind(this)}
             ref={this.imageElementRef}
           />

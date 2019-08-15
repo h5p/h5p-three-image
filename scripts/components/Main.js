@@ -15,6 +15,7 @@ export default class Main extends React.Component {
     this.audioPlayers = {};
 
     this.state = {
+      threeSixty: null,
       showingTextDialog: false,
       currentText: null,
       showingInteraction: false,
@@ -248,8 +249,11 @@ export default class Main extends React.Component {
     }));
   }
 
-  addScene(scene, sceneId) {
-    this.props.addScene(scene, sceneId);
+  addThreeSixty = (threeSixty) => {
+    this.props.addThreeSixty(threeSixty);
+    this.setState({
+      threeSixty: threeSixty
+    });
   }
 
   handleAudioIsPlaying = (id) => {
@@ -349,21 +353,17 @@ export default class Main extends React.Component {
         }
         {
           this.context.params.scenes.map(sceneParams => {
-            const imageSrc = H5P.getPath(
-              sceneParams.scenesrc.path,
-              this.context.contentId
-            );
-
             return (
               <Scene
                 key={sceneParams.sceneId}
+                threeSixty={this.state.threeSixty}
                 isActive={sceneParams.sceneId === this.props.currentScene}
                 isHiddenBehindOverlay={ isHiddenBehindOverlay }
                 sceneIcons={sceneIcons}
                 sceneParams={sceneParams}
                 nextFocus={ this.state.nextFocus }
-                addScene={this.addScene.bind(this)}
-                imageSrc={imageSrc}
+                addThreeSixty={ this.addThreeSixty }
+                imageSrc={sceneParams.scenesrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
