@@ -78,7 +78,8 @@
                 "p",
                 "br",
                 "strong",
-                "em"
+                "em",
+                "code"
               ]
             },
             {

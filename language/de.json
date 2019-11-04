@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editor für Virtuelle Touren",
+      "fields": [
+        {
+          "label": "Szenen",
+          "entity": "Szene",
+          "field": {
+            "fields": [
+              {
+                "label": "Szenenart",
+                "options": [
+                  {
+                    "label": "360°-Bild"
+                  },
+                  {
+                    "label": "Unbewegliches Bild"
+                  }
+                ]
+              },
+              {
+                "label": "\"Zurück\"-Button anzeigen",
+                "description": "Button anzeigen, um zur vorherigen Szene zurückzukehren"
+              },
+              {
+                "label": "Eindeutige Szenen-Id",
+                "description": "Muss eindeutig sein; wird verwendet um zwischen Szenen zu navigieren"
+              },
+              {
+                "label": "Titel der Szene",
+                "description": "Hilft Autoren dabei, die Szene zu identifizieren"
+              },
+              {
+                "label": "Hintergrund der Szene"
+              },
+              {
+                "label": "Beschreibung der Szene",
+                "description": "Ein Text, der die Szene für den Benutzer beschreibt"
+              },
+              {
+                "label": "Anfangs-Kameraposition",
+                "description": "Kameraposition in Winkelangabe (oben-unten und links-rechts)"
+              },
+              {
+                "label": "Interaktionen",
+                "entity": "Interaktion",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaktion",
+                      "description": "Hotspot mit einer Interaktion"
+                    },
+                    {
+                      "label": "Position der Interaktion",
+                      "description": "Position der Interaktion in Winkelangabe (oben-unten und links-rechts)"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Darstellungsweise der Buttons",
+                "description": "Lege fest, wie Buttons aussehen, die auf diese Szene verweisen. Für Szenen, die unbeweglich sind und nicht zu weiteren Szenen führen, empfiehlt sich die Option \"Mehr Informationen\".",
+                "options": [
+                  {
+                    "label": "Neue Szene (Pfeil)"
+                  },
+                  {
+                    "label": "Mehr Informationen (Plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Tonspur",
+                "description": "Füge eine Tonspur hinzu, die nur in dieser Szene gespielt wird."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Id der Startszene"
+        },
+        {
+          "label": "Tonspur"
+        }
+      ]
+    },
+    {
+      "label": "Verhaltenseinstellungen",
+      "description": "Diese Optionen legen fest, wie die Tour im Detail funktioniert.",
+      "fields": [
+        {
+          "label": "Tonspur für alle Szenen",
+          "description": "Füge eine Tonspur hinzu, die standardmäßig in allen Szenen gespielt wird."
+        },
+        {
+          "label": "Darstellungsqualität der Szenen",
+          "description": "Erlaubt die Anzahl der Segmente zu wählen, die bei der Darstellung der Szene verwendet werden sollen. Dies wirkt sich direkt auf die Darstellungsqualität aus. Erhöhe die Qualität, wenn eine Szene \"blockartig\" aussieht oder \"Wellen\" innerhalb der Szene auftreten. Höhere Qualitätsstufen führen zu längeren Ladezeiten.",
+          "options": [
+            {
+              "label": "Hohe Qualität (128x128)"
+            },
+            {
+              "label": "Mittlere Qualität (64x64)"
+            },
+            {
+              "label": "Niedrige Qualität (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
