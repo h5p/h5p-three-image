@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editor de três imagens",
+      "fields": [
+        {
+          "label": "Cenas",
+          "entity": "Cenas",
+          "field": {
+            "fields": [
+              {
+                "label": "Tipo de cena",
+                "options": [
+                  {
+                    "label": "Imagem 360"
+                  },
+                  {
+                    "label": "Imagem estática"
+                  }
+                ]
+              },
+              {
+                "label": "Mostrar o botão de \"Volta\"",
+                "description": "Mostra o botão para navegar a sua cena anterior"
+              },
+              {
+                "label": "Id único da cena",
+                "description": "Deve ser único, utilizado para navegação entre as cenas"
+              },
+              {
+                "label": "Titulo da cena",
+                "description": "Utilizado para identificar a cenas aos autores"
+              },
+              {
+                "label": "Fundo da cena"
+              },
+              {
+                "label": "Descrição da cena",
+                "description": "O texto que pode descrever a cena para o usuário final"
+              },
+              {
+                "label": "Posição da camera inicial",
+                "description": "Posição da camera em arfagem e guinada"
+              },
+              {
+                "label": "Interações",
+                "entity": "Interação",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interação",
+                      "description": "Ponto de acesso com interação"
+                    },
+                    {
+                      "label": "Posição de interação",
+                      "description": "Posição de interação com a arfagem e guinada"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Estilo de botão",
+                "description": "Decide como os botões que estão apontando para esta cena deverão parecer. Para cenas que são estáticas e não levam para novas cenas, nós recomendamos o botão \"Mais informações\".",
+                "options": [
+                  {
+                    "label": "Nova cena (flecha)"
+                  },
+                  {
+                    "label": "Mais informações (extra)"
+                  }
+                ]
+              },
+              {
+                "label": "Faixa de audio",
+                "description": "Adicione uma faixa de audio específica para esta cena."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Id da cena de inicio"
+        },
+        {
+          "label": "Faixa de audio"
+        }
+      ]
+    },
+    {
+      "label": "Configurações de comportamento",
+      "description": "Estas opções deixarão você controlar como o mundo se comporta.",
+      "fields": [
+        {
+          "label": "Audio global",
+          "description": "Adiciona uma faixa de audio que é disponível para todas as cenas por padrão."
+        },
+        {
+          "label": "Qualidade de renderização da cena",
+          "description": "Escolha o segmento de altura e largura para renderizar a cena. Isto diretamente afetará o nivel de qualidade da cena, tente aumentar a qualidade se uma cena parece \"quadradinha\" ou \"ondas\" são são vistas na cena. Perceba que quanto maior a qualidade maior o tempo para renderizar e carregar.",          
+          "options": [
+            {
+              "label": "Alta Qualidade (128x128)"
+            },
+            {
+              "label": "Qualidade Média (64x64)"
+            },
+            {
+              "label": "Baixa Qualidade (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
