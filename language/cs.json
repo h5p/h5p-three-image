@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editor tří obrázků",
+      "fields": [
+        {
+          "label": "Scény",
+          "entity": "Scéna",
+          "field": {
+            "fields": [
+              {
+                "label": "Typ scény",
+                "options": [
+                  {
+                    "label": "360 obázek"
+                  },
+                  {
+                    "label": "Statický obrázek"
+                  }
+                ]
+              },
+              {
+                "label": "Zobrazit tlačítko \"Zpět\" ",
+                "description": "Zobrazit tlačítko pro navigaci zpět na předchozí scénu"
+              },
+              {
+                "label": "Unikátní scéna id",
+                "description": "Musí být jedinečný, používá se pro navigaci mezi scénami"
+              },
+              {
+                "label": "Název scény",
+                "description": "Slouží k identifikaci scény pro autory"
+              },
+              {
+                "label": "Pozadí scény"
+              },
+              {
+                "label": "Popis scény",
+                "description": "Text, který může popsat scénu pro koncového uživatele"
+              },
+              {
+                "label": "Počáteční pozice kamery",
+                "description": "Pozice kamery v úhlu a sklonu"
+              },
+              {
+                "label": "Interakce",
+                "entity": "Interakce",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interakce",
+                      "description": "Aktivní body s interakcí"
+                    },
+                    {
+                      "label": "Interaction position",
+                      "description": "Interaction position in pitch and yaw"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Styp tlačítka",
+                "description": "Rozhodněte se, jak by měla vypadat tlačítka směřující k této scéně. Pro scény, které jsou statické a nevedou k novým scénám, doporučujeme tlačítko \"Více informací\" .",
+                "options": [
+                  {
+                    "label": "Nová scéna (šipka)"
+                  },
+                  {
+                    "label": "Více informací (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Zvuková stopa",
+                "description": "Přidat zvukovou stopu, která je specifická pro tuto scénu."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Start sceény id"
+        },
+        {
+          "label": "Zvuková stopa"
+        }
+      ]
+    },
+    {
+      "label": "Nastavení chování",
+      "description": "Tyto možnosti vám umožní řídit, jak se budou scény chovat.",
+      "fields": [
+        {
+          "label": "Globální zvuk",
+          "description": "Přidejte zvukovou stopu, která je ve výchozím nastavení dostupná pro všechny scény."
+        },
+        {
+          "label": "Kvalita vykreslování scén",
+          "description": "Vyberte velikost segmentů šířky a výšky použitých k vykreslení scény. To přímo ovlivňuje úroveň kvality scény, zkuste zvýšit kvalitu, pokud scéna vypadá tak, že jsou ve scénách vidět \"bloky \" nebo \"vlny \". Upozorňujeme, že načítání ve vyšší kvalitě trvá déle.",
+          "options": [
+            {
+              "label": "Vysoká kvalita (128x128)"
+            },
+            {
+              "label": "Střední kvalita (64x64)"
+            },
+            {
+              "label": "Nízká kvalita (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
