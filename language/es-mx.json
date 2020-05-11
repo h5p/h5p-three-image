@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editor del Tour Virtual",
+      "fields": [
+        {
+          "label": "Escenas",
+          "entity": "Escena",
+          "field": {
+            "fields": [
+              {
+                "label": "Tpo de escena",
+                "options": [
+                  {
+                    "label": "Imagen 360"
+                  },
+                  {
+                    "label": "Imagen estática"
+                  }
+                ]
+              },
+              {
+                "label": "Mostrar botón \"Retroceder\" ",
+                "description": "Mostrar botón para navegar de regreso a su escena anterior"
+              },
+              {
+                "label": "ID único de escena",
+                "description": "Debe ser único, usado para navegar entre escenas"
+              },
+              {
+                "label": "Título de Escena",
+                "description": "Usado para identificar la escena para autores"
+              },
+              {
+                "label": "Fondo de la Escena"
+              },
+              {
+                "label": "Descripción de la Escena",
+                "description": "Un texto que puede describir la escena para el usuario final"
+              },
+              {
+                "label": "Posición inicial de la cámara",
+                "description": "Posición de la cámara en in pitch y yaw"
+              },
+              {
+                "label": "Interacciones",
+                "entity": "Interacción",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interacción",
+                      "description": "Hotspot con una interacción"
+                    },
+                    {
+                      "label": "Posición de Interacción",
+                      "description": "Posición de interacción en pitch y yaw"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Estilo del botónutton style",
+                "description": "Decidir como deberían de verse los botones que apuntan a esta escena. Para escenas que sean estáticas y no conduzcan hacia nuevas escenas, recomendamos el botón de \"Más información\" .",
+                "options": [
+                  {
+                    "label": "Nueva escena (flecha)"
+                  },
+                  {
+                    "label": "Más información (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Pista de Audio",
+                "description": "Añadir una pista de audio que es específica para esta escena."
+              }
+            ]
+          }
+        },
+        {
+          "label": "ID inicar escena"
+        },
+        {
+          "label": "Pista de Audio"
+        }
+      ]
+    },
+    {
+      "label": "Configuraciones de Comportamiento",
+      "description": "Estas opciones le permitirán controolar como se comporta el mundo.",
+      "fields": [
+        {
+          "label": "Audio Global",
+          "description": "Añadir una pista de audio que está disponible para todas las escenas por defecto."
+        },
+        {
+          "label": "Calidad del renderizado de escena",
+          "description": "Elija la cantidad de segmentos de ancho y altura usados para renderizar una escena. Esto afecta directamente el nivel de calidad de la escena, intente aumentar la calidad si la escena se viera \"pixeleada\" o \"ondulaciones\" sean visibles dentro de las escenas. Tenga en cuenta que al renderizar a mayor calidad tomará más tiempo para cargar.",
+          "options": [
+            {
+              "label": "Alta Calidad (128x128)"
+            },
+            {
+              "label": "Media Calidad (64x64)"
+            },
+            {
+              "label": "Baja Calidad (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

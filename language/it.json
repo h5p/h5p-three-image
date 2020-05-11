@@ -12,7 +12,7 @@
                 "label": "Tipo di scena",
                 "options": [
                   {
-                    "label": "Immagine 360"
+                    "label": "Immagine 360°"
                   },
                   {
                     "label": "Immagine statica"
@@ -29,10 +29,10 @@
               },
               {
                 "label": "Titolo della scena",
-                "description": "Usato per identificare la scena per gli autori"
+                "description": "Usato per individuare la scena per gli autori"
               },
               {
-                "label": "Background della scena"
+                "label": "Sfondo della scena"
               },
               {
                 "label": "Descrizione della scena",
@@ -53,20 +53,20 @@
                     },
                     {
                       "label": "Posizione dell'interazione",
-                      "description": "Posizione dell'interazione in laterale e verticale"
+                      "description": "Rotazione laterale e verticale dell'interazione"
                     }
                   ]
                 }
               },
               {
-                "label": "Button style",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "label": "Stile del pulsante",
+                "description": "Decidi come dovrebbero apparire i pulsanti che puntano a questa scena. Per le scene statiche e che non portano a nuove scene, si consiglia il pulsante \"Ulteriori informazioni\"",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Nuova scena (freccia)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Ulteriori informazioni (più)"
                   }
                 ]
               },
@@ -87,15 +87,15 @@
     },
     {
       "label": "Impostazioni di esecuzione",
-      "description": "Queste opzioni ti permettono di controllare come si comporta il mondo",
+      "description": "Queste opzioni ti permettono di controllare il movimento del globo",
       "fields": [
         {
           "label": "Audio globale",
-          "description": "Aggiungi una traccia audio predefinita per tutte le scene."
+          "description": "Aggiungi una traccia audio predefinita per tutte le scene"
         },
         {
-          "label": "Qualità della resa di una scena",
-          "description": "Scegli larghezza e altezza dei segmenti usati per rappresentare una scena. Ciò ha effetto diretto sul livello della qualità della scena. Prova ad aumentare la qualità se una scena sembra  \"squadrata\" o se si vedono \"onde\" nelle scene. Nota che un rendering di qualità più alta impiega più tempo a caricare.",
+          "label": "Qualità di resa di una scena",
+          "description": "Scegli larghezza e altezza dei segmenti usati per rappresentare una scena. Ciò ha effetto diretto sulla qualità della scena. Prova ad aumentare la qualità se una scena ti sembra \"squadrata\" o se nelle scene compaiono \"onde\". NB. un rendering di qualità più alta impiega più tempo a caricare",
           "options": [
             {
               "label": "Alta qualità (128x128)"
