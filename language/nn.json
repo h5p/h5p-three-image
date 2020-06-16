@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Three Image Editor",
+      "fields": [
+        {
+          "label": "Scenes",
+          "entity": "Scene",
+          "field": {
+            "fields": [
+              {
+                "label": "Scene type",
+                "options": [
+                  {
+                    "label": "360 image"
+                  },
+                  {
+                    "label": "Static image"
+                  }
+                ]
+              },
+              {
+                "label": "Display \"Back\" button",
+                "description": "Display button for navigating back to your previous scene"
+              },
+              {
+                "label": "Unique scene id",
+                "description": "Must be unique, used for navigation between scenes"
+              },
+              {
+                "label": "Scene Title",
+                "description": "Used to identify the scene for authors"
+              },
+              {
+                "label": "Scene Background"
+              },
+              {
+                "label": "Scene Description",
+                "description": "A text that can describe the scene for the end-user"
+              },
+              {
+                "label": "Initial camera position",
+                "description": "Camera position in pitch and yaw"
+              },
+              {
+                "label": "Interactions",
+                "entity": "Interaction",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaction",
+                      "description": "Hotspot with an interaction"
+                    },
+                    {
+                      "label": "Interaction position",
+                      "description": "Interaction position in pitch and yaw"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Button style",
+                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "options": [
+                  {
+                    "label": "New scene (arrow)"
+                  },
+                  {
+                    "label": "More information (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Audio Track",
+                "description": "Add an audio track that's specific for this scene."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Start scene id"
+        },
+        {
+          "label": "Audio track"
+        }
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the world behaves.",
+      "fields": [
+        {
+          "label": "Global Audio",
+          "description": "Add an audio track that's available for all of the scenes by default."
+        },
+        {
+          "label": "Scene rendering quality",
+          "description": "Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
+          "options": [
+            {
+              "label": "High Quality (128x128)"
+            },
+            {
+              "label": "Medium Quality (64x64)"
+            },
+            {
+              "label": "Low Quality (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
