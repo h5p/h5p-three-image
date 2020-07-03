@@ -59,14 +59,14 @@
                 }
               },
               {
-                "label": "Button style",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "label": "Knopstijl",
+                "description": "Bepaal hoe knoppen die naar deze scène verwijzen eruit moeten zien. Voor scènes die statisch zijn en niet naar nieuwe scènes leiden, bevelen we de \"Meer informatie\" knop aan.",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Nieuwe scène (pijl)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Meer informatie (plus)"
                   }
                 ]
               },
@@ -90,7 +90,7 @@
       "description": "Met deze opties kun je bepalen hoe de interactie zich gedraagt.",
       "fields": [
         {
-          "label": "Globale audio",
+          "label": "Algemene audio",
           "description": "Voeg een audiobestand toe dat standaard beschikbaar is voor alle scènes."
         },
         {
