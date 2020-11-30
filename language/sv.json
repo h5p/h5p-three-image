@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Redigerare för Three Image",
+      "fields": [
+        {
+          "label": "Scener",
+          "entity": "Scen",
+          "field": {
+            "fields": [
+              {
+                "label": "Scen-typ",
+                "options": [
+                  {
+                    "label": "360 bild"
+                  },
+                  {
+                    "label": "Statisk bild"
+                  }
+                ]
+              },
+              {
+                "label": "Visa knapp \"Tillbaka\"",
+                "description": "Visa knapp för att navigera bakåt till din föregående scen"
+              },
+              {
+                "label": "Unikt scen-ID",
+                "description": "Måste vara unikt, används för navigering mellan scener"
+              },
+              {
+                "label": "Scen-titel",
+                "description": "Används för att identifiera scenen för kursskapare"
+              },
+              {
+                "label": "Scen-bakgrund"
+              },
+              {
+                "label": "Scen-beskrivning",
+                "description": "En text som kan beskriva scenen för slutanvändaren"
+              },
+              {
+                "label": "Initial kameraposition",
+                "description": "Kameraposition i pitch-and-yaw"
+              },
+              {
+                "label": "Interaktioner",
+                "entity": "Interaktion",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interaktion",
+                      "description": "Hotspot med en interaktion"
+                    },
+                    {
+                      "label": "Interaktions position",
+                      "description": "Interaktions position i pitch-and-yaw"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Knappformat",
+                "description": "Avgör hur knappar som visar på denna scen ska se ut. För scener som är statiska och inte leder till nya scener så rekommenderas knappen \"Mer information\".",
+                "options": [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ]
+              },
+              {
+                "label": "",
+                "description": ""
+              }
+            ]
+          }
+        },
+        {
+          "label": "ID för startscen"
+        },
+        {
+          "label": "Ljudspår"
+        }
+      ]
+    },
+    {
+      "label": "Beteende-inställningar",
+      "description": "Dessa inställningar avgör hur världen beter sig.",
+      "fields": [
+        {
+          "label": "Globalt ljud",
+          "description": "Lägg till ett ljudspår som är tillgängligt som standard för alla scener."
+        },
+        {
+          "label": "Renderingskvalitet för scen",
+          "description": "Välj hur många bredd- och höjdsegment som ska användas för att tolka (rendera) en scen. Detta har en direkt påverkan på kvalitetsnivån på scenen, pröva att öka kvaliteten om en scen ser \"rutig\" ut eller om \"vågor\" syns i scenerna. Notera att högre renderingskvalitet tar mer tid att ladda.",
+          "options": [
+            {
+              "label": "Hög kvalitet (128x128)"
+            },
+            {
+              "label": "Medium kvalitet (64x64)"
+            },
+            {
+              "label": "Låg kvalitet (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
