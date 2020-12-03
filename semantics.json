@@ -210,7 +210,7 @@
         "name": "labelPosition",
         "type": "select",
         "label": "Label position",
-        "description": "The default label position. The position may be overriden per interaction.",
+        "description": "The default label position. The position may be overriden per interaction",
         "options": [
           {
             "value": "right",
@@ -230,6 +230,13 @@
           }
         ],
         "default": "right"
+      },
+      {
+        "name": "showLabel",
+        "type": "boolean",
+        "label": "Display Labels",
+        "description": "If unchecked - labels will show only on mouse over",
+        "default": true
       }
     ]
   }
