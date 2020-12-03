@@ -205,6 +205,31 @@
           }
         ],
         "default": "high"
+      },
+      {
+        "name": "labelPosition",
+        "type": "select",
+        "label": "Label position",
+        "description": "The default label position. The position may be overriden per interaction.",
+        "options": [
+          {
+            "value": "right",
+            "label": "Right aligned"
+          },
+          {
+            "value": "left",
+            "label": "Left aligned"
+          },
+          {
+            "value": "top",
+            "label": "Top aligned"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom aligned"
+          }
+        ],
+        "default": "right"
       }
     ]
   }
