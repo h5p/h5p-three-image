@@ -114,6 +114,53 @@
                     ]
                   },
                   {
+                    "name": "label",
+                    "type": "group",
+                    "label": "Label settings",
+                    "importance": "low",
+                    "description": "A label that describes the icon.",
+                    "fields": [
+                      {
+                        "name": "labelText",
+                        "type": "text",
+                        "label": "Label",
+                        "description": "If left blank, the title will be used as a label"
+                      },
+                      {
+                        "name": "labelPosition",
+                        "type": "select",
+                        "label": "Label position",
+                        "description": "Choose where the label for interaction will appear",
+                        "options": [
+                          {
+                            "value": "right",
+                            "label": "Right aligned"
+                          },
+                          {
+                            "value": "left",
+                            "label": "Left aligned"
+                          },
+                          {
+                            "value": "top",
+                            "label": "Top aligned"
+                          },
+                          {
+                            "value": "bottom",
+                            "label": "Bottom aligned"
+                          }
+                        ],
+                        "default": "right"
+                      },
+                      {
+                        "name": "showLabel",
+                        "type": "boolean",
+                        "label": "Display Label",
+                        "description": "",
+                        "default": true
+                      }
+                    ]
+                  },
+                  {
                     "name": "interactionpos",
                     "type": "text",
                     "label": "Interaction position",
@@ -207,36 +254,45 @@
         "default": "high"
       },
       {
-        "name": "labelPosition",
-        "type": "select",
-        "label": "Label position",
-        "description": "The default label position. The position may be overriden per interaction",
-        "options": [
+        "name": "label",
+        "type": "group",
+        "label": "Label settings",
+        "importance": "low",
+        "description": "A label that describes the icon.",
+        "fields": [
           {
-            "value": "right",
-            "label": "Right aligned"
+            "name": "labelPosition",
+            "type": "select",
+            "label": "Label position",
+            "description": "The default label position. The position may be overriden per interaction",
+            "options": [
+              {
+                "value": "right",
+                "label": "Right aligned"
+              },
+              {
+                "value": "left",
+                "label": "Left aligned"
+              },
+              {
+                "value": "top",
+                "label": "Top aligned"
+              },
+              {
+                "value": "bottom",
+                "label": "Bottom aligned"
+              }
+            ],
+            "default": "right"
           },
           {
-            "value": "left",
-            "label": "Left aligned"
-          },
-          {
-            "value": "top",
-            "label": "Top aligned"
-          },
-          {
-            "value": "bottom",
-            "label": "Bottom aligned"
+            "name": "showLabel",
+            "type": "boolean",
+            "label": "Display Labels",
+            "description": "If unchecked - labels will show only on mouse over",
+            "default": true
           }
-        ],
-        "default": "right"
-      },
-      {
-        "name": "showLabel",
-        "type": "boolean",
-        "label": "Display Labels",
-        "description": "If unchecked - labels will show only on mouse over",
-        "default": true
+        ]
       }
     ]
   }
