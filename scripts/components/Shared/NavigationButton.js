@@ -288,6 +288,11 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
+    function createLabel(icon) {
+      if(icon === 'h5p-go-back-button') return;
+      return <div className='nav-label'>My label</div>
+    }
+
     return (
       <div
         ref={this.navButtonWrapper}
@@ -297,6 +302,7 @@ export default class NavigationButton extends React.Component {
         onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
+      {createLabel(this.props.icon, this.props.labelPosition)}
         <button
           ref={this.navButton}
           title={title}
