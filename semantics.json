@@ -124,6 +124,7 @@
                         "name": "labelText",
                         "type": "text",
                         "label": "Label",
+                        "optional": true,
                         "description": "If left blank, the title will be used as a label"
                       },
                       {

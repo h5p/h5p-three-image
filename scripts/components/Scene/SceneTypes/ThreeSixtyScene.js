@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavigationButton, {getIconFromInteraction} from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction, getLabelFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
 import loading from '../../../assets/loading.svg';
@@ -269,6 +269,7 @@ export default class ThreeSixtyScene extends React.Component {
           ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
         )}
         title={title}
+        label={label}
         buttonClasses={ className }
         icon={getIconFromInteraction(interaction, this.context.params.scenes)}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }

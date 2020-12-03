@@ -47,6 +47,10 @@ export const getIconFromInteraction = (interaction, scenes) => {
   return icon;
 };
 
+export const getLabelFromInteraction = (interaction) => {
+  return interaction.label
+};
+
 export default class NavigationButton extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +59,6 @@ export default class NavigationButton extends React.Component {
     this.navButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
-
     this.state = {
       isFocused: this.props.isFocused,
     };
@@ -288,12 +291,15 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
-    function createLabel(icon) {
-      if(icon === 'h5p-go-back-button') return;
-      return <div className='nav-label'>My label</div>
+
+    function createLabel(icon, label, title) {
+      if(!label || !label.showLabel || icon === 'h5p-go-back-button') return;
+      let labelText = label.labelText ? label.labelText : title;
+      return <div className='nav-label'>{labelText}</div>
     }
 
     return (
+
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
@@ -302,7 +308,7 @@ export default class NavigationButton extends React.Component {
         onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
-      {createLabel(this.props.icon, this.props.labelPosition)}
+      {createLabel(this.props.icon, this.props.label, title)}
         <button
           ref={this.navButton}
           title={title}

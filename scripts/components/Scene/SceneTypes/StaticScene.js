@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaticScene.scss';
-import NavigationButton, {getIconFromInteraction, Icons} from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons} from "../../Shared/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
@@ -385,6 +385,7 @@ export default class StaticScene extends React.Component {
                   key={index}
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
+                  label={getLabelFromInteraction(interaction)}
                   type={ 'interaction-' + index }
                   isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
                   nextFocus={ this.props.nextFocus }
