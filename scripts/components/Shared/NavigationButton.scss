@@ -1,6 +1,9 @@
 @import '../../styles/icons';
 @import '../../styles/colors';
 
+$labelPadding: 0.5em;
+$labelWidth: 8em;
+
 .nav-button-wrapper {
   position: absolute;
   display: inline-flex;
@@ -45,8 +48,50 @@
   border-radius: 3px;
   background: $labelBg;
   color: $labelColor;
-  padding-right: $labelPadding + ($buttonSize / 2);
-  margin-right: -$buttonSize / 2;
+  width: $labelWidth;
+
+  &-inner {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &.top {
+    position: absolute;
+    bottom: ($buttonSize / 4);
+    left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
+    .nav-label-inner {
+      margin-bottom: $buttonSize / 2;
+      text-align: center;
+    }
+  }
+
+  &.left {
+    margin-right: -($buttonSize / 2);
+    margin-top: ($buttonSize / 4);
+    .nav-label-inner {
+      padding-right: $buttonSize / 2;
+      text-align: left;
+    }
+  }
+
+  &.bottom {
+    margin-top: ($buttonSize / 2);
+    margin-right: -($labelWidth / 2) - ($buttonSize / 2) - 0.5em;
+    .nav-label-inner {
+      margin-top: $buttonSize / 2;
+      text-align: center;
+    }
+  }
+
+  &.right {
+    margin-right: -$labelWidth - $buttonSize;
+    margin-top: ($buttonSize / 4);
+    .nav-label-inner {
+      padding-left: $buttonSize / 2;
+      text-align: left;
+    }
+  }
 }
 
 .h5p-interaction-button .nav-button {
