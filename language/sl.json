@@ -52,6 +52,38 @@
                       "description": "Interaktivna točka"
                     },
                     {
+                      "label": "Label settings",
+                      "description": "A label that describes the icon.",
+                      "fields": [
+                        {
+                          "label": "Label",
+                          "description": "If left blank, the title will be used as a label"
+                        },
+                        {
+                          "label": "Label position",
+                          "description": "Choose where the label for interaction will appear",
+                          "options": [
+                            {
+                              "label": "Right aligned"
+                            },
+                            {
+                              "label": "Left aligned"
+                            },
+                            {
+                              "label": "Top aligned"
+                            },
+                            {
+                              "label": "Bottom aligned"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "Display Label",
+                          "description": ""
+                        }
+                      ]
+                    },
+                    {
                       "label": "Položaj interakcije",
                       "description": "Določitev položaja interakcije"
                     }
@@ -105,6 +137,34 @@
             },
             {
               "label": "Nizka kakovost (16x16)"
+            }
+          ]
+        },
+        {
+          "label": "Label settings",
+          "description": "A label that describes the icon.",
+          "fields": [
+            {
+              "label": "Label position",
+              "description": "The default label position. The position may be overriden per interaction",
+              "options": [
+                {
+                  "label": "Right aligned"
+                },
+                {
+                  "label": "Left aligned"
+                },
+                {
+                  "label": "Top aligned"
+                },
+                {
+                  "label": "Bottom aligned"
+                }
+              ]
+            },
+            {
+              "label": "Display Labels",
+              "description": "If unchecked - labels will show only on mouse over"
             }
           ]
         }
