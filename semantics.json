@@ -134,6 +134,10 @@
                         "description": "Choose where the label for interaction will appear",
                         "options": [
                           {
+                            "value": "inherit",
+                            "label": "Use behavioral setting"
+                          },
+                          {
                             "value": "right",
                             "label": "Right aligned"
                           },

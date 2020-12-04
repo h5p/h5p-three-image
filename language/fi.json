@@ -64,6 +64,9 @@
                           "description": "Choose where the label for interaction will appear",
                           "options": [
                             {
+                              "label": "Use behavioral setting"
+                            },
+                            {
                               "label": "Right aligned"
                             },
                             {
