@@ -269,7 +269,7 @@ export default class ThreeSixtyScene extends React.Component {
           ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
         )}
         title={title}
-        label={label}
+        label={getLabelFromInteraction(interaction)}
         buttonClasses={ className }
         icon={getIconFromInteraction(interaction, this.context.params.scenes)}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
