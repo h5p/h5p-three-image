@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
+import NavigationButtonLabel from "./NavigationButtonLabel";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -310,7 +311,7 @@ export default class NavigationButton extends React.Component {
         onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
-      {createLabel(this.props.icon, this.props.label, this.context.behavior.label, title)}
+      <NavigationButtonLabel icon={this.props.icon} label={this.props.label} globalLabel={this.context.behavior.label} title={title}/> 
         <button
           ref={this.navButton}
           title={title}
