@@ -10,31 +10,16 @@ export default class NavigationButtonLabel extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onClick.bind(this);
+
     this.navButtonLabel = React.createRef();
     this.state = {
-      isFocused: this.props.isFocused,
+      isExpanded: false
     };
   }
 
-
-  componentDidMount() {
-  }
-
-  componentDidUpdate(prevProps) {
-
-  }
-
-  componentWillUnmount() {
-  }
-
-
   onClick() {
-    const hasClickHandler = this.props.forceClickHandler
-      || !this.context.extras.isEditor;
-
-    if (hasClickHandler) {
-      this.props.clickHandler();
-    }
+    this.setState({isExpanded: !this.state.isExpanded});
   }
 
   onDoubleClick() {
@@ -46,14 +31,6 @@ export default class NavigationButtonLabel extends React.Component {
     });
   }
 
-  onMouseDown(e) {
-    const hasMouseDownHandler = this.context.extras.isEditor
-      && this.props.mouseDownHandler;
-
-    if (hasMouseDownHandler) {
-      this.props.mouseDownHandler(e);
-    }
-  }
 
   setFocus() {
     const isFocusable = this.context.extras.isEditor
@@ -89,11 +66,11 @@ export default class NavigationButtonLabel extends React.Component {
   render(props) {
       if(this.props.icon === 'h5p-go-back-button') return ""; // prevents rendering on the back button
       if(!this.props.label || !this.props.label.showLabel) return ""; // necessary as the variable doesn't get loaded in straight away.
-      let labelText = this.props.label.labelText ? this.props.label.labelText : this.props.title;
-      let labelPos = this.props.label.labelPosition === 'inherit' ? this.props.globalLabel.labelPosition : this.props.label.labelPosition;
-
+      const labelText = this.props.label.labelText ? this.props.label.labelText : this.props.title;
+      const labelPos = this.props.label.labelPosition === 'inherit' ? this.props.globalLabel.labelPosition : this.props.label.labelPosition;
+      const expanded = this.state.isExpanded === true ? 'expanded' : '';
     return (
-        <div className={`nav-label ${labelPos}`}>
+        <div onClick={this.onClick.bind(this)} className={`nav-label ${labelPos} ${expanded}`}>
           <div className='nav-label-inner'>{labelText}</div>
         </div>
     );

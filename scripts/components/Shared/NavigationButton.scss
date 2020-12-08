@@ -58,21 +58,52 @@ $labelWidth: 9em;
     white-space: nowrap;
     text-align: center;
   }
+  
+  &.expanded {
+    .nav-label-inner {
+      text-overflow: unset;
+      overflow: visible;
+      white-space: normal;
+    }
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    display: block;
+    border-width: 5px;
+    left: 0;
+  }
+
+  &:before {
+    border-color: #fff transparent transparent transparent;
+    bottom: -1.5em;
+  }
+
+  &:after {
+    border-color: #000 transparent transparent transparent;
+    bottom: calc(-1.5em + 1px);
+  }
 
   &.top {
     width: $labelWidth;
     bottom: ($buttonSize / 2);
-    left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
+    left: -($labelWidth / 2) + 1em;
 
     .nav-label-inner {
       margin-bottom: $buttonSize / 2;
+    } 
+
+    &:before, &:after {
+      left: 0;
     }
   }
 
   &.bottom {
     width: $labelWidth;
     top: ($buttonSize / 2);
-    left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
+    left: -($labelWidth / 2)  + 1em;
     .nav-label-inner {
       margin-top: $buttonSize / 2;
     }
@@ -85,6 +116,10 @@ $labelWidth: 9em;
       margin-right: $buttonSize / 2;
       text-align: left;
     }
+
+    &:before, &:after {
+      left: calc(50% - (#{$buttonSize} / 2));
+    }
   }
 
   &.right {
@@ -93,6 +128,10 @@ $labelWidth: 9em;
     .nav-label-inner {
       padding-left: $buttonSize / 2;
       text-align: left;
+    }
+
+    &:before, &:after {
+      left: calc(50% - (#{$buttonSize} / 2));
     }
   }
 }
