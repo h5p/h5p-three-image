@@ -41,7 +41,7 @@ $labelWidth: 9em;
 }
 
 .nav-label {
-  font-size: 1em;
+  font-size: 0.9em;
   min-width: 6em;
   max-width: $labelWidth;
   position: absolute;
@@ -56,32 +56,31 @@ $labelWidth: 9em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-align: center;
   }
 
   &.top {
     width: $labelWidth;
-    bottom: ($buttonSize / 4);
+    bottom: ($buttonSize / 2);
     left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
 
     .nav-label-inner {
       margin-bottom: $buttonSize / 2;
-      text-align: center;
     }
   }
 
   &.bottom {
     width: $labelWidth;
-    top: ($buttonSize / 4);
+    top: ($buttonSize / 2);
     left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
     .nav-label-inner {
       margin-top: $buttonSize / 2;
-      text-align: center;
     }
   }
 
   &.left {
     right: $buttonSize / 2;
-    top: ($buttonSize / 4);
+    top: 0.2em;
     .nav-label-inner {
       margin-right: $buttonSize / 2;
       text-align: left;
@@ -90,7 +89,7 @@ $labelWidth: 9em;
 
   &.right {
     left: $buttonSize / 2;
-    top: ($buttonSize / 4);
+    top: 0.2em;
     .nav-label-inner {
       padding-left: $buttonSize / 2;
       text-align: left;
