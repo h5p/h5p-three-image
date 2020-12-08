@@ -87,7 +87,6 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   render(props) {
-      console.log(this)
       if(this.props.icon === 'h5p-go-back-button') return ""; // prevents rendering on the back button
       if(!this.props.label || !this.props.label.showLabel) return ""; // necessary as the variable doesn't get loaded in straight away.
       let labelText = this.props.label.labelText ? this.props.label.labelText : this.props.title;

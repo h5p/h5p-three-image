@@ -292,7 +292,6 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
-
     return (
 
       <div
