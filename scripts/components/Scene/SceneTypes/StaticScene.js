@@ -270,6 +270,20 @@ export default class StaticScene extends React.Component {
     });
   }
 
+  // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
+  getInteractionTitle(action) {
+    const currentTitle = action.metadata.title;    
+
+    switch(currentTitle) {
+      case 'Untitled Text':
+        return action.params.text;
+      case "Untitled Image":
+        return action.params.alt;
+      default:
+        return currentTitle;
+    }
+  }
+
   getAdjustedInteractionPositions(posX, posY) {
     const interactionEm = 2.5;
     const wrapper = this.sceneWrapperRef.current;
@@ -367,10 +381,10 @@ export default class StaticScene extends React.Component {
                 }
               }
 
-              let title = interaction.action.metadata.title;
+              let title;
+              
               const library = H5P.libraryFromString(interaction.action.library);
               const machineName = library.machineName;
-
               const isGoToSceneInteraction = machineName === 'H5P.GoToScene';
               const scenes = this.context.params.scenes;
               if (isGoToSceneInteraction) {
@@ -378,6 +392,8 @@ export default class StaticScene extends React.Component {
                   return scene.sceneId === interaction.action.params.nextSceneId;
                 });
                 title = nextScene.scenename;
+              } else {
+                title = this.getInteractionTitle(interaction.action);
               }
 
               return (
