@@ -293,14 +293,6 @@ export default class NavigationButton extends React.Component {
     }
 
 
-    function createLabel(icon, label, globalLabel, title) {
-      if(icon === 'h5p-go-back-button') return; // prevents rendering on the back button
-      if(!label || !label.showLabel) return; // necessary as the variable doesn't get loaded in straight away.
-      let labelText = label.labelText ? label.labelText : title;
-      let labelPos = label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
-      return <div className={`nav-label ${labelPos}`}><div className='nav-label-inner'>{labelText}</div></div>
-    }
-
     return (
 
       <div
