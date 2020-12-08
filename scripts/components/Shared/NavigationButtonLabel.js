@@ -93,7 +93,9 @@ export default class NavigationButtonLabel extends React.Component {
       let labelPos = this.props.label.labelPosition === 'inherit' ? this.props.globalLabel.labelPosition : this.props.label.labelPosition;
 
     return (
-        <div className={`nav-label ${labelPos}`}><div className='nav-label-inner'>{labelText}</div></div>
+        <div className={`nav-label ${labelPos}`}>
+          <div className='nav-label-inner'>{labelText}</div>
+        </div>
     );
   }
 }
