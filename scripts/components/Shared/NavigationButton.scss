@@ -2,7 +2,7 @@
 @import '../../styles/colors';
 
 $labelPadding: 0.5em;
-$labelWidth: 8em;
+$labelWidth: 9em;
 
 .nav-button-wrapper {
   position: absolute;
@@ -42,13 +42,15 @@ $labelWidth: 8em;
 
 .nav-label {
   font-size: 1em;
+  min-width: 6em;
+  max-width: $labelWidth;
+  position: absolute;
   line-height: 1.5;
   padding: $labelPadding;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   border-radius: 3px;
   background: $labelBg;
   color: $labelColor;
-  width: $labelWidth;
 
   &-inner {
     text-overflow: ellipsis;
@@ -57,36 +59,38 @@ $labelWidth: 8em;
   }
 
   &.top {
-    position: absolute;
+    width: $labelWidth;
     bottom: ($buttonSize / 4);
     left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
+
     .nav-label-inner {
       margin-bottom: $buttonSize / 2;
       text-align: center;
     }
   }
 
-  &.left {
-    margin-right: -($buttonSize / 2);
-    margin-top: ($buttonSize / 4);
-    .nav-label-inner {
-      padding-right: $buttonSize / 2;
-      text-align: left;
-    }
-  }
-
   &.bottom {
-    margin-top: ($buttonSize / 2);
-    margin-right: -($labelWidth / 2) - ($buttonSize / 2) - 0.5em;
+    width: $labelWidth;
+    top: ($buttonSize / 4);
+    left: -($labelWidth / 2) + ($buttonSize / 2) - 0.5em;
     .nav-label-inner {
       margin-top: $buttonSize / 2;
       text-align: center;
     }
   }
 
+  &.left {
+    right: $buttonSize / 2;
+    top: ($buttonSize / 4);
+    .nav-label-inner {
+      margin-right: $buttonSize / 2;
+      text-align: left;
+    }
+  }
+
   &.right {
-    margin-right: -$labelWidth - $buttonSize;
-    margin-top: ($buttonSize / 4);
+    left: $buttonSize / 2;
+    top: ($buttonSize / 4);
     .nav-label-inner {
       padding-left: $buttonSize / 2;
       text-align: left;
