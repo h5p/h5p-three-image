@@ -28,10 +28,9 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   onClick() {
-    if(!this.state.expandable) {
+    if (!this.state.expandable) {
       return;
     }
-
     this.setState({isExpanded: !this.state.isExpanded});
   }
 
@@ -58,62 +57,63 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   isExpandable() {
-    if( !(!this.labelDiv || !this.labelDiv.current)) {
-      if(this.labelDiv.current.offsetWidth >= 114) {
-        this.setState({expandable: true})
-      }      
+    if (this.labelDiv.current.scrollWidth > this.labelDiv.current.offsetWidth) {
+      this.setState({expandable: true});
     }
   }
 
-  onDoubleClick() {
-    if (this.props.doubleClickHandler) {
-      this.props.doubleClickHandler();
-    }
-    this.setState({
-      isFocused: false,
-    });
-  }
+  // onDoubleClick() {
+  //   if (this.props.doubleClickHandler) {
+  //     this.props.doubleClickHandler();
+  //   }
+  //   this.setState({
+  //     isFocused: false,
+  //   });
+  // }
 
-  setFocus() {
-    const isFocusable = this.context.extras.isEditor
-      && this.navButtonWrapper
-      && this.navButtonWrapper.current;
-    if (isFocusable) {
-      this.navButtonWrapper.current.focus({
-        preventScroll: true
-      });
-    }
-  }
+  // setFocus() {
+  //   const isFocusable = this.context.extras.isEditor
+  //     && this.navButtonWrapper
+  //     && this.navButtonWrapper.current;
+  //   if (isFocusable) {
+  //     this.navButtonWrapper.current.focus({
+  //       preventScroll: true
+  //     });
+  //   }
+  // }
 
-  handleFocus = () => {
-    if (this.context.extras.isEditor) {
-      if (this.navButtonWrapper && this.navButtonWrapper.current) {
-        this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
-      }
-      return;
-    }
+  // handleFocus = () => {
+  //   if (this.context.extras.isEditor) {
+  //     if (this.navButtonWrapper && this.navButtonWrapper.current) {
+  //       this.navButtonWrapper.current.focus({
+  //         preventScroll: true
+  //       });
+  //     }
+  //     return;
+  //   }
 
-    if (!this.context.extras.isEditor && this.props.onFocus) {
-      if (this.skipFocus) {
-        this.skipFocus = false;
-      }
-      else {
-        this.props.onFocus();
-      }
-    }
-  }
+  //   if (!this.context.extras.isEditor && this.props.onFocus) {
+  //     if (this.skipFocus) {
+  //       this.skipFocus = false;
+  //     }
+  //     else {
+  //       this.props.onFocus();
+  //     }
+  //   }
+  // }
 
-  render(props) {
+  render() {
     const isExpanded = this.state.isExpanded === true ? 'expanded' : '';
     const canExpand = this.state.expandable === true ? 'can-expand' : '';
     return (
-      <div ref={this.labelDiv}
+      <div
         onClick={this.onClick.bind(this)}
         className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand}`}
       >
-        <div className='nav-label-inner'>{this.props.labelText}</div>
+        <div ref={this.labelDiv}
+          className='nav-label-inner'>
+          {this.props.labelText}
+        </div>
       </div>
     );
   }

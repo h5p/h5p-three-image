@@ -170,8 +170,8 @@ export default class NavigationButton extends React.Component {
       const el = this.navButtonWrapper.current;
       // We want this to run after the component is removed
       setTimeout(() => {
-          // Let parent know this element should be remove from the THREE world.
-          this.props.onUnmount(el);
+        // Let parent know this element should be remove from the THREE world.
+        this.props.onUnmount(el);
       }, 0);
     }
   }
@@ -297,14 +297,14 @@ export default class NavigationButton extends React.Component {
         return;
       }
       return  <NavigationButtonLabel
-                icon={this.props.icon}
-                label={this.props.label}
-                title={title}
-                labelText={getLabelText(this.props.label, title)}
-                labelPos={getLabelPos(this.props.label,this.context.behavior.label)}
-                onMount={this.props.onMount}
-              />;
-    }
+        icon={this.props.icon}
+        label={this.props.label}
+        title={title}
+        labelText={getLabelText(this.props.label, title)}
+        labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
+        onMount={this.props.onMount}
+      />;
+    };
 
     return (
 
