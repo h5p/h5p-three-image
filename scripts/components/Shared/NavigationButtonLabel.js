@@ -11,7 +11,6 @@ export const getLabelPos = (label, globalLabel) => {
 };
 
 export const getLabelText = (label, title) => {
-  console.log(label, title)
   return label.labelText ? label.labelText : title;
 };
 
@@ -21,9 +20,9 @@ export default class NavigationButtonLabel extends React.Component {
 
     this.onClick.bind(this);
 
-    this.navButtonLabel = React.createRef();
+    this.labelDiv = React.createRef();
     this.state = {
-      expandable: this.isExpandable(),
+      expandable: false,
       isExpanded: false
     };
   }
@@ -32,7 +31,38 @@ export default class NavigationButtonLabel extends React.Component {
     if(!this.state.expandable) {
       return;
     }
+
     this.setState({isExpanded: !this.state.isExpanded});
+  }
+
+  componentDidMount() {
+    // if (this.props.onMount) {
+    //   // Let parent know this element should be added to the THREE world.
+    //   this.props.onMount(this.navButtonWrapper.current);
+    // }
+
+    setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+      this.isExpandable();
+    }, 0);
+
+    // this.addFocusListener();
+    if (this.state.isFocused) {
+      // TODO: Would love to not have to rely on setTimeout here
+      //        but without it the element is not available.
+      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+        this.navButtonWrapper.current.focus({
+          preventScroll: true
+        });
+      }, 0);
+    }
+  }
+
+  isExpandable() {
+    if( !(!this.labelDiv || !this.labelDiv.current)) {
+      if(this.labelDiv.current.offsetWidth >= 114) {
+        this.setState({expandable: true})
+      }      
+    }
   }
 
   onDoubleClick() {
@@ -43,11 +73,6 @@ export default class NavigationButtonLabel extends React.Component {
       isFocused: false,
     });
   }
-
-  isExpandable() {
-    return true;
-  }
-
 
   setFocus() {
     const isFocusable = this.context.extras.isEditor
@@ -81,11 +106,13 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   render(props) {
-      const isExpanded = this.state.isExpanded === true ? 'expanded' : '';
-      const canExpand = this.state.expandable === true ? 'canExpand' : '';
-      console.log(this.props)
+    const isExpanded = this.state.isExpanded === true ? 'expanded' : '';
+    const canExpand = this.state.expandable === true ? 'can-expand' : '';
     return (
-      <div onClick={this.onClick.bind(this)} className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand}`}>
+      <div ref={this.labelDiv}
+        onClick={this.onClick.bind(this)}
+        className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand}`}
+      >
         <div className='nav-label-inner'>{this.props.labelText}</div>
       </div>
     );

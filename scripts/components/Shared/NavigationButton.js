@@ -293,7 +293,7 @@ export default class NavigationButton extends React.Component {
     }
 
     const renderLabel = () => {
-      if(this.props.icon === 'h5p-go-back-button'){
+      if (this.props.icon === 'h5p-go-back-button') {
         return;
       }
       return  <NavigationButtonLabel
@@ -302,7 +302,8 @@ export default class NavigationButton extends React.Component {
                 title={title}
                 labelText={getLabelText(this.props.label, title)}
                 labelPos={getLabelPos(this.props.label,this.context.behavior.label)}
-              /> 
+                onMount={this.props.onMount}
+              />;
     }
 
     return (
@@ -315,7 +316,7 @@ export default class NavigationButton extends React.Component {
         onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
-      {renderLabel()}
+        {renderLabel()}
         <button
           ref={this.navButton}
           title={title}

@@ -60,6 +60,7 @@ $labelWidth: 9em;
   }
   
   &.expanded {
+    min-width: $labelWidth;
     .nav-label-inner {
       text-overflow: unset;
       overflow: visible;
@@ -67,22 +68,27 @@ $labelWidth: 9em;
     }
   }
 
-  &.canExpand &:before,
-  &.canExpand &:after {
-    content: '';
+  &:before,
+  &:after {
+    content: ' ';
     position: absolute;
     border-style: solid;
-    display: block;
+    display: none;
     border-width: 5px;
     left: 0;
   }
 
-  &.canExpand &:before {
+  .nav-label.can-expand &:before,
+  .nav-label.can-expand &:after {
+    display: block;
+  }
+
+  .nav-label.can-expand &:before {
     border-color: #fff transparent transparent transparent;
     bottom: -1.5em;
   }
 
-  &.canExpand &:after {
+  .nav-label.can-expand &:after {
     border-color: #000 transparent transparent transparent;
     bottom: calc(-1.5em + 1px);
   }
