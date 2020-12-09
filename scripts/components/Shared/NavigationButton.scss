@@ -59,7 +59,7 @@ $labelWidth: 9em;
     text-align: center;
   }
   
-  &.expanded {
+  &.is-expanded {
     min-width: $labelWidth;
     .nav-label-inner {
       text-overflow: unset;
@@ -87,6 +87,17 @@ $labelWidth: 9em;
     border-color: #000 transparent transparent transparent;
     bottom: calc(-1.5em + 1px);
   }
+
+  &.can-expand.is-expanded:before {
+    border-color: transparent transparent #fff transparent;
+    bottom: -1.5em;
+  }
+
+  &.can-expand.is-expanded:after {
+    border-color: transparent transparent #000 transparent;
+    bottom: -1.5em;
+  }
+
 
   &.top {
     width: $labelWidth;

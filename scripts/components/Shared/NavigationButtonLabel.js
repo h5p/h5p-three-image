@@ -27,7 +27,8 @@ export default class NavigationButtonLabel extends React.Component {
     };
   }
 
-  onClick() {
+  onClick(e) {
+    e.stopPropagation();
     if (!this.state.expandable) {
       return;
     }
@@ -103,7 +104,7 @@ export default class NavigationButtonLabel extends React.Component {
   // }
 
   render() {
-    const isExpanded = this.state.isExpanded === true ? 'expanded' : '';
+    const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';
     const canExpand = this.state.expandable === true ? 'can-expand' : '';
     return (
       <div
