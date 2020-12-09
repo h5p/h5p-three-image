@@ -3,7 +3,16 @@ import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 
 export const getLabelFromInteraction = (interaction) => {
-  return interaction.label
+  return interaction.label;
+};
+
+export const getLabelPos = (label, globalLabel) => {
+  return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
+};
+
+export const getLabelText = (label, title) => {
+  console.log(label, title)
+  return label.labelText ? label.labelText : title;
 };
 
 export default class NavigationButtonLabel extends React.Component {
@@ -14,11 +23,15 @@ export default class NavigationButtonLabel extends React.Component {
 
     this.navButtonLabel = React.createRef();
     this.state = {
+      expandable: this.isExpandable(),
       isExpanded: false
     };
   }
 
   onClick() {
+    if(!this.state.expandable) {
+      return;
+    }
     this.setState({isExpanded: !this.state.isExpanded});
   }
 
@@ -29,6 +42,10 @@ export default class NavigationButtonLabel extends React.Component {
     this.setState({
       isFocused: false,
     });
+  }
+
+  isExpandable() {
+    return true;
   }
 
 
@@ -64,15 +81,13 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   render(props) {
-      if(this.props.icon === 'h5p-go-back-button') return ""; // prevents rendering on the back button
-      if(!this.props.label || !this.props.label.showLabel) return ""; // necessary as the variable doesn't get loaded in straight away.
-      const labelText = this.props.label.labelText ? this.props.label.labelText : this.props.title;
-      const labelPos = this.props.label.labelPosition === 'inherit' ? this.props.globalLabel.labelPosition : this.props.label.labelPosition;
-      const expanded = this.state.isExpanded === true ? 'expanded' : '';
+      const isExpanded = this.state.isExpanded === true ? 'expanded' : '';
+      const canExpand = this.state.expandable === true ? 'canExpand' : '';
+      console.log(this.props)
     return (
-        <div onClick={this.onClick.bind(this)} className={`nav-label ${labelPos} ${expanded}`}>
-          <div className='nav-label-inner'>{labelText}</div>
-        </div>
+      <div onClick={this.onClick.bind(this)} className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand}`}>
+        <div className='nav-label-inner'>{this.props.labelText}</div>
+      </div>
     );
   }
 }
