@@ -14,6 +14,10 @@ export const getLabelText = (label, title) => {
   return label.labelText ? label.labelText : title;
 };
 
+export const isHoverLabel = (label) => {
+  return !label.showLabel;
+};
+
 export default class NavigationButtonLabel extends React.Component {
   constructor(props) {
     super(props);
@@ -106,10 +110,11 @@ export default class NavigationButtonLabel extends React.Component {
   render() {
     const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';
     const canExpand = this.state.expandable === true ? 'can-expand' : '';
+    const hoverOnly = this.props.hoverOnly === true ? 'hover-only' : '';
     return (
       <div
         onClick={this.onClick.bind(this)}
-        className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand}`}
+        className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}
       >
         <div ref={this.labelDiv}
           className='nav-label-inner'>

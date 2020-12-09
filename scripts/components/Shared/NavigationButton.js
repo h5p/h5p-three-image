@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
-import NavigationButtonLabel, {getLabelPos, getLabelText} from "./NavigationButtonLabel";
+import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -304,11 +304,9 @@ export default class NavigationButton extends React.Component {
       >
         {this.props.icon !== 'h5p-go-back-button' && 
         <NavigationButtonLabel
-          icon={this.props.icon}
-          label={this.props.label}
-          title={title}
           labelText={getLabelText(this.props.label, title)}
           labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
+          hoverOnly={isHoverLabel(this.props.label)}
           onMount={this.props.onMount}
         />}
         <button

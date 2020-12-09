@@ -160,7 +160,7 @@
                         "name": "showLabel",
                         "type": "boolean",
                         "label": "Display Label",
-                        "description": "",
+                        "description": "If unchecked - labels will show only on mouse over",
                         "default": true
                       }
                     ]
