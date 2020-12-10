@@ -111,7 +111,8 @@ $labelWidth: 9em;
   &.top {
     width: $labelWidth;
     bottom: ($buttonSize / 2);
-    left: -($labelWidth / 2) + 1em;
+    transform: translateX(-50%);
+    left: 50%;
 
     .nav-label-inner {
       margin-bottom: $buttonSize / 2;
@@ -126,7 +127,8 @@ $labelWidth: 9em;
   &.bottom {
     width: $labelWidth;
     top: ($buttonSize / 2);
-    left: -($labelWidth / 2)  + 1em;
+    transform: translateX(-50%);
+    left: 50%;
     .nav-label-inner {
       margin-top: $buttonSize / 2;
     }
