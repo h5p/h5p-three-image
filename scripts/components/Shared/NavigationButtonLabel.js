@@ -111,6 +111,8 @@ export default class NavigationButtonLabel extends React.Component {
     const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';
     const canExpand = this.state.expandable === true ? 'can-expand' : '';
     const hoverOnly = this.props.hoverOnly === true ? 'hover-only' : '';
+    const isEditor = this.context.extras.isEditor;
+
     return (
       <div className='nav-label-container'>
         <div className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
@@ -118,7 +120,7 @@ export default class NavigationButtonLabel extends React.Component {
             className='nav-label-inner'>
             {this.props.labelText}
           </div>
-          {canExpand && <button className="nav-label-expand" onClick={this.onClick.bind(this)}>
+          {canExpand && <button className="nav-label-expand" tabIndex={isEditor ? '-1' : undefined} aria-label="expand-label"  onClick={this.onClick.bind(this) }>
             <div className="nav-label-expand-arrow"/>
           </button>}
         </div>
