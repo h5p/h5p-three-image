@@ -55,6 +55,7 @@ $labelWidth: 9em;
   border-radius: 3px;
   background: $labelBg;
   color: $labelColor;
+  border: 0;
 
   &-inner {
     text-overflow: ellipsis;
