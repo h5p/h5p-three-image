@@ -76,10 +76,15 @@ $labelWidth: 9em;
       white-space: normal;
     }
 
-    .nav-label-expand-arrow {
-      transform: rotate(180deg); /* Equal to rotateZ(45deg) */
-      margin-top: -10px;
-      margin-bottom: 10px;
+    .nav-label-expand-arrow:before,
+    .nav-label-expand-arrow:after {
+      transform: rotate(0deg);
+      top: -0.6em;
+    }
+
+    .nav-label-expand-arrow:before {
+      color: white;
+      top: calc(-0.6em - 2px);
     }
   }
 
@@ -90,31 +95,35 @@ $labelWidth: 9em;
     background: transparent;
     border: 0;
     border-radius: 50%;
-    padding: 5px;
+    padding: 0.8em;
 
     &:hover {
       background-color: white;
     }
 
     &-arrow {
-      border-style: solid;
-      display: block;
       position: relative;
-      border-width: 10px;
-      border-color: #fff transparent transparent transparent;
 
-      margin-top: 10px;
-      margin-bottom: -10px;
+      &:before,
+      &:after {
+        font-family: "360-image";
+        position: absolute;
+        left: -0.5em;
+        top: -0.4em;
+        transform: rotate(180deg);
+        font-size: 1.25em;
+        height: 1.025em;
+        content: $triangleArrow;
+        z-index: 1;
+      }
+
+      &:before {
+        color: white;
+        top: calc(-0.4em + 2px);
+      }
 
       &:after {
-        content: ' ';
-        position: absolute;
-        border-style: solid;
-        border-width: 10px;
-        border-color: #000 transparent transparent transparent;
-        transform: translateX(-50%);
-        left: 50%;
-        top: -12px;
+        color: black;
       }
     }
   }
