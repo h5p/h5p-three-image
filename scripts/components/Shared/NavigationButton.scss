@@ -75,37 +75,69 @@ $labelWidth: 9em;
       overflow: visible;
       white-space: normal;
     }
+
+    .nav-label-expand-arrow {
+      transform: rotate(180deg); /* Equal to rotateZ(45deg) */
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
   }
 
-  &.can-expand:before,
-  &.can-expand:after {
-    content: ' ';
-    position: absolute;
-    border-style: solid;
+  &-expand {
     display: block;
-    border-width: 5px;
-    left: 0;
+    position: absolute;
+    bottom: -2.5em;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 5px;
+
+    &:hover {
+      background-color: white;
+    }
+
+    &-arrow {
+      border-style: solid;
+      display: block;
+      position: relative;
+      border-width: 10px;
+      border-color: #fff transparent transparent transparent;
+
+      margin-top: 10px;
+      margin-bottom: -10px;
+
+      &:after {
+        content: ' ';
+        position: absolute;
+        border-style: solid;
+        border-width: 10px;
+        border-color: #000 transparent transparent transparent;
+        transform: translateX(-50%);
+        left: 50%;
+        top: -12px;
+      }
+    }
   }
 
-  &.can-expand:before {
-    border-color: #fff transparent transparent transparent;
-    bottom: -1.5em;
-  }
+  // &.can-expand:before,
+  // &.can-expand:after {
+  //   content: ' ';
+  //   position: absolute;
+  //   border-style: solid;
+  //   display: block;
+  //   border-width: 5px;
+  //   left: 0;
+  // }
 
-  &.can-expand:after {
-    border-color: #000 transparent transparent transparent;
-    bottom: calc(-1.5em + 1px);
-  }
+  // &.can-expand:before {
+  //   border-color: #fff transparent transparent transparent;
+  //   bottom: -1.5em;
+  // }
 
-  &.can-expand.is-expanded:before {
-    border-color: transparent transparent #fff transparent;
-    bottom: -1.5em;
-  }
-
-  &.can-expand.is-expanded:after {
-    border-color: transparent transparent #000 transparent;
-    bottom: -1.5em;
-  }
+  // &.can-expand:after {
+  //   border-color: #000 transparent transparent transparent;
+  //   bottom: calc(-1.5em + 1px);
+  // }
 
 
   &.top {
@@ -117,11 +149,6 @@ $labelWidth: 9em;
     .nav-label-inner {
       margin-bottom: $buttonSize / 2;
     } 
-
-    &:before,
-    &:after {
-      left: 0;
-    }
   }
 
   &.bottom {
@@ -129,6 +156,7 @@ $labelWidth: 9em;
     top: ($buttonSize / 2);
     transform: translateX(-50%);
     left: 50%;
+
     .nav-label-inner {
       margin-top: $buttonSize / 2;
     }
@@ -137,14 +165,15 @@ $labelWidth: 9em;
   &.left {
     right: $buttonSize / 2;
     top: 0.2em;
+
     .nav-label-inner {
       margin-right: $buttonSize / 2;
       text-align: left;
     }
 
-    &:before,
-    &:after {
-      left: calc(50% - (#{$buttonSize} / 2));
+    .nav-label-expand {
+      transform: translateX(-50%);
+      left: 50%;
     }
   }
 
@@ -156,9 +185,9 @@ $labelWidth: 9em;
       text-align: left;
     }
 
-    &:before,
-    &:after {
-      left: calc(50% - (#{$buttonSize} / 2));
+    .nav-label-expand {
+      transform: translateX(-50%);
+      left: 50%;
     }
   }
 }
