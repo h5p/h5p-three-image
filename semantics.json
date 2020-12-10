@@ -118,6 +118,7 @@
                     "type": "group",
                     "label": "Label settings",
                     "importance": "low",
+                    "expanded": true,
                     "description": "A label that describes the icon.",
                     "fields": [
                       {
@@ -263,6 +264,7 @@
         "type": "group",
         "label": "Label settings",
         "importance": "low",
+        "expanded": true,
         "description": "A label that describes the icon.",
         "fields": [
           {
