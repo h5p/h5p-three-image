@@ -78,13 +78,9 @@ $labelWidth: 9em;
 
     .nav-label-expand-arrow:before,
     .nav-label-expand-arrow:after {
-      transform: rotate(0deg);
-      top: -0.6em;
-    }
-
-    .nav-label-expand-arrow:before {
-      color: white;
-      top: calc(-0.6em - 2px);
+      transform: rotate(0deg) translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
     }
   }
 
@@ -96,9 +92,18 @@ $labelWidth: 9em;
     border: 0;
     border-radius: 50%;
     padding: 0.8em;
+    border: 1px solid transparent;
+
+    &:focus {
+      background-color: #000000;
+      box-shadow: 0 0px 10px 1px #373e94;
+      border: 1px dotted #ffffff;
+      outline: none;
+    }
 
     &:hover {
-      background-color: white;
+      background-color: #ffffff;
+      box-shadow: 0 0px 10px 1px #000000;
     }
 
     &-arrow {
@@ -108,22 +113,18 @@ $labelWidth: 9em;
       &:after {
         font-family: "360-image";
         position: absolute;
-        left: -0.5em;
-        top: -0.4em;
-        transform: rotate(180deg);
+        left: -50%;
+        top: -50%;
+        transform: rotate(180deg) translate(50%, 50%);
         font-size: 1.25em;
         height: 1.025em;
         content: $triangleArrow;
         z-index: 1;
+        color: #000000;
       }
 
       &:before {
-        color: white;
-        top: calc(-0.4em + 2px);
-      }
-
-      &:after {
-        color: black;
+        color: #ffffff;
       }
     }
   }
