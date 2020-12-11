@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "Three Image Editor",
+      "label": "Virtuaalikierrosten editori",
       "fields": [
         {
           "label": "Dioraamat",
@@ -24,12 +24,12 @@
                 "description": "Näyttää painikkeen jolla voit palata takaisin päin edelliseen dioraamaan."
               },
               {
-                "label": "Unuukki dioraaman id",
-                "description": "Tämän täytyy olla uniikkitunnisten jota käytetään dioraamojen välillä liikkumiseen."
+                "label": "Uniikki dioraaman id",
+                "description": "Tämän täytyy olla uniikki tunniste, jota käytetään dioraamojen välillä liikkumiseen."
               },
               {
                 "label": "Dioraaman otsikko",
-                "description": "Hallinoijat tunnistavat dioraaman täsät otsikosta"
+                "description": "Hallinoijat tunnistavat dioraaman tästä otsikosta"
               },
               {
                 "label": "Dioraaman taustakuva"
@@ -87,7 +87,7 @@
     },
     {
       "label": "Lisäasetukset",
-      "description": "Nämä asetukset määrittelevät kuinka tehtävä käyttäytyy",
+      "description": "Nämä asetukset määrittelevät kuinka tehtävä käyttäytyy.",
       "fields": [
         {
           "label": "Globaali ääniraita",
