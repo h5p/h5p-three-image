@@ -104,6 +104,19 @@ export default class ThreeSixtyScene extends React.Component {
     this.initializePointerLock(element);
   }
 
+    // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
+    getInteractionTitle(action) {
+      const currentTitle = action.metadata.title;    
+      switch(currentTitle) {
+        case 'Untitled Text':
+          return action.params.text;
+        case "Untitled Image":
+          return action.params.alt;
+        default:
+          return currentTitle;
+      }
+    }
+
   /**
    * TODO
    */
@@ -246,13 +259,15 @@ export default class ThreeSixtyScene extends React.Component {
       className.push('active');
     }
 
-    let title = interaction.action.metadata.title;
+    let title;
     const isGoToSceneInteraction = interaction.action.library.split(' ')[0] === 'H5P.GoToScene';
     if (isGoToSceneInteraction) {
       const gotoScene = this.context.params.scenes.find(scene => {
         return scene.sceneId === interaction.action.params.nextSceneId;
       });
       title = gotoScene.scenename; // Use scenename as title.
+    } else {
+      title = this.getInteractionTitle(interaction.action);
     }
 
     return (
