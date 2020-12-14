@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavigationButton.scss';
+import './NavigationButtonLabel.scss';
 import {H5PContext} from "../../context/H5PContext";
 
 export const getLabelFromInteraction = (interaction) => {
@@ -40,25 +41,9 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.props.onMount) {
-    //   // Let parent know this element should be added to the THREE world.
-    //   this.props.onMount(this.navButtonWrapper.current);
-    // }
-
-    setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+    setTimeout(() => {
       this.isExpandable();
     }, 0);
-
-    // this.addFocusListener();
-    if (this.state.isFocused) {
-      // TODO: Would love to not have to rely on setTimeout here
-      //        but without it the element is not available.
-      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
-        this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
-      }, 0);
-    }
   }
 
   isExpandable() {
@@ -66,46 +51,6 @@ export default class NavigationButtonLabel extends React.Component {
       this.setState({expandable: true});
     }
   }
-
-  // onDoubleClick() {
-  //   if (this.props.doubleClickHandler) {
-  //     this.props.doubleClickHandler();
-  //   }
-  //   this.setState({
-  //     isFocused: false,
-  //   });
-  // }
-
-  // setFocus() {
-  //   const isFocusable = this.context.extras.isEditor
-  //     && this.navButtonWrapper
-  //     && this.navButtonWrapper.current;
-  //   if (isFocusable) {
-  //     this.navButtonWrapper.current.focus({
-  //       preventScroll: true
-  //     });
-  //   }
-  // }
-
-  // handleFocus = () => {
-  //   if (this.context.extras.isEditor) {
-  //     if (this.navButtonWrapper && this.navButtonWrapper.current) {
-  //       this.navButtonWrapper.current.focus({
-  //         preventScroll: true
-  //       });
-  //     }
-  //     return;
-  //   }
-
-  //   if (!this.context.extras.isEditor && this.props.onFocus) {
-  //     if (this.skipFocus) {
-  //       this.skipFocus = false;
-  //     }
-  //     else {
-  //       this.props.onFocus();
-  //     }
-  //   }
-  // }
 
   render() {
     const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';

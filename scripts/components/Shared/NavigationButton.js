@@ -120,9 +120,7 @@ export default class NavigationButton extends React.Component {
 
     this.addFocusListener();
     if (this.state.isFocused) {
-      // TODO: Would love to not have to rely on setTimeout here
-      //        but without it the element is not available.
-      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+      setTimeout(() => {
         this.navButtonWrapper.current.focus({
           preventScroll: true
         });
