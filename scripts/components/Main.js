@@ -4,7 +4,6 @@ import Dialog from "./Dialog/Dialog";
 import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
 import './Main.scss';
-import '../styles/editor-customizations.scss';
 import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
