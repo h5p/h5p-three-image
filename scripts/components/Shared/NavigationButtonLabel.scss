@@ -16,12 +16,16 @@ $labelWidth: 9em;
   background: $labelBg;
   color: $labelColor;
   border: 0;
+  transition: max-height 1s linear;
+  max-height: 1.5em;
 
   &-inner {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
+    max-height: 1.5em;
+    transition: max-height 1s linear;
   }
 
   &.hover-only {
@@ -30,10 +34,12 @@ $labelWidth: 9em;
   
   &.is-expanded {
     min-width: $labelWidth;
+    max-height: 12em;
     .nav-label-inner {
       text-overflow: unset;
-      overflow: visible;
+      overflow: auto;
       white-space: normal;
+      max-height: 12em;
     }
 
     .nav-label-expand-arrow:before,
