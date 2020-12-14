@@ -1,0 +1,142 @@
+@import '../../styles/icons';
+@import '../../styles/colors';
+
+$labelPadding: 0.5em;
+$labelWidth: 9em;
+
+.nav-label {
+  font-size: 0.9em;
+  min-width: 6em;
+  max-width: $labelWidth;
+  position: absolute;
+  line-height: 1.5;
+  padding: $labelPadding;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  background: $labelBg;
+  color: $labelColor;
+  border: 0;
+
+  &-inner {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  &.hover-only {
+    display: none;
+  }
+  
+  &.is-expanded {
+    min-width: $labelWidth;
+    .nav-label-inner {
+      text-overflow: unset;
+      overflow: visible;
+      white-space: normal;
+    }
+
+    .nav-label-expand-arrow:before,
+    .nav-label-expand-arrow:after {
+      transform: rotate(0deg) translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  &-expand {
+    display: block;
+    position: absolute;
+    bottom: -2.5em;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.8em;
+    border: 1px solid transparent;
+
+    &:focus {
+      background-color: #000000;
+      box-shadow: 0 0px 10px 1px #373e94;
+      border: 1px dotted #ffffff;
+      outline: none;
+    }
+
+    &:hover {
+      background-color: #ffffff;
+      box-shadow: 0 0px 10px 1px #000000;
+    }
+
+    &-arrow {
+      position: relative;
+
+      &:before,
+      &:after {
+        font-family: "360-image";
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        transform: rotate(180deg) translate(50%, 50%);
+        font-size: 1.25em;
+        height: 1.025em;
+        content: $triangleArrow;
+        z-index: 1;
+        color: #000000;
+      }
+
+      &:before {
+        color: #ffffff;
+      }
+    }
+  }
+
+  &.top {
+    width: $labelWidth;
+    bottom: ($buttonSize / 2);
+    transform: translateX(-50%);
+    left: 50%;
+
+    .nav-label-inner {
+      margin-bottom: $buttonSize / 2;
+    } 
+  }
+
+  &.bottom {
+    width: $labelWidth;
+    top: ($buttonSize / 2);
+    transform: translateX(-50%);
+    left: 50%;
+
+    .nav-label-inner {
+      margin-top: $buttonSize / 2;
+    }
+  }
+
+  &.left {
+    right: $buttonSize / 2;
+    top: 0.2em;
+
+    .nav-label-inner {
+      margin-right: $buttonSize / 2;
+      text-align: left;
+    }
+
+    .nav-label-expand {
+      transform: translateX(-50%);
+      left: 50%;
+    }
+  }
+
+  &.right {
+    left: $buttonSize / 2;
+    top: 0.2em;
+    .nav-label-inner {
+      padding-left: $buttonSize / 2;
+      text-align: left;
+    }
+
+    .nav-label-expand {
+      transform: translateX(-50%);
+      left: 50%;
+    }
+  }
+}
