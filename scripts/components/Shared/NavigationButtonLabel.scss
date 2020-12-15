@@ -89,7 +89,7 @@ $labelWidth: 9em;
 }
 
 .nav-label {
-  transition: max-height 1s linear;
+  transition: height 0.5s linear;
   border-radius: 3px;
   background: $labelBg;
   color: $labelColor;
@@ -105,7 +105,6 @@ $labelWidth: 9em;
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
-    transition: max-height 1s linear;
   }
 
   &-expand {

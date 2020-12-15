@@ -73,7 +73,7 @@ export default class NavigationButtonLabel extends React.Component {
 
     return (
       <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
-        <div style={{maxHeight: this.state.divHeight}} className={`nav-label`}>
+        <div style={{height: this.state.divHeight}} className={`nav-label`}>
           <div ref={this.labelDivInner}
             className='nav-label-inner'>
             {this.props.labelText}
