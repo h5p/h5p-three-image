@@ -300,13 +300,6 @@ export default class NavigationButton extends React.Component {
         onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
-        {this.props.icon !== 'h5p-go-back-button' && 
-        <NavigationButtonLabel
-          labelText={getLabelText(this.props.label, title)}
-          labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
-          hoverOnly={isHoverLabel(this.props.label)}
-          onMount={this.props.onMount}
-        />}
         <button
           ref={this.navButton}
           title={title}
@@ -318,6 +311,13 @@ export default class NavigationButton extends React.Component {
           onMouseUp={this.setFocus.bind(this)}
         />
         {this.props.children}
+        {this.props.icon !== 'h5p-go-back-button' && 
+        <NavigationButtonLabel
+          labelText={getLabelText(this.props.label, title)}
+          labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
+          hoverOnly={isHoverLabel(this.props.label)}
+          onMount={this.props.onMount}
+        />}
       </div>
     );
   }
