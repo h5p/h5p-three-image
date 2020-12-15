@@ -2,7 +2,7 @@
 @import '../../styles/colors';
 
 $labelPadding: 0.5em;
-$labelWidth: 9em;
+$labelWidth: 11em;
 
 .nav-label-container {
 
@@ -19,10 +19,9 @@ $labelWidth: 9em;
     bottom: ($buttonSize / 2);
     transform: translateX(-50%);
     left: 50%;
-
-    .nav-label-inner {
-      margin-bottom: $buttonSize / 2;
-    } 
+    .nav-label {
+      padding-bottom: 1.5em;
+    }
   }
 
   &.bottom {
@@ -30,9 +29,8 @@ $labelWidth: 9em;
     top: ($buttonSize / 2);
     transform: translateX(-50%);
     left: 50%;
-
-    .nav-label-inner {
-      margin-top: $buttonSize / 2;
+    .nav-label {
+      padding-top: 1.5em;
     }
   }
 
@@ -40,9 +38,8 @@ $labelWidth: 9em;
     right: $buttonSize / 2;
     top: 0.2em;
 
-    .nav-label-inner {
-      margin-right: $buttonSize / 2;
-      text-align: left;
+    .nav-label {
+      padding-right: 1.5em;
     }
 
     .nav-label-expand {
@@ -54,9 +51,8 @@ $labelWidth: 9em;
   &.right {
     left: $buttonSize / 2;
     top: 0.2em;
-    .nav-label-inner {
-      padding-left: $buttonSize / 2;
-      text-align: left;
+    .nav-label {
+      padding-left: 1.5em;
     }
 
     .nav-label-expand {
@@ -109,7 +105,7 @@ $labelWidth: 9em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    text-align: center;
+    text-align: left;
   }
 
   &-expand {
