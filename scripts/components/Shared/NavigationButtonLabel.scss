@@ -76,6 +76,11 @@ $labelWidth: 9em;
       top: 50%;
       left: 50%;
     }
+
+    .nav-label-expand-arrow:before {
+      top: calc(-50% - 1px);
+    }
+
     .nav-label {
       min-width: $labelWidth;
       overflow: scroll;
@@ -148,6 +153,7 @@ $labelWidth: 9em;
 
       &:before {
         color: #ffffff;
+        top: calc(-50% + 1px);
       }
     }
   }
