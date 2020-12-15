@@ -4,95 +4,14 @@
 $labelPadding: 0.5em;
 $labelWidth: 9em;
 
-.nav-label {
-  font-size: 0.9em;
-  min-width: 6em;
-  max-width: $labelWidth;
+.nav-label-container {
+
   position: absolute;
-  line-height: 1.5;
-  padding: $labelPadding;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  border-radius: 3px;
-  background: $labelBg;
-  color: $labelColor;
   border: 0;
-  transition: max-height 1s linear;
-  max-height: 1.5em;
 
-  &-inner {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    text-align: center;
-    max-height: 1.5em;
-    transition: max-height 1s linear;
-  }
-
-  &.hover-only {
-    display: none;
-  }
-  
-  &.is-expanded {
-    min-width: $labelWidth;
-    max-height: 12em;
-    .nav-label-inner {
-      text-overflow: unset;
-      overflow: auto;
-      white-space: normal;
-      max-height: 12em;
-    }
-
-    .nav-label-expand-arrow:before,
-    .nav-label-expand-arrow:after {
-      transform: rotate(0deg) translate(-50%,-50%);
-      top: 50%;
-      left: 50%;
-    }
-  }
-
-  &-expand {
-    display: block;
-    position: absolute;
-    bottom: -2.5em;
-    background: transparent;
-    border: 0;
-    border-radius: 50%;
-    padding: 0.8em;
-    border: 1px solid transparent;
-
-    &:focus {
-      background-color: #000000;
-      box-shadow: 0 0px 10px 1px #373e94;
-      border: 1px dotted #ffffff;
-      outline: none;
-    }
-
-    &:hover {
-      background-color: #ffffff;
-      box-shadow: 0 0px 10px 1px #000000;
-    }
-
-    &-arrow {
-      position: relative;
-
-      &:before,
-      &:after {
-        font-family: "360-image";
-        position: absolute;
-        left: -50%;
-        top: -50%;
-        transform: rotate(180deg) translate(50%, 50%);
-        font-size: 1.25em;
-        height: 1.025em;
-        content: $triangleArrow;
-        z-index: 1;
-        color: #000000;
-      }
-
-      &:before {
-        color: #ffffff;
-      }
-    }
+  &.can-expand {
+    min-width: 9em;
   }
 
   &.top {
@@ -143,6 +62,94 @@ $labelWidth: 9em;
     .nav-label-expand {
       transform: translateX(-50%);
       left: 50%;
+    }
+  }
+
+  &.hover-only .nav-label {
+    display: none;
+  }
+  
+  &.is-expanded {
+    .nav-label-expand-arrow:before,
+    .nav-label-expand-arrow:after {
+      transform: rotate(0deg) translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+    }
+    .nav-label {
+      min-width: $labelWidth;
+      overflow: scroll;
+      .nav-label-inner {
+        text-overflow: unset;
+        overflow: auto;
+        white-space: normal;
+      }
+    }
+  }
+}
+
+.nav-label {
+  transition: max-height 1s linear;
+  border-radius: 3px;
+  background: $labelBg;
+  color: $labelColor;
+  line-height: 1.5;
+  padding: $labelPadding;
+  overflow: hidden;
+  font-size: 0.9em;
+  min-width: 6em;
+  max-width: $labelWidth;
+
+  &-inner {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    transition: max-height 1s linear;
+  }
+
+  &-expand {
+    display: block;
+    position: absolute;
+    bottom: -2.5em;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.8em;
+    border: 1px solid transparent;
+
+    &:focus {
+      background-color: #000000;
+      box-shadow: 0 0px 10px 1px #373e94;
+      border: 1px dotted #ffffff;
+      outline: none;
+    }
+
+    &:hover {
+      background-color: #ffffff;
+      box-shadow: 0 0px 10px 1px #000000;
+    }
+
+    &-arrow {
+      position: relative;
+
+      &:before,
+      &:after {
+        font-family: "360-image";
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        transform: rotate(180deg) translate(50%, 50%);
+        font-size: 1.25em;
+        height: 1.025em;
+        content: $triangleArrow;
+        z-index: 1;
+        color: #000000;
+      }
+
+      &:before {
+        color: #ffffff;
+      }
     }
   }
 }

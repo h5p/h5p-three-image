@@ -24,11 +24,11 @@ export default class NavigationButtonLabel extends React.Component {
     super(props);
 
     this.onClick.bind(this);
-
-    this.labelDiv = React.createRef();
+    this.labelDivInner = React.createRef();
     this.state = {
       expandable: false,
-      isExpanded: false
+      isExpanded: false,
+      divHeight: '1.5em'
     };
   }
 
@@ -37,7 +37,20 @@ export default class NavigationButtonLabel extends React.Component {
     if (!this.state.expandable) {
       return;
     }
+
+
+    // This is done seperatly to ensure new height gets calculated
     this.setState({isExpanded: !this.state.isExpanded});
+
+    if(!this.state.isExpanded) {
+      setTimeout(() => {
+        this.setState({divHeight: window.getComputedStyle(this.labelDivInner.current).height})
+      }, 0);
+    } else {
+      setTimeout(() => {
+        this.setState({divHeight: '1.5em'})
+      }, 0);
+    }
   }
 
   componentDidMount() {
@@ -47,7 +60,7 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   isExpandable() {
-    if (this.labelDiv.current.scrollWidth > this.labelDiv.current.offsetWidth) {
+    if (this.labelDivInner.current.scrollWidth > this.labelDivInner.current.offsetWidth) {
       this.setState({expandable: true});
     }
   }
@@ -59,17 +72,16 @@ export default class NavigationButtonLabel extends React.Component {
     const isEditor = this.context.extras.isEditor;
 
     return (
-      <div className='nav-label-container'>
-        <div className={`nav-label ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
-          <div ref={this.labelDiv}
+      <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
+        <div style={{maxHeight: this.state.divHeight}} className={`nav-label`}>
+          <div ref={this.labelDivInner}
             className='nav-label-inner'>
             {this.props.labelText}
           </div>
-          {canExpand && <button className="nav-label-expand" tabIndex={isEditor ? '-1' : undefined} aria-label="expand-label"  onClick={this.onClick.bind(this) }>
+        </div>
+        {canExpand && <button className="nav-label-expand" tabIndex={isEditor ? '-1' : undefined} aria-label="expand-label"  onClick={this.onClick.bind(this) }>
             <div className="nav-label-expand-arrow"/>
           </button>}
-        </div>
-        
       </div>
     );
   }
