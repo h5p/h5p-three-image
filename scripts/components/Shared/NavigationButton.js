@@ -315,7 +315,7 @@ export default class NavigationButton extends React.Component {
         <NavigationButtonLabel
           labelText={getLabelText(this.props.label, title)}
           labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
-          hoverOnly={isHoverLabel(this.props.label)}
+          hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
           onMount={this.props.onMount}
         />}
       </div>
