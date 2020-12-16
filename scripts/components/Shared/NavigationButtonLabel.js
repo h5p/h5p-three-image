@@ -38,7 +38,6 @@ export default class NavigationButtonLabel extends React.Component {
       return;
     }
 
-
     // This is done seperatly to ensure new height gets calculated
     this.setState({isExpanded: !this.state.isExpanded});
 
@@ -53,16 +52,23 @@ export default class NavigationButtonLabel extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+      if(this.props !== prevProps) {
+        this.setState({expandable: this.isExpandable()}); 
+      }
+  }
+
   componentDidMount() {
     setTimeout(() => {
-      this.isExpandable();
+      this.setState({expandable: this.isExpandable()});
     }, 0);
   }
 
   isExpandable() {
     if (this.labelDivInner.current.scrollWidth > this.labelDivInner.current.offsetWidth) {
-      this.setState({expandable: true});
+      return true;
     }
+    return false;
   }
 
   render() {
