@@ -49,19 +49,15 @@
                   "fields": [
                     {
                       "label": "Interacción",
-                      "description": "Hotspot con una interacción"
-                    },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon.",
+                      "description": "Hotspot con una interacción",
                       "fields": [
                         {
                           "label": "Label",
-                          "description": "If left blank, the title will be used as a label"
+                          "description": "If left blank we'll try to use the title as a label"
                         },
                         {
                           "label": "Label position",
-                          "description": "Choose where the label for interaction will appear",
+                          "description": "Choose where the label should appear",
                           "options": [
                             {
                               "label": "Use behavioral setting"
@@ -82,9 +78,24 @@
                         },
                         {
                           "label": "Display Label",
-                          "description": ""
+                          "description": "If hidden - labels will show only on mouse over",
+                          "options": [
+                            {
+                              "label": "Use behavioral setting"
+                            },
+                            {
+                              "label": "Show"
+                            },
+                            {
+                              "label": "Hide"
+                            }
+                          ]
                         }
                       ]
+                    },
+                    {
+                      "label": "Label settings",
+                      "description": "A label that describes the icon."
                     },
                     {
                       "label": "Posición de Interacción",

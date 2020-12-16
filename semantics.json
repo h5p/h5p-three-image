@@ -140,14 +140,28 @@
                             "label": "Bottom aligned"
                           }
                         ],
-                        "default": "right"
+                        "default": "inherit"
                       },
                       {
                         "name": "showLabel",
-                        "type": "boolean",
+                        "type": "select",
                         "label": "Display Label",
-                        "description": "If unchecked - labels will show only on mouse over",
-                        "default": true
+                        "description": "If hidden - labels will show only on mouse over",
+                        "options": [
+                          {
+                            "value": "inherit",
+                            "label": "Use behavioral setting"
+                          },
+                          {
+                            "value": "show",
+                            "label": "Show"
+                          },
+                          {
+                            "value": "hide",
+                            "label": "Hide"
+                          }
+                        ],
+                        "default": "inherit"
                       }
                     ]
                   },
