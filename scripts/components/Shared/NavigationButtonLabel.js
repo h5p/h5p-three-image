@@ -12,7 +12,7 @@ export const getLabelPos = (label, globalLabel) => {
 };
 
 export const getLabelText = (label, title) => {
-  return label.labelText ? label.labelText : title;
+  return label && label.labelText ? label.labelText : title;
 };
 
 export const isHoverLabel = (label) => {
