@@ -15,8 +15,8 @@ export const getLabelText = (label, title) => {
   return label && label.labelText ? label.labelText : title;
 };
 
-export const isHoverLabel = (label) => {
-  return !label.showLabel;
+export const isHoverLabel = (label, globalLabel) => {
+  return !(label.showLabel === 'inherit' ? globalLabel.showLabel : label.labelPosition);
 };
 
 export default class NavigationButtonLabel extends React.Component {
@@ -41,21 +41,22 @@ export default class NavigationButtonLabel extends React.Component {
     // This is done seperatly to ensure new height gets calculated
     this.setState({isExpanded: !this.state.isExpanded});
 
-    if(!this.state.isExpanded) {
+    if (!this.state.isExpanded) {
       setTimeout(() => {
-        this.setState({divHeight: window.getComputedStyle(this.labelDivInner.current).height})
+        this.setState({divHeight: window.getComputedStyle(this.labelDivInner.current).height});
       }, 0);
-    } else {
+    }
+    else {
       setTimeout(() => {
-        this.setState({divHeight: '1.5em'})
+        this.setState({divHeight: '1.5em'});
       }, 0);
     }
   }
 
   componentDidUpdate(prevProps) {
-      if(this.props !== prevProps) {
-        this.setState({expandable: this.isExpandable()}); 
-      }
+    if (this.props !== prevProps) {
+      this.setState({expandable: this.isExpandable()}); 
+    }
   }
 
   componentDidMount() {
@@ -86,8 +87,8 @@ export default class NavigationButtonLabel extends React.Component {
           </div>
         </div>
         {canExpand && <button className="nav-label-expand" tabIndex={isEditor ? '-1' : undefined} aria-label="expand-label"  onClick={this.onClick.bind(this) }>
-            <div className="nav-label-expand-arrow"/>
-          </button>}
+          <div className="nav-label-expand-arrow"/>
+        </button>}
       </div>
     );
   }

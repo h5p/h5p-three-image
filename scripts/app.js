@@ -87,7 +87,8 @@ H5P.ThreeImage = (function () {
 
     this.reDraw = (forceStartScreen = this.currentScene) => {
       const sceneRenderingQuality = this.behavior.sceneRenderingQuality;
-      if (sceneRenderingQuality !== this.sceneRenderingQuality) {
+      if (sceneRenderingQuality !== this.sceneRenderingQuality
+        && this.threeSixty) {
         this.setSceneRenderingQuality(sceneRenderingQuality);
       }
 
@@ -159,7 +160,7 @@ H5P.ThreeImage = (function () {
     this.getRatio = () => {
       const rect = wrapper.getBoundingClientRect();
       return (rect.width / rect.height);
-    }
+    };
 
     const setCameraPosition = (cameraPosition, focus) => {
       if (this.currentScene === null || !this.threeSixty) {
