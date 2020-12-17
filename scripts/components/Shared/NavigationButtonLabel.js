@@ -16,7 +16,7 @@ export const getLabelText = (label, title) => {
 };
 
 export const isHoverLabel = (label, globalLabel) => {
-  return !(label.showLabel === 'inherit' ? globalLabel.showLabel : label.labelPosition);
+  return !(label.showLabel === 'inherit' ? globalLabel.showLabel : label.showLabel);
 };
 
 export default class NavigationButtonLabel extends React.Component {
