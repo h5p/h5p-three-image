@@ -67,7 +67,7 @@ export default class NavigationButtonLabel extends React.Component {
 
   isExpandable() {
     let isExpanded = 0;
-    if (this.state.isExpanded === true) {
+    if (this.state.isExpanded) {
       isExpanded = 1;
     }
 
