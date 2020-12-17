@@ -66,7 +66,12 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   isExpandable() {
-    if (this.labelDivInner.current.scrollWidth > this.labelDivInner.current.offsetWidth) {
+    let isExpanded = 0;
+    if (this.state.isExpanded === true) {
+      isExpanded = 1;
+    }
+
+    if (this.labelDivInner.current.scrollWidth + isExpanded > this.labelDivInner.current.offsetWidth) {
       return true;
     }
     return false;
