@@ -30,7 +30,8 @@ H5P.ThreeImage = (function () {
       sceneDescription: 'Scene Description', // TODO: Add to semantics.json
       resetCamera: 'Reset Camera', // TODO: Add to semantics.json
       submitDialog: 'Submit Dialog', // TODO: Add to semantics.jso
-      closeDialog: 'Close Dialog' // TODO: Add to semantics.jso
+      closeDialog: 'Close Dialog', // TODO: Add to semantics.jso,
+      expandButtonAriaLabel: 'Expand the visual button label'
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {

@@ -302,7 +302,7 @@ export default class NavigationButton extends React.Component {
       >
         <button
           ref={this.navButton}
-          title={title}
+          title={getLabelText(this.props.label, title)}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
