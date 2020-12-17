@@ -105,7 +105,7 @@ $labelWidth: 11em;
 
     .nav-label {
       min-width: $labelWidth;
-      overflow: scroll;
+      overflow: auto;
       .nav-label-inner {
         text-overflow: unset;
         overflow: auto;
