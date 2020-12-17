@@ -81,8 +81,16 @@ $labelWidth: 11em;
     }
   }
 
-  &.hover-only .nav-label {
+  &.hover-only {
     display: none;
+    .nav-label {
+      height: unset !important;
+    }
+    .nav-label-inner {
+      text-overflow: unset;
+      overflow: auto;
+      white-space: normal;
+    }
   }
   
   &.is-expanded {

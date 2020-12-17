@@ -9,7 +9,7 @@ $labelWidth: 9em;
   display: inline-flex;
 }
 
-.nav-button-wrapper:hover .nav-label.hover-only {
+.nav-button-wrapper:hover .nav-label-container.hover-only {
   display: block;
 } 
 
@@ -46,6 +46,16 @@ $labelWidth: 9em;
 
 .nav-button-wrapper.three-sixty .nav-label {
     font-size: 1.8em;
+}
+
+.nav-button-wrapper {
+  &:hover {
+    z-index: 2;
+  }
+
+  &.dragging {
+    z-index: 5;
+  }
 }
 
 .h5p-interaction-button .nav-button {
