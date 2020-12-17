@@ -365,6 +365,10 @@ export default class StaticScene extends React.Component {
                 buttonClasses.push('active');
               }
 
+              if (this.state.draggingInteractionIndex === index) {
+                buttonClasses.push('dragging');
+              }
+
               if (posX > 91.5) {
                 buttonClasses.push('left-aligned');
               }

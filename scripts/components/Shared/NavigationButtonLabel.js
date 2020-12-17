@@ -16,7 +16,7 @@ export const getLabelText = (label, title) => {
 };
 
 export const isHoverLabel = (label, globalLabel) => {
-  return !(label.showLabel === 'inherit' ? globalLabel.showLabel : label.labelPosition);
+  return !(label.showLabel === 'inherit' ? globalLabel.showLabel : label.showLabel);
 };
 
 export default class NavigationButtonLabel extends React.Component {
@@ -28,8 +28,9 @@ export default class NavigationButtonLabel extends React.Component {
     this.state = {
       expandable: false,
       isExpanded: false,
-      divHeight: '1.5em'
+      divHeight: this.props.hoverOnly === true ? 'unset' : '1.5em'
     };
+
   }
 
   onClick(e) {
@@ -67,7 +68,7 @@ export default class NavigationButtonLabel extends React.Component {
 
   isExpandable() {
     let isExpanded = 0;
-    if (this.state.isExpanded === true) {
+    if (this.state.isExpanded) {
       isExpanded = 1;
     }
 

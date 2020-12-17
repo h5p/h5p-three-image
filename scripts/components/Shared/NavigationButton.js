@@ -259,19 +259,16 @@ export default class NavigationButton extends React.Component {
       'nav-button-wrapper',
     ];
 
-    if (this.navButtonWrapper && this.navButtonWrapper.current) {
-      const wrapper = this.navButtonWrapper.current;
-      if (wrapper.classList.contains('dragging')) {
-        wrapperClasses.push('dragging');
-      }
-    }
-
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
     }
 
     if (this.props.icon) {
       wrapperClasses.push(this.props.icon);
+    }
+
+    if (this.state.isMouseOver) {
+      wrapperClasses.push('hover');
     }
 
     // only apply custom focus if we have children that are shown on focus

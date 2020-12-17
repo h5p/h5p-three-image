@@ -27,19 +27,19 @@ $labelWidth: 11em;
       top: -2em;
       &-arrow:before,
       &-arrow:after {
-          transform: rotate(0deg) translate(-50%,-50%) !important;
+          transform: rotate(0deg) translate(-50%,-50%);
       }
-      &-arrow-before {
-        top: calc(-50% + 1px);
+      &-arrow:before {
+        top: calc(-50% - 1px);
       }
     }
     &.is-expanded .nav-label-expand .nav-label-expand-arrow {
       &:before, 
       &:after {
-        transform: rotate(180deg) translate(50%, 50%) !important;
+        transform: rotate(180deg) translate(50%, 50%);
       }
       &:before {
-        top: calc(-50% - 1px);
+        top: calc(-50% + 1px);
       }
     }
   }
@@ -81,8 +81,14 @@ $labelWidth: 11em;
     }
   }
 
-  &.hover-only .nav-label {
+  &.hover-only {
     display: none;
+
+    .nav-label-inner {
+      text-overflow: unset;
+      overflow: auto;
+      white-space: normal;
+    }
   }
   
   &.is-expanded {
@@ -99,7 +105,7 @@ $labelWidth: 11em;
 
     .nav-label {
       min-width: $labelWidth;
-      overflow: scroll;
+      overflow: auto;
       .nav-label-inner {
         text-overflow: unset;
         overflow: auto;
