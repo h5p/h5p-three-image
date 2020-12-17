@@ -22,6 +22,26 @@ $labelWidth: 11em;
     .nav-label {
       padding-bottom: 1.5em;
     }
+    .nav-label-expand {
+      bottom: unset;
+      top: -2em;
+      &-arrow:before,
+      &-arrow:after {
+          transform: rotate(0deg) translate(-50%,-50%) !important;
+      }
+      &-arrow-before {
+        top: calc(-50% + 1px);
+      }
+    }
+    &.is-expanded .nav-label-expand .nav-label-expand-arrow {
+      &:before, 
+      &:after {
+        transform: rotate(180deg) translate(50%, 50%) !important;
+      }
+      &:before {
+        top: calc(-50% - 1px);
+      }
+    }
   }
 
   &.bottom {
