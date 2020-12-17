@@ -28,8 +28,9 @@ export default class NavigationButtonLabel extends React.Component {
     this.state = {
       expandable: false,
       isExpanded: false,
-      divHeight: '1.5em'
+      divHeight: this.props.hoverOnly === true ? 'unset' : '1.5em'
     };
+
   }
 
   onClick(e) {
