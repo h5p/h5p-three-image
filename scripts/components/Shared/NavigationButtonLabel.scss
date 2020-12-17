@@ -29,8 +29,8 @@ $labelWidth: 11em;
       &-arrow:after {
           transform: rotate(0deg) translate(-50%,-50%) !important;
       }
-      &-arrow-before {
-        top: calc(-50% + 1px);
+      &-arrow:before {
+        top: calc(-50% - 1px) !important;
       }
     }
     &.is-expanded .nav-label-expand .nav-label-expand-arrow {
@@ -39,7 +39,7 @@ $labelWidth: 11em;
         transform: rotate(180deg) translate(50%, 50%) !important;
       }
       &:before {
-        top: calc(-50% - 1px);
+        top: calc(-50% + 1px) !important;
       }
     }
   }
