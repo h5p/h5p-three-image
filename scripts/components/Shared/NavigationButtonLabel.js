@@ -87,8 +87,8 @@ export default class NavigationButtonLabel extends React.Component {
       <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
         <div style={{height: this.state.divHeight}} className={`nav-label`}>
           <div ref={this.labelDivInner}
-            className='nav-label-inner'>
-            {this.props.labelText}
+            className='nav-label-inner' dangerouslySetInnerHTML={{ __html: this.props.labelText}}>
+           
           </div>
         </div>
         {canExpand && <button className="nav-label-expand" tabIndex={isEditor ? '-1' : undefined} aria-label="expand-label"  onClick={this.onClick.bind(this) }>
