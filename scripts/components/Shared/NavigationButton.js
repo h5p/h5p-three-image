@@ -58,6 +58,7 @@ export default class NavigationButton extends React.Component {
 
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
+    this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onLabelFocus = this.onLabelFocus.bind(this);
@@ -103,13 +104,14 @@ export default class NavigationButton extends React.Component {
     const navButton = this.navButton
       && this.navButton.current;
 
-    if (navButton && navButton.contains(e.relatedTarget)) {
-      // Clicked target is child of button wrapper, don't blur
-      this.navButton.current.focus({
+    if (navButton && navButton.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+      // Clicked target is child of button wrapper and not the expandButton, don't blur
+      this.navButtonWrapper.current.focus({
         preventScroll: true
       });
       return;
     }
+
 
     this.setState({
       isFocused: false,
@@ -235,9 +237,9 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  handleFocus = () => {
+  handleFocus = (e) => {
     if (this.context.extras.isEditor) {
-      if (this.navButtonWrapper && this.navButtonWrapper.current) {
+      if (this.navButtonWrapper && this.navButtonWrapper.current && this.navButtonWrapper === e.target) {
         this.navButtonWrapper.current.focus({
           preventScroll: true
         });

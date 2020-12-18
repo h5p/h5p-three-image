@@ -90,7 +90,7 @@ export default class NavigationButtonLabel extends React.Component {
       isExpanded = 1;
     }
 
-    if (this.labelDiv.current.scrollWidth + isExpanded > this.labelDiv.current.offsetWidth) {
+    if (this.labelDiv.current && this.labelDiv.current.scrollWidth + isExpanded > this.labelDiv.current.offsetWidth) {
       return true;
     }
     return false;
@@ -100,6 +100,9 @@ export default class NavigationButtonLabel extends React.Component {
     const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';
     const canExpand = this.state.expandable === true ? 'can-expand' : '';
     const hoverOnly = this.props.hoverOnly === true ? 'hover-only' : '';
+
+    const expandButtonTabIndex = !this.context.extras.isEditor
+      && this.props.isHiddenBehindOverlay ? '-1' : undefined;
 
     return (
       <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
@@ -111,7 +114,9 @@ export default class NavigationButtonLabel extends React.Component {
         </div>
         {canExpand &&
           <button
+            ref={this.props.forwardRef}
             className="nav-label-expand"
+            tabIndex={expandButtonTabIndex}
             aria-label={this.context.l10n.expandButtonAriaLabel}
             onClick={this.onClick.bind(this)}
             onFocus={this.onFocus}
