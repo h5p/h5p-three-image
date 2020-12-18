@@ -60,6 +60,8 @@ export default class NavigationButton extends React.Component {
     this.navButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    this.onLabelFocus = this.onLabelFocus.bind(this);
+    this.onLabelBlur = this.onLabelBlur.bind(this);
     this.state = {
       isFocused: this.props.isFocused,
     };
@@ -71,10 +73,18 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  onLabelFocus() {
+    this.setState({isFocused: true});
+  }
+
+  onLabelBlur() {
+    this.setState({isFocused: false});
+  }
+
   onFocus() {
     // Already focused
     if (this.state.isFocused) {
-      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
+      this.navButton.current.addEventListener('blur', this.onBlur);
       return;
     }
 
@@ -85,16 +95,17 @@ export default class NavigationButton extends React.Component {
       this.props.onFocusedInteraction();
     }
 
-    this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
+    this.navButton.current.addEventListener('blur', this.onBlur);
+    this.forceUpdate();
   }
 
   onBlur(e) {
-    const navButtonWrapper = this.navButtonWrapper
-      && this.navButtonWrapper.current;
+    const navButton = this.navButton
+      && this.navButton.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)) {
+    if (navButton && navButton.contains(e.relatedTarget)) {
       // Clicked target is child of button wrapper, don't blur
-      this.navButtonWrapper.current.focus({
+      this.navButton.current.focus({
         preventScroll: true
       });
       return;
@@ -107,8 +118,8 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-    if (this.navButtonWrapper && this.navButtonWrapper.current) {
-      this.navButtonWrapper.current.removeEventListener('blur', this.onBlur);
+    if (this.navButton && this.navButton.current) {
+      this.navButton.current.removeEventListener('blur', this.onBlur);
     }
   }
 
@@ -234,12 +245,12 @@ export default class NavigationButton extends React.Component {
       return;
     }
 
-    if (!this.context.extras.isEditor && this.props.onFocus) {
+    if (!this.context.extras.isEditor) {
       if (this.skipFocus) {
         this.skipFocus = false;
       }
       else {
-        this.props.onFocus();
+        this.onFocus();
       }
     }
   }
@@ -272,7 +283,7 @@ export default class NavigationButton extends React.Component {
     }
 
     // only apply custom focus if we have children that are shown on focus
-    if (this.state.isFocused && this.props.children) {
+    if (this.state.isFocused) {
       wrapperClasses.push('focused');
     }
 
@@ -294,7 +305,6 @@ export default class NavigationButton extends React.Component {
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? '0' : undefined}
-        onFocus={ this.handleFocus }
         onClick={this.onClick.bind(this)}
       >
         <button
@@ -306,6 +316,7 @@ export default class NavigationButton extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
           onMouseUp={this.setFocus.bind(this)}
+          onFocus={this.handleFocus}
         />
         {this.props.children}
         {this.props.icon !== 'h5p-go-back-button' && 
@@ -314,6 +325,8 @@ export default class NavigationButton extends React.Component {
           labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
           hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
           onMount={this.props.onMount}
+          onLabelFocus={this.onLabelFocus}
+          onLabelBlur={this.onLabelBlur}
         />}
       </div>
     );
