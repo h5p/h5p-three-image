@@ -104,18 +104,18 @@ export default class ThreeSixtyScene extends React.Component {
     this.initializePointerLock(element);
   }
 
-    // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
-    getInteractionTitle(action) {
-      const currentTitle = action.metadata.title;    
-      switch(currentTitle) {
-        case 'Untitled Text':
-          return action.params.text;
-        case "Untitled Image":
-          return action.params.alt;
-        default:
-          return currentTitle;
-      }
+  // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
+  getInteractionTitle(action) {
+    const currentTitle = action.metadata.title;    
+    switch (currentTitle) {
+      case 'Untitled Text':
+        return action.params.text;
+      case "Untitled Image":
+        return action.params.alt;
+      default:
+        return currentTitle;
     }
+  }
 
   /**
    * TODO
