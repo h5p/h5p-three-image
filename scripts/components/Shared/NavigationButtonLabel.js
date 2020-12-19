@@ -28,19 +28,20 @@ export default class NavigationButtonLabel extends React.Component {
     this.state = {
       expandable: false,
       isExpanded: false,
-      divHeight: this.props.hoverOnly === true ? 'unset' : '1.5em'
+      divHeight: this.props.hoverOnly ? 'unset' : '1.5em'
     };
 
   }
 
+  /**
+   * Handle expand button being clicked
+   * @param  {Event} e
+   */
   onClick(e) {
     e.stopPropagation();
     if (!this.state.expandable) {
       return;
     }
-
-    // This is done seperatly to ensure new height gets calculated
-    this.setState({isExpanded: !this.state.isExpanded});
 
     if (!this.state.isExpanded) {
       setTimeout(() => {
@@ -52,11 +53,14 @@ export default class NavigationButtonLabel extends React.Component {
         this.setState({divHeight: '1.5em'});
       }, 0);
     }
+
+    // This is done seperatly to ensure new height gets calculated
+    this.setState({ isExpanded: !this.state.isExpanded });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.setState({expandable: this.isExpandable()}); 
+    if (this.props.labelText !== prevProps.labelText) {
+      this.setState({ expandable: this.isExpandable() });
     }
   }
 
@@ -67,10 +71,8 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   isExpandable() {
-    let isExpanded = 0;
-    if (this.state.isExpanded) {
-      isExpanded = 1;
-    }
+    // If it is allready expanded the width will be the scrollwidth will be the same as offsetwidth
+    let isExpanded = this.state.isExpanded ? 1 : 0;
 
     if (this.labelDivInner.current && this.labelDivInner.current.scrollWidth + isExpanded > this.labelDivInner.current.offsetWidth) {
       return true;
@@ -79,9 +81,9 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   render() {
-    const isExpanded = this.state.isExpanded === true ? 'is-expanded' : '';
-    const canExpand = this.state.expandable === true ? 'can-expand' : '';
-    const hoverOnly = this.props.hoverOnly === true ? 'hover-only' : '';
+    const isExpanded = this.state.isExpanded ? 'is-expanded' : '';
+    const canExpand = this.state.expandable ? 'can-expand' : '';
+    const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
 
     const expandButtonTabIndex = !this.context.extras.isEditor
       && this.props.isHiddenBehindOverlay ? '-1' : undefined;

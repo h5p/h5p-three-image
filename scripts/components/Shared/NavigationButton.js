@@ -93,7 +93,8 @@ export default class NavigationButton extends React.Component {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)
+      && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
       this.navButtonWrapper.current.focus({
         preventScroll: true

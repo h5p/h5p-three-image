@@ -105,10 +105,9 @@ $labelWidth: 11em;
 
     .nav-label {
       min-width: $labelWidth;
-      overflow: auto;
+      max-width: unset;
       .nav-label-inner {
         text-overflow: unset;
-        overflow: auto;
         white-space: normal;
       }
     }
