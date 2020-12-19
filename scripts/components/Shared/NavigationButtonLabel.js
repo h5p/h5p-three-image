@@ -24,7 +24,12 @@ export default class NavigationButtonLabel extends React.Component {
     super(props);
 
     this.onClick.bind(this);
-    this.labelDivInner = React.createRef();
+    this.labelDiv = React.createRef();
+    this.labelButton = React.createRef();
+
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+
     this.state = {
       expandable: false,
       isExpanded: false,
@@ -45,7 +50,7 @@ export default class NavigationButtonLabel extends React.Component {
 
     if (!this.state.isExpanded) {
       setTimeout(() => {
-        this.setState({divHeight: window.getComputedStyle(this.labelDivInner.current).height});
+        this.setState({divHeight: window.getComputedStyle(this.labelDiv.current).height});
       }, 0);
     }
     else {
@@ -70,11 +75,24 @@ export default class NavigationButtonLabel extends React.Component {
     }, 0);
   }
 
+  onBlur() {
+    if (this.labelButton && this.labelButton.current) {
+      this.labelButton.current.removeEventListener('blur', this.onBlur);
+    }
+    this.props.onLabelBlur();
+  }
+
+  onFocus() {
+    this.labelButton.current.addEventListener('blur', this.onBlur);
+    this.props.setFocus;
+    this.props.onLabelFocus();
+  }
+
   isExpandable() {
     // If it is allready expanded the width will be the scrollwidth will be the same as offsetwidth
     let isExpanded = this.state.isExpanded ? 1 : 0;
 
-    if (this.labelDivInner.current && this.labelDivInner.current.scrollWidth + isExpanded > this.labelDivInner.current.offsetWidth) {
+    if (this.labelDiv.current && this.labelDiv.current.scrollWidth + isExpanded > this.labelDiv.current.offsetWidth) {
       return true;
     }
     return false;
@@ -91,7 +109,7 @@ export default class NavigationButtonLabel extends React.Component {
     return (
       <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
         <div style={{ height: this.state.divHeight }} aria-hidden='true' className={`nav-label`}>
-          <div ref={this.labelDivInner}
+          <div ref={this.labelDiv}
             className='nav-label-inner' dangerouslySetInnerHTML={{ __html: this.props.labelText}}>
            
           </div>
@@ -102,7 +120,9 @@ export default class NavigationButtonLabel extends React.Component {
             className="nav-label-expand"
             tabIndex={expandButtonTabIndex}
             aria-label={this.context.l10n.expandButtonAriaLabel}
-            onClick={this.onClick.bind(this)}>
+            onClick={this.onClick.bind(this)}
+            onFocus={this.onFocus}
+            ref={this.labelButton}>
             <div className="nav-label-expand-arrow" />
           </button>}
       </div>
