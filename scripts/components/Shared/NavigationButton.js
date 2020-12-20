@@ -63,6 +63,8 @@ export default class NavigationButton extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.state = {
       isFocused: this.props.isFocused,
+      expandButtonFocused: false,
+      innerButtonFocused: false
     };
   }
 
@@ -279,6 +281,13 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push('focused');
     }
 
+    // Add classname to current active element (wrapper, button or expand label button) so it can be shown on top
+    if (this.state.isFocused && this.props.children
+      || this.state.expandButtonFocused
+      || this.state.innerButtonFocused) {
+      wrapperClasses.push('active-element');
+    }
+
     const isWrapperTabbable = this.context.extras.isEditor;
     const isInnerButtonTabbable = !this.context.extras.isEditor
       && !this.props.isHiddenBehindOverlay;
@@ -297,7 +306,7 @@ export default class NavigationButton extends React.Component {
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? '0' : undefined}
-        onFocus={ this.handleFocus }
+        onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
       >
         <button
@@ -309,7 +318,8 @@ export default class NavigationButton extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
           onMouseUp={this.setFocus.bind(this)}
-        />
+          onFocus={() => this.setState({ innerButtonFocused: true })}
+          onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
         {this.props.icon !== 'h5p-go-back-button' &&
           <NavigationButtonLabel
@@ -318,6 +328,7 @@ export default class NavigationButton extends React.Component {
             hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
+            setFocused={(focused) => this.setState({ expandButtonFocused: focused })}
           />
         }
       </div>

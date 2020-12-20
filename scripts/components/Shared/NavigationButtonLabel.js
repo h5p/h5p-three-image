@@ -98,6 +98,8 @@ export default class NavigationButtonLabel extends React.Component {
         </div>
         {canExpand &&
           <button
+            onFocus={() => this.props.setFocused(true)}
+            onBlur ={() => this.props.setFocused(false)}
             ref={this.props.forwardRef}
             className="nav-label-expand"
             tabIndex={expandButtonTabIndex}

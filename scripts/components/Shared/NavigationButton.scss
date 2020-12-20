@@ -7,6 +7,9 @@ $labelWidth: 9em;
 .nav-button-wrapper {
   position: absolute;
   display: inline-flex;
+  &.active-element {
+    z-index: 2;
+  }
 }
 
 .nav-button-wrapper:hover .nav-label-container.hover-only {
@@ -50,7 +53,7 @@ $labelWidth: 9em;
 
 .nav-button-wrapper {
   &:hover {
-    z-index: 2;
+    z-index: 3;
   }
 
   &.dragging {
