@@ -316,5 +316,61 @@
         ]
       }
     ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "common": true,
+    "label": "Localize",
+    "fields": [
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Aria label for content type",
+        "default": "Interactive Explorer"
+      },
+      {
+        "name": "playAudioTrack",
+        "type": "text",
+        "label": "Label for to play audio",
+        "default": "Play Audio Track"
+      },
+      {
+        "name": "pauseAudioTrack",
+        "type": "text",
+        "label": "Label to pause audio",
+        "default": "Pause Audio Track"
+      },
+      {
+        "name": "sceneDescription",
+        "type": "text",
+        "label": "Title to scene dialog",
+        "default": "Scene Description"
+      },
+      {
+        "name": "resetCamera",
+        "type": "text",
+        "label": "Label for button to reset camera",
+        "default": "Reset Camera"
+      },
+      {
+        "name": "submitDialog",
+        "type": "text",
+        "label": "Label for the submit dialog button",
+        "default": "Submit Dialog"
+      },
+      {
+        "name": "closeDialog",
+        "type": "text",
+        "label": "Label for the close dialog button",
+        "default": "Close Dialog"
+      },
+      {
+        "name": "expandButtonAriaLabel",
+        "type": "text",
+        "label": "Aria label for the expand label button",
+        "default": "Expand the visual label"
+      }
+    ]
   }
 ]

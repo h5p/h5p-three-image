@@ -23,15 +23,16 @@ H5P.ThreeImage = (function () {
 
     let wrapper;
     this.behavior = params.behaviour || {};
-    this.l10n = {
-      title: 'Interactive Explorer', // TODO: Add to semantics.json
-      playAudioTrack: 'Play Audio Track', // TODO: Add to semantics.json
-      pauseAudioTrack: 'Pause Audio Track', // TODO: Add to semantics.json
-      sceneDescription: 'Scene Description', // TODO: Add to semantics.json
-      resetCamera: 'Reset Camera', // TODO: Add to semantics.json
-      submitDialog: 'Submit Dialog', // TODO: Add to semantics.jso
-      closeDialog: 'Close Dialog', // TODO: Add to semantics.jso,
-      expandButtonAriaLabel: 'Expand the visual button label'
+    this.l10n = {...params.l10n,
+      // Text defaults
+      title: 'Interactive Explorer',
+      playAudioTrack: 'Play Audio Track',
+      pauseAudioTrack: 'Pause Audio Track',
+      sceneDescription: 'Scene Description',
+      resetCamera: 'Reset Camera',
+      submitDialog: 'Submit Dialog',
+      closeDialog: 'Close Dialog',
+      expandButtonAriaLabel: 'Expand the visual label'
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
