@@ -7,6 +7,11 @@ $labelWidth: 9em;
 .nav-button-wrapper {
   position: absolute;
   display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   &.active-element {
     z-index: 2;
   }
@@ -61,16 +66,18 @@ $labelWidth: 9em;
   }
 }
 
-.h5p-interaction-button .nav-button {
-  background: $interactionBg;
+.h5p-interaction-button {
+  .nav-button {
+    background: $interactionBg;
 
-  &:hover {
-    background: $interactionHoverBg;
+    &:active {
+      background: $interactionActiveBg;
+      border-color: $interactionActiveBorder;
+    }
   }
 
-  &:active {
-    background: $interactionActiveBg;
-    border-color: $interactionActiveBorder;
+  &:hover .nav-button {
+    background: $interactionHoverBg;
   }
 }
 

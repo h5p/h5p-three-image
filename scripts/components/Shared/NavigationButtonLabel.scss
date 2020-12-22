@@ -115,7 +115,7 @@ $labelWidth: 11em;
 }
 
 .nav-label {
-  transition: height 0.5s linear;
+  transition: height 0.2s linear;
   border-radius: 3px;
   background: $labelBg;
   color: $labelColor;
@@ -142,6 +142,7 @@ $labelWidth: 11em;
     border-radius: 50%;
     padding: 0.8em;
     border: 1px solid transparent;
+    cursor: pointer;
 
     &:focus {
       background-color: #000000;
