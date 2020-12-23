@@ -1,7 +1,8 @@
 import React from 'react';
 import './NavigationButton.scss';
 import './NavigationButtonLabel.scss';
-import {H5PContext} from "../../context/H5PContext";
+import { H5PContext } from "../../context/H5PContext";
+import { willOverflow } from './OverflowHelpers';
 
 export const getLabelFromInteraction = (interaction) => {
   return interaction.label;
@@ -25,12 +26,13 @@ export default class NavigationButtonLabel extends React.Component {
 
     this.onClick.bind(this);
     this.labelDiv = React.createRef();
-    this.labelButton = React.createRef();
 
     this.state = {
       expandable: false,
       isExpanded: false,
-      divHeight: this.props.hoverOnly ? 'unset' : '1.5em'
+      divHeight: this.getDivHeight(),
+      labelPos: this.props.labelPos,
+      expandDirection: null
     };
 
   }
@@ -47,16 +49,15 @@ export default class NavigationButtonLabel extends React.Component {
 
     if (!this.state.isExpanded) {
       setTimeout(() => {
-        this.setState({divHeight: window.getComputedStyle(this.labelDiv.current).height});
+        this.setState({ divHeight: window.getComputedStyle(this.labelDiv.current).height });
       }, 0);
     }
     else {
       setTimeout(() => {
-        this.setState({divHeight: '1.5em'});
+        this.setState({ divHeight: this.getDivHeight() });
       }, 0);
     }
 
-    // This is done seperatly to ensure new height gets calculated
     this.setState({ isExpanded: !this.state.isExpanded });
   }
 
@@ -68,21 +69,21 @@ export default class NavigationButtonLabel extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({expandable: this.isExpandable()});
+      this.setState({
+        expandable: this.isExpandable(),
+        divHeight: this.getDivHeight()
+      });
     }, 0);
   }
 
-  onBlur() {
-    if (this.labelButton && this.labelButton.current) {
-      this.labelButton.current.removeEventListener('blur', this.onBlur);
+  /**
+   * Return hight of div based on scrollHeight
+   */
+  getDivHeight() {
+    if (this.labelDiv.current) {
+      return this.labelDiv.current.scrollHeight > 22 ? '3em' : '1.5em';
     }
-    this.props.onLabelBlur();
-  }
-
-  onFocus() {
-    this.labelButton.current.addEventListener('blur', this.onBlur);
-    this.props.setFocus;
-    this.props.onLabelFocus();
+    return null;
   }
 
   isExpandable() {
@@ -95,17 +96,32 @@ export default class NavigationButtonLabel extends React.Component {
     return false;
   }
 
+  getExpandDirection() {
+    const expandDirection = willOverflow(this.props.labelPos,
+      this.labelDiv.current.scrollHeight + 15 + (this.state.expandable ? 10 : 0), // TODO make more precise Add expandbutton
+      this.labelDiv.current.scrollWidth,
+      this.props.topPosition,
+      this.props.leftPosition,
+      this.props.wrapperHeight,
+      this.props.wrapperWidth,
+      this.props.navButtonHeight);
+
+    return expandDirection;
+  }
+
   render() {
     const isExpanded = this.state.isExpanded ? 'is-expanded' : '';
     const canExpand = this.state.expandable ? 'can-expand' : '';
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
+    const expandDirection = this.state.expandDirection ? 'expand-' + this.state.expandDirection : '';
 
     const expandButtonTabIndex = !this.context.extras.isEditor
       && this.props.isHiddenBehindOverlay ? '-1' : undefined;
 
     return (
-      <div className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly}`}>
-        <div style={{ height: this.state.divHeight }} aria-hidden='true' className={`nav-label`}>
+      <div
+        className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly} ${expandDirection}`}>
+        <div style={{ height: this.state.divHeight }} aria-hidden='true' className={`nav-label`} >
           <div ref={this.labelDiv}
             className='nav-label-inner' dangerouslySetInnerHTML={{ __html: this.props.labelText}}>
            

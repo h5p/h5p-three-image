@@ -87,7 +87,10 @@ export default class StaticScene extends React.Component {
 
   getWrapperSize(isVertical = false) {
     let wrapper = this.sceneWrapperRef.current;
-    return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
+    if (wrapper) {
+      return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
+    }
+    return undefined;
   }
 
   getDraggingInteraction() {
@@ -419,6 +422,8 @@ export default class StaticScene extends React.Component {
                   buttonClasses={ buttonClasses }
                   onBlur={this.props.onBlurInteraction}
                   isFocused={this.props.focusedInteraction === index}
+                  wrapperHeight={this.getWrapperSize(true)}
+                  wrapperWidth={this.getWrapperSize()}
                 >
                   {
                     this.context.extras.isEditor &&

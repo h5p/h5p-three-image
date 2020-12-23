@@ -328,6 +328,11 @@ export default class NavigationButton extends React.Component {
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
             setFocused={(focused) => this.setState({ expandButtonFocused: focused })}
+            topPosition={this.navButtonWrapper.current ? this.navButtonWrapper.current.offsetTop : null}
+            wrapperHeight={this.props.wrapperHeight}
+            wrapperWidth={this.props.wrapperWidth}
+            leftPosition={this.props.leftPosition}
+            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
           />
         }
       </div>
