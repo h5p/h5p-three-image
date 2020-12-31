@@ -10,12 +10,7 @@ $labelWidth: 11em;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   border: 0;
 
-  &.can-expand {
-    min-width: 9em;
-  }
-
   &.top {
-    width: $labelWidth;
     bottom: ($buttonSize / 2);
     transform: translateX(-50%);
     left: 50%;
@@ -45,7 +40,6 @@ $labelWidth: 11em;
   }
 
   &.bottom {
-    width: $labelWidth;
     top: ($buttonSize / 2);
     transform: translateX(-50%);
     left: 50%;
@@ -131,8 +125,6 @@ $labelWidth: 11em;
     }
 
     .nav-label {
-      min-width: $labelWidth;
-      max-width: unset;
       .nav-label-inner {
         text-overflow: unset;
         white-space: normal;
@@ -155,6 +147,10 @@ $labelWidth: 11em;
   font-size: 0.9em;
   min-width: 6em;
   max-width: $labelWidth;
+
+  &.is-multiline {
+    min-width: $labelWidth;
+  }
 
   &-inner {
     text-overflow: ellipsis;
