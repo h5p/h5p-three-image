@@ -87,10 +87,7 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   isExpandable() {
-    // If it is allready expanded the width will be the scrollwidth will be the same as offsetwidth
-    let isExpanded = this.state.isExpanded ? 1 : 0;
-
-    if (this.labelDiv.current && this.labelDiv.current.scrollWidth + isExpanded > this.labelDiv.current.offsetWidth) {
+    if (this.labelDiv.current.scrollHeight > 44) {
       return true;
     }
     return false;
