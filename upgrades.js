@@ -12,7 +12,13 @@ H5PUpgrades['H5P.ThreeImage'] = (function () {
             audio: audio
           };
         }
-
+        finished(null, parameters);
+      },
+      4: function (parameters, finished) {
+        if (parameters && parameters.context &&
+            parameters.context.behaviour && parameters.context.behaviour.length) {
+          parameters.context.behaviour.label.showLabel = false;
+        }
         finished(null, parameters);
       }
     }
