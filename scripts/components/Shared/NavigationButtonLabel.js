@@ -18,7 +18,7 @@ export const getLabelText = (label, title) => {
 
 export const isHoverLabel = (label, globalLabel) => {
   if (label.showLabel === 'inherit') {
-    return globalLabel.showLabel === 'show' ? false : true;
+    return globalLabel.showLabel ? false : true;
   }
   return label.showLabel === 'show' ? false : true;
 };
