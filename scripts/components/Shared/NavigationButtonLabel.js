@@ -84,6 +84,9 @@ export default class NavigationButtonLabel extends React.Component {
    */
   getDivHeight() {
     if (this.labelDiv.current) {
+      if(this.props.hoverOnly) {
+        return 'unset';
+      }
       return this.labelDiv.current.scrollHeight > 22 ? '3em' : '1.5em';
     }
     return null;
@@ -110,9 +113,9 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   render() {
-    const isExpanded = this.state.isExpanded ? 'is-expanded' : '';
-    const canExpand = this.state.expandable ? 'can-expand' : '';
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
+    const isExpanded = this.state.isExpanded || hoverOnly ? 'is-expanded' : '';
+    const canExpand = this.state.expandable || hoverOnly ? 'can-expand' : '';
     const isMultline = (this.getDivHeight() != '1.5em' ) ? 'is-multiline': '';
     const expandDirection = this.state.expandDirection ? 'expand-' + this.state.expandDirection : '';
 

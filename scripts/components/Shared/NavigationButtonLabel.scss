@@ -110,6 +110,10 @@ $labelWidth: 11em;
       overflow: auto;
       white-space: normal;
     }
+
+    .nav-label-expand-arrow {
+      display: none;
+    }
   }
   
   &.is-expanded {
@@ -208,3 +212,7 @@ $labelWidth: 11em;
     }
   }
 }
+
+.nav-button-wrapper:hover .nav-label-container.hover-only {
+  display: block;
+} 
