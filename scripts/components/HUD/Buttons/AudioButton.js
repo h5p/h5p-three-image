@@ -133,10 +133,12 @@ export default class AudioButton extends React.Component {
           isPlayer.pause();
         }
 
-        // and start the current player
-        const currentPlayer = this.getPlayer(currentPlayerId);
-        if (currentPlayer) {
-          currentPlayer.play();
+        // and start the current player if we have an id
+        if (currentPlayerId) {
+          const currentPlayer = this.getPlayer(currentPlayerId);
+          if (currentPlayer) {
+            currentPlayer.play();
+          }
         }
       }
     }
@@ -204,7 +206,7 @@ export default class AudioButton extends React.Component {
   static createAudioPlayer(id, sources, onPlay, onStop, loop) {
     // Check if browser supports audio.
     let player = document.createElement('audio');
-    if (player.canPlayType !== undefined && sources !== undefined) {
+    if (player.canPlayType !== undefined) {
       // Add supported source files.
       for (var i = 0; i < sources.length; i++) {
         if (player.canPlayType(sources[i].mime)) {
