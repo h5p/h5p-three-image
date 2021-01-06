@@ -43,6 +43,10 @@ export default class AudioButton extends React.Component {
    * @return {AudioElement} or 'null' if track isn't playable.
    */
   getPlayer = (id) => {
+    if (id === undefined) {
+      return null;
+    }
+
     // Create player if none exist
     if (this.players[id] === undefined) {
       this.players[id] = AudioButton.createAudioPlayer(
@@ -65,13 +69,8 @@ export default class AudioButton extends React.Component {
    * Handle audio button clicked
    */
   handleClick = () => {
-    // Determine player ID
-    const id = this.getPlayerId(this.props);
-    if (!id) {
-      return; // Not found
-    }
-
-    const player = this.getPlayer(id);
+    // Get player
+    const player = this.getPlayer(this.getPlayerId(this.props));
     if (player) {
       if (id === this.props.isPlaying) {
         // Pause and reset the player
@@ -134,11 +133,9 @@ export default class AudioButton extends React.Component {
         }
 
         // and start the current player if we have an id
-        if (currentPlayerId) {
-          const currentPlayer = this.getPlayer(currentPlayerId);
-          if (currentPlayer) {
-            currentPlayer.play();
-          }
+        const currentPlayer = this.getPlayer(currentPlayerId);
+        if (currentPlayer) {
+          currentPlayer.play();
         }
       }
     }
