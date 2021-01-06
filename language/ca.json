@@ -1,0 +1,114 @@
+{
+  "semantics": [
+    {
+      "label": "Editor de Three Image",
+      "fields": [
+        {
+          "label": "Escenes",
+          "entity": "Escena",
+          "field": {
+            "fields": [
+              {
+                "label": "Tipus d’escena",
+                "options": [
+                  {
+                    "label": "Imatge 360"
+                  },
+                  {
+                    "label": "Imatge estàtica"
+                  }
+                ]
+              },
+              {
+                "label": "Mostra el botó \"Enrere\"",
+                "description": "Mostra el botó per navegar enrere a l’escena anterior"
+              },
+              {
+                "label": "Identificador únic de l’escena",
+                "description": "Ha de ser únic, utilitzat per a la navegació entre escenes"
+              },
+              {
+                "label": "Títol de l’escena",
+                "description": "Used to identify the scene"
+              },
+              {
+                "label": "Fons de l’escena"
+              },
+              {
+                "label": "Descripció de l’escena",
+                "description": "Text que pot descriure l’escena per a l’usuari final"
+              },
+              {
+                "label": "Posició inicial de la càmera",
+                "description": "Posició de la càmera en guinyada o capcineig"
+              },
+              {
+                "label": "Interaccions",
+                "entity": "Interacció",
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Interacció",
+                      "description": "Zona sensible amb una interacció"
+                    },
+                    {
+                      "label": "Posició de la interacció",
+                      "description": "Posició de la interacció en guinyada o capcineig"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Estil del botó",
+                "description": "Decidiu quin aspecte han de tenir els botons que dirigeixen a aquesta escena. Per a les escenes estàtiques que no dirigeixen a altres escenes, recomanem que s’utilitzi el botó \"Més informació\".",
+                "options": [
+                  {
+                    "label": "Escena nova (fletxa)"
+                  },
+                  {
+                    "label": "Més informació"
+                  }
+                ]
+              },
+              {
+                "label": "Pista d’àudio",
+                "description": "Afegiu una pista d’àudio que sigui específica per a aquest escenari."
+              }
+            ]
+          }
+        },
+        {
+          "label": "Inicia l’identificador de l’escena"
+        },
+        {
+          "label": "Pista d’àudio"
+        }
+      ]
+    },
+    {
+      "label": "Opcions de comportament",
+      "description": "Aquestes opcions us permeten controlar com es comporta el món.",
+      "fields": [
+        {
+          "label": "Àudio global",
+          "description": "Afegiu una pista d’àudio que estigui disponible per a totes les escenes de manera predeterminada."
+        },
+        {
+          "label": "Qualitat de la renderització de l’escena",
+          "description": "Trieu l’amplada i l’alçada que utilitzaran els segments per renderitzar una escena, ja que això influeix directament en la seva qualitat. Si una escena es veu pixelada o s’hi veuen ones, proveu d’augmentar-ne la qualitat. Tingueu en compte que les renderitzacions en alta qualitat tarden més a carregar-se.",
+          "options": [
+            {
+              "label": "Alta qualitat (128 x 128)"
+            },
+            {
+              "label": "Qualitat mitjana (64 x 64)"
+            },
+            {
+              "label": "Qualitat baixa (16x16)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

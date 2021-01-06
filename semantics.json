@@ -60,7 +60,7 @@
               "name": "scenename",
               "type": "text",
               "label": "Scene Title",
-              "description": "Used to identify the scene for authors"
+              "description": "Used to identify the scene"
             },
             {
               "name": "scenesrc",
