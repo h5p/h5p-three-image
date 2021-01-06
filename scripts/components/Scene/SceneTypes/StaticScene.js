@@ -424,6 +424,7 @@ export default class StaticScene extends React.Component {
                   isFocused={this.props.focusedInteraction === index}
                   wrapperHeight={this.getWrapperSize(true)}
                   wrapperWidth={this.getWrapperSize()}
+                  staticScene={true}
                 >
                   {
                     this.context.extras.isEditor &&

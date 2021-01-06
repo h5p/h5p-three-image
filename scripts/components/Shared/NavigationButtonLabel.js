@@ -28,14 +28,16 @@ export default class NavigationButtonLabel extends React.Component {
     super(props);
 
     this.onClick.bind(this);
-    this.labelDiv = React.createRef();
+    this.innerinnerLabelDiv = React.createRef();
+    this.navLabel = React.createRef();
 
     this.state = {
       expandable: false,
       isExpanded: false,
       divHeight: this.getDivHeight(),
       labelPos: this.props.labelPos,
-      expandDirection: null
+      expandDirection: null,
+      alignment: null
     };
 
   }
@@ -52,21 +54,38 @@ export default class NavigationButtonLabel extends React.Component {
 
     if (!this.state.isExpanded) {
       setTimeout(() => {
-        this.setState({ divHeight: window.getComputedStyle(this.labelDiv.current).height });
+        this.setState({
+          divHeight: this.innerinnerLabelDiv.current.scrollHeight,
+          isExpanded: true
+        });
       }, 0);
     }
     else {
       setTimeout(() => {
-        this.setState({ divHeight: this.getDivHeight() });
+        this.setState({ divHeight: this.getDivHeight(), isExpanded: false });
       }, 0);
     }
-
-    this.setState({ isExpanded: !this.state.isExpanded });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.labelText !== prevProps.labelText) {
-      this.setState({ expandable: this.isExpandable() });
+    // Need to calculate if expand button should be shown and height
+    if (this.props.labelText !== prevProps.labelText || this.props.hoverOnly !== prevProps.hoverOnly) {
+      this.setState({
+        expandable: this.isExpandable(),
+        divHeight: this.getDivHeight()
+      });
+    }
+    // Need to calculate if alignment and expanddirection should be changed
+    // It is only in a static scene the label can be overflow, since camera can be moved in 360
+    if (this.props.topPosition !== prevProps.topPosition
+      || this.props.leftPosition !== prevProps.leftPosition && this.props.staticScene) {
+      const expandDirection = this.getOverflowProperties();
+      if (expandDirection.expandDirection !== this.state.expandDirection) {
+        this.setState({ expandDirection: expandDirection.expandDirection });
+      }
+      if (expandDirection.alignment !== this.state.alignment) {
+        this.setState({ alignment: expandDirection.alignment });
+      }
     }
   }
 
@@ -83,52 +102,81 @@ export default class NavigationButtonLabel extends React.Component {
    * Return hight of div based on scrollHeight
    */
   getDivHeight() {
-    if (this.labelDiv.current) {
-      if(this.props.hoverOnly) {
+    if (this.innerLabelDiv.current) {
+      if (this.props.hoverOnly) {
         return 'unset';
       }
-      return this.labelDiv.current.scrollHeight > 22 ? '3em' : '1.5em';
+      return this.innerLabelDiv.current.scrollHeight > 22 ? '3em' : '1.5em';
     }
     return null;
   }
 
+  /**
+   * Return if element can be expanded
+   */
   isExpandable() {
-    if (this.labelDiv.current.scrollHeight > 44) {
+    if (this.innerLabelDiv.current.scrollHeight > 44) {
       return true;
     }
     return false;
   }
 
-  getExpandDirection() {
-    const expandDirection = willOverflow(this.props.labelPos,
-      this.labelDiv.current.scrollHeight + 15 + (this.state.expandable ? 10 : 0), // TODO make more precise Add expandbutton
-      this.labelDiv.current.scrollWidth,
+  /**
+   * Calculate if element will overflow when expanded
+   */
+  getOverflowProperties() {
+    let height = this.innerLabelDiv.current.scrollHeight;
+
+    // Get the right height from the top of the navigation button for entire label
+
+    if (this.props.labelPos === 'top') {
+      height += parseInt(window.getComputedStyle(this.navLabel.current).paddingTop);
+    }
+    else if (this.props.labelPos === 'bottom') {
+      height += parseInt(this.props.navButtonHeight) +
+        parseInt(window.getComputedStyle(this.navLabel.current).paddingTop);
+    }
+    else {
+      height += parseInt(window.getComputedStyle(this.navLabel.current).paddingTop)
+        + parseInt(window.getComputedStyle(this.navLabel.current).paddingBottom);
+    }
+    if (this.state.expandable) {
+      height += parseInt(window.getComputedStyle(this.props.forwardRef.current).paddingTop);
+    }
+    const overflowChanges = willOverflow(this.props.labelPos,
+      height,
+      this.innerLabelDiv.current.scrollWidth,
       this.props.topPosition,
       this.props.leftPosition,
       this.props.wrapperHeight,
-      this.props.wrapperWidth,
-      this.props.navButtonHeight);
+      this.props.wrapperWidth);
 
-    return expandDirection;
+    return overflowChanges;
   }
 
   render() {
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
     const isExpanded = this.state.isExpanded || hoverOnly ? 'is-expanded' : '';
     const canExpand = this.state.expandable || hoverOnly ? 'can-expand' : '';
-    const isMultline = (this.getDivHeight() != '1.5em' ) ? 'is-multiline': '';
+    const isMultline = (this.state.divHeight != '1.5em') ? 'is-multiline' : '';
     const expandDirection = this.state.expandDirection ? 'expand-' + this.state.expandDirection : '';
+    const alignment = this.state.alignment || this.props.labelPos;
 
     const expandButtonTabIndex = !this.context.extras.isEditor
       && this.props.isHiddenBehindOverlay ? '-1' : undefined;
 
     return (
       <div
-        className={`nav-label-container ${this.props.labelPos} ${isExpanded} ${canExpand} ${hoverOnly} ${expandDirection}`}>
-        <div style={{ height: this.state.divHeight }} aria-hidden='true' className={`nav-label ${isMultline}`} >
-          <div ref={this.labelDiv}
-            className='nav-label-inner' dangerouslySetInnerHTML={{ __html: this.props.labelText}}>
-           
+        className={`nav-label-container ${alignment} ${isExpanded} ${canExpand} ${hoverOnly} ${expandDirection}`}>
+        <div
+          style={{ height: this.state.divHeight }}
+          aria-hidden='true'
+          className={`nav-label ${isMultline}`}
+          ref={this.navLabel}>
+          <div
+            ref={this.innerLabelDiv}
+            className='nav-label-inner'
+            dangerouslySetInnerHTML={{ __html: this.props.labelText }}>
           </div>
         </div>
         {canExpand &&
@@ -136,7 +184,7 @@ export default class NavigationButtonLabel extends React.Component {
             onFocus={() => this.props.setFocused(true)}
             onBlur ={() => this.props.setFocused(false)}
             ref={this.props.forwardRef}
-            className="nav-label-expand"
+            className="nav-label-expand-button"
             tabIndex={expandButtonTabIndex}
             aria-label={this.context.l10n.expandButtonAriaLabel}
             onClick={this.onClick.bind(this)}>

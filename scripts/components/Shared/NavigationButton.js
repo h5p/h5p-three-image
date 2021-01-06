@@ -333,6 +333,7 @@ export default class NavigationButton extends React.Component {
             wrapperWidth={this.props.wrapperWidth}
             leftPosition={this.props.leftPosition}
             navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+            staticScene={this.props.staticScene}
           />
         }
       </div>

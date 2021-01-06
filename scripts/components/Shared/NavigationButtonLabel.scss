@@ -1,14 +1,39 @@
-@import '../../styles/icons';
-@import '../../styles/colors';
+@import "../../styles/icons";
+@import "../../styles/colors";
 
 $labelPadding: 0.5em;
 $labelWidth: 11em;
 
 .nav-label-container {
-
   position: absolute;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   border: 0;
+
+  //The different allignment the label has
+
+  &.top,
+  &.expand-up {
+    .nav-label-expand-button {
+      bottom: unset;
+      top: -1.1em;
+      .nav-label-expand-arrow:before,
+      .nav-label-expand-arrow:after {
+        transform: rotate(0deg) translate(-50%, -50%);
+      }
+      .nav-label-expand-arrow:before {
+        top: calc(-50% - 1px);
+      }
+    }
+    &.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
+      &:before,
+      &:after {
+        transform: rotate(180deg) translate(50%, 50%);
+      }
+      &:before {
+        top: calc(-50% + 1px);
+      }
+    }
+  }
 
   &.top {
     bottom: ($buttonSize / 2);
@@ -16,26 +41,6 @@ $labelWidth: 11em;
     left: 50%;
     .nav-label {
       padding-bottom: 1.5em;
-    }
-    .nav-label-expand {
-      bottom: unset;
-      top: -2em;
-      &-arrow:before,
-      &-arrow:after {
-          transform: rotate(0deg) translate(-50%,-50%);
-      }
-      &-arrow:before {
-        top: calc(-50% - 1px);
-      }
-    }
-    &.is-expanded .nav-label-expand .nav-label-expand-arrow {
-      &:before, 
-      &:after {
-        transform: rotate(180deg) translate(50%, 50%);
-      }
-      &:before {
-        top: calc(-50% + 1px);
-      }
     }
   }
 
@@ -56,7 +61,7 @@ $labelWidth: 11em;
       padding-right: 1.5em;
     }
 
-    .nav-label-expand {
+    .nav-label-expand-button {
       transform: translateX(-50%);
       left: 50%;
     }
@@ -69,38 +74,19 @@ $labelWidth: 11em;
       padding-left: 1.5em;
     }
 
-    .nav-label-expand {
+    .nav-label-expand-button {
       transform: translateX(-50%);
       left: 50%;
     }
   }
 
-  /* &.expand-up {
-    //bottom: ($buttonSize / 2);
+  // If expansion has to be done in another direction than the alignment,
+  // this applies to right and left aligned elements
+
+  &.expand-up {
     top: unset;
-    bottom: 50%;
-    transform: translateY(-50%);
-    .nav-label-expand {
-      //bottom: 2;
-      //top: -2em;
-      &-arrow:before,
-      &-arrow:after {
-        transform: rotate(0deg) translate(-50%, -50%);
-      }
-      &-arrow:before {
-        top: calc(-50% - 1px);
-      }
-    }
-    &.is-expanded .nav-label-expand .nav-label-expand-arrow {
-      &:before,
-      &:after {
-        transform: rotate(180deg) translate(50%, 50%);
-      }
-      &:before {
-        top: calc(-50% + 1px);
-      }
-    }
-  } */
+    bottom: 0;
+  }
 
   &.hover-only {
     display: none;
@@ -115,20 +101,10 @@ $labelWidth: 11em;
       display: none;
     }
   }
-  
+
   &.is-expanded {
-    .nav-label-expand-arrow:before,
-    .nav-label-expand-arrow:after {
-      transform: rotate(0deg) translate(-50%,-50%);
-      top: 50%;
-      left: 50%;
-    }
-
-    .nav-label-expand-arrow:before {
-      top: calc(-50% - 1px);
-    }
-
     .nav-label {
+      max-width: unset;
       .nav-label-inner {
         text-overflow: unset;
         white-space: normal;
@@ -137,38 +113,49 @@ $labelWidth: 11em;
         -webkit-box-orient: unset;
       }
     }
-  }
-}
+    .nav-label-expand-button {
+      .nav-label-expand-arrow:before,
+      .nav-label-expand-arrow:after {
+        transform: rotate(0deg) translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
 
-.nav-label {
-  transition: height 0.2s linear;
-  border-radius: 3px;
-  background: $labelBg;
-  color: $labelColor;
-  line-height: 1.5;
-  padding: $labelPadding;
-  overflow: hidden;
-  font-size: 0.9em;
-  min-width: 6em;
-  max-width: $labelWidth;
-
-  &.is-multiline {
-    min-width: $labelWidth;
+      .nav-label-expand-arrow:before {
+        top: calc(-50% - 1px);
+      }
+    }
   }
 
-  &-inner {
-    text-overflow: ellipsis;
+  .nav-label {
+    transition: height 0.2s linear;
+    border-radius: 3px;
+    background: $labelBg;
+    color: $labelColor;
+    line-height: 1.5;
+    padding: $labelPadding;
     overflow: hidden;
-    text-align: left;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
+    font-size: 0.9em;
+    min-width: 6em;
+    max-width: $labelWidth;
 
-  &-expand {
+    &.is-multiline {
+      min-width: $labelWidth;
+    }
+
+    &-inner {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+  .nav-label-expand-button {
     display: block;
     position: absolute;
-    bottom: -2.5em;
+    bottom: -1.1em;
     background: transparent;
     border: 0;
     border-radius: 50%;
@@ -188,7 +175,7 @@ $labelWidth: 11em;
       box-shadow: 0 0px 10px 1px #000000;
     }
 
-    &-arrow {
+    .nav-label-expand-arrow {
       position: relative;
 
       &:before,
@@ -212,7 +199,9 @@ $labelWidth: 11em;
     }
   }
 }
-
 .nav-button-wrapper:hover .nav-label-container.hover-only {
   display: block;
-} 
+  .nav-label {
+    max-width: unset;
+  }
+}
