@@ -18,7 +18,18 @@ export default class InteractionContent extends React.Component {
 
       if (AudioButton.isVideoAudio(prevProps.audioIsPlaying)) {
         // Thas last player was us, we need to stop it
-        this.instance.pause();
+
+        // NOTE: This is a hack for Panopto embed player bug where the API
+        // sends a "play" event to all Panopto players when one is played
+        // causing us to think that the audio is changed, when it actually
+        // is not.
+        // By checking that the new audio source is not a video, we can rule
+        // this case out, since two videos can never happen at the same time
+        // currently. This can be removed when Panopto has fixed their
+        // API. See HFP-3191
+        if (!AudioButton.isVideoAudio(this.props.audioIsPlaying)) {
+          this.instance.pause();
+        }
       }
     }
   }
