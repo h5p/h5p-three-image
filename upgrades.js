@@ -15,9 +15,12 @@ H5PUpgrades['H5P.ThreeImage'] = (function () {
         finished(null, parameters);
       },
       4: function (parameters, finished) {
-        if (parameters && parameters.context &&
-            parameters.context.behaviour && parameters.context.behaviour.length) {
-          parameters.context.behaviour.label.showLabel = false;
+        if (parameters && parameters.behaviour) {
+          parameters.behaviour.label = 
+            { 
+              showLabel: false,
+              labelPosition: 'right'
+            };
         }
         finished(null, parameters);
       }
