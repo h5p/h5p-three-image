@@ -31,8 +31,10 @@ export default class ThreeSixtyScene extends React.Component {
     };
   }
 
+
   /**
-   * TODO
+   * Locks the dragged Navigation Button to the pointer
+   * @param  {Object} element
    */
   initializePointerLock(element) {
     // Not supported
@@ -59,20 +61,24 @@ export default class ThreeSixtyScene extends React.Component {
     }, 100);
   }
 
+ 
   /**
-   * TODO
+   * Unlocks the Navigation Button from the pointer.
    */
   cancelPointerLock() {
     this.setState({
       willPointerLock: false,
       hasPointerLock: false,
-    })
+    });
   }
 
+ 
   /**
-   * TODO
+   * Called when the scene is moved, caused by a drag event.
+   * @param  {H5P.Event} e
    */
   handleSceneMoveStart = (e) => {
+    
     if (!this.context.extras.isEditor || e.data.isCamera) {
       return;
     }
@@ -118,7 +124,7 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * TODO
+   * Called when a scene move is stopped after dragging ends.
    */
   handleSceneMoveStop = (e) => {
     if (this.context.extras.isEditor) {
@@ -128,11 +134,12 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * TODO
+   * Creates a ThreeSixty object. If one exists uses that one.
+   * Apply all listeners
    */
   initializeThreeSixty = () => {
     // Determine camera position
-    let cameraPosition = this.state.cameraPosition
+    let cameraPosition = this.state.cameraPosition;
     if (!cameraPosition) {
       const startPosition = this.props.sceneParams.cameraStartPosition
         .split(',')
@@ -151,7 +158,7 @@ export default class ThreeSixtyScene extends React.Component {
         ratio: 16/9,
         cameraStartPosition: cameraPosition,
         segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
-      })
+      });
       this.props.addThreeSixty(threeSixty);
     }
     else {
@@ -184,7 +191,7 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * TODO
+   * Loads the current ThreeSixty scene
    */
   loadScene() {
     if (!this.imageElement) {
@@ -199,7 +206,7 @@ export default class ThreeSixtyScene extends React.Component {
     });
 
     if (H5P.setSource !== undefined) {
-      H5P.setSource(this.imageElement, this.props.imageSrc, this.context.contentId)
+      H5P.setSource(this.imageElement, this.props.imageSrc, this.context.contentId);
     }
     else {
       const path = H5P.getPath(this.props.imageSrc.path, this.context.contentId);
@@ -214,7 +221,7 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
-   * TODO
+   * Triggeered when the scene is loaded.  Updates state.threeSixty in Main.js
    */
   sceneLoaded = () => {
     if (this.state.isLoaded && this.state.isUpdated && this.props.isActive) {
@@ -266,7 +273,8 @@ export default class ThreeSixtyScene extends React.Component {
         return scene.sceneId === interaction.action.params.nextSceneId;
       });
       title = gotoScene.scenename; // Use scenename as title.
-    } else {
+    }
+    else {
       title = this.getInteractionTitle(interaction.action);
     }
 
@@ -294,7 +302,9 @@ export default class ThreeSixtyScene extends React.Component {
         doubleClickHandler={() => {
           this.context.trigger('doubleClickedInteraction', index);
         }}
-        onFocus={ () => { this.handleInteractionFocus(interaction) } }
+        onFocus={ () => {
+          this.handleInteractionFocus(interaction);
+        }}
         onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}

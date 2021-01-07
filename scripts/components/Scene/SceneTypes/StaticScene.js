@@ -277,7 +277,7 @@ export default class StaticScene extends React.Component {
   getInteractionTitle(action) {
     const currentTitle = action.metadata.title;    
 
-    switch(currentTitle) {
+    switch (currentTitle) {
       case 'Untitled Text':
         return action.params.text;
       case "Untitled Image":
@@ -399,7 +399,8 @@ export default class StaticScene extends React.Component {
                   return scene.sceneId === interaction.action.params.nextSceneId;
                 });
                 title = nextScene.scenename;
-              } else {
+              } 
+              else {
                 title = this.getInteractionTitle(interaction.action);
               }
 
