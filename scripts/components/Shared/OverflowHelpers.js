@@ -6,10 +6,11 @@ export class OverflowHelper {
 
   /**
    * Create an instance of OverflowHelper.
-   * @param {HTMLElement} el DOM element we are checking whether overflows 
-   * @param {HTMLElement} containerEl DOM element container
-   * @param {{x: number, y: number}} initialCoordinates The initial coordinates for the element
-   *  
+   * @param  {number} elHeight
+   * @param  {number} topPosition
+   * @param  {number} leftPosition
+   * @param  {number} containerHeight
+   * @param  {number} containerWidth 
    */
   constructor(elHeight, topPosition, leftPosition, containerHeight, containerWidth) {
     this.height = elHeight;
@@ -43,13 +44,13 @@ export class OverflowHelper {
 
 /**
  * Calculate correct alignment and expand direction for an element
- * @param  {String} position
- * @param  {Number} height
- * @param  {Number} topPosition
- * @param  {Number} leftPosition
- * @param  {Number} wrapperHeight
- * @param  {Number} wrapperWidth
- * @returns {Object} {expandirection, alignment}
+ * @param  {string} position
+ * @param  {number} height
+ * @param  {number} topPosition
+ * @param  {number} leftPosition
+ * @param  {number} wrapperHeight
+ * @param  {number} wrapperWidth
+ * @returns {object} {expandirection, alignment}
  */
 export function willOverflow(position, height, topPosition, leftPosition, wrapperHeight, wrapperWidth) {
   const overflowHelper = new OverflowHelper(height, topPosition, leftPosition, wrapperHeight, wrapperWidth);
