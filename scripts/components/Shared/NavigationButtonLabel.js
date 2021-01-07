@@ -55,7 +55,7 @@ export default class NavigationButtonLabel extends React.Component {
     if (!this.state.isExpanded) {
       setTimeout(() => {
         this.setState({
-          divHeight: this.innerinnerLabelDiv.current.scrollHeight,
+          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight: 0,
           isExpanded: true
         });
       }, 0);
