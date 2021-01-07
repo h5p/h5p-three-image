@@ -28,7 +28,7 @@ export default class NavigationButtonLabel extends React.Component {
     super(props);
 
     this.onClick.bind(this);
-    this.innerinnerLabelDiv = React.createRef();
+    this.innerLabelDiv = React.createRef();
     this.navLabel = React.createRef();
 
     this.state = {
@@ -145,7 +145,6 @@ export default class NavigationButtonLabel extends React.Component {
     }
     const overflowChanges = willOverflow(this.props.labelPos,
       height,
-      this.innerLabelDiv.current.scrollWidth,
       this.props.topPosition,
       this.props.leftPosition,
       this.props.wrapperHeight,

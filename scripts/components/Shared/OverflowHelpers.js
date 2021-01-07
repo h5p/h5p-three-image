@@ -26,9 +26,8 @@ export class OverflowHelper {
    * Check whether the DOM element is overflowing the container's top edge
    * @returns {boolean} true if overflowing, false if not
    */
-  overflowsTop(offset) {
-    console.log(this.height, offset, this.topPosition)
-    return this.height  + offset  > this.topPosition;
+  overflowsTop() {
+    return this.height  > this.topPosition;
   }
 
 
@@ -46,7 +45,6 @@ export class OverflowHelper {
  * Calculate correct alignment and expand direction for an element
  * @param  {String} position
  * @param  {Number} height
- * @param  {Number} width
  * @param  {Number} topPosition
  * @param  {Number} leftPosition
  * @param  {Number} wrapperHeight
@@ -54,7 +52,7 @@ export class OverflowHelper {
  * @returns {Object} {expandirection, alignment}
  */
 export function willOverflow(position, height, topPosition, leftPosition, wrapperHeight, wrapperWidth) {
-  const overflowHelper = new OverflowHelper(height, width, topPosition, leftPosition, wrapperHeight, wrapperWidth);
+  const overflowHelper = new OverflowHelper(height, topPosition, leftPosition, wrapperHeight, wrapperWidth);
   let expandDirection = null;
   let alignment = null;
 
