@@ -59,14 +59,14 @@
                 }
               },
               {
-                "label": "Button style",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "label": "Стил на бутона",
+                "description": "Решете как ще изглеждат бутоните. За сцени, които са статични и не водят до нови сцени, препоръчваме бутона \"Повече информация\".",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Нова сцена (стрелка)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Още информация (плюс)"
                   }
                 ]
               },
@@ -78,7 +78,7 @@
           }
         },
         {
-          "label": "Start scene id"
+          "label": "Начало на цена с id"
         },
         {
           "label": "Аудио запис"
