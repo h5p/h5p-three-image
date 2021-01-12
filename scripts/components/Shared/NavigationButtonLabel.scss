@@ -41,6 +41,9 @@ $labelWidth: 11em;
     left: 50%;
     .nav-label {
       padding-bottom: 1.5em;
+      .nav-label-inner {
+        text-align: center;
+      }
     }
   }
 
@@ -49,14 +52,18 @@ $labelWidth: 11em;
     transform: translateX(-50%);
     left: 50%;
     .nav-label {
+      text-align: center;
       padding-top: 1.5em;
+      .nav-label-inner {
+        text-align: center;
+      }
     }
   }
 
   &.left {
     right: $buttonSize / 2;
-    top: 0.2em;
-
+    top: 50%;
+    transform: translateY(-50%);
     .nav-label {
       padding-right: 1.5em;
     }
@@ -69,7 +76,8 @@ $labelWidth: 11em;
 
   &.right {
     left: $buttonSize / 2;
-    top: 0.2em;
+    top: 50%;
+    transform: translateY(-50%);
     .nav-label {
       padding-left: 2em;
     }
@@ -77,6 +85,14 @@ $labelWidth: 11em;
     .nav-label-expand-button {
       transform: translateX(-50%);
       left: 50%;
+    }
+  }
+
+  &.left,
+  &.right {
+    &.is-multiline {
+      top: 0.2em;
+      transform: none;
     }
   }
 
@@ -139,10 +155,6 @@ $labelWidth: 11em;
     min-width: 6em;
     max-width: $labelWidth;
 
-    &.is-multiline {
-      min-width: $labelWidth;
-    }
-
     &-inner {
       text-overflow: ellipsis;
       overflow: hidden;
@@ -152,6 +164,11 @@ $labelWidth: 11em;
       -webkit-box-orient: vertical;
     }
   }
+
+  &.is-multiline .nav-label {
+    min-width: $labelWidth;
+  }
+
   .nav-label-expand-button {
     display: block;
     position: absolute;

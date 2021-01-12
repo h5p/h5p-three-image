@@ -72,9 +72,8 @@ export default class StaticScene extends React.Component {
       return;
     }
 
-    const minFontSize = 11;
+    const minFontSize = 13;
     const fontIncrementThreshold = 55;
-
     const widthDiff = defaultSize - wrapperSize.width;
     let newFontSize = defaultFontSize - (widthDiff / fontIncrementThreshold);
     if (newFontSize < minFontSize) {

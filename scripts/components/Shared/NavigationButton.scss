@@ -19,7 +19,6 @@ $labelWidth: 9em;
 
 .nav-button {
   position: relative;
-  font-size: 1em;
   width: $buttonSize;
   height: $buttonSize;
   padding: 0;
@@ -48,9 +47,6 @@ $labelWidth: 9em;
   }
 }
 
-.nav-button-wrapper.three-sixty .nav-label {
-    font-size: 1.8em;
-}
 
 .nav-button-wrapper {
   &:hover {
@@ -81,9 +77,6 @@ $labelWidth: 9em;
   opacity: 0.5;
 }
 
-.three-sixty .nav-button {
-  font-size: 1.75em;
-}
 
 .bottom .nav-button {
   top: auto;

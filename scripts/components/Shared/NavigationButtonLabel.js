@@ -96,6 +96,23 @@ export default class NavigationButtonLabel extends React.Component {
         divHeight: this.getDivHeight()
       });
     }, 0);
+    this.context.on('resize', () => {
+      if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
+        this.setState({
+          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.off('resize', () => {
+      if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
+        this.setState({
+          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
+        });
+      }
+    });
   }
 
   /**
@@ -166,11 +183,11 @@ export default class NavigationButtonLabel extends React.Component {
 
     return (
       <div
-        className={`nav-label-container ${alignment} ${isExpanded} ${canExpand} ${hoverOnly} ${expandDirection}`}>
+        className={`nav-label-container ${alignment} ${isExpanded} ${canExpand} ${hoverOnly} ${expandDirection} ${isMultline}`}>
         <div
           style={{ height: this.state.divHeight }}
           aria-hidden='true'
-          className={`nav-label ${isMultline}`}
+          className={`nav-label`}
           ref={this.navLabel}>
           <div
             ref={this.innerLabelDiv}
