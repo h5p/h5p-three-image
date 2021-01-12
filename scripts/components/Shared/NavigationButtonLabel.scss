@@ -2,7 +2,20 @@
 @import "../../styles/colors";
 
 $labelPadding: 0.5em;
-$labelWidth: 11em;
+$labelMinWidth: 6em;
+$labelMaxWidth: 11em;
+$arrowUpTop: calc(-50% - 1px);
+$arrowDownTop: calc(-50% + 1px);
+
+@mixin center-horizontally {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+@mixin center-vertically {
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .nav-label-container {
   position: absolute;
@@ -21,7 +34,7 @@ $labelWidth: 11em;
         transform: rotate(0deg) translate(-50%, -50%);
       }
       .nav-label-expand-arrow:before {
-        top: calc(-50% - 1px);
+        top: $arrowUpTop;
       }
     }
     &.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
@@ -30,15 +43,14 @@ $labelWidth: 11em;
         transform: rotate(180deg) translate(50%, 50%);
       }
       &:before {
-        top: calc(-50% + 1px);
+        top: $arrowDownTop;
       }
     }
   }
 
   &.top {
     bottom: ($buttonSize / 2);
-    transform: translateX(-50%);
-    left: 50%;
+    @include center-horizontally();
     .nav-label {
       padding-bottom: 1.5em;
       .nav-label-inner {
@@ -49,8 +61,7 @@ $labelWidth: 11em;
 
   &.bottom {
     top: ($buttonSize / 2);
-    transform: translateX(-50%);
-    left: 50%;
+    @include center-horizontally();
     .nav-label {
       text-align: center;
       padding-top: 1.5em;
@@ -62,29 +73,25 @@ $labelWidth: 11em;
 
   &.left {
     right: $buttonSize / 2;
-    top: 50%;
-    transform: translateY(-50%);
+    @include center-vertically();
     .nav-label {
       padding-right: 1.5em;
     }
 
     .nav-label-expand-button {
-      transform: translateX(-50%);
-      left: 50%;
+      @include center-horizontally();
     }
   }
 
   &.right {
     left: $buttonSize / 2;
-    top: 50%;
-    transform: translateY(-50%);
+    @include center-vertically();
     .nav-label {
       padding-left: 2em;
     }
 
     .nav-label-expand-button {
-      transform: translateX(-50%);
-      left: 50%;
+      @include center-horizontally();
     }
   }
 
@@ -94,14 +101,12 @@ $labelWidth: 11em;
       top: 0.2em;
       transform: none;
     }
-  }
-
-  // If expansion has to be done in another direction than the alignment,
-  // this applies to right and left aligned elements
-
-  &.expand-up {
-    top: unset;
-    bottom: 0;
+    // If expansion has to be done in another direction than the alignment,
+    // this applies to right and left aligned elements
+    &.expand-up {
+      top: unset;
+      bottom: 0;
+    }
   }
 
   &.hover-only {
@@ -138,7 +143,7 @@ $labelWidth: 11em;
       }
 
       .nav-label-expand-arrow:before {
-        top: calc(-50% - 1px);
+        top: $arrowUpTop;
       }
     }
   }
@@ -152,8 +157,8 @@ $labelWidth: 11em;
     padding: $labelPadding;
     overflow: hidden;
     font-size: 0.9em;
-    min-width: 6em;
-    max-width: $labelWidth;
+    min-width: $labelMinWidth;
+    max-width: $labelMaxWidth;
 
     &-inner {
       text-overflow: ellipsis;
@@ -166,7 +171,7 @@ $labelWidth: 11em;
   }
 
   &.is-multiline .nav-label {
-    min-width: $labelWidth;
+    min-width: $labelMaxWidth;
   }
 
   .nav-label-expand-button {
@@ -211,7 +216,7 @@ $labelWidth: 11em;
 
       &:before {
         color: #ffffff;
-        top: calc(-50% + 1px);
+        top: $arrowDownTop;
       }
     }
   }

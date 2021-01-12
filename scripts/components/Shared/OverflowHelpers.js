@@ -28,7 +28,7 @@ export class OverflowHelper {
    * @returns {boolean} true if overflowing, false if not
    */
   overflowsTop() {
-    return this.height  > this.topPosition;
+    return this.height > this.topPosition;
   }
 
 
@@ -57,21 +57,24 @@ export function willOverflow(position, height, topPosition, leftPosition, wrappe
   let expandDirection = null;
   let alignment = null;
 
-  if (position === 'left' || position === 'right') {
-    if (overflowHelper.overflowsBottom()) {
-      expandDirection = 'up';
-    }
-  }
-  else if (position === 'top') {
-    if(overflowHelper.overflowsTop()) {
-      alignment = 'bottom';
-    }
-  }
-  else if (position === 'bottom') {
-    if(overflowHelper.overflowsBottom()) {
-      alignment = 'top';
-    }
+  switch (position) {
+    case 'left':
+    case 'right':
+      if (overflowHelper.overflowsBottom()) {
+        expandDirection = 'up';
+      }
+      break;
+    case 'top':
+      if (overflowHelper.overflowsTop()) {
+        alignment = 'bottom';
+      }
+      break;
+    case 'bottom':
+      if (overflowHelper.overflowsBottom()) {
+        alignment = 'top';
+      }
+      break;
   }
 
-  return {expandDirection: expandDirection, alignment: alignment};
+  return { expandDirection: expandDirection, alignment: alignment };
 }

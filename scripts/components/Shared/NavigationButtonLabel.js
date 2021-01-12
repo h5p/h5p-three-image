@@ -23,6 +23,12 @@ export const isHoverLabel = (label, globalLabel) => {
   return label.showLabel === 'show' ? false : true;
 };
 
+// Threshold for if the label should be multiline
+const INNER_LABEL_HEIGHT_THRESHOLD_LOW = 22;
+
+// Threshold for if the label should be expandeble
+const INNER_LABEL_HEIGHT_THRESHOLD_HIGH = 44;
+
 export default class NavigationButtonLabel extends React.Component {
   constructor(props) {
     super(props);
@@ -123,7 +129,7 @@ export default class NavigationButtonLabel extends React.Component {
       if (this.props.hoverOnly) {
         return 'unset';
       }
-      return this.innerLabelDiv.current.scrollHeight > 22 ? '3em' : '1.5em';
+      return this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
     }
     return null;
   }
@@ -132,7 +138,7 @@ export default class NavigationButtonLabel extends React.Component {
    * Return if element can be expanded
    */
   isExpandable() {
-    if (this.innerLabelDiv.current.scrollHeight > 44) {
+    if (this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH) {
       return true;
     }
     return false;
