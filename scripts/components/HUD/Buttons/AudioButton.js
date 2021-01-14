@@ -133,10 +133,12 @@ export default class AudioButton extends React.Component {
           isPlayer.pause();
         }
 
-        // and start the current player
-        const currentPlayer = this.getPlayer(currentPlayerId);
-        if (currentPlayer) {
-          currentPlayer.play();
+        // and start the current player if we have an id
+        if (currentPlayerId) {
+          const currentPlayer = this.getPlayer(currentPlayerId);
+          if (currentPlayer) {
+            currentPlayer.play();
+          }
         }
       }
     }
