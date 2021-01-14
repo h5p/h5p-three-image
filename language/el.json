@@ -218,6 +218,26 @@
         {
           "label": "Aria label for the expand label button",
           "default": "Expand the visual label"
+        },
+        {
+          "label": "Label for when background image is loading in 360 scene",
+          "default": "Loading background image..."
+        },
+        {
+          "label": "Label for when there is no content",
+          "default": "No content"
+        },
+        {
+          "label": "Label for context menu button for go to scene",
+          "default": "Go to scene"
+        },
+        {
+          "label": "Label for context menu button for edit",
+          "default": "Edit"
+        },
+        {
+          "label": "Label for context menu button for delete",
+          "default": "Delete"
         }
       ]
     }

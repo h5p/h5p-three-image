@@ -485,7 +485,7 @@ export default class ThreeSixtyScene extends React.Component {
               <div className='loading-image-wrapper'>
                 <img src={loading} alt='loading' />
               </div>
-              <div className='loader'>Loading background image...</div>
+              <div className='loader' dangerouslySetInnerHTML={{ __html: this.context.l10n.backgroundLoading }}></div>
             </div>
           </div>
         }

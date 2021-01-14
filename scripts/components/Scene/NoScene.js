@@ -1,17 +1,17 @@
 import React from 'react';
 import './NoScene.scss';
-import { H5PContext } from "../../context/H5PContext";
+import PropTypes from 'prop-types';
 
-export default class NoScene extends React.Component {
-  render() {
-    return (
-      <div className='no-scene-container'>
-        <div className="no-scene-wrapper">
-          <div className="title">No content</div>
-        </div>
-      </div>
-    );
-  }
-}
+const NoScene = ({label}) => (
+  <div className='no-scene-container'>
+    <div className="no-scene-wrapper">
+      <div className="title" dangerouslySetInnerHTML={{ __html: label }} />
+    </div>
+  </div>
+);
 
-NoScene.contextType = H5PContext;
+NoScene.propTypes = {
+  label: PropTypes.string.isRequired
+};
+
+export default NoScene;

@@ -370,6 +370,36 @@
         "type": "text",
         "label": "Aria label for the expand label button",
         "default": "Expand the visual label"
+      },
+      {
+        "name": "backgroundLoading",
+        "type": "text",
+        "label": "Label for when background image is loading in 360 scene",
+        "default": "Loading background image..."
+      },
+      {
+        "name": "noContent",
+        "type": "text",
+        "label": "Label for when there is no content",
+        "default": "No content"
+      },
+      {
+        "name": "goToScene",
+        "type": "text",
+        "label": "Label for context menu button for go to scene",
+        "default": "Go to scene"
+      },
+      {
+        "name": "edit",
+        "type": "text",
+        "label": "Label for context menu button for edit",
+        "default": "Edit"
+      },
+      {
+        "name": "delete",
+        "type": "text",
+        "label": "Label for context menu button for delete",
+        "default": "Delete"
       }
     ]
   }
