@@ -101,6 +101,14 @@ export default class NavigationButtonLabel extends React.Component {
         expandable: this.isExpandable(),
         divHeight: this.getDivHeight()
       });
+      const expandDirection = this.getOverflowProperties();
+      console.log(expandDirection);
+      if (expandDirection.expandDirection !== this.state.expandDirection) {
+        this.setState({ expandDirection: expandDirection.expandDirection });
+      }
+      if (expandDirection.alignment !== this.state.alignment) {
+        this.setState({ alignment: expandDirection.alignment });
+      }
     }, 0);
     this.context.on('resize', () => {
       if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
@@ -203,8 +211,8 @@ export default class NavigationButtonLabel extends React.Component {
         </div>
         {canExpand &&
           <button
-            onFocus={() => this.props.setFocused(true)}
-            onBlur ={() => this.props.setFocused(false)}
+            onFocus={() => this.props.onFocus(true)}
+            onBlur ={() => this.props.onBlur(false)}
             ref={this.props.forwardRef}
             className="nav-label-expand-button"
             tabIndex={expandButtonTabIndex}

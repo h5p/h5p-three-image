@@ -258,6 +258,15 @@ export default class NavigationButton extends React.Component {
     });
   }
 
+  handleExpandButtonFocus = () => {
+    this.setState({
+      expandButtonFocused: true
+    });
+    if (this.props.onFocusedInteraction) {
+      this.props.onFocus();
+    }
+  }
+
   render() {
     let wrapperClasses = [
       'nav-button-wrapper',
@@ -327,7 +336,8 @@ export default class NavigationButton extends React.Component {
             hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
-            setFocused={(focused) => this.setState({ expandButtonFocused: focused })}
+            onFocus={this.handleExpandButtonFocus.bind(this)}
+            onBlur={() => this.setState({ expandButtonFocused: false })}
             topPosition={this.navButtonWrapper.current ? this.navButtonWrapper.current.offsetTop : null}
             wrapperHeight={this.props.wrapperHeight}
             wrapperWidth={this.props.wrapperWidth}
