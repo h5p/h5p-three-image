@@ -344,6 +344,7 @@ export default class NavigationButton extends React.Component {
             leftPosition={this.props.leftPosition}
             navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
             staticScene={this.props.staticScene}
+            navButtonFocused={this.state.innerButtonFocused}
           />
         }
       </div>

@@ -227,3 +227,17 @@ $arrowDownTop: calc(-50% + 1px);
     max-width: unset;
   }
 }
+.nav-button-wrapper:focus {
+  .nav-label-container.hover-only {
+    display: block;
+    .nav-label {
+      max-width: unset;
+    }
+  }
+}
+.nav-button-wrapper .nav-label-container.hover-only.nav-button-focused {
+  display: block;
+  .nav-label {
+    max-width: unset;
+  }
+}
