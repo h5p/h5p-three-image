@@ -192,8 +192,7 @@ export default class NavigationButtonLabel extends React.Component {
       height,
       this.props.topPosition,
       this.props.leftPosition,
-      this.props.wrapperHeight,
-      this.props.wrapperWidth);
+      this.props.wrapperHeight);
 
     return overflowChanges;
   }

@@ -12,13 +12,12 @@ export class OverflowHelper {
    * @param  {number} containerHeight
    * @param  {number} containerWidth 
    */
-  constructor(elHeight, topPosition, leftPosition, containerHeight, containerWidth) {
+  constructor(elHeight, topPosition, leftPosition, containerHeight) {
     this.height = elHeight;
 
     this.topPosition = topPosition;
     this.leftPosition = leftPosition;
 
-    this.containerWidth = containerWidth;
     this.containerHeight = containerHeight;
 
   }
@@ -49,11 +48,10 @@ export class OverflowHelper {
  * @param  {number} topPosition
  * @param  {number} leftPosition
  * @param  {number} wrapperHeight
- * @param  {number} wrapperWidth
  * @returns {object} {expandirection, alignment}
  */
-export function willOverflow(position, height, topPosition, leftPosition, wrapperHeight, wrapperWidth) {
-  const overflowHelper = new OverflowHelper(height, topPosition, leftPosition, wrapperHeight, wrapperWidth);
+export function willOverflow(position, height, topPosition, leftPosition, wrapperHeight) {
+  const overflowHelper = new OverflowHelper(height, topPosition, leftPosition, wrapperHeight);
   let expandDirection = null;
   let alignment = null;
 

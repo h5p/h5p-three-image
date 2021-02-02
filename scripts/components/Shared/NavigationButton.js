@@ -338,9 +338,8 @@ export default class NavigationButton extends React.Component {
             forwardRef={this.expandButton}
             onFocus={this.handleExpandButtonFocus.bind(this)}
             onBlur={() => this.setState({ expandButtonFocused: false })}
-            topPosition={this.navButtonWrapper.current ? this.navButtonWrapper.current.offsetTop : null}
+            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
             wrapperHeight={this.props.wrapperHeight}
-            wrapperWidth={this.props.wrapperWidth}
             leftPosition={this.props.leftPosition}
             navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
             staticScene={this.props.staticScene}

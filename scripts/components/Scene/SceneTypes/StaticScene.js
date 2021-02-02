@@ -11,6 +11,7 @@ export default class StaticScene extends React.Component {
 
     this.sceneWrapperRef = React.createRef();
     this.imageElementRef = React.createRef();
+    this.overLayRef = React.createRef();
 
     this.state = {
       x: null,
@@ -334,6 +335,7 @@ export default class StaticScene extends React.Component {
 
     return (
       <div
+        ref={this.overLayRef}
         className='image-scene-overlay'
         aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
       >
@@ -422,8 +424,9 @@ export default class StaticScene extends React.Component {
                   buttonClasses={ buttonClasses }
                   onBlur={this.props.onBlurInteraction}
                   isFocused={this.props.focusedInteraction === index}
-                  wrapperHeight={this.getWrapperSize(true)}
-                  wrapperWidth={this.getWrapperSize()}
+                  // Use the overlay height instead of getWrapperSize because
+                  // That is not correct when moving to a new scene without resizing
+                  wrapperHeight={this.overLayRef.current ? this.overLayRef.current.clientHeight : 0}
                   staticScene={true}
                 >
                   {
