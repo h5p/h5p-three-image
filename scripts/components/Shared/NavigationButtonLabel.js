@@ -9,7 +9,7 @@ export const getLabelFromInteraction = (interaction) => {
 };
 
 export const getLabelPos = (label, globalLabel) => {
-  return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
+  return label ? (label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition) : false;
 };
 
 export const getLabelText = (label, title) => {
@@ -17,10 +17,10 @@ export const getLabelText = (label, title) => {
 };
 
 export const isHoverLabel = (label, globalLabel) => {
-  if (label.showLabel === 'inherit') {
+  if (label && label.showLabel === 'inherit') {
     return globalLabel.showLabel ? false : true;
   }
-  return label.showLabel === 'show' ? false : true;
+  return label && label.showLabel === 'show' ? false : true;
 };
 
 // Threshold for if the label should be multiline
@@ -43,7 +43,7 @@ export default class NavigationButtonLabel extends React.Component {
       divHeight: this.getDivHeight(),
       labelPos: this.props.labelPos,
       expandDirection: null,
-      alignment: null
+      alignment: null,
     };
 
   }
@@ -85,6 +85,19 @@ export default class NavigationButtonLabel extends React.Component {
     // It is only in a static scene the label can be overflow, since camera can be moved in 360
     if (this.props.topPosition !== prevProps.topPosition
       || this.props.leftPosition !== prevProps.leftPosition && this.props.staticScene) {
+      const expandDirection = this.getOverflowProperties();
+      if (expandDirection.expandDirection !== this.state.expandDirection) {
+        this.setState({ expandDirection: expandDirection.expandDirection });
+      }
+      if (expandDirection.alignment !== this.state.alignment) {
+        this.setState({ alignment: expandDirection.alignment });
+      }
+    }
+    if (!prevProps.rendered && this.props.rendered) {
+      this.setState({
+        expandable: this.isExpandable(),
+        divHeight: this.getDivHeight(),
+      });
       const expandDirection = this.getOverflowProperties();
       if (expandDirection.expandDirection !== this.state.expandDirection) {
         this.setState({ expandDirection: expandDirection.expandDirection });
@@ -136,7 +149,7 @@ export default class NavigationButtonLabel extends React.Component {
       if (this.props.hoverOnly) {
         return 'unset';
       }
-      return this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
+      return this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth || this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
     }
     return null;
   }
@@ -145,7 +158,9 @@ export default class NavigationButtonLabel extends React.Component {
    * Return if element can be expanded
    */
   isExpandable() {
-    if (this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH) {
+    // If not fully loaded the scrollheight might be wrong, therefore we check if it is to wide and two lines
+    if (this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH 
+      || (this.getDivHeight() === '3em' && this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth)) {
       return true;
     }
     return false;

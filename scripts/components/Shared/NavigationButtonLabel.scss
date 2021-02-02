@@ -160,7 +160,8 @@ $arrowDownTop: calc(-50% + 1px);
     min-width: $labelMinWidth;
     max-width: $labelMaxWidth;
 
-    &-inner {
+    .nav-label-inner {
+      white-space: pre;
       text-overflow: ellipsis;
       overflow: hidden;
       text-align: left;
@@ -172,6 +173,15 @@ $arrowDownTop: calc(-50% + 1px);
 
   &.is-multiline .nav-label {
     min-width: $labelMaxWidth;
+   .nav-label-inner {
+      white-space: initial;
+    }
+  }
+  &.can-expand .nav-label {
+    min-width: $labelMaxWidth;
+   .nav-label-inner {
+      white-space: initial;
+    }
   }
 
   .nav-label-expand-button {

@@ -280,7 +280,7 @@ export default class ThreeSixtyScene extends React.Component {
 
     return (
       <NavigationButton
-        key={'interaction-' + index}
+        key={'interaction-' + this.props.sceneId + index}
         onMount={ el => this.props.threeSixty.add(
           el,
           ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
@@ -308,6 +308,7 @@ export default class ThreeSixtyScene extends React.Component {
         onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}
+        rendered={this.state.isUpdated}
       >
         {
           this.context.extras.isEditor &&

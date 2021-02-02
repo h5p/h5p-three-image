@@ -319,7 +319,7 @@ export default class NavigationButton extends React.Component {
       >
         <button
           ref={this.navButton}
-          title={getLabelText(this.props.label, title)}
+          aria-label={getLabelText(this.props.label, title)}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
@@ -345,6 +345,7 @@ export default class NavigationButton extends React.Component {
             navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
             staticScene={this.props.staticScene}
             navButtonFocused={this.state.innerButtonFocused}
+            rendered={this.props.rendered}
           />
         }
       </div>
