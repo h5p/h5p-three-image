@@ -26,7 +26,7 @@ export default class ContextMenu extends Component {
             onClick={this.goToScene.bind(this)}
             tabIndex="-1"
           >
-            <div className='tooltip'>Go to scene</div>
+            <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.l10n.goToScene }}></div>
           </button>
         }
         <button
@@ -34,14 +34,14 @@ export default class ContextMenu extends Component {
           onClick={this.handlEdit.bind(this)}
           tabIndex="-1"
         >
-          <div className='tooltip'>Edit</div>
+          <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.l10n.edit }} />
         </button>
         <button
           className='delete'
           onClick={this.handleDelete.bind(this)}
           tabIndex="-1"
         >
-          <div className='tooltip'>Delete</div>
+          <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.l10n.delete }}/>
         </button>
       </div>
     );

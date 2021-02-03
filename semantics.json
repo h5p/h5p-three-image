@@ -99,6 +99,73 @@
                 "type": "group",
                 "fields": [
                   {
+                    "name": "label",
+                    "type": "group",
+                    "label": "Label",
+                    "importance": "low",
+                    "expanded": true,
+                    "description": "A label that describes the icon.",
+                    "fields": [
+                      {
+                        "name": "labelText",
+                        "type": "text",
+                        "label": "Label",
+                        "optional": true,
+                        "description": "If left blank we'll try to use the title as a label"
+                      },
+                      {
+                        "name": "labelPosition",
+                        "type": "select",
+                        "label": "Label position",
+                        "description": "Choose where the label should appear",
+                        "options": [
+                          {
+                            "value": "inherit",
+                            "label": "Use behavioral setting"
+                          },
+                          {
+                            "value": "right",
+                            "label": "Right aligned"
+                          },
+                          {
+                            "value": "left",
+                            "label": "Left aligned"
+                          },
+                          {
+                            "value": "top",
+                            "label": "Top aligned"
+                          },
+                          {
+                            "value": "bottom",
+                            "label": "Bottom aligned"
+                          }
+                        ],
+                        "default": "inherit"
+                      },
+                      {
+                        "name": "showLabel",
+                        "type": "select",
+                        "label": "Display Label",
+                        "description": "If hidden - labels will show only on mouse over",
+                        "options": [
+                          {
+                            "value": "inherit",
+                            "label": "Use behavioral setting"
+                          },
+                          {
+                            "value": "show",
+                            "label": "Show"
+                          },
+                          {
+                            "value": "hide",
+                            "label": "Hide"
+                          }
+                        ],
+                        "default": "inherit"
+                      }
+                    ]
+                  },
+                  {
                     "name": "action",
                     "type": "library",
                     "label": "Interaction",
@@ -171,7 +238,7 @@
   {
     "name": "behaviour",
     "type": "group",
-    "label": "Behavioural settings",
+    "label": "Behavioral settings",
     "importance": "low",
     "description": "These options will let you control how the world behaves.",
     "fields": [
@@ -205,6 +272,134 @@
           }
         ],
         "default": "high"
+      },
+      {
+        "name": "label",
+        "type": "group",
+        "label": "Label settings",
+        "importance": "low",
+        "expanded": true,
+        "description": "A label that describes the icon.",
+        "fields": [
+          {
+            "name": "labelPosition",
+            "type": "select",
+            "label": "Label position",
+            "description": "The default label position. The position may be overriden per interaction",
+            "options": [
+              {
+                "value": "right",
+                "label": "Right aligned"
+              },
+              {
+                "value": "left",
+                "label": "Left aligned"
+              },
+              {
+                "value": "top",
+                "label": "Top aligned"
+              },
+              {
+                "value": "bottom",
+                "label": "Bottom aligned"
+              }
+            ],
+            "default": "right"
+          },
+          {
+            "name": "showLabel",
+            "type": "boolean",
+            "label": "Display Labels",
+            "description": "If unchecked - labels will show only on mouse over",
+            "default": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "common": true,
+    "label": "Localize",
+    "fields": [
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Aria label for content type",
+        "default": "Interactive Explorer"
+      },
+      {
+        "name": "playAudioTrack",
+        "type": "text",
+        "label": "Label for to play audio",
+        "default": "Play Audio Track"
+      },
+      {
+        "name": "pauseAudioTrack",
+        "type": "text",
+        "label": "Label to pause audio",
+        "default": "Pause Audio Track"
+      },
+      {
+        "name": "sceneDescription",
+        "type": "text",
+        "label": "Title to scene dialog",
+        "default": "Scene Description"
+      },
+      {
+        "name": "resetCamera",
+        "type": "text",
+        "label": "Label for button to reset camera",
+        "default": "Reset Camera"
+      },
+      {
+        "name": "submitDialog",
+        "type": "text",
+        "label": "Label for the submit dialog button",
+        "default": "Submit Dialog"
+      },
+      {
+        "name": "closeDialog",
+        "type": "text",
+        "label": "Label for the close dialog button",
+        "default": "Close Dialog"
+      },
+      {
+        "name": "expandButtonAriaLabel",
+        "type": "text",
+        "label": "Aria label for the expand label button",
+        "default": "Expand the visual label"
+      },
+      {
+        "name": "backgroundLoading",
+        "type": "text",
+        "label": "Label for when background image is loading in 360 scene",
+        "default": "Loading background image..."
+      },
+      {
+        "name": "noContent",
+        "type": "text",
+        "label": "Label for when there is no content",
+        "default": "No content"
+      },
+      {
+        "name": "goToScene",
+        "type": "text",
+        "label": "Label for context menu button for go to scene",
+        "default": "Go to scene"
+      },
+      {
+        "name": "edit",
+        "type": "text",
+        "label": "Label for context menu button for edit",
+        "default": "Edit"
+      },
+      {
+        "name": "delete",
+        "type": "text",
+        "label": "Label for context menu button for delete",
+        "default": "Delete"
       }
     ]
   }

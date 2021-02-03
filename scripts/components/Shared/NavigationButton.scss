@@ -1,16 +1,26 @@
 @import '../../styles/icons';
 @import '../../styles/colors';
 
+$labelPadding: 0.5em;
+$labelWidth: 9em;
+
 .nav-button-wrapper {
   position: absolute;
   display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &.active-element {
+    z-index: 2;
+  }
 }
 
 .nav-button {
   position: relative;
-  font-size: 1em;
-  width: 2.5em;
-  height: 2.5em;
+  width: $buttonSize;
+  height: $buttonSize;
   padding: 0;
   border-radius: 50%;
   line-height: 1;
@@ -37,16 +47,29 @@
   }
 }
 
-.h5p-interaction-button .nav-button {
-  background: $interactionBg;
 
+.nav-button-wrapper {
   &:hover {
-    background: $interactionHoverBg;
+    z-index: 3;
   }
 
-  &:active {
-    background: $interactionActiveBg;
-    border-color: $interactionActiveBorder;
+&.dragging, &.focused {
+    z-index: 3;
+  }
+}
+
+.h5p-interaction-button {
+  .nav-button {
+    background: $interactionBg;
+
+    &:active {
+      background: $interactionActiveBg;
+      border-color: $interactionActiveBorder;
+    }
+  }
+
+  &:hover .nav-button {
+    background: $interactionHoverBg;
   }
 }
 
@@ -54,9 +77,6 @@
   opacity: 0.5;
 }
 
-.three-sixty .nav-button {
-  font-size: 1.75em;
-}
 
 .bottom .nav-button {
   top: auto;

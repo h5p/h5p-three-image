@@ -23,14 +23,16 @@ H5P.ThreeImage = (function () {
 
     let wrapper;
     this.behavior = params.behaviour || {};
-    this.l10n = {
-      title: 'Interactive Explorer', // TODO: Add to semantics.json
-      playAudioTrack: 'Play Audio Track', // TODO: Add to semantics.json
-      pauseAudioTrack: 'Pause Audio Track', // TODO: Add to semantics.json
-      sceneDescription: 'Scene Description', // TODO: Add to semantics.json
-      resetCamera: 'Reset Camera', // TODO: Add to semantics.json
-      submitDialog: 'Submit Dialog', // TODO: Add to semantics.jso
-      closeDialog: 'Close Dialog' // TODO: Add to semantics.jso
+    this.l10n = {...params.l10n,
+      // Text defaults
+      title: 'Interactive Explorer',
+      playAudioTrack: 'Play Audio Track',
+      pauseAudioTrack: 'Pause Audio Track',
+      sceneDescription: 'Scene Description',
+      resetCamera: 'Reset Camera',
+      submitDialog: 'Submit Dialog',
+      closeDialog: 'Close Dialog',
+      expandButtonAriaLabel: 'Expand the visual label'
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
@@ -87,7 +89,8 @@ H5P.ThreeImage = (function () {
 
     this.reDraw = (forceStartScreen = this.currentScene) => {
       const sceneRenderingQuality = this.behavior.sceneRenderingQuality;
-      if (sceneRenderingQuality !== this.sceneRenderingQuality) {
+      if (sceneRenderingQuality !== this.sceneRenderingQuality
+        && this.threeSixty) {
         this.setSceneRenderingQuality(sceneRenderingQuality);
       }
 
@@ -159,7 +162,7 @@ H5P.ThreeImage = (function () {
     this.getRatio = () => {
       const rect = wrapper.getBoundingClientRect();
       return (rect.width / rect.height);
-    }
+    };
 
     const setCameraPosition = (cameraPosition, focus) => {
       if (this.currentScene === null || !this.threeSixty) {

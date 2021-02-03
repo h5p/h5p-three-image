@@ -76,3 +76,8 @@ typings/
 
 dist
 TODOs.md
+.DS_Store
+.eslintrc.json
+package-lock.json
+package.json
+scripts/.DS_Store

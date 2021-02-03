@@ -1,0 +1,253 @@
+@import "../../styles/icons";
+@import "../../styles/colors";
+
+$labelPadding: 0.5em;
+$labelMinWidth: 6em;
+$labelMaxWidth: 11em;
+$arrowUpTop: calc(-50% - 1px);
+$arrowDownTop: calc(-50% + 1px);
+
+@mixin center-horizontally {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+@mixin center-vertically {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-label-container {
+  position: absolute;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border: 0;
+
+  //The different allignment the label has
+
+  &.top,
+  &.expand-up {
+    .nav-label-expand-button {
+      bottom: unset;
+      top: -1.1em;
+      .nav-label-expand-arrow:before,
+      .nav-label-expand-arrow:after {
+        transform: rotate(0deg) translate(-50%, -50%);
+      }
+      .nav-label-expand-arrow:before {
+        top: $arrowUpTop;
+      }
+    }
+    &.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
+      &:before,
+      &:after {
+        transform: rotate(180deg) translate(50%, 50%);
+      }
+      &:before {
+        top: $arrowDownTop;
+      }
+    }
+  }
+
+  &.top {
+    bottom: ($buttonSize / 2);
+    @include center-horizontally();
+    .nav-label {
+      padding-bottom: 1.5em;
+      .nav-label-inner {
+        text-align: center;
+      }
+    }
+  }
+
+  &.bottom {
+    top: ($buttonSize / 2);
+    @include center-horizontally();
+    .nav-label {
+      text-align: center;
+      padding-top: 1.5em;
+      .nav-label-inner {
+        text-align: center;
+      }
+    }
+  }
+
+  &.left {
+    right: $buttonSize / 2;
+    @include center-vertically();
+    .nav-label {
+      padding-right: 1.5em;
+    }
+
+    .nav-label-expand-button {
+      @include center-horizontally();
+    }
+  }
+
+  &.right {
+    left: $buttonSize / 2;
+    @include center-vertically();
+    .nav-label {
+      padding-left: 2em;
+    }
+
+    .nav-label-expand-button {
+      @include center-horizontally();
+    }
+  }
+
+  &.left,
+  &.right {
+    &.is-multiline {
+      top: 0.2em;
+      transform: none;
+    }
+    // If expansion has to be done in another direction than the alignment,
+    // this applies to right and left aligned elements
+    &.expand-up {
+      top: unset;
+      bottom: 0;
+    }
+  }
+
+  &.hover-only {
+    display: none;
+
+    .nav-label-inner {
+      text-overflow: unset;
+      overflow: auto;
+      white-space: normal;
+    }
+
+    .nav-label-expand-arrow {
+      display: none;
+    }
+  }
+
+  &.is-expanded {
+    .nav-label {
+      max-width: unset;
+      .nav-label-inner {
+        text-overflow: unset;
+        white-space: normal;
+        display: block;
+        -webkit-line-clamp: unset;
+        -webkit-box-orient: unset;
+      }
+    }
+    .nav-label-expand-button {
+      .nav-label-expand-arrow:before,
+      .nav-label-expand-arrow:after {
+        transform: rotate(0deg) translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+
+      .nav-label-expand-arrow:before {
+        top: $arrowUpTop;
+      }
+    }
+  }
+
+  .nav-label {
+    transition: height 0.2s linear;
+    border-radius: 3px;
+    background: $labelBg;
+    color: $labelColor;
+    line-height: 1.5;
+    padding: $labelPadding;
+    overflow: hidden;
+    font-size: 0.9em;
+    min-width: $labelMinWidth;
+    max-width: $labelMaxWidth;
+
+    .nav-label-inner {
+      white-space: pre;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  &.is-multiline .nav-label {
+    min-width: $labelMaxWidth;
+   .nav-label-inner {
+      white-space: initial;
+    }
+  }
+  &.can-expand .nav-label {
+    min-width: $labelMaxWidth;
+   .nav-label-inner {
+      white-space: initial;
+    }
+  }
+
+  .nav-label-expand-button {
+    display: block;
+    position: absolute;
+    bottom: -1.1em;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.8em;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    &:focus {
+      background-color: #000000;
+      box-shadow: 0 0px 10px 1px #373e94;
+      border: 1px dotted #ffffff;
+      outline: none;
+    }
+
+    &:hover {
+      background-color: #ffffff;
+      box-shadow: 0 0px 10px 1px #000000;
+    }
+
+    .nav-label-expand-arrow {
+      position: relative;
+
+      &:before,
+      &:after {
+        font-family: "360-image";
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        transform: rotate(180deg) translate(50%, 50%);
+        font-size: 1.1em;
+        height: 1.025em;
+        content: $triangleArrow;
+        z-index: 1;
+        color: #000000;
+      }
+
+      &:before {
+        color: #ffffff;
+        top: $arrowDownTop;
+      }
+    }
+  }
+}
+.nav-button-wrapper:hover .nav-label-container.hover-only {
+  display: block;
+  .nav-label {
+    max-width: unset;
+  }
+}
+.nav-button-wrapper:focus {
+  .nav-label-container.hover-only {
+    display: block;
+    .nav-label {
+      max-width: unset;
+    }
+  }
+}
+.nav-button-wrapper .nav-label-container.hover-only.nav-button-focused {
+  display: block;
+  .nav-label {
+    max-width: unset;
+  }
+}

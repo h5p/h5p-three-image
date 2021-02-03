@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
+import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -47,17 +48,23 @@ export const getIconFromInteraction = (interaction, scenes) => {
   return icon;
 };
 
+export const getLabelFromInteraction = (interaction) => {
+  return interaction.label;
+};
+
 export default class NavigationButton extends React.Component {
   constructor(props) {
     super(props);
 
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
+    this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
-
     this.state = {
       isFocused: this.props.isFocused,
+      expandButtonFocused: false,
+      innerButtonFocused: false
     };
   }
 
@@ -88,13 +95,14 @@ export default class NavigationButton extends React.Component {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget)) {
-      // Clicked target is child of button wrapper, don't blur
+    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+      // Clicked target is child of button wrapper and not the expandButton, don't blur
       this.navButtonWrapper.current.focus({
         preventScroll: true
       });
       return;
     }
+
 
     this.setState({
       isFocused: false,
@@ -116,9 +124,7 @@ export default class NavigationButton extends React.Component {
 
     this.addFocusListener();
     if (this.state.isFocused) {
-      // TODO: Would love to not have to rely on setTimeout here
-      //        but without it the element is not available.
-      setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
+      setTimeout(() => {
         this.navButtonWrapper.current.focus({
           preventScroll: true
         });
@@ -166,8 +172,8 @@ export default class NavigationButton extends React.Component {
       const el = this.navButtonWrapper.current;
       // We want this to run after the component is removed
       setTimeout(() => {
-          // Let parent know this element should be remove from the THREE world.
-          this.props.onUnmount(el);
+        // Let parent know this element should be remove from the THREE world.
+        this.props.onUnmount(el);
       }, 0);
     }
   }
@@ -222,9 +228,9 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  handleFocus = () => {
+  handleFocus = (e) => {
     if (this.context.extras.isEditor) {
-      if (this.navButtonWrapper && this.navButtonWrapper.current) {
+      if (this.navButtonWrapper && this.navButtonWrapper.current && this.navButtonWrapper === e.target) {
         this.navButtonWrapper.current.focus({
           preventScroll: true
         });
@@ -232,7 +238,7 @@ export default class NavigationButton extends React.Component {
       return;
     }
 
-    if (!this.context.extras.isEditor && this.props.onFocus) {
+    if (!this.context.extras.isEditor  && this.props.onFocus) {
       if (this.skipFocus) {
         this.skipFocus = false;
       }
@@ -252,17 +258,19 @@ export default class NavigationButton extends React.Component {
     });
   }
 
+  handleExpandButtonFocus = () => {
+    this.setState({
+      expandButtonFocused: true
+    });
+    if (this.props.onFocusedInteraction) {
+      this.props.onFocus();
+    }
+  }
+
   render() {
     let wrapperClasses = [
       'nav-button-wrapper',
     ];
-
-    if (this.navButtonWrapper && this.navButtonWrapper.current) {
-      const wrapper = this.navButtonWrapper.current;
-      if (wrapper.classList.contains('dragging')) {
-        wrapperClasses.push('dragging');
-      }
-    }
 
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
@@ -272,9 +280,20 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push(this.props.icon);
     }
 
+    if (this.state.isMouseOver) {
+      wrapperClasses.push('hover');
+    }
+
     // only apply custom focus if we have children that are shown on focus
     if (this.state.isFocused && this.props.children) {
       wrapperClasses.push('focused');
+    }
+
+    // Add classname to current active element (wrapper, button or expand label button) so it can be shown on top
+    if (this.state.isFocused && this.props.children
+      || this.state.expandButtonFocused
+      || this.state.innerButtonFocused) {
+      wrapperClasses.push('active-element');
     }
 
     const isWrapperTabbable = this.context.extras.isEditor;
@@ -289,25 +308,45 @@ export default class NavigationButton extends React.Component {
     }
 
     return (
+
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? '0' : undefined}
-        onFocus={ this.handleFocus }
+        onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
       >
         <button
           ref={this.navButton}
-          title={title}
+          aria-label={getLabelText(this.props.label, title)}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
           onMouseUp={this.setFocus.bind(this)}
-        />
+          onFocus={() => this.setState({ innerButtonFocused: true })}
+          onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
+        {this.props.icon !== 'h5p-go-back-button' &&
+          <NavigationButtonLabel
+            labelText={getLabelText(this.props.label, title)}
+            labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
+            hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
+            onMount={this.props.onMount}
+            forwardRef={this.expandButton}
+            onFocus={this.handleExpandButtonFocus.bind(this)}
+            onBlur={() => this.setState({ expandButtonFocused: false })}
+            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
+            wrapperHeight={this.props.wrapperHeight}
+            leftPosition={this.props.leftPosition}
+            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+            staticScene={this.props.staticScene}
+            navButtonFocused={this.state.innerButtonFocused}
+            rendered={this.props.rendered}
+          />
+        }
       </div>
     );
   }

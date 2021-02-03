@@ -283,7 +283,7 @@ export default class Main extends React.Component {
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
-      return <NoScene />;
+      return <NoScene label={this.context.l10n.noContent} />;
     }
 
     const scene = sceneParams.find(scene => {

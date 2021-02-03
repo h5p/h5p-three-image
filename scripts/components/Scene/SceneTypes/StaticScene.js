@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaticScene.scss';
-import NavigationButton, {getIconFromInteraction, Icons} from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons} from "../../Shared/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
@@ -11,6 +11,7 @@ export default class StaticScene extends React.Component {
 
     this.sceneWrapperRef = React.createRef();
     this.imageElementRef = React.createRef();
+    this.overLayRef = React.createRef();
 
     this.state = {
       x: null,
@@ -72,9 +73,8 @@ export default class StaticScene extends React.Component {
       return;
     }
 
-    const minFontSize = 11;
+    const minFontSize = 13;
     const fontIncrementThreshold = 55;
-
     const widthDiff = defaultSize - wrapperSize.width;
     let newFontSize = defaultFontSize - (widthDiff / fontIncrementThreshold);
     if (newFontSize < minFontSize) {
@@ -87,7 +87,10 @@ export default class StaticScene extends React.Component {
 
   getWrapperSize(isVertical = false) {
     let wrapper = this.sceneWrapperRef.current;
-    return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
+    if (wrapper) {
+      return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
+    }
+    return undefined;
   }
 
   getDraggingInteraction() {
@@ -270,6 +273,20 @@ export default class StaticScene extends React.Component {
     });
   }
 
+  // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
+  getInteractionTitle(action) {
+    const currentTitle = action.metadata.title;    
+
+    switch (currentTitle) {
+      case 'Untitled Text':
+        return action.params.text;
+      case "Untitled Image":
+        return action.params.alt;
+      default:
+        return currentTitle;
+    }
+  }
+
   getAdjustedInteractionPositions(posX, posY) {
     const interactionEm = 2.5;
     const wrapper = this.sceneWrapperRef.current;
@@ -318,6 +335,7 @@ export default class StaticScene extends React.Component {
 
     return (
       <div
+        ref={this.overLayRef}
         className='image-scene-overlay'
         aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
       >
@@ -351,6 +369,10 @@ export default class StaticScene extends React.Component {
                 buttonClasses.push('active');
               }
 
+              if (this.state.draggingInteractionIndex === index) {
+                buttonClasses.push('dragging');
+              }
+
               if (posX > 91.5) {
                 buttonClasses.push('left-aligned');
               }
@@ -367,10 +389,10 @@ export default class StaticScene extends React.Component {
                 }
               }
 
-              let title = interaction.action.metadata.title;
+              let title;
+              
               const library = H5P.libraryFromString(interaction.action.library);
               const machineName = library.machineName;
-
               const isGoToSceneInteraction = machineName === 'H5P.GoToScene';
               const scenes = this.context.params.scenes;
               if (isGoToSceneInteraction) {
@@ -378,6 +400,9 @@ export default class StaticScene extends React.Component {
                   return scene.sceneId === interaction.action.params.nextSceneId;
                 });
                 title = nextScene.scenename;
+              } 
+              else {
+                title = this.getInteractionTitle(interaction.action);
               }
 
               return (
@@ -385,6 +410,7 @@ export default class StaticScene extends React.Component {
                   key={index}
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
+                  label={getLabelFromInteraction(interaction)}
                   type={ 'interaction-' + index }
                   isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
                   nextFocus={ this.props.nextFocus }
@@ -398,6 +424,10 @@ export default class StaticScene extends React.Component {
                   buttonClasses={ buttonClasses }
                   onBlur={this.props.onBlurInteraction}
                   isFocused={this.props.focusedInteraction === index}
+                  // Use the overlay height instead of getWrapperSize because
+                  // That is not correct when moving to a new scene without resizing
+                  wrapperHeight={this.overLayRef.current ? this.overLayRef.current.clientHeight : 0}
+                  staticScene={true}
                 >
                   {
                     this.context.extras.isEditor &&
