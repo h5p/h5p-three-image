@@ -5,8 +5,8 @@
   "license": "MIT",
   "author": "Joubel AS (icc)",
   "majorVersion": 0,
-  "minorVersion": 3,
-  "patchVersion": 11,
+  "minorVersion": 4,
+  "patchVersion": 0,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [
@@ -32,7 +32,7 @@
     {
       "machineName": "H5PEditor.ThreeImage",
       "majorVersion": 0,
-      "minorVersion": 3
+      "minorVersion": 4
     },
     {
       "machineName": "H5P.GoToScene",
