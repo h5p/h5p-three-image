@@ -1,7 +1,7 @@
 @import "../../styles/icons";
 @import "../../styles/colors";
 
-$labelPadding: 0.5em;
+$labelPadding: 0.5em 1em 0.5em 1em;
 $labelMinWidth: 6em;
 $labelMaxWidth: 11em;
 $arrowUpTop: calc(-50% - 1px);
@@ -88,7 +88,7 @@ $arrowDownTop: calc(-50% + 1px);
     left: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-left: 2em;
+      padding-left: 1.5em;
     }
 
     .nav-label-expand-button {
