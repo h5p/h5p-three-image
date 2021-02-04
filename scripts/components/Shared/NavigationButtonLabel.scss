@@ -29,6 +29,7 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label-expand-button {
       bottom: unset;
       top: -1.1em;
+      
       .nav-label-expand-arrow:before,
       .nav-label-expand-arrow:after {
         transform: rotate(0deg) translate(-50%, -50%);
@@ -194,6 +195,7 @@ $arrowDownTop: calc(-50% + 1px);
     padding: 0.8em;
     border: 1px solid transparent;
     cursor: pointer;
+    left: 43%;
 
     &:focus {
       background-color: #000000;
