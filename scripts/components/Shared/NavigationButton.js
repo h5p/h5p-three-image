@@ -318,7 +318,7 @@ export default class NavigationButton extends React.Component {
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
         onMouseEnter={() => {
-          if (this.props.label && this.props.label.showLabel === 'inherit') {
+          if (this.props.label === undefined || (this.props.label && this.props.label.showLabel === 'inherit')) {
             if (!this.context.behavior.label.showLabel){
               this.setState({ 
                 recalcLabelRender: true
@@ -327,7 +327,7 @@ export default class NavigationButton extends React.Component {
           }
         }}
         onMouseOut={() => {
-          if (this.props.label && this.props.label.showLabel === 'inherit') {
+          if (this.props.label === undefined || (this.props.label && this.props.label.showLabel === 'inherit')) {
             if (!this.context.behavior.label.showLabel){
               this.setState({
                 recalcLabelRender: false
