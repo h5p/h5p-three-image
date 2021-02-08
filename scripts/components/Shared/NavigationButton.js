@@ -64,7 +64,8 @@ export default class NavigationButton extends React.Component {
     this.state = {
       isFocused: this.props.isFocused,
       expandButtonFocused: false,
-      innerButtonFocused: false
+      innerButtonFocused: false,
+      recalcLabelRender: false
     };
   }
 
@@ -316,6 +317,24 @@ export default class NavigationButton extends React.Component {
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
+        onMouseEnter={() => {
+          if (this.props.label && this.props.label.showLabel === 'inherit') {
+            if (!this.context.behavior.label.showLabel){
+              this.setState({ 
+                recalcLabelRender: true
+              });
+            }
+          }
+        }}
+        onMouseOut={() => {
+          if (this.props.label && this.props.label.showLabel === 'inherit') {
+            if (!this.context.behavior.label.showLabel){
+              this.setState({
+                recalcLabelRender: false
+              });
+            }
+          }
+        }}
       >
         <button
           ref={this.navButton}
@@ -331,9 +350,10 @@ export default class NavigationButton extends React.Component {
         {this.props.children}
         {this.props.icon !== 'h5p-go-back-button' &&
           <NavigationButtonLabel
+            recalcLabelRender={this.state.recalcLabelRender}
             labelText={getLabelText(this.props.label, title)}
             labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
-            hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
+            hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label, this.state.recalcLabelRender)}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
             onFocus={this.handleExpandButtonFocus.bind(this)}
