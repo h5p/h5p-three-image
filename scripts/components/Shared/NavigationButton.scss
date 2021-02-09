@@ -119,6 +119,9 @@ $labelWidth: 9em;
 .h5p-go-back-button {
   top: 1em;
   left: 1em;
+  // It is nessecary to show the back button on
+  // top of labels so it can be clicked even when covered
+  z-index: 3;
 }
 
 .h5p-go-back-button .nav-button {
