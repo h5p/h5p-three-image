@@ -51,6 +51,10 @@ export default class StaticScene extends React.Component {
       // Let main know that scene is finished loading
       this.props.doneLoadingNextScene();
     }
+    
+    if (this.sceneWrapperRef.current !== null && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth){
+      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+    }    
   }
 
   resizeScene() {
@@ -62,6 +66,7 @@ export default class StaticScene extends React.Component {
     const wrapperSize = wrapper.getBoundingClientRect();
     const defaultSize = 938;
     const defaultFontSize = 16;
+    this.sceneWrapperRef.current.style.width = `auto`;
 
     // Only make icons smaller if necessary
     if (wrapperSize.width > defaultSize) {
@@ -70,6 +75,7 @@ export default class StaticScene extends React.Component {
         this.sceneWrapperRef.current.style.fontSize = `${defaultFontSize}px`;
         this.forceUpdate();
       }
+      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
       return;
     }
 
@@ -81,6 +87,7 @@ export default class StaticScene extends React.Component {
       newFontSize = minFontSize;
     }
 
+    this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
     this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
     this.forceUpdate();
   }
