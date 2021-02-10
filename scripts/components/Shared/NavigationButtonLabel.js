@@ -16,11 +16,7 @@ export const getLabelText = (label, title) => {
   return label && label.labelText ? label.labelText : title;
 };
 
-export const isHoverLabel = (label, globalLabel, recalcLabelRender) => {
-  // This executes when Display Labels checkbox is unchecked
-  if(recalcLabelRender){
-    return false;
-  }
+export const isHoverLabel = (label, globalLabel) => {
   if (label && label.showLabel === 'inherit') {
     return globalLabel.showLabel ? false : true;
   }
@@ -48,7 +44,6 @@ export default class NavigationButtonLabel extends React.Component {
       labelPos: this.props.labelPos,
       expandDirection: null,
       alignment: null,
-      recalcLabelRender: this.props.recalcLabelRender
     };
   }
 
@@ -86,11 +81,6 @@ export default class NavigationButtonLabel extends React.Component {
       });
     }
 
-    if(this.props.recalcLabelRender !== prevProps.recalcLabelRender){
-      this.setState({
-        isExpanded: false
-      });
-    }
     // Need to calculate if alignment and expanddirection should be changed
     // It is only in a static scene the label can be overflow, since camera can be moved in 360
     if (this.props.topPosition !== prevProps.topPosition
@@ -124,12 +114,14 @@ export default class NavigationButtonLabel extends React.Component {
         expandable: this.isExpandable(),
         divHeight: this.getDivHeight()
       });
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
+      if (this.props.staticScene) {
+        const expandDirection = this.getOverflowProperties();
+        if (expandDirection.expandDirection !== this.state.expandDirection) {
+          this.setState({ expandDirection: expandDirection.expandDirection });
+        }
+        if (expandDirection.alignment !== this.state.alignment) {
+          this.setState({ alignment: expandDirection.alignment });
+        }
       }
     }, 0);
     this.context.on('resize', () => {
@@ -139,17 +131,6 @@ export default class NavigationButtonLabel extends React.Component {
         });
       }
     });
-    // Need to calculate if alignment and expanddirection should be changed
-    // It is only in a static scene the label can be overflow, since camera can be moved in 360
-    if (this.props.staticScene) {
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
-      }
-    }
   }
 
   componentWillUnmount() {
@@ -167,9 +148,6 @@ export default class NavigationButtonLabel extends React.Component {
    */
   getDivHeight() {
     if (this.innerLabelDiv.current) {
-      if (this.props.hoverOnly) {
-         return 'unset';
-      }
       return this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth || this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
     }
     return null;
@@ -220,8 +198,8 @@ export default class NavigationButtonLabel extends React.Component {
 
   render() {
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
-    const isExpanded = this.state.isExpanded || hoverOnly ? 'is-expanded' : '';
-    const canExpand = this.state.expandable || hoverOnly ? 'can-expand' : '';
+    const isExpanded = this.state.isExpanded ? 'is-expanded' : '';
+    const canExpand = this.state.expandable ? 'can-expand' : '';
     const isMultline = (this.state.divHeight != '1.5em') ? 'is-multiline' : '';
     const expandDirection = this.state.expandDirection ? 'expand-' + this.state.expandDirection : '';
     const alignment = this.state.alignment || this.props.labelPos;
