@@ -25,6 +25,11 @@ export default class Main extends React.Component {
       focusedInteraction: null,
       nextFocus: null,
       sceneWaitingForLoad: null,
+      updateThreeSixty: false,
+      labelBehavior: {
+        showLabel: true,
+        labelPosition: "right"
+      }
     };
   }
 
@@ -38,6 +43,25 @@ export default class Main extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.updateThreeSixty) {
+      this.setState({
+        updateThreeSixty: false
+      });
+    }
+    if (this.state.labelBehavior && this.context.behavior.label) {
+      if ( this.state.labelBehavior.showLabel !== this.context.behavior.label.showLabel ||
+        this.state.labelBehavior.labelPosition !== this.context.behavior.label.labelPosition
+      ) {
+        this.setState({
+          labelBehavior: {
+            showLabel: this.context.behavior.label.showLabel,
+            labelPosition: this.context.behavior.label.labelPosition,
+          },
+          updateThreeSixty: true
+        });
+      }
+    }
+    
     const validScenes = this.context.params.scenes.map(scene => {
       return scene.sceneId;
     });
@@ -357,6 +381,7 @@ export default class Main extends React.Component {
               <Scene
                 key={sceneParams.sceneId}
                 threeSixty={this.state.threeSixty}
+                updateThreeSixty={this.state.updateThreeSixty}
                 isActive={sceneParams.sceneId === this.props.currentScene}
                 isHiddenBehindOverlay={ isHiddenBehindOverlay }
                 sceneIcons={sceneIcons}

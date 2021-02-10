@@ -38,6 +38,7 @@ export default class Scene extends React.Component {
     return (
       <ThreeSixtyScene
         threeSixty={this.props.threeSixty}
+        updateThreeSixty={this.props.updateThreeSixty}
         isActive={this.props.isActive}
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         nextFocus={ this.props.nextFocus }

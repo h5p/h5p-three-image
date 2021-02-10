@@ -360,7 +360,8 @@ export default class ThreeSixtyScene extends React.Component {
    * React -
    */
   componentDidUpdate(prevProps) {
-    if (this.props.isActive && this.state.isLoaded && !this.state.isUpdated) {
+    if ((this.props.isActive && this.state.isLoaded && !this.state.isUpdated) || 
+    (this.props.isActive && this.props.updateThreeSixty)) {
       // Active and loaded, prepare the scene
       setTimeout(() => {
         this.initializeThreeSixty();

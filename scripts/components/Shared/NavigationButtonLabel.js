@@ -8,7 +8,7 @@ export const getLabelFromInteraction = (interaction) => {
   return interaction.label;
 };
 
-export const getLabelPos = (label, globalLabel) => {
+export const getLabelPos = (globalLabel, label) => {
   return label ? (label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition) : 'right';
 };
 
@@ -16,7 +16,7 @@ export const getLabelText = (label, title) => {
   return label && label.labelText ? label.labelText : title;
 };
 
-export const isHoverLabel = (label, globalLabel) => {
+export const isHoverLabel = (globalLabel, label) => {
   if (label && label.showLabel === 'inherit') {
     return globalLabel.showLabel ? false : true;
   }
