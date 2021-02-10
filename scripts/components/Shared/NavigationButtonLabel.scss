@@ -78,10 +78,6 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label {
       padding-right: 1.5em;
     }
-
-    .nav-label-expand-button {
-      @include center-horizontally();
-    }
   }
 
   &.right {
@@ -89,10 +85,6 @@ $arrowDownTop: calc(-50% + 1px);
     @include center-vertically();
     .nav-label {
       padding-left: 1.5em;
-    }
-
-    .nav-label-expand-button {
-      @include center-horizontally();
     }
   }
 
@@ -195,7 +187,7 @@ $arrowDownTop: calc(-50% + 1px);
     padding: 0.8em;
     border: 1px solid transparent;
     cursor: pointer;
-    left: 43%;
+    @include center-horizontally();
 
     &:focus {
       background-color: #000000;
