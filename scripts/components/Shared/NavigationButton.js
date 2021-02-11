@@ -196,6 +196,10 @@ export default class NavigationButton extends React.Component {
 
     if (hasClickHandler) {
       this.props.clickHandler();
+      // Reset button focus state when changing scenes
+      this.setState({
+        innerButtonFocused: false
+      });
     }
   }
 
@@ -318,6 +322,9 @@ export default class NavigationButton extends React.Component {
       };
     }
 
+    let labelPos = getLabelPos(this.context.behavior.label, label);
+    let hoverLabel = isHoverLabel(this.context.behavior.label, label);
+
     return (
 
       <div
@@ -343,8 +350,8 @@ export default class NavigationButton extends React.Component {
         {this.props.icon !== 'h5p-go-back-button' &&
           <NavigationButtonLabel
             labelText={getLabelText(label, title)}
-            labelPos={getLabelPos(this.context.behavior.label, label)}
-            hoverOnly={isHoverLabel(this.context.behavior.label, label)}
+            labelPos={labelPos}
+            hoverOnly={hoverLabel}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
             onFocus={this.handleExpandButtonFocus.bind(this)}

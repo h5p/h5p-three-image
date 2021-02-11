@@ -9,7 +9,7 @@ export const getLabelFromInteraction = (interaction) => {
 };
 
 export const getLabelPos = (globalLabel, label) => {
-  return label ? (label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition) : 'right';
+  return label ? (label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition) : 'inherit';
 };
 
 export const getLabelText = (label, title) => {
