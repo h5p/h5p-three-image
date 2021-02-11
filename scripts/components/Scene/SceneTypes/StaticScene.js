@@ -75,7 +75,9 @@ export default class StaticScene extends React.Component {
         this.sceneWrapperRef.current.style.fontSize = `${defaultFontSize}px`;
         this.forceUpdate();
       }
-      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+      if (this.imageElementRef.current.clientWidth > 0) {
+        this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+      }
       return;
     }
 
@@ -87,7 +89,9 @@ export default class StaticScene extends React.Component {
       newFontSize = minFontSize;
     }
 
-    this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+    if (this.imageElementRef.current.clientWidth > 0) {
+      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+    }
     this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
     this.forceUpdate();
   }
