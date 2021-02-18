@@ -52,6 +52,7 @@ export default class StaticScene extends React.Component {
       this.props.doneLoadingNextScene();
     }
     
+    // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
     if (this.sceneWrapperRef.current !== null && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth){
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
     }    
@@ -75,7 +76,8 @@ export default class StaticScene extends React.Component {
         this.sceneWrapperRef.current.style.fontSize = `${defaultFontSize}px`;
         this.forceUpdate();
       }
-      if (this.imageElementRef.current.clientWidth > 0) {
+      // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
+      if (this.imageElementRef.current.clientWidth > 0 && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
         this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
       }
       return;
@@ -89,7 +91,8 @@ export default class StaticScene extends React.Component {
       newFontSize = minFontSize;
     }
 
-    if (this.imageElementRef.current.clientWidth > 0) {
+    // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
+    if (this.imageElementRef.current.clientWidth > 0 && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
     }
     this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
