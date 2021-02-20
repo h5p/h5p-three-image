@@ -61,6 +61,10 @@ H5P.ThreeImage = (function () {
         </H5PContext.Provider>,
         wrapper
       );
+
+      window.requestAnimationFrame(() => {
+        this.trigger('resize');
+      });
     };
 
     const createElements = () => {
