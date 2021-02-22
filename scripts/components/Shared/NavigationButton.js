@@ -196,6 +196,11 @@ export default class NavigationButton extends React.Component {
 
     if (hasClickHandler) {
       this.props.clickHandler();
+
+      // Reset button focus state when changing scenes or opening content
+      this.setState({
+        innerButtonFocused: false
+      });
     }
   }
 
@@ -307,6 +312,21 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
+    let label = {};
+
+    if (this.props.label) {
+      label = this.props.label;
+    }
+    else {
+      label = {
+        "labelPosition": "inherit",
+        "showLabel": "inherit"
+      };
+    }
+
+    let labelPos = getLabelPos(this.context.behavior.label, label);
+    let hoverLabel = isHoverLabel(this.context.behavior.label, label);
+
     return (
 
       <div
@@ -319,7 +339,7 @@ export default class NavigationButton extends React.Component {
       >
         <button
           ref={this.navButton}
-          aria-label={getLabelText(this.props.label, title)}
+          aria-label={getLabelText(label, title)}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
@@ -331,9 +351,9 @@ export default class NavigationButton extends React.Component {
         {this.props.children}
         {this.props.icon !== 'h5p-go-back-button' &&
           <NavigationButtonLabel
-            labelText={getLabelText(this.props.label, title)}
-            labelPos={getLabelPos(this.props.label, this.context.behavior.label)}
-            hoverOnly={isHoverLabel(this.props.label, this.context.behavior.label)}
+            labelText={getLabelText(label, title)}
+            labelPos={labelPos}
+            hoverOnly={hoverLabel}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
             onFocus={this.handleExpandButtonFocus.bind(this)}

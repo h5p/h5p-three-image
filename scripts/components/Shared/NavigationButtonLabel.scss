@@ -1,7 +1,7 @@
 @import "../../styles/icons";
 @import "../../styles/colors";
 
-$labelPadding: 0.5em;
+$labelPadding: 0.5em 1em 0.5em 1em;
 $labelMinWidth: 6em;
 $labelMaxWidth: 11em;
 $arrowUpTop: calc(-50% - 1px);
@@ -29,6 +29,7 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label-expand-button {
       bottom: unset;
       top: -1.1em;
+      
       .nav-label-expand-arrow:before,
       .nav-label-expand-arrow:after {
         transform: rotate(0deg) translate(-50%, -50%);
@@ -77,21 +78,13 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label {
       padding-right: 1.5em;
     }
-
-    .nav-label-expand-button {
-      @include center-horizontally();
-    }
   }
 
   &.right {
     left: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-left: 2em;
-    }
-
-    .nav-label-expand-button {
-      @include center-horizontally();
+      padding-left: 1.5em;
     }
   }
 
@@ -110,8 +103,7 @@ $arrowDownTop: calc(-50% + 1px);
   }
 
   &.hover-only {
-    display: none;
-
+    visibility: hidden;
     .nav-label-inner {
       text-overflow: unset;
       overflow: auto;
@@ -173,13 +165,13 @@ $arrowDownTop: calc(-50% + 1px);
 
   &.is-multiline .nav-label {
     min-width: $labelMaxWidth;
-   .nav-label-inner {
+    .nav-label-inner {
       white-space: initial;
     }
   }
   &.can-expand .nav-label {
     min-width: $labelMaxWidth;
-   .nav-label-inner {
+    .nav-label-inner {
       white-space: initial;
     }
   }
@@ -194,6 +186,7 @@ $arrowDownTop: calc(-50% + 1px);
     padding: 0.8em;
     border: 1px solid transparent;
     cursor: pointer;
+    @include center-horizontally();
 
     &:focus {
       background-color: #000000;
@@ -232,22 +225,25 @@ $arrowDownTop: calc(-50% + 1px);
   }
 }
 .nav-button-wrapper:hover .nav-label-container.hover-only {
-  display: block;
+  visibility: visible;
   .nav-label {
-    max-width: unset;
+    max-width: $labelMaxWidth;
+    max-height: 3em;
   }
 }
 .nav-button-wrapper:focus {
   .nav-label-container.hover-only {
-    display: block;
+    visibility: visible;
     .nav-label {
-      max-width: unset;
+      max-width: $labelMaxWidth;
+      max-height: 3em;
     }
   }
 }
 .nav-button-wrapper .nav-label-container.hover-only.nav-button-focused {
-  display: block;
+  visibility: visible;
   .nav-label {
-    max-width: unset;
+    max-width: $labelMaxWidth;
+    max-height: 3em;
   }
 }
