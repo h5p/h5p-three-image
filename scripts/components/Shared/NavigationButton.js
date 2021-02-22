@@ -196,7 +196,8 @@ export default class NavigationButton extends React.Component {
 
     if (hasClickHandler) {
       this.props.clickHandler();
-      // Reset button focus state when changing scenes
+
+      // Reset button focus state when changing scenes or opening content
       this.setState({
         innerButtonFocused: false
       });
@@ -315,7 +316,8 @@ export default class NavigationButton extends React.Component {
 
     if (this.props.label) {
       label = this.props.label;
-    } else {
+    }
+    else {
       label = {
         "labelPosition": "inherit",
         "showLabel": "inherit"

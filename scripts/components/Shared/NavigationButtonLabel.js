@@ -9,7 +9,7 @@ export const getLabelFromInteraction = (interaction) => {
 };
 
 export const getLabelPos = (globalLabel, label) => {
-  return label ? (label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition) : 'inherit';
+  return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
 };
 
 export const getLabelText = (label, title) => {
@@ -17,10 +17,10 @@ export const getLabelText = (label, title) => {
 };
 
 export const isHoverLabel = (globalLabel, label) => {
-  if (label && label.showLabel === 'inherit') {
+  if (label.showLabel === 'inherit') {
     return globalLabel.showLabel ? false : true;
   }
-  return label && label.showLabel === 'show' ? false : true;
+  return label.showLabel === 'show' ? false : true;
 };
 
 // Threshold for if the label should be multiline
