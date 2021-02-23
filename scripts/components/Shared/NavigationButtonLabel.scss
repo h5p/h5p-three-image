@@ -155,7 +155,7 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label-inner {
       white-space: pre;
       text-overflow: ellipsis;
-      overflow: hidden;
+      overflow-y: hidden;
       text-align: left;
       display: -webkit-box;
       -webkit-line-clamp: 2;
