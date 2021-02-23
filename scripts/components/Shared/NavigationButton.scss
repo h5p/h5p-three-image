@@ -15,6 +15,11 @@ $labelWidth: 9em;
   &.active-element {
     z-index: 2;
   }
+
+  // Safari fix to keep consistent with other browsers
+  &:focus {
+   outline-style: none;
+  }
 }
 
 .nav-button {
