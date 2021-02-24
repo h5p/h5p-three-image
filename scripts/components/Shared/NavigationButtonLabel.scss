@@ -76,7 +76,8 @@ $arrowDownTop: calc(-50% + 1px);
     right: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-right: 1.5em;
+      // The font-size is varying, so if em is used the padding will be to small in some cases
+      padding-right: 23px;
     }
   }
 
@@ -84,7 +85,8 @@ $arrowDownTop: calc(-50% + 1px);
     left: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-left: 1.5em;
+      // The font-size is varying, so if em is used the padding will be to small in some cases
+      padding-left: 23px;
     }
   }
 

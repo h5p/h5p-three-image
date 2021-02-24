@@ -51,11 +51,12 @@ export default class StaticScene extends React.Component {
       // Let main know that scene is finished loading
       this.props.doneLoadingNextScene();
     }
-    
+
     // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
-    if (this.sceneWrapperRef.current !== null && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth){
+    if (this.sceneWrapperRef.current !== null
+      && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
-    }    
+    }
   }
 
   resizeScene() {
@@ -83,7 +84,7 @@ export default class StaticScene extends React.Component {
       return;
     }
 
-    const minFontSize = 13;
+    const minFontSize = 14;
     const fontIncrementThreshold = 55;
     const widthDiff = defaultSize - wrapperSize.width;
     let newFontSize = defaultFontSize - (widthDiff / fontIncrementThreshold);
@@ -351,7 +352,7 @@ export default class StaticScene extends React.Component {
       <div
         ref={this.overLayRef}
         className='image-scene-overlay'
-        aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
+        aria-hidden={this.props.isHiddenBehindOverlay ? true : undefined}
       >
         <div
           className={imageSceneClasses.join(' ')}
@@ -359,9 +360,9 @@ export default class StaticScene extends React.Component {
         >
           <img
             tabIndex='-1'
-            alt={ this.props.sceneParams.scenename }
+            alt={this.props.sceneParams.scenename}
             className='image-scene'
-            src={ H5P.getPath(this.props.imageSrc.path, this.context.contentId) }
+            src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
             onLoad={this.onSceneLoaded.bind(this)}
             ref={this.imageElementRef}
           />
@@ -425,9 +426,9 @@ export default class StaticScene extends React.Component {
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
                   label={getLabelFromInteraction(interaction)}
-                  type={ 'interaction-' + index }
-                  isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-                  nextFocus={ this.props.nextFocus }
+                  type={'interaction-' + index}
+                  isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
+                  nextFocus={this.props.nextFocus}
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
@@ -435,7 +436,7 @@ export default class StaticScene extends React.Component {
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
                   }}
-                  buttonClasses={ buttonClasses }
+                  buttonClasses={buttonClasses}
                   onBlur={this.props.onBlurInteraction}
                   isFocused={this.props.focusedInteraction === index}
                   // Use the overlay height instead of getWrapperSize because
@@ -460,7 +461,7 @@ export default class StaticScene extends React.Component {
           <NavigationButton
             title='Back'
             icon={Icons.GO_BACK}
-            isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+            isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
             buttonClasses={backButtonClasses}
