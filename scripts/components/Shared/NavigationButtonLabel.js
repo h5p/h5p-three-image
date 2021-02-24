@@ -83,8 +83,9 @@ export default class NavigationButtonLabel extends React.Component {
 
     // Need to calculate if alignment and expanddirection should be changed
     // It is only in a static scene the label can be overflow, since camera can be moved in 360
-    if (this.props.topPosition !== prevProps.topPosition
-      || this.props.leftPosition !== prevProps.leftPosition && this.props.staticScene) {
+    if ((this.props.topPosition !== prevProps.topPosition
+      || this.props.leftPosition !== prevProps.leftPosition
+      || this.props.labelText !== prevProps.labelText) && this.props.staticScene) {
       const expandDirection = this.getOverflowProperties();
       if (expandDirection.expandDirection !== this.state.expandDirection) {
         this.setState({ expandDirection: expandDirection.expandDirection });
