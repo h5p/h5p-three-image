@@ -219,7 +219,9 @@ export default class NavigationButtonLabel extends React.Component {
         ${expandDirection} 
         ${isMultline} 
         ${navButtonFocused}
-        `}>
+        `}
+        onDoubleClick={this.props.onDoubleClick}
+      >
         <div
           style={{ height: this.state.divHeight }}
           aria-hidden='true'
