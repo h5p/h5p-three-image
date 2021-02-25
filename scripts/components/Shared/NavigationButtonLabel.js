@@ -160,7 +160,7 @@ export default class NavigationButtonLabel extends React.Component {
   isExpandable() {
     // If not fully loaded the scrollheight might be wrong, therefore we check if it is to wide and two lines
     if (this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH 
-      || (this.getDivHeight() === '3em' && this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth)) {
+      || (this.getDivHeight() === '3em' && this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth * 2)) {
       return true;
     }
     return false;
