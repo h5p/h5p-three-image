@@ -124,7 +124,7 @@ export default class NavigationButtonLabel extends React.Component {
           this.setState({ alignment: expandDirection.alignment });
         }
       }
-    }, 0);
+    }, 50);
     this.context.on('resize', () => {
       if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
         this.setState({
