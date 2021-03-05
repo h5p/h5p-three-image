@@ -121,7 +121,7 @@ export default class NavigationButtonLabel extends React.Component {
   setHeightProperties() {
     const isExpandable = this.isExpandable();
     this.setState({
-      expandable: this.isExpandable(),
+      expandable: isExpandable,
       divHeight: this.getDivHeight(),
       // Safari won't show ellipsis unless height is 100%
       // Ellipsis should only be shown if it is expandable
@@ -131,12 +131,12 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   setExpandProperties() {
-    const expandDirection = this.getOverflowProperties();
-    if (expandDirection.expandDirection !== this.state.expandDirection) {
-      this.setState({ expandDirection: expandDirection.expandDirection });
+    const labelProperties = this.getOverflowProperties();
+    if (labelProperties.expandDirection !== this.state.expandDirection) {
+      this.setState({ expandDirection: labelProperties.expandDirection });
     }
-    if (expandDirection.alignment !== this.state.alignment) {
-      this.setState({ alignment: expandDirection.alignment });
+    if (labelProperties.alignment !== this.state.alignment) {
+      this.setState({ alignment: labelProperties.alignment });
     }
   }
 
