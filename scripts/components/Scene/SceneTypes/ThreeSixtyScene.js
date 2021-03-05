@@ -58,7 +58,7 @@ export default class ThreeSixtyScene extends React.Component {
       this.setState({
         hasPointerLock: true,
       });
-    }, 400);
+    }, 100);
   }
 
  
