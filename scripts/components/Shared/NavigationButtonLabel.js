@@ -44,6 +44,7 @@ export default class NavigationButtonLabel extends React.Component {
       labelPos: this.props.labelPos,
       expandDirection: null,
       alignment: null,
+      innerLabelHeight: ''
     };
   }
 
@@ -75,10 +76,7 @@ export default class NavigationButtonLabel extends React.Component {
   componentDidUpdate(prevProps) {
     // Need to calculate if expand button should be shown and height
     if (this.props.labelText !== prevProps.labelText || this.props.hoverOnly !== prevProps.hoverOnly) {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight()
-      });
+      this.setHeightProperties();
     }
 
     // Need to calculate if alignment and expanddirection should be changed
@@ -86,43 +84,19 @@ export default class NavigationButtonLabel extends React.Component {
     if ((this.props.topPosition !== prevProps.topPosition
       || this.props.leftPosition !== prevProps.leftPosition
       || this.props.labelText !== prevProps.labelText) && this.props.staticScene) {
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
-      }
+      this.setExpandProperties();
     }
     if (!prevProps.rendered && this.props.rendered) {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight(),
-      });
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
-      }
+      this.setHeightProperties();
+      this.setExpandProperties();
     }
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight()
-      });
+      this.setHeightProperties();
       if (this.props.staticScene) {
-        const expandDirection = this.getOverflowProperties();
-        if (expandDirection.expandDirection !== this.state.expandDirection) {
-          this.setState({ expandDirection: expandDirection.expandDirection });
-        }
-        if (expandDirection.alignment !== this.state.alignment) {
-          this.setState({ alignment: expandDirection.alignment });
-        }
+        this.setExpandProperties();
       }
     }, 50);
     this.context.on('resize', () => {
@@ -144,11 +118,35 @@ export default class NavigationButtonLabel extends React.Component {
     });
   }
 
+  setHeightProperties() {
+    const isExpandable = this.isExpandable();
+    this.setState({
+      expandable: this.isExpandable(),
+      divHeight: this.getDivHeight(),
+      // Safari won't show ellipsis unless height is 100%
+      // Ellipsis should only be shown if it is expandable
+      // If not the calculated height will be incorrect
+      innerLabelHeight: isExpandable ? '100%': ''
+    });
+  }
+
+  setExpandProperties() {
+    const expandDirection = this.getOverflowProperties();
+    if (expandDirection.expandDirection !== this.state.expandDirection) {
+      this.setState({ expandDirection: expandDirection.expandDirection });
+    }
+    if (expandDirection.alignment !== this.state.alignment) {
+      this.setState({ alignment: expandDirection.alignment });
+    }
+  }
+
   /**
    * Return hight of div based on scrollHeight
    */
   getDivHeight() {
     if (this.innerLabelDiv.current) {
+      // Scrollheight will be incorrect if height === 100%, therefore we reset
+      this.innerLabelDiv.current.style.height = '';
       return this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth || this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
     }
     return null;
@@ -229,6 +227,8 @@ export default class NavigationButtonLabel extends React.Component {
           ref={this.navLabel}>
           <div
             ref={this.innerLabelDiv}
+            // Safari won't show ellipsis unless height is 100%
+            style={{height: this.state.innerLabelHeight}}
             className='nav-label-inner'
             dangerouslySetInnerHTML={{ __html: this.props.labelText }}>
           </div>
