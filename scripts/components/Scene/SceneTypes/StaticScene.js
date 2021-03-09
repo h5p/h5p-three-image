@@ -54,7 +54,8 @@ export default class StaticScene extends React.Component {
 
     // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
     if (this.sceneWrapperRef.current !== null
-      && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
+      && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth
+      && this.imageElementRef.current.clientWidth > 0) {
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
     }
   }
