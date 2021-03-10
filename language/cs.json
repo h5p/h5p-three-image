@@ -52,54 +52,54 @@
                       "description": "Aktivní body s interakcí",
                       "fields": [
                         {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
+                          "label": "Popisek",
+                          "description": "Pokud nevyplníte, pokusíme se použít název jako popisek"
                         },
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Pozice popisku",
+                          "description": "Vyberte, kde se má popisek objevit",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Nastavení chování"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Zarovnáno doprava"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Zarovnáno doleva"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Zarovnáno nahoru"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Zarovnáno dolů"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Zobrazení popisků",
+                          "description": "Pokud jsou skryté - popisky se zobrazí pouze při najetí myší",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Nastavení chování"
                             },
                             {
-                              "label": "Show"
+                              "label": "Zobrazit"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Skrýt"
                             }
                           ]
                         }
                       ]
                     },
                     {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
+                      "label": "Nastavení popisku",
+                      "description": "Popisek popisující ikonu."
                     },
                     {
-                      "label": "Interaction position",
-                      "description": "Interaction position in pitch and yaw"
+                      "label": "Pozice interakce",
+                      "description": "Poloha interakce v rozteči a zatáčení"
                     }
                   ]
                 }
@@ -155,89 +155,89 @@
           ]
         },
         {
-          "label": "Label settings",
-          "description": "A label that describes the icon.",
+          "label": "Nastavení popisku",
+          "description": "Popisek popisující ikonu.",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Pozice popisku",
+              "description": "Výchozí poloha popisku. Pozici lze přepsat na interakci",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Zarovnáno doprava"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Zarovnáno doleva"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Zarovnáno nahoru"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Zarovnáno dolů"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Zobrazit popisky",
+              "description": "Pokud není zaškrtnuto - popisky se zobrazí pouze při najetí myší"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Lokalizace",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "label": "Popisek pro typ obsahu",
+          "default": "Interaktivní průzkumník"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Popisek pro přehrávání zvuku",
+          "default": "Přehrát zvukovou stopu"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Popisek pro pozastavení zvuku",
+          "default": "Pozastavit zvukovou stopu"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Název scény",
+          "default": "Popis scény"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Popisek tlačítka pro resetování kamery",
+          "default": "Resetovat kameru"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Popisek pro dialogové okno odeslání",
+          "default": "Odeslat dialog"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Popisek tlačítka pro zavírání dialogu",
+          "default": "Zavřít dialog"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Popisek pro rozbalení vizuálníno popisku",
+          "default": "Rozbalit vizuální popisek"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Popisek pro načítání obrázku na pozadí ve scéně 360",
+          "default": "Načítání obrázku na pozadí ...."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Popisek pro případ, že není žádný obsah",
+          "default": "Bez obsahu"
         },
         {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
+          "label": "Popisek pro tlačítko kontextové nabídky pro přechod na scénu",
+          "default": "Přejít na scénu"
         },
         {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
+          "label": "Popisek pro tlačítko kontextové nabídky pro úpravy",
+          "default": "Upravit"
         },
         {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
+          "label": "Popisek pro tlačítko kontextové nabídky pro odstranění",
+          "default": "Odstranit"
         }
       ]
     }
