@@ -101,9 +101,20 @@ export default class NavigationButtonLabel extends React.Component {
     }, 50);
     this.context.on('resize', () => {
       if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
-        this.setState({
-          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
-        });
+        if (this.innerLabelDiv.current.scrollHeight !== 0) {
+          this.setState({
+            divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
+          });
+        }
+        // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
+        // The interactions in 360 scene is not proparaly remounted and this leads to
+        // Labels being expanded and not proparly shown when going back
+        else if (!this.props.staticScene) {
+          this.setState({
+            isExpanded: false,
+            divHeight: '3em'
+          });
+        }
       }
     });
   }
