@@ -102,7 +102,7 @@ export default class NavigationButtonLabel extends React.Component {
     this.context.on('resize', () => {
       if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
         // Font size changes when the screen resizes so we need to make sure it has the correct height
-        if (this.innerLabelDiv.current.scrollHeight !== 0) {
+        if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
           this.setState({
             divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
           });
