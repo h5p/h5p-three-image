@@ -48,13 +48,13 @@
                 "field": {
                   "fields": [
                     {
+                      "label": "Label",
+                      "description": "If left blank we'll try to use the title as a label"
+                    },
+                    {
                       "label": "Interaction",
                       "description": "Hotspot with an interaction",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -94,8 +94,7 @@
                       ]
                     },
                     {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
+                      "label": "Label settings"
                     },
                     {
                       "label": "Interaction position",
@@ -156,7 +155,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",

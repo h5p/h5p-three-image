@@ -293,7 +293,7 @@ export default class StaticScene extends React.Component {
     switch (currentTitle) {
       case 'Untitled Text':
         return action.params.text;
-      case "Untitled Image":
+      case 'Untitled Image':
         return action.params.alt;
       default:
         return currentTitle;

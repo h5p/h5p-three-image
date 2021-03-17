@@ -49,7 +49,7 @@ export const getIconFromInteraction = (interaction, scenes) => {
 };
 
 export const getLabelFromInteraction = (interaction) => {
-  return interaction.label;
+  return {...interaction.label, labelText: interaction.labelText};
 };
 
 export default class NavigationButton extends React.Component {
@@ -312,18 +312,11 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
-    let label = {};
-
-    if (this.props.label) {
-      label = this.props.label;
-    }
-    else {
-      label = {
-        "labelPosition": "inherit",
-        "showLabel": "inherit"
-      };
-    }
-
+    let label = this.props.label ? this.props.label : {
+      labelPosition: "inherit",
+      showLabel: "inherit"
+    };
+    
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
 

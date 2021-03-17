@@ -4,10 +4,6 @@ import './NavigationButtonLabel.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { willOverflow } from './OverflowHelpers';
 
-export const getLabelFromInteraction = (interaction) => {
-  return interaction.label;
-};
-
 export const getLabelPos = (globalLabel, label) => {
   return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
 };

@@ -99,20 +99,18 @@
                 "type": "group",
                 "fields": [
                   {
+                    "name": "labelText",
+                    "type": "text",
+                    "label": "Label",
+                    "optional": true,
+                    "description": "If left blank we'll try to use the title as a label"
+                  },
+                  {
                     "name": "label",
                     "type": "group",
-                    "label": "Label",
+                    "label": "Label Settings",
                     "importance": "low",
-                    "expanded": true,
-                    "description": "A label that describes the icon.",
                     "fields": [
-                      {
-                        "name": "labelText",
-                        "type": "text",
-                        "label": "Label",
-                        "optional": true,
-                        "description": "If left blank we'll try to use the title as a label"
-                      },
                       {
                         "name": "labelPosition",
                         "type": "select",
@@ -279,7 +277,6 @@
         "label": "Label settings",
         "importance": "low",
         "expanded": true,
-        "description": "A label that describes the icon.",
         "fields": [
           {
             "name": "labelPosition",
