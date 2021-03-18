@@ -22,7 +22,14 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     let wrapper;
-    this.behavior = params.behaviour || {};
+    this.behavior = {
+      label: {
+        showLabel: false,
+        labelPosition: 'right',
+        ...params.behaviour.label
+      },
+      ...params.behaviour
+    };
     this.l10n = {...params.l10n,
       // Text defaults
       title: 'Interactive Explorer',
@@ -34,6 +41,7 @@ H5P.ThreeImage = (function () {
       closeDialog: 'Close Dialog',
       expandButtonAriaLabel: 'Expand the visual label'
     };
+
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
       params = params.threeImage;
