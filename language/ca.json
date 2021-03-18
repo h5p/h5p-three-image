@@ -43,8 +43,6 @@
                 "description": "Posició de la càmera en guinyada o capcineig"
               },
               {
-                "label": "Interaccions",
-                "entity": "Interacció",
                 "field": {
                   "fields": [
                     {
@@ -52,8 +50,7 @@
                       "description": "If left blank we'll try to use the title as a label"
                     },
                     {
-                      "label": "Interacció",
-                      "description": "Zona sensible amb una interacció",
+                      "label": "Label Settings",
                       "fields": [
                         {
                           "label": "Label position",
@@ -93,13 +90,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Posició de la interacció"
-                    },
-                    {
-                      "label": "Interaction position",
-                      "description": "Interaction position in pitch and yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -224,18 +216,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

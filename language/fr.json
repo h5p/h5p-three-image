@@ -43,8 +43,6 @@
                 "description": "Position de la caméra (pitch and yaw)"
               },
               {
-                "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
@@ -52,8 +50,7 @@
                       "description": "If left blank we'll try to use the title as a label"
                     },
                     {
-                      "label": "Interaction",
-                      "description": "Hotspot avec une interaction",
+                      "label": "Label Settings",
                       "fields": [
                         {
                           "label": "Label position",
@@ -93,13 +90,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings"
-                    },
-                    {
-                      "label": "Position de l'interaction",
-                      "description": "Position de l'interaction (pitch and yaw)"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -224,18 +216,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

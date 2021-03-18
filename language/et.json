@@ -43,8 +43,6 @@
                 "description": "Kaamera asukoht koordinaadistikus (pitch ja yaw)"
               },
               {
-                "label": "Interaktsioonid",
-                "entity": "Interaktsioon",
                 "field": {
                   "fields": [
                     {
@@ -52,8 +50,7 @@
                       "description": "If left blank we'll try to use the title as a label"
                     },
                     {
-                      "label": "Interaktsioon",
-                      "description": "Interaktsiooniga tulipunkt",
+                      "label": "Label Settings",
                       "fields": [
                         {
                           "label": "Label position",
@@ -93,13 +90,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings"
-                    },
-                    {
-                      "label": "Interaktsiooni asukoht",
-                      "description": "Interaktsiooni asukoht koordinaadistikus (pitch ja yaw)"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -224,18 +216,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

@@ -43,8 +43,6 @@
                 "description": "Kameraposition i pitch-and-yaw"
               },
               {
-                "label": "Interaktioner",
-                "entity": "Interaktion",
                 "field": {
                   "fields": [
                     {
@@ -52,8 +50,7 @@
                       "description": "If left blank we'll try to use the title as a label"
                     },
                     {
-                      "label": "Interaktion",
-                      "description": "Hotspot med en interaktion",
+                      "label": "Label Settings",
                       "fields": [
                         {
                           "label": "Label position",
@@ -93,13 +90,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings"
-                    },
-                    {
-                      "label": "Interaktions position",
-                      "description": "Interaktions position i pitch-and-yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -108,16 +100,16 @@
                 "description": "Avgör hur knappar som visar på denna scen ska se ut. För scener som är statiska och inte leder till nya scener så rekommenderas knappen \"Mer information\".",
                 "options": [
                   {
-                    "label": ""
+                    "label": "New scene (arrow)"
                   },
                   {
-                    "label": ""
+                    "label": "More information (plus)"
                   }
                 ]
               },
               {
-                "label": "",
-                "description": ""
+                "label": "Audio Track",
+                "description": "Add an audio track that's specific for this scene."
               }
             ]
           }
@@ -224,18 +216,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }
