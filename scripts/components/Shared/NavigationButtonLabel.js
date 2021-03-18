@@ -5,7 +5,8 @@ import { H5PContext } from "../../context/H5PContext";
 import { willOverflow } from './OverflowHelpers';
 
 export const getLabelPos = (globalLabel, label) => {
-  return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
+  const useLabelPosition = label && label.labelPosition && label.labelPosition !== 'inherit';
+  return useLabelPosition ? label.labelPosition : globalLabel.labelPosition;
 };
 
 export const getLabelText = (label, title) => {
