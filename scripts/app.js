@@ -30,7 +30,7 @@ H5P.ThreeImage = (function () {
       },
       ...params.behaviour
     };
-    this.l10n = {...params.l10n,
+    this.l10n = {
       // Text defaults
       title: 'Interactive Explorer',
       playAudioTrack: 'Play Audio Track',
@@ -39,7 +39,8 @@ H5P.ThreeImage = (function () {
       resetCamera: 'Reset Camera',
       submitDialog: 'Submit Dialog',
       closeDialog: 'Close Dialog',
-      expandButtonAriaLabel: 'Expand the visual label'
+      expandButtonAriaLabel: 'Expand the visual label',
+      ...params.l10n,
     };
 
     // Parameters has been wrapped in the threeImage widget group
