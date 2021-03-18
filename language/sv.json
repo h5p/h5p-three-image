@@ -23,10 +23,7 @@
                 "label": "Visa knapp \"Tillbaka\"",
                 "description": "Visa knapp för att navigera bakåt till din föregående scen"
               },
-              {
-                "label": "Unikt scen-ID",
-                "description": "Måste vara unikt, används för navigering mellan scener"
-              },
+              {},
               {
                 "label": "Scen-titel",
                 "description": "Används för att identifiera scenen för kursskapare"
@@ -38,10 +35,7 @@
                 "label": "Scen-beskrivning",
                 "description": "En text som kan beskriva scenen för slutanvändaren"
               },
-              {
-                "label": "Initial kameraposition",
-                "description": "Kameraposition i pitch-and-yaw"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "ID för startscen"
-        },
+        {},
         {
           "label": "Ljudspår"
         }

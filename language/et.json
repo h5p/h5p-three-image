@@ -23,10 +23,7 @@
                 "label": "Kuva \"Tagasi\" nupp",
                 "description": "Näita Tagasi nuppu, millega saab navigeerida eelmisele stseenile"
               },
-              {
-                "label": "Unikaalne stseeni id (arv)",
-                "description": "Peab olema unikaalne, kasutatakse stseenide vahel navigeerimiseks"
-              },
+              {},
               {
                 "label": "Stseeni tiitel",
                 "description": "Kasutatakse stseeni autorite näitamiseks"
@@ -38,10 +35,7 @@
                 "label": "Stseeni kirjeldus",
                 "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
               },
-              {
-                "label": "Algne kaamera asukoht",
-                "description": "Kaamera asukoht koordinaadistikus (pitch ja yaw)"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Algusstseeni id"
-        },
+        {},
         {
           "label": "Heliriba"
         }

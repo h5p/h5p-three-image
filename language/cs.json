@@ -23,10 +23,7 @@
                 "label": "Zobrazit tlačítko \"Zpět\" ",
                 "description": "Zobrazit tlačítko pro navigaci zpět na předchozí scénu"
               },
-              {
-                "label": "Unikátní scéna id",
-                "description": "Musí být jedinečný, používá se pro navigaci mezi scénami"
-              },
+              {},
               {
                 "label": "Název scény",
                 "description": "Slouží k identifikaci scény pro autory"
@@ -38,10 +35,7 @@
                 "label": "Popis scény",
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
-              {
-                "label": "Počáteční pozice kamery",
-                "description": "Pozice kamery v úhlu a sklonu"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Start sceény id"
-        },
+        {},
         {
           "label": "Zvuková stopa"
         }

@@ -52,9 +52,7 @@
             },
             {
               "name": "sceneId",
-              "type": "number",
-              "label": "Unique scene id",
-              "description": "Must be unique, used for navigation between scenes"
+              "type": "number"
             },
             {
               "name": "scenename",
@@ -84,9 +82,7 @@
             },
             {
               "name": "cameraStartPosition",
-              "type": "text",
-              "label": "Initial camera position",
-              "description": "Camera position in pitch and yaw"
+              "type": "text"
             },
             {
               "name": "interactions",
@@ -216,7 +212,6 @@
       {
         "name": "startSceneId",
         "type": "number",
-        "label": "Start scene id",
         "default": 0
       },
       {

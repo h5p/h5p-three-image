@@ -23,10 +23,7 @@
                 "label": "Afficher un bouton \"Retour\"",
                 "description": "Affichez un bouton pour revenir à la scène précédente"
               },
-              {
-                "label": "Identifiant unique de la scène",
-                "description": "Doit être unique, utilisé pour naviguer entre les scènes"
-              },
+              {},
               {
                 "label": "Titre de la scène",
                 "description": "Utilisé pour identifier la scène"
@@ -38,10 +35,7 @@
                 "label": "Description de la scène",
                 "description": "Un texte pour décirire la scène à l'utilisateur final"
               },
-              {
-                "label": "Position initiale de la caméra",
-                "description": "Position de la caméra (pitch and yaw)"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Identifiant de la scène de début"
-        },
+        {},
         {
           "label": "Piste audio"
         }

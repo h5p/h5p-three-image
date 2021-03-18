@@ -23,10 +23,7 @@
                 "label": "Toon \"Terug\" knop",
                 "description": "Toon knop om terug te gaan naar de vorige scene"
               },
-              {
-                "label": "Unieke id van de scène",
-                "description": "Deze moet uniek zijn en wordt gebruikt voor het navigeren tussen de scènes"
-              },
+              {},
               {
                 "label": "Scènetitel",
                 "description": "Deze wordt gebruikt om de scène voor de auteurs te identificeren"
@@ -38,10 +35,7 @@
                 "label": "Scèneomschrijving",
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
-              {
-                "label": "Oorspronkelijke camerapositie",
-                "description": "Camerapositie in x en z stand"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Start scène id"
-        },
+        {},
         {
           "label": "Audiobestand"
         }

@@ -23,10 +23,7 @@
                 "label": "Näytä \"Back\" painike",
                 "description": "Näyttää painikkeen jolla voit palata takaisin päin edelliseen dioraamaan."
               },
-              {
-                "label": "Uniikki dioraaman id",
-                "description": "Tämän täytyy olla uniikki tunniste, jota käytetään dioraamojen välillä liikkumiseen."
-              },
+              {},
               {
                 "label": "Dioraaman otsikko",
                 "description": "Hallinoijat tunnistavat dioraaman tästä otsikosta"
@@ -38,10 +35,7 @@
                 "label": "Dioraaman kuvausteksti",
                 "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
-              {
-                "label": "Kameran aloitussijainti",
-                "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Aloittavan dioraaman id"
-        },
+        {},
         {
           "label": "Ääniraita"
         }

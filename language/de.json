@@ -23,10 +23,7 @@
                 "label": "\"Zurück\"-Button anzeigen",
                 "description": "Button anzeigen, um zur vorherigen Szene zurückzukehren"
               },
-              {
-                "label": "Eindeutige Szenen-Id",
-                "description": "Muss eindeutig sein; wird verwendet um zwischen Szenen zu navigieren"
-              },
+              {},
               {
                 "label": "Titel der Szene",
                 "description": "Hilft Autoren dabei, die Szene zu identifizieren"
@@ -38,10 +35,7 @@
                 "label": "Beschreibung der Szene",
                 "description": "Ein Text, der die Szene für den Benutzer beschreibt"
               },
-              {
-                "label": "Anfangs-Kameraposition",
-                "description": "Kameraposition in Winkelangabe (oben-unten und links-rechts)"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Id der Startszene"
-        },
+        {},
         {
           "label": "Tonspur"
         }

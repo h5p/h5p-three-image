@@ -23,10 +23,7 @@
                 "label": "Erakutsi \"Atzera\" botoia",
                 "description": "Erakutsi aurreko eszenara joateko botoia"
               },
-              {
-                "label": "Eszenaren ID bakarra",
-                "description": "Bakarra izan behar du, eszena artean nabigatzeko erabiltzen da"
-              },
+              {},
               {
                 "label": "Eszenaren izenburua",
                 "description": "Egileentzako eszena identifikatzeko erabiltzen da"
@@ -38,10 +35,7 @@
                 "label": "Eszenaren deskribapena",
                 "description": "Erabiltzaileari eszena deskribatzen dion testua"
               },
-              {
-                "label": "Kameraren hasierako kokapena",
-                "description": "Kamerak hasieran izango duen kokapena"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Hasierako eszenaren IDa"
-        },
+        {},
         {
           "label": "Audio-pista"
         }

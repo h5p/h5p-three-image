@@ -23,10 +23,7 @@
                 "label": "Mostrar o botão de \"Volta\"",
                 "description": "Mostra o botão para navegar a sua cena anterior"
               },
-              {
-                "label": "Id único da cena",
-                "description": "Deve ser único, utilizado para navegação entre as cenas"
-              },
+              {},
               {
                 "label": "Titulo da cena",
                 "description": "Utilizado para identificar a cenas aos autores"
@@ -38,10 +35,7 @@
                 "label": "Descrição da cena",
                 "description": "O texto que pode descrever a cena para o usuário final"
               },
-              {
-                "label": "Posição da camera inicial",
-                "description": "Posição da camera em arfagem e guinada"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Id da cena de inicio"
-        },
+        {},
         {
           "label": "Faixa de audio"
         }

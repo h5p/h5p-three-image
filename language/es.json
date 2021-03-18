@@ -23,10 +23,7 @@
                 "label": "Mostrar botón \"Retroceder\" ",
                 "description": "Mostrar botón para navegar de regreso a su escena anterior"
               },
-              {
-                "label": "ID único de escena",
-                "description": "Debe ser único, usado para navegar entre escenas"
-              },
+              {},
               {
                 "label": "Título de Escena",
                 "description": "Usado para identificar la escena para autores"
@@ -38,10 +35,7 @@
                 "label": "Descripción de la Escena",
                 "description": "Un texto que puede describir la escena para el usuario final"
               },
-              {
-                "label": "Posición inicial de la cámara",
-                "description": "Posición de la cámara en in pitch y yaw"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "ID inicar escena"
-        },
+        {},
         {
           "label": "Pista de Audio"
         }

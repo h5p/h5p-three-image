@@ -23,10 +23,7 @@
                 "label": "Display \"Back\" button",
                 "description": "Display button for navigating back to your previous scene"
               },
-              {
-                "label": "Unique scene id",
-                "description": "Must be unique, used for navigation between scenes"
-              },
+              {},
               {
                 "label": "Scene Title",
                 "description": "Used to identify the scene"
@@ -38,10 +35,7 @@
                 "label": "Scene Description",
                 "description": "A text that can describe the scene for the end-user"
               },
-              {
-                "label": "Initial camera position",
-                "description": "Camera position in pitch and yaw"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Start scene id"
-        },
+        {},
         {
           "label": "Audio track"
         }

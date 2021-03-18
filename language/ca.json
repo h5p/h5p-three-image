@@ -23,10 +23,7 @@
                 "label": "Mostra el botó \"Enrere\"",
                 "description": "Mostra el botó per navegar enrere a l’escena anterior"
               },
-              {
-                "label": "Identificador únic de l’escena",
-                "description": "Ha de ser únic, utilitzat per a la navegació entre escenes"
-              },
+              {},
               {
                 "label": "Títol de l’escena",
                 "description": "Used to identify the scene"
@@ -38,10 +35,7 @@
                 "label": "Descripció de l’escena",
                 "description": "Text que pot descriure l’escena per a l’usuari final"
               },
-              {
-                "label": "Posició inicial de la càmera",
-                "description": "Posició de la càmera en guinyada o capcineig"
-              },
+              {},
               {
                 "field": {
                   "fields": [
@@ -114,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Inicia l’identificador de l’escena"
-        },
+        {},
         {
           "label": "Pista d’àudio"
         }
