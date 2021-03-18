@@ -342,9 +342,9 @@ export default class NavigationButton extends React.Component {
           onFocus={() => this.setState({ innerButtonFocused: true })}
           onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
-        {this.props.icon !== 'h5p-go-back-button' &&
+        {this.props.icon !== 'h5p-go-back-button' && getLabelText(label) !== '' &&
           <NavigationButtonLabel
-            labelText={getLabelText(label, title)}
+            labelText={getLabelText(label)}
             labelPos={labelPos}
             hoverOnly={hoverLabel}
             onMount={this.props.onMount}
