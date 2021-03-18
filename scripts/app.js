@@ -32,7 +32,7 @@ H5P.ThreeImage = (function () {
     };
     this.l10n = {
       // Text defaults
-      title: 'Interactive Explorer',
+      title: 'Virtual Tour',
       playAudioTrack: 'Play Audio Track',
       pauseAudioTrack: 'Pause Audio Track',
       sceneDescription: 'Scene Description',

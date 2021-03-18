@@ -324,7 +324,7 @@
         "name": "title",
         "type": "text",
         "label": "Aria label for content type",
-        "default": "Interactive Explorer"
+        "default": "Virtual Tour"
       },
       {
         "name": "playAudioTrack",
