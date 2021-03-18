@@ -101,7 +101,7 @@
                     "type": "text",
                     "label": "Label",
                     "optional": true,
-                    "description": "If left blank we'll try to use the title as a label"
+                    "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
                   },
                   {
                     "name": "label",
