@@ -320,6 +320,7 @@ export default class NavigationButton extends React.Component {
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
 
+    const labelText = getLabelText(label);
     return (
 
       <div
@@ -332,7 +333,7 @@ export default class NavigationButton extends React.Component {
       >
         <button
           ref={this.navButton}
-          aria-label={getLabelText(label, title)}
+          aria-label={labelText ? labelText : title}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick.bind(this)}
@@ -342,9 +343,9 @@ export default class NavigationButton extends React.Component {
           onFocus={() => this.setState({ innerButtonFocused: true })}
           onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
-        {this.props.icon !== 'h5p-go-back-button' && getLabelText(label) !== '' &&
+        {this.props.icon !== 'h5p-go-back-button' && labelText !== '' &&
           <NavigationButtonLabel
-            labelText={getLabelText(label)}
+            labelText={labelText}
             labelPos={labelPos}
             hoverOnly={hoverLabel}
             onMount={this.props.onMount}
