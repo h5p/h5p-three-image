@@ -81,6 +81,9 @@
   &.reset:before {
     content: $reset;
   }
+  &.goToStart:before {
+    content: $goToStart;
+  }
   &.submit-dialog:before {
     content: " ";
     background-image: url('../../../../../assets/the-h5p-star.svg');
