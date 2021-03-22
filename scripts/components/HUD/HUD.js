@@ -70,6 +70,14 @@ export default class HUD extends React.Component {
               nextFocus={ this.props.nextFocus }
               onClick={ this.props.onCenterScene }
             />
+          }{
+            <Button
+              type={ 'go-to-start' }
+              label={ this.context.l10n.goToStartScene }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
+              onClick={ this.props.onGoToStartScene }
+            />
           }
           { false &&
             <Button

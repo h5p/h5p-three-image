@@ -32,7 +32,8 @@ H5P.ThreeImage = (function () {
       resetCamera: 'Reset Camera',
       submitDialog: 'Submit Dialog',
       closeDialog: 'Close Dialog',
-      expandButtonAriaLabel: 'Expand the visual label'
+      expandButtonAriaLabel: 'Expand the visual label',
+      goToStartScene: 'Go to start scene'
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
@@ -42,7 +43,6 @@ H5P.ThreeImage = (function () {
     this.contentId = contentId;
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
-
     const setCurrentSceneId = (sceneId) => {
       this.currentScene = sceneId;
 
