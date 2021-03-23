@@ -427,7 +427,7 @@ export default class ThreeSixtyScene extends React.Component {
       // Need to respond to audio in order to update the icon of the interaction
       const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
       const hasChangedFocus = prevProps.focusedInteraction
-        !== this.props.focusedInteraction;
+        !== this.props.focusedInteraction || this.props.isEditingInteraction;
 
       const hasChangedInteractions = this.props.sceneParams.interactions
         && (this.renderedInteractions

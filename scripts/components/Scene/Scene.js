@@ -56,6 +56,7 @@ export default class Scene extends React.Component {
         onBlurInteraction={this.props.onBlurInteraction}
         onFocusedInteraction={this.props.onFocusedInteraction}
         focusedInteraction={this.props.focusedInteraction}
+        isEditingInteraction={this.props.isEditingInteraction}
         sceneWaitingForLoad={this.props.sceneWaitingForLoad}
         doneLoadingNextScene={this.props.doneLoadingNextScene}
       />

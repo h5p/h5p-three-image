@@ -23,6 +23,7 @@ export default class Main extends React.Component {
       sceneHistory: [],
       audioIsPlaying: null,
       focusedInteraction: null,
+      isEditingInteraction: false,
       nextFocus: null,
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
@@ -37,7 +38,8 @@ export default class Main extends React.Component {
     // Listen for focus to interaction
     this.context.on('focusInteraction', (e) => {
       this.setState({
-        focusedInteraction: e.data,
+        focusedInteraction: e.data[0],
+        isEditingInteraction: e.data[1]
       });
     });
   }
@@ -399,6 +401,7 @@ export default class Main extends React.Component {
                 onBlurInteraction={this.blurInteraction.bind(this)}
                 onFocusedInteraction={this.setFocusedInteraction.bind(this)}
                 focusedInteraction={this.state.focusedInteraction}
+                isEditingInteraction={this.state.isEditingInteraction}
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
               />
