@@ -45,8 +45,14 @@ jobs:
         git clone https://github.com/NDLANO/h5p-editor-shape.git
         git clone https://github.com/NDLANO/h5p-editor-image-radio-group
 
-        npm i -g webpack@2.7.0
-        if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm install && npm run build; popd; fi
+        
+        if [ -d "h5p-editor-three-image" ]; then 
+          pushd h5p-editor-three-image 
+          npm i -g webpack@2.7.0 
+          npm i 
+          yes | npm run build
+          popd
+        fi
 
         
         cp -r ../h5p-three-image .
