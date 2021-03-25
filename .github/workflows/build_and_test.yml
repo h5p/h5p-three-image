@@ -36,9 +36,9 @@ jobs:
         if [ -d "h5p-simple-multiple-choice" ]; then pushd h5p-simple-multiple-choice && npm install && npm run build; popd; fi
         
 
-        rm -rf h5p-chart h5p-shape h5p-editor-shape
+        rm -rf h5p-chart h5p-shape h5p-editor-shape h5p-editor-three-image
         
-        
+        git clone https://github.com/NDLANO/h5p-editor-three-image.git
         git clone https://github.com/NDLANO/h5p-chart.git
         git clone https://github.com/NDLANO/h5p-shape.git
         git clone https://github.com/NDLANO/h5p-editor-shape.git
