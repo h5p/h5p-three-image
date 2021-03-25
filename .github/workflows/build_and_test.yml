@@ -35,6 +35,7 @@ jobs:
         if [ -d "h5p-open-ended-question" ]; then pushd h5p-open-ended-question && npm install && npm run build; popd; fi
         if [ -d "h5p-simple-multiple-choice" ]; then pushd h5p-simple-multiple-choice && npm install && npm run build; popd; fi
         
+        if [ -d "h5p-editor-audio-recorder" ]; then pushd h5p-editor-audio-recorder && npm install && npm run build; popd; fi
 
         rm -rf h5p-chart h5p-shape h5p-editor-shape h5p-editor-three-image
         
@@ -43,7 +44,8 @@ jobs:
         git clone https://github.com/NDLANO/h5p-shape.git
         git clone https://github.com/NDLANO/h5p-editor-shape.git
         git clone https://github.com/NDLANO/h5p-editor-image-radio-group
-        
+
+        if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm install && npm run build; popd; fi
 
         
         cp -r ../h5p-three-image .
