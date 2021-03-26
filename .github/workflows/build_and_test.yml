@@ -12,9 +12,9 @@ jobs:
       with: 
         path: h5p-three-image
     - name: Use Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
-        node-version: '15.x'
+        node-version: '8'
     - run: |
         cd h5p-three-image
         npm ci
