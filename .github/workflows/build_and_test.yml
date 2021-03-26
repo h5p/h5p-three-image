@@ -43,7 +43,7 @@ jobs:
           pushd h5p-editor-audio-recorder 
           git checkout bec6fe1
           npm cache clean -f
-          npm i webpack@2.7.0 webpack-sources@1.0.1
+          npm i webpack@2.7.0 webpack-sources@1.0.1 -g
           npm ci
           webpack
           popd
