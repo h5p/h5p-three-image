@@ -37,8 +37,9 @@ jobs:
         
         if [ -d "h5p-editor-audio-recorder" ]; then 
           pushd h5p-editor-audio-recorder 
-          npm i webpack@2.7.0
-          npm i
+          git checkout bec6fe1
+          npm i webpack@2.7.0 webpack-sources@1.0.1
+          npm ci
           webpack
           popd
         fi
