@@ -427,7 +427,7 @@ export default class ThreeSixtyScene extends React.Component {
       // Need to respond to audio in order to update the icon of the interaction
       const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
       const hasChangedFocus = prevProps.focusedInteraction
-        !== this.props.focusedInteraction || this.props.isEditingInteraction;
+        !== this.props.focusedInteraction;
 
       const hasChangedInteractions = this.props.sceneParams.interactions
         && (this.renderedInteractions
@@ -436,7 +436,8 @@ export default class ThreeSixtyScene extends React.Component {
       let shouldUpdateInteractionHotspots = hasChangedInteractions
           || audioHasChanged
           || hasChangedFocus
-          || isHiddenBehindOverlayHasChanged;
+          || isHiddenBehindOverlayHasChanged
+          || this.props.isEditingInteraction;
 
       // Check if the scene that interactions point to has changed icon type
       // This is only relevant when changing the icon using the H5P editor
