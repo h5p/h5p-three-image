@@ -10,6 +10,9 @@ export const Icons = {
   GO_BACK: 'h5p-go-back-button',
   SCENE_DESCRIPTION: 'h5p-scene-description-button',
   AUDIO: 'h5p-audio-button h5p-interaction-button',
+  VIDEO: 'h5p-video-button h5p-interaction-button',
+  IMAGE: 'h5p-image-button h5p-interaction-button',
+  INFO_MARK: 'h5p-info-mark-button h5p-interaction-button',
 };
 
 const infoInteractions = [
@@ -38,6 +41,15 @@ export const getIconFromInteraction = (interaction, scenes) => {
   }
   else if (machineName === 'H5P.Audio') {
     icon = Icons.AUDIO;
+  }
+  else if (machineName === 'H5P.AdvancedText') {
+    icon = Icons.INFO_MARK;
+  }
+  else if (machineName === 'H5P.Video') {
+    icon = Icons.VIDEO;
+  }
+  else if (machineName === 'H5P.Image') {
+    icon = Icons.IMAGE;
   }
   else if (isInfoInteraction(machineName)) {
     icon = Icons.INFO;
@@ -93,7 +105,7 @@ export default class NavigationButton extends React.Component {
 
   onBlur(e) {
     const navButtonWrapper = this.navButtonWrapper
-      && this.navButtonWrapper.current;
+        && this.navButtonWrapper.current;
 
     if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
@@ -192,7 +204,7 @@ export default class NavigationButton extends React.Component {
 
   onClick() {
     const hasClickHandler = this.props.forceClickHandler
-      || !this.context.extras.isEditor;
+        || !this.context.extras.isEditor;
 
     if (hasClickHandler) {
       this.props.clickHandler();
@@ -215,7 +227,7 @@ export default class NavigationButton extends React.Component {
 
   onMouseDown(e) {
     const hasMouseDownHandler = this.context.extras.isEditor
-      && this.props.mouseDownHandler;
+        && this.props.mouseDownHandler;
 
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
@@ -224,8 +236,8 @@ export default class NavigationButton extends React.Component {
 
   setFocus() {
     const isFocusable = this.context.extras.isEditor
-      && this.navButtonWrapper
-      && this.navButtonWrapper.current;
+        && this.navButtonWrapper
+        && this.navButtonWrapper.current;
     if (isFocusable) {
       this.navButtonWrapper.current.focus({
         preventScroll: true
@@ -296,14 +308,14 @@ export default class NavigationButton extends React.Component {
 
     // Add classname to current active element (wrapper, button or expand label button) so it can be shown on top
     if (this.state.isFocused && this.props.children
-      || this.state.expandButtonFocused
-      || this.state.innerButtonFocused) {
+        || this.state.expandButtonFocused
+        || this.state.innerButtonFocused) {
       wrapperClasses.push('active-element');
     }
 
     const isWrapperTabbable = this.context.extras.isEditor;
     const isInnerButtonTabbable = !this.context.extras.isEditor
-      && !this.props.isHiddenBehindOverlay;
+        && !this.props.isHiddenBehindOverlay;
 
     let title = '';
     if (this.props.title) {
@@ -329,45 +341,45 @@ export default class NavigationButton extends React.Component {
 
     return (
 
-      <div
-        ref={this.navButtonWrapper}
-        className={wrapperClasses.join(' ')}
-        style={this.getStyle()}
-        tabIndex={isWrapperTabbable ? '0' : undefined}
-        onFocus={this.handleFocus}
-        onClick={this.onClick.bind(this)}
-      >
-        <button
-          ref={this.navButton}
-          aria-label={getLabelText(label, title)}
-          className='nav-button'
-          tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
-          onClick={this.onClick.bind(this)}
-          onDoubleClick={this.onDoubleClick.bind(this)}
-          onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
-          onFocus={() => this.setState({ innerButtonFocused: true })}
-          onBlur={() => this.setState({ innerButtonFocused: false })} />
-        {this.props.children}
-        {this.props.icon !== 'h5p-go-back-button' &&
+        <div
+            ref={this.navButtonWrapper}
+            className={wrapperClasses.join(' ')}
+            style={this.getStyle()}
+            tabIndex={isWrapperTabbable ? '0' : undefined}
+            onFocus={this.handleFocus}
+            onClick={this.onClick.bind(this)}
+        >
+          <button
+              ref={this.navButton}
+              aria-label={getLabelText(label, title)}
+              className='nav-button'
+              tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
+              onClick={this.onClick.bind(this)}
+              onDoubleClick={this.onDoubleClick.bind(this)}
+              onMouseDown={this.onMouseDown.bind(this)}
+              onMouseUp={this.setFocus.bind(this)}
+              onFocus={() => this.setState({ innerButtonFocused: true })}
+              onBlur={() => this.setState({ innerButtonFocused: false })} />
+          {this.props.children}
+          {this.props.icon !== 'h5p-go-back-button' &&
           <NavigationButtonLabel
-            labelText={getLabelText(label, title)}
-            labelPos={labelPos}
-            hoverOnly={hoverLabel}
-            onMount={this.props.onMount}
-            forwardRef={this.expandButton}
-            onFocus={this.handleExpandButtonFocus.bind(this)}
-            onBlur={() => this.setState({ expandButtonFocused: false })}
-            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
-            wrapperHeight={this.props.wrapperHeight}
-            leftPosition={this.props.leftPosition}
-            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
-            staticScene={this.props.staticScene}
-            navButtonFocused={this.state.innerButtonFocused}
-            rendered={this.props.rendered}
+              labelText={getLabelText(label, title)}
+              labelPos={labelPos}
+              hoverOnly={hoverLabel}
+              onMount={this.props.onMount}
+              forwardRef={this.expandButton}
+              onFocus={this.handleExpandButtonFocus.bind(this)}
+              onBlur={() => this.setState({ expandButtonFocused: false })}
+              topPosition={this.props.topPosition*this.props.wrapperHeight/100}
+              wrapperHeight={this.props.wrapperHeight}
+              leftPosition={this.props.leftPosition}
+              navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+              staticScene={this.props.staticScene}
+              navButtonFocused={this.state.innerButtonFocused}
+              rendered={this.props.rendered}
           />
-        }
-      </div>
+          }
+        </div>
     );
   }
 }

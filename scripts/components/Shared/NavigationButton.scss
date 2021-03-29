@@ -112,6 +112,15 @@ $labelWidth: 9em;
 .h5p-audio-button .nav-button:before {
   content: $audioOn;
 }
+.h5p-video-button .nav-button:before {
+  content: $video;
+}
+.h5p-image-button .nav-button:before {
+  content: $image;
+}
+.h5p-info-mark-button .nav-button:before {
+  content: $info-mark;
+}
 .h5p-audio-button.active .nav-button:before {
   content: $audioOff;
 }
