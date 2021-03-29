@@ -69,7 +69,6 @@ export default class Main extends React.Component {
     const prunedHistory = this.state.sceneHistory.filter(sceneId => {
       return validScenes.includes(sceneId);
     });
-
     // Scene has been removed from params, but not yet from history
     if (this.state.sceneHistory.length !== prunedHistory.length) {
       let lastElement = prunedHistory[prunedHistory.length - 1];
@@ -294,8 +293,11 @@ export default class Main extends React.Component {
     if (!scene) {
       return;
     }
-
     this.props.onSetCameraPos(scene.cameraStartPosition, true);
+  }
+
+  goToStartScene() {
+    this.navigateToScene(this.context.params.startSceneId);
   }
 
   doneLoadingNextScene() {
@@ -414,6 +416,7 @@ export default class Main extends React.Component {
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
           onCenterScene={ this.centerScene.bind(this) }
+          onGoToStartScene={ this.goToStartScene.bind(this) }
         />
       </div>
     );
