@@ -10,6 +10,9 @@ export const Icons = {
   GO_BACK: 'h5p-go-back-button',
   SCENE_DESCRIPTION: 'h5p-scene-description-button',
   AUDIO: 'h5p-audio-button h5p-interaction-button',
+  VIDEO: 'h5p-video-button h5p-interaction-button',
+  IMAGE: 'h5p-image-button h5p-interaction-button',
+  INFO_MARK: 'h5p-info-mark-button h5p-interaction-button',
 };
 
 const infoInteractions = [
@@ -38,6 +41,15 @@ export const getIconFromInteraction = (interaction, scenes) => {
   }
   else if (machineName === 'H5P.Audio') {
     icon = Icons.AUDIO;
+  }
+  else if (machineName === 'H5P.AdvancedText') {
+    icon = Icons.INFO_MARK;
+  }
+  else if (machineName === 'H5P.Video') {
+    icon = Icons.VIDEO;
+  }
+  else if (machineName === 'H5P.Image') {
+    icon = Icons.IMAGE;
   }
   else if (isInfoInteraction(machineName)) {
     icon = Icons.INFO;
@@ -350,22 +362,22 @@ export default class NavigationButton extends React.Component {
           onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
         {this.props.icon !== 'h5p-go-back-button' &&
-          <NavigationButtonLabel
-            labelText={getLabelText(label, title)}
-            labelPos={labelPos}
-            hoverOnly={hoverLabel}
-            onMount={this.props.onMount}
-            forwardRef={this.expandButton}
-            onFocus={this.handleExpandButtonFocus.bind(this)}
-            onBlur={() => this.setState({ expandButtonFocused: false })}
-            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
-            wrapperHeight={this.props.wrapperHeight}
-            leftPosition={this.props.leftPosition}
-            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
-            staticScene={this.props.staticScene}
-            navButtonFocused={this.state.innerButtonFocused}
-            rendered={this.props.rendered}
-          />
+        <NavigationButtonLabel
+          labelText={getLabelText(label, title)}
+          labelPos={labelPos}
+          hoverOnly={hoverLabel}
+          onMount={this.props.onMount}
+          forwardRef={this.expandButton}
+          onFocus={this.handleExpandButtonFocus.bind(this)}
+          onBlur={() => this.setState({ expandButtonFocused: false })}
+          topPosition={this.props.topPosition*this.props.wrapperHeight/100}
+          wrapperHeight={this.props.wrapperHeight}
+          leftPosition={this.props.leftPosition}
+          navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+          staticScene={this.props.staticScene}
+          navButtonFocused={this.state.innerButtonFocused}
+          rendered={this.props.rendered}
+        />
         }
       </div>
     );
