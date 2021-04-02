@@ -43,6 +43,7 @@ H5P.ThreeImage = (function () {
     this.contentId = contentId;
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
+
     const setCurrentSceneId = (sceneId) => {
       this.currentScene = sceneId;
 
