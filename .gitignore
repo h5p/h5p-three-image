@@ -81,3 +81,6 @@ TODOs.md
 package-lock.json
 package.json
 scripts/.DS_Store
+
+# Storybook dist
+storybook-static

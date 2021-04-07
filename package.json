@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -26,23 +28,28 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-react": "^7.13.13",
+    "@storybook/addon-actions": "^6.2.3",
+    "@storybook/addon-essentials": "^6.2.3",
+    "@storybook/addon-links": "^6.2.3",
+    "@storybook/react": "^6.2.3",
     "babel-loader": "^8.0.4",
+    "core-js": "^3.10.0",
     "css-loader": "^2.1.0",
     "eslint": "^7.15.0",
     "eslint-plugin-react": "^7.21.5",
-    "node-sass": "^4.13.1",
     "resolve-url-loader": "^3.1.2",
-    "sass-loader": "^7.1.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   }
 }
