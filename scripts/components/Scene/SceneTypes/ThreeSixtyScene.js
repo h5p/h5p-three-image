@@ -477,6 +477,16 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
+   * Handle scene click to hide ineractions
+   */
+   handleClick = (event) => {
+    // Allow parent click events only 
+    if (event.target.classList.contains('h5p-three-sixty-scene') && this.context.extras.isEditor) {
+      this.props.onBlurInteraction();
+    }
+  }
+
+  /**
    * React -
    */
   render() {
@@ -485,7 +495,10 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div className='three-sixty-scene-wrapper'>
+      <div 
+        className='three-sixty-scene-wrapper'
+        onClick={this.handleClick}
+      >
         <div
           ref={this.sceneRef}
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
