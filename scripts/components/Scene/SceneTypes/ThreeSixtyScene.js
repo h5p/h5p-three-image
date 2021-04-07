@@ -439,11 +439,6 @@ export default class ThreeSixtyScene extends React.Component {
           || isHiddenBehindOverlayHasChanged
           || this.props.isEditingInteraction;
 
-      // Update interaction's editing state
-      if (this.props.isEditingInteraction) {
-        this.props.updateInteractionState();
-      }
-
       // Check if the scene that interactions point to has changed icon type
       // This is only relevant when changing the icon using the H5P editor
       if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
