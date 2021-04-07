@@ -29,6 +29,7 @@ export default class ThreeSixtyScene extends React.Component {
       willPointerLock: false,
       hasPointerLock: false,
     };
+
   }
 
 
@@ -222,6 +223,13 @@ export default class ThreeSixtyScene extends React.Component {
       }
       this.imageElement.src = path;
     }
+  }
+
+  /**
+   * Triggeered when the scene is loaded.  Updates state.threeSixty in Main.js
+   */
+   sceneClicked = (e) => {
+    console.log('222222');
   }
 
   /**
@@ -475,6 +483,16 @@ export default class ThreeSixtyScene extends React.Component {
       }
     }
   }
+  
+  /**
+   * Handle scene click to hide ineractions
+   */
+   handleClick = (event) => {
+    // Allow parent click events only 
+    if (event.target.classList.contains('h5p-three-sixty-scene') && this.context.extras.isEditor) {
+      this.props.onBlurInteraction();
+    }
+  }
 
   /**
    * React -
@@ -485,7 +503,10 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div className='three-sixty-scene-wrapper'>
+      <div 
+        className='three-sixty-scene-wrapper'
+        onClick={this.handleClick}
+      >
         <div
           ref={this.sceneRef}
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
