@@ -77,7 +77,6 @@ export default class NavigationButton extends React.Component {
   onFocus() {
     // Already focused
     if (this.state.isFocused) {
-      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       return;
     }
 
@@ -88,7 +87,6 @@ export default class NavigationButton extends React.Component {
       this.props.onFocusedInteraction();
     }
 
-    this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
   }
 
   onBlur(e) {
@@ -111,9 +109,6 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-    if (this.navButtonWrapper && this.navButtonWrapper.current) {
-      this.navButtonWrapper.current.removeEventListener('blur', this.onBlur);
-    }
   }
 
   componentDidMount() {
@@ -164,7 +159,6 @@ export default class NavigationButton extends React.Component {
 
   componentWillUnmount() {
     if (this.navButtonWrapper) {
-      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       this.navButtonWrapper.current.removeEventListener('focus', this.onFocus);
     }
 
@@ -330,6 +324,7 @@ export default class NavigationButton extends React.Component {
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
+        onBlur={this.onBlur.bind(this)}
       >
         <button
           ref={this.navButton}
