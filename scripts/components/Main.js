@@ -42,6 +42,13 @@ export default class Main extends React.Component {
         isEditingInteraction: e.data[1]
       });
     });
+
+    // Update edit state to false after doneediting event
+    this.context.on('updateEditStateIneraction', () => {
+      this.setState({
+        isEditingInteraction: false
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -282,10 +289,6 @@ export default class Main extends React.Component {
     });
   }
 
-  updateInteractionState = () => {
-    this.state.isEditingInteraction= false;
-  }
-
   handleAudioIsPlaying = (id) => {
     this.setState({
       audioIsPlaying: id // Change the player
@@ -394,7 +397,6 @@ export default class Main extends React.Component {
                 sceneParams={sceneParams}
                 nextFocus={ this.state.nextFocus }
                 addThreeSixty={ this.addThreeSixty }
-                updateInteractionState={ this.updateInteractionState }
                 imageSrc={sceneParams.scenesrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}

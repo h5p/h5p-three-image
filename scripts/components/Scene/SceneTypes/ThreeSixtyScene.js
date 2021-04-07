@@ -439,11 +439,6 @@ export default class ThreeSixtyScene extends React.Component {
           || isHiddenBehindOverlayHasChanged
           || this.props.isEditingInteraction;
 
-      // Update interaction's editing state
-      if (this.props.isEditingInteraction) {
-        this.props.updateInteractionState();
-      }
-
       // Check if the scene that interactions point to has changed icon type
       // This is only relevant when changing the icon using the H5P editor
       if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
@@ -477,6 +472,16 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
+   * Handle scene click to hide ineractions
+   */
+   handleClick = (event) => {
+    // Allow parent click events only 
+    if (event.target.classList.contains('h5p-three-sixty-scene') && this.context.extras.isEditor) {
+      this.props.onBlurInteraction();
+    }
+  }
+
+  /**
    * React -
    */
   render() {
@@ -485,7 +490,10 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     return (
-      <div className='three-sixty-scene-wrapper'>
+      <div 
+        className='three-sixty-scene-wrapper'
+        onClick={this.handleClick}
+      >
         <div
           ref={this.sceneRef}
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
