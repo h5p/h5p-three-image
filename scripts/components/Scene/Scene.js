@@ -58,6 +58,7 @@ export default class Scene extends React.Component {
         focusedInteraction={this.props.focusedInteraction}
         sceneWaitingForLoad={this.props.sceneWaitingForLoad}
         doneLoadingNextScene={this.props.doneLoadingNextScene}
+        startBtnClicked={this.props.startBtnClicked}
       />
     );
   }
