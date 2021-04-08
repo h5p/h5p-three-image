@@ -71,6 +71,7 @@ export default class HUD extends React.Component {
               onClick={ this.props.onCenterScene }
             />
           }{
+            !this.props.isStartScene &&
             <Button
               type={ 'go-to-start' }
               label={ this.context.l10n.goToStartScene }

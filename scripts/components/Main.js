@@ -326,6 +326,8 @@ export default class Main extends React.Component {
     if (!scene) {
       return null;
     }
+    const isStartScene = this.props.currentScene === this.context.params.startSceneId;
+
     const isShowingInteraction = this.state.showingInteraction &&
       this.state.currentInteraction !== null;
 
@@ -357,7 +359,6 @@ export default class Main extends React.Component {
         iconType: sceneParams.iconType,
       };
     });
-
     return (
       <div role="document" aria-label={ this.context.l10n.title }>
         { showInteractionDialog &&
@@ -422,6 +423,7 @@ export default class Main extends React.Component {
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
           onCenterScene={ this.centerScene.bind(this) }
+          isStartScene = {isStartScene}
           onGoToStartScene={ this.goToStartScene.bind(this) }
         />
       </div>
