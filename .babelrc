@@ -5,7 +5,8 @@
       "@babel/preset-env",
       {
         "targets": "last 2 versions, ie 11, > 0.5%, not dead",
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": 3
       }
     ]
   ],
