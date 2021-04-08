@@ -16,7 +16,7 @@ jobs:
           node-version: "15.x"
       - run: |
           cd h5p-three-image
-          npm install
+          npm ci
           npm run build
       - name: Use Node.js 8
         uses: actions/setup-node@v2
