@@ -37,7 +37,7 @@
     height: 0.75em;
     position: absolute;
   }
-  &:hover .tooltip {
+  &:hover .tooltip, &:focus-within .tooltip {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
@@ -121,7 +121,7 @@
       transform: translateX(130%) translateY(-50%) rotate(45deg);
     }
   }
-  .btn-wrap:hover .tooltip {
+  .btn-wrap:hover .tooltip, .btn-wrap:focus-within .tooltip {
     bottom: 140%;
   }
 }
