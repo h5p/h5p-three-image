@@ -103,7 +103,7 @@ export default class Main extends React.Component {
         ],
       });
     }
-
+ 
     if (this.state.audioIsPlaying && this.state.audioIsPlaying !== prevState.audioIsPlaying) {
       // Something is playing audio
 
