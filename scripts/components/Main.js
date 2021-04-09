@@ -43,8 +43,8 @@ export default class Main extends React.Component {
       });
     });
 
-    // Update edit state to false after doneediting event
-    this.context.on('updateEditStateIneraction', () => {
+    // Update edit state to false after done editing event
+    this.context.on('updateEditStateInteraction', () => {
       this.setState({
         isEditingInteraction: false
       });
