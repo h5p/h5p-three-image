@@ -61,7 +61,7 @@ export default class ThreeSixtyScene extends React.Component {
     }, 100);
   }
 
- 
+
   /**
    * Unlocks the Navigation Button from the pointer.
    */
@@ -72,13 +72,13 @@ export default class ThreeSixtyScene extends React.Component {
     });
   }
 
- 
+
   /**
    * Called when the scene is moved, caused by a drag event.
    * @param  {H5P.Event} e
    */
   handleSceneMoveStart = (e) => {
-    
+
     if (!this.context.extras.isEditor || e.data.isCamera) {
       return;
     }
@@ -112,7 +112,7 @@ export default class ThreeSixtyScene extends React.Component {
 
   // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
   getInteractionTitle(action) {
-    const currentTitle = action.metadata.title;    
+    const currentTitle = action.metadata.title;
     switch (currentTitle) {
       case 'Untitled Text':
         return action.params.text;
@@ -140,7 +140,7 @@ export default class ThreeSixtyScene extends React.Component {
   initializeThreeSixty = () => {
     // Determine camera position
     let cameraPosition = this.state.cameraPosition;
-    if (!cameraPosition) {
+    if (!cameraPosition || this.props.startBtnClicked) {
       const startPosition = this.props.sceneParams.cameraStartPosition
         .split(',')
         .map(parseFloat);
@@ -360,7 +360,7 @@ export default class ThreeSixtyScene extends React.Component {
    * React -
    */
   componentDidUpdate(prevProps) {
-    if ((this.props.isActive && this.state.isLoaded && !this.state.isUpdated) || 
+    if ((this.props.isActive && this.state.isLoaded && !this.state.isUpdated) ||
     (this.props.isActive && this.props.updateThreeSixty)) {
       // Active and loaded, prepare the scene
       setTimeout(() => {

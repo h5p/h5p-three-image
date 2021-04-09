@@ -26,6 +26,7 @@ export default class Main extends React.Component {
       nextFocus: null,
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
+      startBtnClicked: false,
       labelBehavior: {
         showLabel: true,
         labelPosition: "right"
@@ -61,7 +62,11 @@ export default class Main extends React.Component {
         });
       }
     }
-    
+    if (this.state.startBtnClicked && this.props.currentScene !== this.context.params.startSceneId) {
+      this.setState({
+        startBtnClicked: false
+      });
+    }
     const validScenes = this.context.params.scenes.map(scene => {
       return scene.sceneId;
     });
@@ -298,6 +303,9 @@ export default class Main extends React.Component {
 
   goToStartScene() {
     this.navigateToScene(this.context.params.startSceneId);
+    this.setState({
+      startBtnClicked: true
+    });
   }
 
   doneLoadingNextScene() {
@@ -318,6 +326,8 @@ export default class Main extends React.Component {
     if (!scene) {
       return null;
     }
+    const isStartScene = this.props.currentScene === this.context.params.startSceneId;
+
     const isShowingInteraction = this.state.showingInteraction &&
       this.state.currentInteraction !== null;
 
@@ -337,22 +347,18 @@ export default class Main extends React.Component {
 
     const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
     const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
-
     // Whenever a dialog is shown we need to hide all the elements behind the overlay
     const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
-
     let dialogTitle;
     if (showInteractionDialog) {
       dialogTitle = scene.interactions[this.state.currentInteraction].action.metadata.title;
     }
-
     const sceneIcons = this.context.params.scenes.map(sceneParams => {
       return {
         id: sceneParams.sceneId,
         iconType: sceneParams.iconType,
       };
     });
-
     return (
       <div role="document" aria-label={ this.context.l10n.title }>
         { showInteractionDialog &&
@@ -403,6 +409,7 @@ export default class Main extends React.Component {
                 focusedInteraction={this.state.focusedInteraction}
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
+                startBtnClicked={this.state.startBtnClicked}
               />
             );
           })
@@ -416,6 +423,7 @@ export default class Main extends React.Component {
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
           onCenterScene={ this.centerScene.bind(this) }
+          isStartScene = {isStartScene}
           onGoToStartScene={ this.goToStartScene.bind(this) }
         />
       </div>

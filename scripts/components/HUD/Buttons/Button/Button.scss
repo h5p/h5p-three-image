@@ -37,10 +37,18 @@
     height: 0.75em;
     position: absolute;
   }
-  &:hover .tooltip {
+  @mixin tooltip-styling {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
+  }
+
+  &:hover .tooltip {
+    @include tooltip-styling;
+  }
+  
+  &:focus-within .tooltip {
+    @include tooltip-styling;
   }
 }
 .hud-btn {
@@ -122,6 +130,10 @@
     }
   }
   .btn-wrap:hover .tooltip {
+    bottom: 140%;
+  }
+
+  .btn-wrap:focus-within .tooltip {
     bottom: 140%;
   }
 }

@@ -73,10 +73,11 @@ export default class HUD extends React.Component {
           }{
             <Button
               type={ 'go-to-start' }
-              label={ this.context.l10n.goToStartScene }
+              label={this.props.isStartScene ? this.context.l10n.userIsAtStartScene : this.context.l10n.goToStartScene}
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               nextFocus={ this.props.nextFocus }
               onClick={ this.props.onGoToStartScene }
+              disabled = {this.props.isStartScene}
             />
           }
           { false &&

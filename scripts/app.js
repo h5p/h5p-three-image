@@ -33,7 +33,8 @@ H5P.ThreeImage = (function () {
       submitDialog: 'Submit Dialog',
       closeDialog: 'Close Dialog',
       expandButtonAriaLabel: 'Expand the visual label',
-      goToStartScene: 'Go to start scene'
+      goToStartScene: 'Go to start scene',
+      userIsAtStartScene: 'You are at the start scene'
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
