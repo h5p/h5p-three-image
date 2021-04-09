@@ -121,7 +121,11 @@
       transform: translateX(130%) translateY(-50%) rotate(45deg);
     }
   }
-  .btn-wrap:hover .tooltip, .btn-wrap:focus-within .tooltip {
+  .btn-wrap:hover .tooltip {
+    bottom: 140%;
+  }
+
+  .btn-wrap:focus-within .tooltip {
     bottom: 140%;
   }
 }
