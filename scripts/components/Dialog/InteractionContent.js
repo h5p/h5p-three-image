@@ -63,23 +63,6 @@ export default class InteractionContent extends React.Component {
       });
     }
 
-    if (library.library.split(' ')[0] === 'H5P.GoToScene') {
-      const input = contentRef.children[0];
-      const button = contentRef.children[1];
-      console.log(this.props.currentInteraction)
-      this.props.handlePasswordUnlock(this.props.currentInteraction, input.value )
-      console.log(input)
-      button.innerText = "Go"
-      input.className = "test";
-
-      button.addEventListener("click", (e) => {
-        this.props.handlePasswordUnlock(this.props.currentInteraction, input.value )
-      })
-      //contentRef.addChild(PasswordInput)
-
-
-    }
-
     this.setState({
       isInitialized: true,
     });

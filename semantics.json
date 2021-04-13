@@ -101,7 +101,7 @@
                   {
                     "name": "label",
                     "type": "group",
-                    "label": "Label",
+                    "label": "Interaction data",
                     "importance": "low",
                     "expanded": true,
                     "description": "A label that describes the icon.",
@@ -162,6 +162,20 @@
                           }
                         ],
                         "default": "inherit"
+                      },
+                      {
+                        "name": "interactionPassword",
+                        "type": "text",
+                        "label": "Password for the interaction",
+                        "optional": true,
+                        "description": ""
+                      },
+                      {
+                        "name": "interactionPasswordHint",
+                        "type": "text",
+                        "label": "A hint for the interaction password ",
+                        "optional": true,
+                        "description": ""
                       }
                     ]
                   },

@@ -7,6 +7,7 @@ import './Main.scss';
 import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
+import PasswordContent from "./Dialog/PasswordContent";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class Main extends React.Component {
       showingTextDialog: false,
       currentText: null,
       showingInteraction: false,
+      showingPassword: false,
       currentInteraction: null,
       sceneHistory: [],
       audioIsPlaying: null,
@@ -27,8 +29,6 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       startBtnClicked: false,
-      scenePassword : "",
-      sceneUnlocked : false,
       labelBehavior: {
         showLabel: true,
         labelPosition: "right"
@@ -235,25 +235,28 @@ export default class Main extends React.Component {
       return scene.sceneId === this.props.currentScene;
     });
     const interaction = scene.interactions[interactionIndex];
-
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
+    console.log(interaction)
+    var s = interaction.label.interactionPassword && !interaction.unlocked
+    console.log(s)
 
-    if (machineName === 'H5P.GoToScene') {
+    //Check if it has password and is unlocked
+    if (interaction.label.interactionPassword && !interaction.unlocked){
+      console.log(interaction.label.interactionPassword)
+      this.setState({
+        showingInteraction: true,
+        currentInteraction: interactionIndex,
+        showingPassword: true,
+        nextFocus: null
+      });
+    }
+    else if (machineName === 'H5P.GoToScene') {
+      this.setState({
+        currentInteraction: null,
+      });
       const nextSceneId = parseInt(interaction.action.params.nextSceneId);
-      console.log(interaction.action.params.scenePassword)
-      if(!interaction.action.params.scenePassword || interaction.action.params.unlocked) {
-        this.navigateToScene(nextSceneId);
-      } else {
-        console.log("this is password locked")
-        console.log("Password: " + interaction.action.params.scenePassword)
-        this.setState({
-          showingInteraction: true,
-          currentInteraction: interactionIndex,
-          scenePassword : interaction.action.params.scenePassword,
-          nextFocus: null
-        });
-      }
+      this.navigateToScene(nextSceneId);
     }
     else if (machineName === 'H5P.Audio') {
       const playerId = 'interaction-' + scene.sceneId + '-' + interactionIndex;
@@ -278,6 +281,7 @@ export default class Main extends React.Component {
       this.setState({
         showingInteraction: true,
         currentInteraction: interactionIndex,
+        showingPassword: false,
         nextFocus: null
       });
     }
@@ -286,6 +290,14 @@ export default class Main extends React.Component {
   hideInteraction() {
     this.setState(prevState => ({
       showingInteraction: false,
+      currentInteraction: null,
+      nextFocus: 'interaction-' + prevState.currentInteraction
+    }));
+  }
+
+  hidePasswordDialog() {
+    this.setState(prevState => ({
+      showingPassword: false,
       currentInteraction: null,
       nextFocus: 'interaction-' + prevState.currentInteraction
     }));
@@ -328,23 +340,22 @@ export default class Main extends React.Component {
     });
   }
 
- handlePassword(interactionIndex ,inputPassword) {
-   const scene = this.context.params.scenes.find(scene => {
-     return scene.sceneId === this.props.currentScene;
-   });
-   const interaction = scene.interactions[interactionIndex];
 
-    if(this.state.scenePassword === inputPassword) {
+  handlePassword(inputPassword) {
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.currentScene;
+    });
+    const interaction = scene.interactions[this.state.currentInteraction];
+
+    if(interaction.label.interactionPassword === inputPassword) {
       console.log("unlocked")
-      this.setState({
-        sceneUnlocked : true
-      })
-      interaction.action.params.unlocked = true;
+      interaction.unlocked = true;
+      return true;
     } else {
-      console.log("not unlocked")
+      //Gotta make this clean someday
+      return false;
     }
-
- }
+  }
 
   render() {
     const sceneParams = this.context.params.scenes;
@@ -376,8 +387,8 @@ export default class Main extends React.Component {
 
       dialogClasses.push(interactionClass);
     }
-
     const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
+    const showPasswordDialog = (this.state.showingPassword && this.state.currentInteraction !== null && !scene.interactions[this.state.currentInteraction].unlocked);
     const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
     // Whenever a dialog is shown we need to hide all the elements behind the overlay
     const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
@@ -399,13 +410,20 @@ export default class Main extends React.Component {
           onHideTextDialog={this.hideInteraction.bind(this)}
           dialogClasses={dialogClasses}
         >
-          <InteractionContent
-            currentScene={this.props.currentScene}
-            currentInteraction={this.state.currentInteraction}
-            audioIsPlaying={ this.state.audioIsPlaying }
-            onAudioIsPlaying={ this.handleAudioIsPlaying }
-            handlePasswordUnlock = {this.handlePassword.bind(this)}
-          />
+          {showPasswordDialog ? <PasswordContent
+              handlePassword = {this.handlePassword.bind(this)}
+              showInteraction = {this.showInteraction.bind(this)}
+              currentInteractionIndex = {this.state.currentInteraction}
+              currentInteraction = {scene.interactions[this.state.currentInteraction]}
+              isInteractionUnlocked = {scene.interactions[this.state.currentInteraction].unlocked}
+              hint = {scene.interactions[this.state.currentInteraction].label.interactionPasswordHint}
+            /> :
+            <InteractionContent
+              currentScene={this.props.currentScene}
+              currentInteraction={this.state.currentInteraction}
+              audioIsPlaying={this.state.audioIsPlaying}
+              onAudioIsPlaying={this.handleAudioIsPlaying}
+            />}
         </Dialog>
         }
         { showTextDialog &&
