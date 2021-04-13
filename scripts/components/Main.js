@@ -27,6 +27,8 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       startBtnClicked: false,
+      scenePassword : "",
+      sceneUnlocked : false,
       labelBehavior: {
         showLabel: true,
         labelPosition: "right"
@@ -103,7 +105,7 @@ export default class Main extends React.Component {
         ],
       });
     }
- 
+
     if (this.state.audioIsPlaying && this.state.audioIsPlaying !== prevState.audioIsPlaying) {
       // Something is playing audio
 
@@ -203,8 +205,8 @@ export default class Main extends React.Component {
     // Create player if none exist
     if (this.audioPlayers[id] === undefined) {
       if (!interaction || !interaction.action || !interaction.action.params ||
-          !interaction.action.params.files ||
-          !interaction.action.params.files.length) {
+        !interaction.action.params.files ||
+        !interaction.action.params.files.length) {
         return; // No track to play
       }
       this.audioPlayers[id] = AudioButton.createAudioPlayer(
@@ -239,7 +241,19 @@ export default class Main extends React.Component {
 
     if (machineName === 'H5P.GoToScene') {
       const nextSceneId = parseInt(interaction.action.params.nextSceneId);
-      this.navigateToScene(nextSceneId);
+      console.log(interaction.action.params.scenePassword)
+      if(!interaction.action.params.scenePassword || interaction.action.params.unlocked) {
+        this.navigateToScene(nextSceneId);
+      } else {
+        console.log("this is password locked")
+        console.log("Password: " + interaction.action.params.scenePassword)
+        this.setState({
+          showingInteraction: true,
+          currentInteraction: interactionIndex,
+          scenePassword : interaction.action.params.scenePassword,
+          nextFocus: null
+        });
+      }
     }
     else if (machineName === 'H5P.Audio') {
       const playerId = 'interaction-' + scene.sceneId + '-' + interactionIndex;
@@ -314,6 +328,24 @@ export default class Main extends React.Component {
     });
   }
 
+ handlePassword(interactionIndex ,inputPassword) {
+   const scene = this.context.params.scenes.find(scene => {
+     return scene.sceneId === this.props.currentScene;
+   });
+   const interaction = scene.interactions[interactionIndex];
+
+    if(this.state.scenePassword === inputPassword) {
+      console.log("unlocked")
+      this.setState({
+        sceneUnlocked : true
+      })
+      interaction.action.params.unlocked = true;
+    } else {
+      console.log("not unlocked")
+    }
+
+ }
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -362,26 +394,27 @@ export default class Main extends React.Component {
     return (
       <div role="document" aria-label={ this.context.l10n.title }>
         { showInteractionDialog &&
-          <Dialog
-            title={ dialogTitle }
-            onHideTextDialog={this.hideInteraction.bind(this)}
-            dialogClasses={dialogClasses}
-          >
-            <InteractionContent
-              currentScene={this.props.currentScene}
-              currentInteraction={this.state.currentInteraction}
-              audioIsPlaying={ this.state.audioIsPlaying }
-              onAudioIsPlaying={ this.handleAudioIsPlaying }
-            />
-          </Dialog>
+        <Dialog
+          title={ dialogTitle }
+          onHideTextDialog={this.hideInteraction.bind(this)}
+          dialogClasses={dialogClasses}
+        >
+          <InteractionContent
+            currentScene={this.props.currentScene}
+            currentInteraction={this.state.currentInteraction}
+            audioIsPlaying={ this.state.audioIsPlaying }
+            onAudioIsPlaying={ this.handleAudioIsPlaying }
+            handlePasswordUnlock = {this.handlePassword.bind(this)}
+          />
+        </Dialog>
         }
         { showTextDialog &&
-          <Dialog
-            title={ this.context.l10n.sceneDescription }
-            onHideTextDialog={  this.handleCloseTextDialog  }
-          >
-            <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
-          </Dialog>
+        <Dialog
+          title={ this.context.l10n.sceneDescription }
+          onHideTextDialog={  this.handleCloseTextDialog  }
+        >
+          <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
+        </Dialog>
         }
         {
           this.context.params.scenes.map(sceneParams => {

@@ -55,13 +55,29 @@ export default class InteractionContent extends React.Component {
       this.context.contentId,
       H5P.jQuery(contentRef)
     );
-
     if (library.library.split(' ')[0] === 'H5P.Video') {
       this.instance.on('stateChange', e => {
         if (e.data === H5P.Video.PLAYING) {
           this.props.onAudioIsPlaying('video-' + scene.sceneId + '-' + this.props.currentInteraction);
         }
       });
+    }
+
+    if (library.library.split(' ')[0] === 'H5P.GoToScene') {
+      const input = contentRef.children[0];
+      const button = contentRef.children[1];
+      console.log(this.props.currentInteraction)
+      this.props.handlePasswordUnlock(this.props.currentInteraction, input.value )
+      console.log(input)
+      button.innerText = "Go"
+      input.className = "test";
+
+      button.addEventListener("click", (e) => {
+        this.props.handlePasswordUnlock(this.props.currentInteraction, input.value )
+      })
+      //contentRef.addChild(PasswordInput)
+
+
     }
 
     this.setState({
@@ -76,13 +92,11 @@ export default class InteractionContent extends React.Component {
       const isWide = (imageRatio > contentRatio);
       img.style.width = isWide ? '100%' : 'auto';
       img.style.height = isWide ? 'auto' : '100%';
-
       this.instance.on('loaded', () => this.props.onResize(!isWide));
     }
 
     this.instance.on('resize', () => this.props.onResize());
   }
-
   render() {
     return (
       <div ref={ el => this.initializeContent(el) } />
