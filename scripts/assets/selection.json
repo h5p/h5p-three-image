@@ -1,178 +1,120 @@
 {
   "selection": [
     {
-      "order": 137,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "nosceneicon"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 138,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "set-angle"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 139,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "360image"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 140,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "back"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 141,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "mute"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 142,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "interaction"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 143,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "information"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 144,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "go-to-scene"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 145,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "restart"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 146,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "info"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 147,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "sound"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 148,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "static-image"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 149,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "copy"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 150,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "paste"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 151,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "first-scene"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 152,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "edit"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 153,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "delete"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 154,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "view"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 155,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "not-first-scene"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 156,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "dropdown"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 157,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "pin"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 158,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "scene-icon"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 159,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "Icon61"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 160,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "home-icon"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 161,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "film-solid"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 162,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "image-regular"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 163,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "info-solid"
+      "order": 0,
+      "ligatures": ""
     },
     {
-      "order": 164,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "lock-icon"
+      "order": 170,
+      "ligatures": ""
     },
     {
-      "order": 165,
-      "ligatures": "",
-      "prevSize": 32,
-      "name": "unlock-icon"
+      "order": 0,
+      "ligatures": ""
     }
   ],
   "metadata": {
@@ -181,7 +123,7 @@
     "majorVersion": 1,
     "minorVersion": 1,
     "includeMetadata": true,
-    "iconsHash": 1699666271
+    "iconsHash": 606134290
   },
   "height": 1024,
   "prevSize": 32,
@@ -459,7 +401,7 @@
     },
     {
       "paths": [
-        "M171 450h46.5v-139.5c0-162.37 132.13-294.5 294.5-294.5s294.5 132.13 294.5 294.5v139.5h46.5c51.34 0 93 41.66 93 93v372c0 51.34-41.66 93-93 93h-682c-51.34 0-93-41.66-93-93v-372c0-51.34 41.66-93 93-93zM372.5 450h279v-139.5c0-76.93-62.57-139.5-139.5-139.5s-139.5 62.57-139.5 139.5v139.5z"
+        "M217.763 542.658h23.275v-256.196c0-149.57 121.392-270.905 270.905-270.905s270.905 121.392 270.905 270.905v256.196h23.275c26.995 0 49.030 22.092 49.030 49.030v367.782c0 26.995-22.092 49.030-49.030 49.030h-588.473c-26.995 0-49.030-22.092-49.030-49.030v-367.782c0-26.995 22.092-49.030 49.030-49.030zM697.131 286.405c0-101.78-83.351-185.131-185.131-185.131s-185.131 83.351-185.131 185.131v256.196h370.205v-256.196z"
       ],
       "tags": [
         "lock-icon"
@@ -469,7 +411,7 @@
     },
     {
       "paths": [
-        "M171 512h480.5v-199.76c0-76.71-61.43-140.48-138.14-141.24-77.5-0.76-140.86 62.19-140.86 139.5v31c0 25.78-20.72 46.5-46.5 46.5h-62c-25.78 0-46.5-20.72-46.5-46.5v-31c0-162.75 132.73-295.070 295.48-294.5s293.52 134.66 293.52 297.41v198.59h46.5c51.34 0 93 41.66 93 93v310c0 51.34-41.66 93-93 93h-682c-51.34 0-93-41.66-93-93v-310c0-51.34 41.66-93 93-93z"
+        "M806.237 542.658h-479.311v-256.196c0-101.78 83.351-185.131 185.131-185.131s185.131 83.351 185.131 185.131h85.831c0-149.57-121.392-270.905-270.905-270.905s-270.905 121.392-270.905 270.905v256.196h-23.275c-26.995 0-49.030 22.092-49.030 49.030v367.782c0 26.995 22.092 49.030 49.030 49.030h588.473c26.995 0 49.030-22.092 49.030-49.030v-367.782c0-26.995-22.092-49.030-49.030-49.030z"
       ],
       "tags": [
         "unlock-icon"
