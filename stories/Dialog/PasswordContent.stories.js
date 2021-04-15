@@ -24,8 +24,6 @@ const defaultArguments = {
   hint: '',
 };
 const Template = (args) => {
-  const [hasClicked, setHasClicked] = useState(false);
-  console.log(args)
   return(
     <H5PContext.Provider value={defaultAppContext}>
       <PasswordContent {...defaultArguments} {...args}/>
