@@ -54,7 +54,6 @@ export default class PasswordContent extends React.Component {
     }), 500)
   };
   render() {
-//TODO: replace with l10n translation
     return (
       <div className='h5p-password-content' >
         <div className={`h5p-password-icon-wrapper ${this.state.unlocked ? "h5p-password-icon-wrapper--correct-code" :
