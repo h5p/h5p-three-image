@@ -55,7 +55,7 @@ export default class PasswordContent extends React.Component {
         <div className={`h5p-password-icon-wrapper ${this.state.unlocked ? "h5p-password-icon-wrapper--correct-code" :
           !this.state.hasClicked ? "" : "h5p-password-icon-wrapper--wrong-code"
         }` }>
-          <span className={`h5p-password-icon ${this.state.unlocked ? "unlocked" : "locked"}` + ` ${this.state.shakeClass}`}/>
+          <span className={`h5p-password-icon ${this.state.unlocked ? "unlocked" : "locked"} ${this.state.shakeClass}`}/>
         </div>
         <h1>{this.state.unlocked ? this.context.l10n.unlocked : this.context.l10n.locked}</h1>
 
