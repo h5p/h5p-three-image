@@ -9,10 +9,15 @@ export default class PasswordContent extends React.Component {
       unlocked: false,
       hasClicked: false,
       shakeClass : "",
-      showPasswordInput : true
+      showPasswordInput : true,
+      inputPassword: ""
     }
   }
-
+  handleOnChange = event => {
+    this.setState({
+      inputPassword: event.target.value
+    })
+  }
   handleOnClick = event => {
     event.preventDefault();
     this.setState({
@@ -22,7 +27,7 @@ export default class PasswordContent extends React.Component {
       this.props.showInteraction(this.props.currentInteractionIndex)
     } else {
       this.setState({
-        unlocked: this.props.handlePassword(this.input.value)
+        unlocked: this.props.handlePassword(this.state.inputPassword)
       })
       if(!this.props.currentInteraction.unlocked){
         this.shakeIcon();
@@ -70,7 +75,7 @@ export default class PasswordContent extends React.Component {
           <label className={"h5p-wrapper"} htmlFor={"field-code-" + this.props.currentInteractionIndex}>
             <span className={"h5p-field-text"}>{this.props.hint}</span>
             <div className={"h5p-wrapper-inner"}>
-              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={this.context.l10n.code}  ref={(input) => this.input = input}/>
+              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={this.context.l10n.code} value={this.state.inputPassword} onChange={this.handleOnChange}/>
               <button className={`h5p-password-btn ${this.state.showPasswordInput ? "h5p-password-show-btn h5p-password-show-btn-is-shown" : "h5p-password-show-btn"}`} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? this.context.l10n.showCode : this.context.l10n.hideCode}</button>
             </div>
           </label>
