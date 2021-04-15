@@ -13,6 +13,8 @@ export const Icons = {
   VIDEO: 'h5p-video-button h5p-interaction-button',
   IMAGE: 'h5p-image-button h5p-interaction-button',
   INFO_MARK: 'h5p-info-mark-button h5p-interaction-button',
+  LOCK: 'h5p-locked-button h5p-interaction-button',
+  UNLOCK: 'h5p-unlocked-button h5p-interaction-button',
 };
 
 const infoInteractions = [
@@ -29,7 +31,10 @@ export const getIconFromInteraction = (interaction, scenes) => {
   const library = interaction.action.library;
   const machineName = H5P.libraryFromString(library).machineName;
   let icon = '';
-  if (machineName === 'H5P.GoToScene') {
+  if (interaction.label.interactionPassword && !interaction.unlocked) {
+    icon = Icons.LOCK;
+  }
+  else if (machineName === 'H5P.GoToScene') {
     icon = Icons.GO_TO_SCENE;
 
     const nextScene = scenes.find(scene => {

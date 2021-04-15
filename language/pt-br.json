@@ -179,6 +179,14 @@
             {
               "label": "Display Labels",
               "description": "If unchecked - labels will show only on mouse over"
+            },
+            {
+              "label": "Código para a interação",
+              "description": "Se não for deixada em branco, o usuário deve inserir a senha para abrir o conteúdo."
+            },
+            {
+              "label": "Uma dica para o código de interação",
+              "description": "Uma dica opcional para o código, pode ser deixada em branco se desejado"
             }
           ]
         }

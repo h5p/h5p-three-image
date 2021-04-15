@@ -34,7 +34,17 @@ H5P.ThreeImage = (function () {
       closeDialog: 'Close Dialog',
       expandButtonAriaLabel: 'Expand the visual label',
       goToStartScene: 'Go to start scene',
-      userIsAtStartScene: 'You are at the start scene'
+      userIsAtStartScene: 'You are at the start scene',
+      unlocked: 'Unlocked',
+      locked: 'Locked',
+      searchRoomForCode: 'Search the room until you find the code',
+      wrongCode: 'The code was wrong, try again.',
+      contentUnlocked: 'The content has been unlocked!',
+      code: 'Code',
+      showCode: 'Show code',
+      hideCode: 'Hide code',
+      unlockedStateAction: 'Continue',
+      lockedStateAction: 'Unlock',
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {

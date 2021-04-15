@@ -108,6 +108,12 @@ $labelWidth: 9em;
 .h5p-go-to-scene-button .nav-button:before {
   content: $goToScene;
 }
+.h5p-locked-button .nav-button:before {
+  content: $lock-icon;
+}
+.h5p-unlocked-button .nav-button:before {
+  content: $unlock-icon;
+}
 
 .h5p-audio-button .nav-button:before {
   content: $audioOn;

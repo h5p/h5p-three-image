@@ -55,7 +55,6 @@ export default class InteractionContent extends React.Component {
       this.context.contentId,
       H5P.jQuery(contentRef)
     );
-
     if (library.library.split(' ')[0] === 'H5P.Video') {
       this.instance.on('stateChange', e => {
         if (e.data === H5P.Video.PLAYING) {
@@ -76,13 +75,11 @@ export default class InteractionContent extends React.Component {
       const isWide = (imageRatio > contentRatio);
       img.style.width = isWide ? '100%' : 'auto';
       img.style.height = isWide ? 'auto' : '100%';
-
       this.instance.on('loaded', () => this.props.onResize(!isWide));
     }
 
     this.instance.on('resize', () => this.props.onResize());
   }
-
   render() {
     return (
       <div ref={ el => this.initializeContent(el) } />

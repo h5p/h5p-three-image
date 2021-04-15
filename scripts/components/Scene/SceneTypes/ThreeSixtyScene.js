@@ -265,7 +265,6 @@ export default class ThreeSixtyScene extends React.Component {
     if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
       className.push('active');
     }
-
     let title;
     const isGoToSceneInteraction = interaction.action.library.split(' ')[0] === 'H5P.GoToScene';
     if (isGoToSceneInteraction) {
