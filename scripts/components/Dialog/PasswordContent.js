@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { H5PContext } from "../../context/H5PContext";
-import './PasswordContent.scss';
+import "./PasswordContent.scss";
 
 export default class PasswordContent extends React.Component {
   constructor(props) {
@@ -8,77 +8,116 @@ export default class PasswordContent extends React.Component {
     this.state = {
       unlocked: false,
       hasClicked: false,
-      shakeClass : "",
-      showPasswordInput : true,
-      inputPassword: ""
-    }
+      shakeClass: "",
+      showPasswordInput: true,
+      inputPassword: "",
+    };
   }
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     this.setState({
-      inputPassword: event.target.value
-    })
-  }
-  handleOnClick = event => {
+      inputPassword: event.target.value,
+    });
+  };
+  handleOnClick = (event) => {
     event.preventDefault();
     this.setState({
-      hasClicked: true
-    })
-    if(this.props.currentInteraction.unlocked) {
-      this.props.showInteraction(this.props.currentInteractionIndex)
+      hasClicked: true,
+    });
+    if (this.props.currentInteraction.unlocked) {
+      this.props.showInteraction(this.props.currentInteractionIndex);
     } else {
       this.setState({
-        unlocked: this.props.handlePassword(this.state.inputPassword)
-      })
-      if(!this.props.currentInteraction.unlocked){
+        unlocked: this.props.handlePassword(this.state.inputPassword),
+      });
+      if (!this.props.currentInteraction.unlocked) {
         this.shakeIcon();
-
       }
     }
   };
   toggleShowCode = () => {
-
     this.setState({
-      showPasswordInput : !this.state.showPasswordInput
-    })
-
-  }
+      showPasswordInput: !this.state.showPasswordInput,
+    });
+  };
 
   shakeIcon = () => {
     this.setState({
-      shakeClass : "h5p-password-icon--shake"
-    })
-    setTimeout((() => {
+      shakeClass: "h5p-password-icon--shake",
+    });
+    setTimeout(() => {
       this.setState({
-        shakeClass : ""
-      })
-    }), 500)
+        shakeClass: "",
+      });
+    }, 500);
   };
   render() {
     return (
-      <div className='h5p-password-content' >
-        <div className={`h5p-password-icon-wrapper ${this.state.unlocked ? "h5p-password-icon-wrapper--correct-code" :
-          !this.state.hasClicked ? "" : "h5p-password-icon-wrapper--wrong-code"
-        }` }>
-          <span className={`h5p-password-icon ${this.state.unlocked ? "unlocked" : "locked"} ${this.state.shakeClass}`}/>
+      <div className="h5p-password-content">
+        <div
+          className={`h5p-password-icon-wrapper ${
+            this.state.unlocked
+              ? "h5p-password-icon-wrapper--correct-code"
+              : !this.state.hasClicked
+              ? ""
+              : "h5p-password-icon-wrapper--wrong-code"
+          }`}
+        >
+          <span
+            className={`h5p-password-icon ${
+              this.state.unlocked ? "unlocked" : "locked"
+            } ${this.state.shakeClass}`}
+          />
         </div>
-        <h1>{this.state.unlocked ? this.context.l10n.unlocked : this.context.l10n.locked}</h1>
+        <h1>
+          {this.state.unlocked
+            ? this.context.l10n.unlocked
+            : this.context.l10n.locked}
+        </h1>
 
-        {<span className={"h5p-field-description"}>
-
-          {this.state.unlocked ? this.context.l10n.contentUnlocked :
-            !this.state.hasClicked ? this.context.l10n.searchRoomForCode : this.context.l10n.wrongCode
-          }
-
-         </span>}
+        {
+          <span className={"h5p-field-description"}>
+            {this.state.unlocked
+              ? this.context.l10n.contentUnlocked
+              : !this.state.hasClicked
+              ? this.context.l10n.searchRoomForCode
+              : this.context.l10n.wrongCode}
+          </span>
+        }
         <form className={"h5p-wrapper"} onSubmit={this.handleSubmit}>
-          <label className={"h5p-wrapper"} htmlFor={"field-code-" + this.props.currentInteractionIndex}>
+          <label
+            className={"h5p-wrapper"}
+            htmlFor={"field-code-" + this.props.currentInteractionIndex}
+          >
             <span className={"h5p-field-text"}>{this.props.hint}</span>
             <div className={"h5p-wrapper-inner"}>
-              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={this.context.l10n.code} value={this.state.inputPassword} onChange={this.handleOnChange}/>
-              <button className={`h5p-password-btn ${this.state.showPasswordInput ? "h5p-password-show-btn h5p-password-show-btn-is-shown" : "h5p-password-show-btn"}`} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? this.context.l10n.showCode : this.context.l10n.hideCode}</button>
+              <input
+                type={this.state.showPasswordInput ? "password" : "text"}
+                className={"h5p-field-input"}
+                id={"field-code-" + this.props.currentInteractionIndex}
+                placeholder={this.context.l10n.code}
+                value={this.state.inputPassword}
+                onChange={this.handleOnChange}
+              />
+              <button
+                className={`h5p-password-btn ${
+                  this.state.showPasswordInput
+                    ? "h5p-password-show-btn h5p-password-show-btn-is-shown"
+                    : "h5p-password-show-btn"
+                }`}
+                type={"button"}
+                onClick={this.toggleShowCode}
+              >
+                {this.state.showPasswordInput
+                  ? this.context.l10n.showCode
+                  : this.context.l10n.hideCode}
+              </button>
             </div>
           </label>
-          <button className={"h5p-password-btn"} onClick={this.handleOnClick}>{this.state.unlocked ? this.context.l10n.unlockedStateAction : this.context.l10n.lockedStateAction}</button>
+          <button className={"h5p-password-btn"} onClick={this.handleOnClick}>
+            {this.state.unlocked
+              ? this.context.l10n.unlockedStateAction
+              : this.context.l10n.lockedStateAction}
+          </button>
         </form>
       </div>
     );
