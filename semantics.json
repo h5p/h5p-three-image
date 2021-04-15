@@ -166,16 +166,16 @@
                       {
                         "name": "interactionPassword",
                         "type": "text",
-                        "label": "Password for the interaction",
+                        "label": "Code for the interaction",
                         "optional": true,
-                        "description": ""
+                        "description": "If not empty, the user has to input the code in order to open this content."
                       },
                       {
                         "name": "interactionPasswordHint",
                         "type": "text",
-                        "label": "A hint for the interaction password ",
+                        "label": "A hint for the interaction code",
                         "optional": true,
-                        "description": ""
+                        "description": "An optional hint for the code, can be left empty if wanted"
                       }
                     ]
                   },

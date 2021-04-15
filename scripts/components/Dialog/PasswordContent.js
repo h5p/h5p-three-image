@@ -24,7 +24,6 @@ export default class PasswordContent extends React.Component {
       this.setState({
         unlocked: this.props.handlePassword(this.input.value)
       })
-      console.log("unlocked: " +this.state.unlocked)
       if(!this.props.currentInteraction.unlocked){
         this.shakeIcon();
 
@@ -32,7 +31,6 @@ export default class PasswordContent extends React.Component {
     }
   };
   toggleShowCode = () => {
-    console.log("sasa")
 
     this.setState({
       showPasswordInput : !this.state.showPasswordInput
@@ -59,12 +57,12 @@ export default class PasswordContent extends React.Component {
         }` }>
           <span className={`h5p-password-icon ${this.state.unlocked ? "unlocked" : "locked"}` + ` ${this.state.shakeClass}`}/>
         </div>
-        <h1>{this.state.unlocked ? " Åpnet" : "Låst"}</h1>
+        <h1>{this.state.unlocked ? this.context.l10n.unlocked : this.context.l10n.locked}</h1>
 
         {<span className={"h5p-field-description"}>
 
-          {this.state.unlocked ? " Rommet er nå åpent!" :
-            !this.state.hasClicked ? "Søk i rommet til du finner koden." : "Koden var dessverre feil, prøv igjen"
+          {this.state.unlocked ? this.context.l10n.contentUnlocked :
+            !this.state.hasClicked ? this.context.l10n.searchRoomForCode : this.context.l10n.wrongCode
           }
 
          </span>}
@@ -72,11 +70,11 @@ export default class PasswordContent extends React.Component {
           <label className={"h5p-wrapper"} htmlFor={"field-code-" + this.props.currentInteractionIndex}>
             <span className={"h5p-field-text"}>{this.props.hint}</span>
             <div className={"h5p-wrapper-inner"}>
-              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={"Kode"}  ref={(input) => this.input = input}/>
-              <button className={"h5p-password-btn h5p-password-show-btn"} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? "Vis kode" : "Skjul kode"}</button>
+              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={this.context.l10n.code}  ref={(input) => this.input = input}/>
+              <button className={`h5p-password-btn ${this.state.showPasswordInput ? "h5p-password-show-btn h5p-password-show-btn-is-shown" : "h5p-password-show-btn"}`} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? this.context.l10n.showCode : this.context.l10n.hideCode}</button>
             </div>
           </label>
-          <button className={"h5p-password-btn"} onClick={this.handleOnClick}>{this.state.unlocked ? " Gå videre" : "Lås opp"}</button>
+          <button className={"h5p-password-btn"} onClick={this.handleOnClick}>{this.state.unlocked ? this.context.l10n.unlockedStateAction : this.context.l10n.lockedStateAction}</button>
         </form>
       </div>
     );

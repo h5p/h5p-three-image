@@ -237,13 +237,9 @@ export default class Main extends React.Component {
     const interaction = scene.interactions[interactionIndex];
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
-    console.log(interaction)
-    var s = interaction.label.interactionPassword && !interaction.unlocked
-    console.log(s)
 
     //Check if it has password and is unlocked
     if (interaction.label.interactionPassword && !interaction.unlocked){
-      console.log(interaction.label.interactionPassword)
       this.setState({
         showingInteraction: true,
         currentInteraction: interactionIndex,
@@ -348,7 +344,6 @@ export default class Main extends React.Component {
     const interaction = scene.interactions[this.state.currentInteraction];
 
     if(interaction.label.interactionPassword === inputPassword) {
-      console.log("unlocked")
       interaction.unlocked = true;
       return true;
     } else {
