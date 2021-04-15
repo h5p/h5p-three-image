@@ -1,45 +1,42 @@
 // @ts-check
-import React, {useState} from "react";
-import PasswordContent from "../../scripts/components/Dialog/PasswordContent";
+import React from "react";
 import { defaultAppContext } from "../../.storybook/config/contexts";
+import PasswordContent from "../../scripts/components/Dialog/PasswordContent";
 import { H5PContext } from "../../scripts/context/H5PContext";
+
 export default {
   title: "PasswordContent",
   component: PasswordContent,
   argTypes: {
-    children: { control: { disable: true } },
-    currentInteraction: {
-      unlocked: { control: 'boolean' },
-    }
+    hint: { control: "text" },
   },
 };
 
 const defaultArguments = {
-  currentInteraction: {
-    unlocked: false,
-  },
+  currentInteraction: { unlocked: false },
   currentInteractionIndex: 0,
   showInteraction: () => {},
   handlePassword: () => {},
-  hint: '',
+  hint: "",
 };
+
 const Template = (args) => {
-  return(
+  const props = {
+    ...defaultArguments,
+    ...args,
+  };
+
+  return (
     <H5PContext.Provider value={defaultAppContext}>
-      <PasswordContent {...defaultArguments} {...args}/>
+      <PasswordContent {...props} />
     </H5PContext.Provider>
   );
 };
+
 export const Empty = Template.bind({});
 Empty.args = {};
 
-export const Unlocked = Template.bind({});
-Unlocked.args = {
-  currentInteraction: {
-    unlocked: true
-  },
-};
 export const WithHint = Template.bind({});
 WithHint.args = {
-  hint: '123',
+  hint: "Hint",
 };
