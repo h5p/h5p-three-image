@@ -343,13 +343,10 @@ export default class Main extends React.Component {
     });
     const interaction = scene.interactions[this.state.currentInteraction];
 
-    if(interaction.label.interactionPassword === inputPassword) {
-      interaction.unlocked = true;
-      return true;
-    } else {
-      //Gotta make this clean someday
-      return false;
-    }
+    const isCorrectPassword = interaction.label.interactionPassword === inputPassword;
+    interaction.unlocked = interaction.unlocked || isCorrectPassword;
+
+    return isCorrectPassword;
   }
 
   render() {
