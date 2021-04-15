@@ -34,9 +34,9 @@ export default class PasswordContent extends React.Component {
   toggleShowCode = () => {
     console.log("sasa")
 
-  this.setState({
-    showPasswordInput : !this.state.showPasswordInput
-  })
+    this.setState({
+      showPasswordInput : !this.state.showPasswordInput
+    })
 
   }
 
@@ -64,17 +64,18 @@ export default class PasswordContent extends React.Component {
         {<span className={"h5p-field-description"}>
 
           {this.state.unlocked ? " Rommet er nå åpent!" :
-              !this.state.hasClicked ? "Søk i rommet til du finner koden." : "Koden var dessverre feil, prøv igjen"
+            !this.state.hasClicked ? "Søk i rommet til du finner koden." : "Koden var dessverre feil, prøv igjen"
           }
 
          </span>}
         <form className={"h5p-wrapper"} onSubmit={this.handleSubmit}>
           <label className={"h5p-wrapper"} htmlFor={"field-code-" + this.props.currentInteractionIndex}>
             <span className={"h5p-field-text"}>{this.props.hint}</span>
-            <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={"Kode"}  ref={(input) => this.input = input}/>
-            </label>
-          <button className={"h5p-password-btn show-btn"} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? "Vis kode" : "Skjul kode"}</button>
-
+            <div className={"h5p-wrapper-inner"}>
+              <input type={this.state.showPasswordInput ? "password" : "text"} className={"h5p-field-input"} id={"field-code-" + this.props.currentInteractionIndex} placeholder={"Kode"}  ref={(input) => this.input = input}/>
+              <button className={"h5p-password-btn h5p-password-show-btn"} type={"button"} onClick={this.toggleShowCode}>{this.state.showPasswordInput ? "Vis kode" : "Skjul kode"}</button>
+            </div>
+          </label>
           <button className={"h5p-password-btn"} onClick={this.handleOnClick}>{this.state.unlocked ? " Gå videre" : "Lås opp"}</button>
         </form>
       </div>
