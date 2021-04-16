@@ -69,27 +69,6 @@
                         },
                         {
                           "label": "Mostrar Etiqueta",
-                          "description": "Si oculta - las etiquetas se mostrarán solo al pasar el ratón encima",
-                          "options": [
-                            {
-                              "label": "Usar configuración del comportamiento"
-                            },
-                            {
-                              "label": "Mostrar"
-                            },
-                            {
-                              "label": "Ocultar"
-                            },
-                            {
-                              "label": "Alineado en superior"
-                            },
-                            {
-                              "label": "Alineado en inferior"
-                            }
-                          ]
-                        },
-                        {
-                          "label": "Mostrar Etiqueta",
                           "description": "Si se oculta - las etiquetas se mostrarán solamente al pasarles el ratón encima",
                           "options": [
                             {
@@ -105,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Configuraciones de etiqueta",
-                      "description": "Una etiqueta que describe el ícono."
-                    },
-                    {
-                      "label": "Posición de Interacción",
-                      "description": "Posición de interacción en pitch y yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -166,7 +139,6 @@
         },
         {
           "label": "Configuraciones de etiqueta",
-          "description": "Una etiqueta que describe al ícono.",
           "fields": [
             {
               "label": "Posición de etiqueta",
@@ -236,18 +208,6 @@
         {
           "label": "Etiqueta para cuando no hay contenido",
           "default": "Sin contenido"
-        },
-        {
-          "label": "Etiqueta para botón de menú contextual para ir a escena",
-          "default": "Ir a escena"
-        },
-        {
-          "label": "Etiqueta para botón de menú contextual para editar",
-          "default": "Editar"
-        },
-        {
-          "label": "Etiqueta para botón de menú contextual para eliminar",
-          "default": "Eliminar"
         }
       ]
     }
