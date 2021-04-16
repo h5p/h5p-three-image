@@ -26,7 +26,7 @@
               {},
               {
                 "label": "Titel der Szene",
-                "description": "Hilft Autoren dabei, die Szene zu identifizieren"
+                "description": "Hilft dabei, die Szene zu identifizieren"
               },
               {
                 "label": "Hintergrund der Szene"
@@ -41,51 +41,49 @@
                   "fields": [
                     {
                       "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "description": "Wenn leer, wird keine Beschriftung angezeigt und für Vorlesewerkzeuge wird der Szenentitel verwendet"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Einstellungen der Beschriftung",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Position der Beschriftung",
+                          "description": "Legt fest, wo die Beschriftung angezeigt werden soll",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Verhaltenseinstellungen verwenden"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Rechts ausgerichtet"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Links ausgerichtet"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Oben ausgerichtet"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Unten ausgerichtet"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Beschriftung anzeigen",
+                          "description": "Wenn verborgen, werden Beschriftungen nur beim Darüberfahren mit der Maus angezeigt",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Verhaltenseinstellungen verwenden"
                             },
                             {
-                              "label": "Show"
+                              "label": "Anzeigen"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Verbergen"
                             }
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -138,76 +136,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Beschriftungseinstellungen",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Position der Beschriftung",
+              "description": "Die Standard-Position der Beschriftung. Sie kann pro Interaktion überschrieben werden.",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Rechts ausgerichtet"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Links ausgerichtet"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Oben ausgerichtet"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Unten ausgerichtet"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Beschriftungen anzeigen",
+              "description": "Wenn nicht ausgewählt, werden Beschriftungen nur beim Darüberfahren mit der Maus angezeigt"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Bezeichnungen und Beschriftungen",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Aria-Label für den Inhaltstyp",
+          "default": "Virtuelle Tour"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Beschriftungen, um Ton abzuspielen",
+          "default": "Tonspur abspielen"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Beschriftung, um Ton zu pausieren",
+          "default": "Tonspur pausieren"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Titel des Szenendialogs",
+          "default": "Szenenbeschreibung"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Beschriftung des Buttons, die Kamera zurückzusetzen",
+          "default": "Kamera zurücksetzen"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Beschriftung des Buttons, um den Dialog zu senden",
+          "default": "Dialog absenden"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Beschriftung des Buttons, um den Dialog zu schließen",
+          "default": "Dialog schließen"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Aria-Label des Buttons, der Beschriftungen erweitert",
+          "default": "Die Beschriftung erweitern"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Beschriftung wenn der Hintergrund der 360°-Szene lädt",
+          "default": "Lade Hintergrundbild..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Beschriftung, wenn kein Inhalt vorhanden ist",
+          "default": "Kein Inhalt"
         }
       ]
     }
