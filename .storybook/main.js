@@ -12,7 +12,14 @@ module.exports = {
       include: path.resolve(__dirname, ".."),
       use: ["style-loader", "css-loader", "resolve-url-loader", "sass-loader"],
     });
-
+    // config.module.rules.push({
+    //   test: /\.(ja)$/,
+    //   use: [
+    //     {
+    //       loader: 'file-loader',
+    //     },
+    //   ],
+    // });
     return config;
   },
 };

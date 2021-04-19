@@ -25,9 +25,32 @@ export const defaultAppContext = {
     unlockedStateAction: 'Continue',
     lockedStateAction: 'Unlock',
   },
-  params: {},
+  params: {
+    startSceneId: 1,
+    scenes: [
+      { sceneId: 1,
+        scenename: "test",
+        interactions: [
+          {
+            label: {
+              labelText: "",
+              labelPosition: "right",
+            },
+            action: {
+              library: "H5P.GoToScene 0.1",
+              params: {nextSceneId: 1},
+              gotoScene: 1,
+            },
+            interactionpos: "0,0"
+          }
+        ]
+      }
+    ]
+  },
   contentId: 0,
   extras: {},
   sceneRenderingQuality: "high",
   on: () => undefined,
+  getRatio: () => 16/9,
+  trigger: (eventName, data) => {console.log(eventName); console.log(data); H5P.jQuery('root').trigger(eventName, data)},
 };

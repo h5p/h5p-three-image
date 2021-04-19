@@ -127,6 +127,7 @@ export default class ThreeSixtyScene extends React.Component {
    * Called when a scene move is stopped after dragging ends.
    */
   handleSceneMoveStop = (e) => {
+    console
     if (this.context.extras.isEditor) {
       this.cancelPointerLock();
     }

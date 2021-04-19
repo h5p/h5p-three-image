@@ -26,3 +26,4 @@ Empty.args = {
   addThreeSixty: (tS) => undefined,
   onSetCameraPos: () => undefined,
 };
+
