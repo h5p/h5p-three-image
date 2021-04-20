@@ -1,0 +1,38 @@
+<!-- .storybook/preview-head.html -->
+<script>var H5P = window.H5P = window.H5P || {};</script>
+<script>
+var H5PIntegration = window.H5PIntegration = window.H5PIntegration || {};
+H5PIntegration.l10n = {}
+</script>
+
+<script src="/jquery.js"></script>
+<script src="/h5p.js"></script>
+<script src="/h5p-event-dispatcher.js"></script>
+<script src="/three.min.js"></script>
+
+<script src="/three-sixty.js"></script>
+<!--<script src="static/three-image.js"></script> -->
+<script>
+H5P.getPath = function(path, context){console.log(path);return path;};
+
+if (!Array.prototype.find) {
+  Array.prototype.find = function (callback, thisArg) {
+    "use strict";
+    var arr = this,
+        arrLen = arr.length,
+        i;
+    for (i = 0; i < arrLen; i += 1) {
+        if (callback.call(thisArg, arr[i], i, arr)) {
+            return arr[i];
+        }
+    }
+    return undefined;
+  };
+}
+</script>
+<style>
+.h5p-three-sixty-scene {
+    position: absolute;
+    top: 1em;
+}
+</style>

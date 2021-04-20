@@ -12,7 +12,6 @@ module.exports = {
       include: path.resolve(__dirname, ".."),
       use: ["style-loader", "css-loader", "resolve-url-loader", "sass-loader"],
     });
-
     return config;
   },
 };

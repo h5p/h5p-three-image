@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./stories/static -p 6006",
     "build-storybook": "build-storybook"
   },
   "repository": {
@@ -31,10 +31,10 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.13.13",
-    "@storybook/addon-actions": "^6.2.3",
-    "@storybook/addon-essentials": "^6.2.3",
-    "@storybook/addon-links": "^6.2.3",
-    "@storybook/react": "^6.2.3",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/react": "^6.2.8",
     "babel-loader": "^8.0.4",
     "core-js": "^3.10.0",
     "css-loader": "^2.1.0",
@@ -49,7 +49,11 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "acorn-dynamic-import": "^4.0.0",
+    "load-json-file": "^6.2.0",
+    "pinkie-promise": "^2.0.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "repeating": "^3.0.0"
   }
 }
