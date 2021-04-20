@@ -102,12 +102,16 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     // Make sure we don't start movement on contextmenu actions
-    if (!target || !target.classList.contains('nav-button')) {
-      return;
+    if (target && (
+      target.classList.contains('nav-button')
+      || target.classList.contains('nav-label-container')
+      || target.classList.contains('nav-label')
+      || target.classList.contains('nav-label-inner'))) {
+      const element = e.data.element;
+      this.initializePointerLock(element);
     }
 
-    const element = e.data.element;
-    this.initializePointerLock(element);
+    return;
   }
 
   // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
@@ -432,7 +436,8 @@ export default class ThreeSixtyScene extends React.Component {
       let shouldUpdateInteractionHotspots = hasChangedInteractions
           || audioHasChanged
           || hasChangedFocus
-          || isHiddenBehindOverlayHasChanged;
+          || isHiddenBehindOverlayHasChanged
+          || this.props.isEditingInteraction;
 
       // Check if the scene that interactions point to has changed icon type
       // This is only relevant when changing the icon using the H5P editor

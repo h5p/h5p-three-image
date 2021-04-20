@@ -230,16 +230,7 @@ $arrowDownTop: calc(-50% + 1px);
     max-height: 3em;
   }
 }
-.nav-button-wrapper:focus {
-  .nav-label-container.hover-only {
-    visibility: visible;
-    .nav-label {
-      max-width: $labelMaxWidth;
-      max-height: 3em;
-    }
-  }
-}
-.nav-button-wrapper .nav-label-container.hover-only.nav-button-focused {
+.nav-button-wrapper .nav-label-container.hover-only.show-label {
   visibility: visible;
   .nav-label {
     max-width: $labelMaxWidth;
