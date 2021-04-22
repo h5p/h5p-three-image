@@ -31,7 +31,7 @@ export const getIconFromInteraction = (interaction, scenes) => {
   const library = interaction.action.library;
   const machineName = H5P.libraryFromString(library).machineName;
   let icon = '';
-  if (interaction.label.interactionPassword && !interaction.unlocked) {
+  if (interaction.label && interaction.label.interactionPassword && !interaction.unlocked) {
     icon = Icons.LOCK;
   }
   else if (machineName === 'H5P.GoToScene') {

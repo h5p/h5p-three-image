@@ -239,7 +239,7 @@ export default class Main extends React.Component {
     const machineName = library.machineName;
 
     //Check if it has password and is unlocked
-    if (interaction.label.interactionPassword && !interaction.unlocked){
+    if (interaction.label && interaction.label.interactionPassword && !interaction.unlocked){
       this.setState({
         showingInteraction: true,
         currentInteraction: interactionIndex,
