@@ -85,7 +85,7 @@ export default class PasswordContent extends React.Component {
             <span className={"h5p-field-text"}>{this.props.hint}</span>
             <div className={"h5p-wrapper-inner"}>
               <input
-                type={"text"}
+                type="text"
                 className={"h5p-field-input"}
                 id={"field-code-" + this.props.currentInteractionIndex}
                 placeholder={this.context.l10n.code}
