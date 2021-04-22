@@ -159,7 +159,7 @@ export default class Main extends React.Component {
       && AudioButton.isInteractionAudio(this.state.audioIsPlaying);
     if (isInteractionAudioPlaying) {
       const lastPlayer = this.getAudioPlayer(this.state.audioIsPlaying);
-      if (lastPlayer) {pass
+      if (lastPlayer) {
         // Pause and reset the interaction player from last scene
         lastPlayer.pause();
         lastPlayer.currentTime = 0;
