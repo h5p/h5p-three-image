@@ -9,7 +9,6 @@ export default class PasswordContent extends React.Component {
       unlocked: false,
       hasClicked: false,
       shakeClass: "",
-      showPasswordInput: true,
       inputPassword: "",
     };
   }
@@ -33,11 +32,6 @@ export default class PasswordContent extends React.Component {
         this.shakeIcon();
       }
     }
-  };
-  toggleShowCode = () => {
-    this.setState({
-      showPasswordInput: !this.state.showPasswordInput,
-    });
   };
 
   shakeIcon = () => {
@@ -91,26 +85,13 @@ export default class PasswordContent extends React.Component {
             <span className={"h5p-field-text"}>{this.props.hint}</span>
             <div className={"h5p-wrapper-inner"}>
               <input
-                type={this.state.showPasswordInput ? "password" : "text"}
-                className={"h5p-field-input"}
+                type="text"
+                className="h5p-field-input"
                 id={"field-code-" + this.props.currentInteractionIndex}
                 placeholder={this.context.l10n.code}
                 value={this.state.inputPassword}
                 onChange={this.handleOnChange}
               />
-              <button
-                className={`h5p-password-btn ${
-                  this.state.showPasswordInput
-                    ? "h5p-password-show-btn h5p-password-show-btn-is-shown"
-                    : "h5p-password-show-btn"
-                }`}
-                type={"button"}
-                onClick={this.toggleShowCode}
-              >
-                {this.state.showPasswordInput
-                  ? this.context.l10n.showCode
-                  : this.context.l10n.hideCode}
-              </button>
             </div>
           </label>
           <button className={"h5p-password-btn"} onClick={this.handleOnClick}>
