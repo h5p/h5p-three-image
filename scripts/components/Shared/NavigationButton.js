@@ -343,7 +343,7 @@ export default class NavigationButton extends React.Component {
 
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
-
+    console.log(this.props.showAsActiveField)
     return (
 
       <div
@@ -354,36 +354,53 @@ export default class NavigationButton extends React.Component {
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
       >
-        <button
-          ref={this.navButton}
-          aria-label={getLabelText(label, title)}
-          className='nav-button'
-          tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
-          onClick={this.onClick.bind(this)}
-          onDoubleClick={this.onDoubleClick.bind(this)}
-          onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
-          onFocus={() => this.setState({ innerButtonFocused: true })}
-          onBlur={() => this.setState({ innerButtonFocused: false })} />
-        {this.props.children}
-        {this.props.icon !== 'h5p-go-back-button' &&
-        <NavigationButtonLabel
-          labelText={getLabelText(label, title)}
-          labelPos={labelPos}
-          hoverOnly={hoverLabel}
-          onMount={this.props.onMount}
-          forwardRef={this.expandButton}
-          onFocus={this.handleExpandButtonFocus.bind(this)}
-          onBlur={() => this.setState({ expandButtonFocused: false })}
-          topPosition={this.props.topPosition*this.props.wrapperHeight/100}
-          wrapperHeight={this.props.wrapperHeight}
-          leftPosition={this.props.leftPosition}
-          navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
-          staticScene={this.props.staticScene}
-          navButtonFocused={this.state.innerButtonFocused}
-          rendered={this.props.rendered}
-        />
+
+        {
+          this.props.showAsActiveField ?
+            <button
+              ref={this.navButton}
+              aria-label={getLabelText(label, title)}
+              className={ `nav-button ${this.context.extras.isEditor ? "nav-button-active-field nav-button-active-field--editor" : 'nav-button-active-field'}`}
+              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
+              onClick={this.onClick.bind(this)}
+              onDoubleClick={this.onDoubleClick.bind(this)}
+              onMouseDown={this.onMouseDown.bind(this)}
+              onMouseUp={this.setFocus.bind(this)}
+              onFocus={() => this.setState({innerButtonFocused: true})}
+              onBlur={() => this.setState({innerButtonFocused: false})}/>
+            :
+            <button
+              ref={this.navButton}
+              aria-label={getLabelText(label, title)}
+              className='nav-button'
+              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
+              onClick={this.onClick.bind(this)}
+              onDoubleClick={this.onDoubleClick.bind(this)}
+              onMouseDown={this.onMouseDown.bind(this)}
+              onMouseUp={this.setFocus.bind(this)}
+              onFocus={() => this.setState({innerButtonFocused: true})}
+              onBlur={() => this.setState({innerButtonFocused: false})}/>
         }
+        {this.props.children}
+        {
+          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsActiveField &&
+          <NavigationButtonLabel
+            labelText={getLabelText(label, title)}
+            labelPos={labelPos}
+            hoverOnly={hoverLabel}
+            onMount={this.props.onMount}
+            forwardRef={this.expandButton}
+            onFocus={this.handleExpandButtonFocus.bind(this)}
+            onBlur={() => this.setState({expandButtonFocused: false})}
+            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
+            wrapperHeight={this.props.wrapperHeight}
+            leftPosition={this.props.leftPosition}
+            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+            staticScene={this.props.staticScene}
+            navButtonFocused={this.state.innerButtonFocused}
+            rendered={this.props.rendered}
+          />}
+
       </div>
     );
   }

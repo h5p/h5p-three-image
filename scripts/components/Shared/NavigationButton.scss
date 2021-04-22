@@ -25,7 +25,7 @@ $labelWidth: 9em;
   border-radius: 50%;
   line-height: 1;
 
-  background: $buttonBg;
+  background-color: $buttonBg;
   border: none;
   cursor: pointer;
 
@@ -38,15 +38,14 @@ $labelWidth: 9em;
   transition: border 100ms linear;
 
   &:hover {
-    background: $hoverBg;
+    background-color: $hoverBg;
   }
 
   &:active {
-    background: $activeBg;
+    background-color: $activeBg;
     border: 0.25em solid $activeBorder;
   }
 }
-
 
 .nav-button-wrapper {
   &:hover {
@@ -60,17 +59,45 @@ $labelWidth: 9em;
 
 .h5p-interaction-button {
   .nav-button {
-    background: $interactionBg;
+    background-color: $interactionBg;
 
     &:active {
-      background: $interactionActiveBg;
+      background-color: $interactionActiveBg;
       border-color: $interactionActiveBorder;
     }
   }
 
   &:hover .nav-button {
-    background: $interactionHoverBg;
+    background-color: $interactionHoverBg;
   }
+
+  .nav-button-active-field {
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 0;
+    box-shadow: none;
+    &:before {
+      display: none;
+    }
+    &--editor {
+      background-color: #1d5cff;
+      opacity: .75;
+      &:before {
+        display: inherit;
+        opacity: 1;
+      }
+    }
+    &:hover {
+      background-color: #1d5cff;
+      opacity: .75;
+    }
+
+    &:active {
+      border: 0.25em solid $activeBorder;
+    }
+  }
+
+
 }
 
 .disabled .nav-button {

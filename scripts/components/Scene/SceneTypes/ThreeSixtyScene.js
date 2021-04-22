@@ -276,7 +276,6 @@ export default class ThreeSixtyScene extends React.Component {
     else {
       title = this.getInteractionTitle(interaction.action);
     }
-
     return (
       <NavigationButton
         key={'interaction-' + this.props.sceneId + index}
@@ -308,6 +307,7 @@ export default class ThreeSixtyScene extends React.Component {
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}
         rendered={this.state.isUpdated}
+        showAsActiveField={interaction.label.showAsActiveField}
       >
         {
           this.context.extras.isEditor &&

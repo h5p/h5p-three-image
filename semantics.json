@@ -164,6 +164,12 @@
                         "default": "inherit"
                       },
                       {
+                        "name": "showAsActiveField",
+                        "type": "boolean",
+                        "label": "Show as active field?",
+                        "optional": true
+                      },
+                      {
                         "name": "interactionPassword",
                         "type": "text",
                         "label": "Code for the interaction",
