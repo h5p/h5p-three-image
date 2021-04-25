@@ -44,7 +44,7 @@
                       "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Paràmetres de l'etiqueta",
                       "fields": [
                         {
                           "label": "Label position",
@@ -83,9 +83,7 @@
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -167,7 +165,7 @@
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localitza",
       "fields": [
         {
           "label": "Aria label for content type",
@@ -183,7 +181,7 @@
         },
         {
           "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "default": "Descripció de l’escena"
         },
         {
           "label": "Label for button to reset camera",
