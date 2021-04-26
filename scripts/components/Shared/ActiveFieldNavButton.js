@@ -10,18 +10,19 @@ export default class ActiveFieldNavButton extends React.Component {
       canDrag : false,
       camPosYaw : 0,
       camPosPitch : 0,
-      startMousePosX : 0,
+      startMousePos : 0,
       startMidPoint : 0,
-      sizeX : 0
+      sizeWidth : 0,
+      sizeHeight : 0
     }
   }
 
   componentDidMount() {
     const activeFieldValues = this.props.getActiveFieldValues();
-    console.log(activeFieldValues)
 
     this.setState({
-      sizeX : activeFieldValues[0]
+      sizeWidth : activeFieldValues[0],
+      sizeHeight : activeFieldValues[1]
     })
   }
 
@@ -48,44 +49,61 @@ export default class ActiveFieldNavButton extends React.Component {
 
 
   }
-  onAnchorDragMouseDown = (e) => {
+  onAnchorDragMouseDown = (e, horizontalDrag) => {
+
     this.setState({
       anchorDrag: true,
-      startMousePosX : e.clientX,
-      startMidPoint : this.state.sizeX / 2
+      startMousePos : horizontalDrag ? e.clientX : e.clientY,
+      startMidPoint : horizontalDrag ? this.state.sizeWidth / 2 : this.state.sizeHeight / 2
     })
 
   }
-  onMouseMove = (currentPosMouseX) => {
-    const midPoint = this.state.startMousePosX - (this.state.startMidPoint)
-    let finalX = ((currentPosMouseX - midPoint) * 2);
-    if(finalX > 32 && finalX < 512) {
-      this.setState({
-        sizeX : finalX
-      })
+  onMouseMove = (event, horizontalDrag) => {
+
+    const currentPosMouse = horizontalDrag ? event.clientX : event.clientY
+    const midPoint = this.state.startMousePos - (this.state.startMidPoint)
+    let finalValue = ((currentPosMouse - midPoint) * 2);
+    if(finalValue > 32 && finalValue < 512) {
+      horizontalDrag ?
+        this.setState({
+          sizeWidth: finalValue
+        })
+        :
+        this.setState({
+          sizeHeight: finalValue
+        })
     }
   }
 
-  onAnchorDragMouseUp = (e) => {
-    const newSizeWidth = this.state.sizeX
-    console.log(newSizeWidth)
+  onAnchorDragMouseUp = (e, horizontalDrag) => {
+    let newSizeWidth = this.state.sizeWidth
+    let newSizeHeight = this.state.sizeHeight
+
     this.setState({
       anchorDrag: false,
     })
-    this.props.setActiveFieldValues(newSizeWidth)
+
+    this.props.setActiveFieldValues(newSizeWidth, newSizeHeight)
   }
 
   render() {
 
-    const DragButton = () => {
+    const DragButton = (innerProps) => {
       const activeFieldBtnRef = useRef(null);
 
       const mouseMoveHandler = (e) => {
-        this.onMouseMove(e.clientX)
+        this.onMouseMove(e, innerProps.horizontalDrag)
       }
+      const handleOnFocus = (e) => {
+        const newValue = ""
+        console.log("onFocused")
+      }
+      const handleOnBlur = (e) => {
 
+        const newValue = ""
+      }
       const handleMouseDown = useCallback(e => {
-        this.onAnchorDragMouseDown(e)
+        this.onAnchorDragMouseDown(e, innerProps.horizontalDrag)
         this.toggleDrag()
         document.addEventListener("mousemove", mouseMoveHandler)
 
@@ -94,13 +112,16 @@ export default class ActiveFieldNavButton extends React.Component {
           () => {
             document.removeEventListener("mousemove",  mouseMoveHandler)
             this.toggleDrag()
-            this.onAnchorDragMouseUp(e)
+            this.onAnchorDragMouseUp(e, innerProps.horizontalDrag)
           },
           { once: true }
         );
       }, []);
 
       useEffect(() => {
+        activeFieldBtnRef.current.addEventListener("click", (e) => {
+          handleOnClick(e)
+        })
         activeFieldBtnRef.current.addEventListener("mousedown", (e) => {
           e.stopPropagation();
           handleMouseDown(e)
@@ -110,15 +131,18 @@ export default class ActiveFieldNavButton extends React.Component {
 
 
       return(
-        <button className={"drag"} ref={activeFieldBtnRef}
-        />)
-    }
+        <button className={innerProps.horizontalDrag ? "drag drag--horizontal" : "drag drag--vertical"}
+                ref={activeFieldBtnRef}
+                tabIndex={this.props.tabIndexValue}
+        />
+      )}
+
     return (
       <div className={"nav-button-active-field-wrapper"}>
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
-          style={{width: this.state.sizeX + 'px'}}
+          style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
           className={ `nav-button ${this.context.extras.isEditor ? "nav-button-active-field nav-button-active-field--editor" : 'nav-button-active-field'}`}
           tabIndex={this.props.tabIndexValue}
           onClick={this.props.onClickEvent}
@@ -129,8 +153,11 @@ export default class ActiveFieldNavButton extends React.Component {
           onBlur={this.props.onBlurEvent}
         />
         {
-          this.context.extras.isEditor ? <DragButton/>
- : ""
+          this.context.extras.isEditor ? <>
+              <DragButton horizontalDrag = {true}/>
+              <DragButton horizontalDrag = {false}/>
+            </>
+            : ""
         }
       </div>
     );

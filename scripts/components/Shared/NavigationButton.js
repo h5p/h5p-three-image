@@ -288,12 +288,12 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
-  setActiveFieldValues(widthX) {
+  setActiveFieldValues(widthX, heightY) {
     const scene = this.context.params.scenes.find(scene => {
       return scene.sceneId === this.props.sceneId;
     });
     const interaction = scene.interactions[this.props.interactionIndex];
-    interaction.label.activeFieldSizeValues = widthX + "," + 0;
+    interaction.label.activeFieldSizeValues = widthX + "," + heightY;
   }
 
   getActiveFieldValues() {
