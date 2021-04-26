@@ -119,9 +119,6 @@ export default class ActiveFieldNavButton extends React.Component {
       }, []);
 
       useEffect(() => {
-        activeFieldBtnRef.current.addEventListener("click", (e) => {
-          handleOnClick(e)
-        })
         activeFieldBtnRef.current.addEventListener("mousedown", (e) => {
           e.stopPropagation();
           handleMouseDown(e)
