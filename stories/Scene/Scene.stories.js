@@ -61,7 +61,7 @@ SceneStory.args = {
 
 export const SceneStoryWithAssignment = assignmentTemplate.bind({});
 SceneStoryWithAssignment.args = {
-  label: "assignement",
+  label: "Assignment",
   forceStartScreen: undefined,
   forceStartCamera: undefined,
   currentScene: 1,
