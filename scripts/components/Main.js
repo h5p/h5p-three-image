@@ -29,6 +29,7 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       startBtnClicked: false,
+      scoreCard: {},
       labelBehavior: {
         showLabel: true,
         labelPosition: "right"
@@ -349,6 +350,13 @@ export default class Main extends React.Component {
     return isCorrectPassword;
   }
 
+  updateScoreCard(sceneId, assignmentId, score){
+    if(!this.state.scoreCard[sceneId]){
+      this.state.scoreCard[sceneId] = {};
+    }
+    this.state.scoreCard[sceneId][assignmentId] = score;
+  }
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -415,6 +423,7 @@ export default class Main extends React.Component {
               currentInteraction={this.state.currentInteraction}
               audioIsPlaying={this.state.audioIsPlaying}
               onAudioIsPlaying={this.handleAudioIsPlaying}
+              updateScoreCard={this.updateScoreCard.bind(this)}
             />}
         </Dialog>
         }
@@ -453,6 +462,7 @@ export default class Main extends React.Component {
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
                 startBtnClicked={this.state.startBtnClicked}
+                
               />
             );
           })
