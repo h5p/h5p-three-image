@@ -35,7 +35,6 @@ export default class InteractionContent extends React.Component {
   }
 
   initializeContent(contentRef) {
-    const that = this;
     if (!contentRef || this.state.isInitialized) {
       return;
     }
