@@ -2,6 +2,7 @@ import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
+import ActiveFieldNavButton from "./ActiveFieldNavButton";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -233,7 +234,6 @@ export default class NavigationButton extends React.Component {
   onMouseDown(e) {
     const hasMouseDownHandler = this.context.extras.isEditor
       && this.props.mouseDownHandler;
-
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
     }
@@ -288,7 +288,23 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
+  setActiveFieldValues(widthX) {
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.sceneId;
+    });
+    const interaction = scene.interactions[this.props.interactionIndex];
+    interaction.label.activeFieldSizeValues = widthX + "," + 0;
+  }
 
+  getActiveFieldValues() {
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.sceneId;
+    });
+    const interaction = scene.interactions[this.props.interactionIndex];
+
+    return interaction.label.activeFieldSizeValues ?
+      interaction.label.activeFieldSizeValues.split(",") : [16,16]
+  }
   render() {
     let wrapperClasses = [
       'nav-button-wrapper',
@@ -343,7 +359,6 @@ export default class NavigationButton extends React.Component {
 
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
-    console.log(this.props.showAsActiveField)
     return (
 
       <div
@@ -357,17 +372,19 @@ export default class NavigationButton extends React.Component {
 
         {
           this.props.showAsActiveField ?
-            <button
-              ref={this.navButton}
-              aria-label={getLabelText(label, title)}
-              className={ `nav-button ${this.context.extras.isEditor ? "nav-button-active-field nav-button-active-field--editor" : 'nav-button-active-field'}`}
-              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
-              onClick={this.onClick.bind(this)}
-              onDoubleClick={this.onDoubleClick.bind(this)}
-              onMouseDown={this.onMouseDown.bind(this)}
-              onMouseUp={this.setFocus.bind(this)}
-              onFocus={() => this.setState({innerButtonFocused: true})}
-              onBlur={() => this.setState({innerButtonFocused: false})}/>
+            <ActiveFieldNavButton
+              reference={this.navButton}
+              ariaLabel={getLabelText(label, title)}
+              tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
+              onClickEvent={this.onClick.bind(this)}
+              onDoubleClickEvent={this.onDoubleClick.bind(this)}
+              onMouseDownEvent={this.onMouseDown.bind(this)}
+              onMouseUpEvent={this.setFocus.bind(this)}
+              onFocusEvent={() => this.setState({innerButtonFocused: true})}
+              onBlurEvent={() => this.setState({innerButtonFocused: false})}
+              setActiveFieldValues={this.setActiveFieldValues.bind(this)}
+              getActiveFieldValues={this.getActiveFieldValues.bind(this)}
+            />
             :
             <button
               ref={this.navButton}

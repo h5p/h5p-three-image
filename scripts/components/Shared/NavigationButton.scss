@@ -52,7 +52,7 @@ $labelWidth: 9em;
     z-index: 3;
   }
 
-&.dragging, &.focused {
+  &.dragging, &.focused {
     z-index: 3;
   }
 }
@@ -70,34 +70,41 @@ $labelWidth: 9em;
   &:hover .nav-button {
     background-color: $interactionHoverBg;
   }
+  .nav-button-active-field-wrapper {
 
-  .nav-button-active-field {
-    background-color: rgba(0,0,0,0);
-    transition: background-color 0.2s ease-in-out;
-    border-radius: 0;
-    box-shadow: none;
-    &:before {
-      display: none;
-    }
-    &--editor {
-      background-color: #1d5cff;
-      opacity: .75;
+    .nav-button-active-field {
+      background-color: rgba(0,0,0,0);
+      transition: background-color 0.2s ease-in-out;
+      border-radius: 0;
+      box-shadow: none;
       &:before {
-        display: inherit;
-        opacity: 1;
+        display: none;
+      }
+      &--editor {
+        background-color: #1d5cff;
+        opacity: .75;
+        &:before {
+          display: inherit;
+          opacity: 1;
+        }
+      }
+      &:hover {
+        background-color: #1d5cff;
+        opacity: .75;
+      }
+
+      &:active {
+        border: 0.25em solid $activeBorder;
       }
     }
-    &:hover {
-      background-color: #1d5cff;
-      opacity: .75;
+    .drag {
+      width: 1.5em;
+      height: 1.5em;
+      background-color: white;
     }
 
-    &:active {
-      border: 0.25em solid $activeBorder;
-    }
+
   }
-
-
 }
 
 .disabled .nav-button {

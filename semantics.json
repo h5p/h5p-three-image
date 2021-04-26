@@ -170,6 +170,13 @@
                         "optional": true
                       },
                       {
+                        "name": "activeFieldSizeValues",
+                        "type": "text",
+                        "default" : "16,16",
+                        "label": "Values for storing the height and width for activeField",
+                        "optional": true
+                      },
+                      {
                         "name": "interactionPassword",
                         "type": "text",
                         "label": "Code for the interaction",

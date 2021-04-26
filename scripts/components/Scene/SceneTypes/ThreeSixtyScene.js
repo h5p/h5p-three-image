@@ -78,7 +78,6 @@ export default class ThreeSixtyScene extends React.Component {
    * @param  {H5P.Event} e
    */
   handleSceneMoveStart = (e) => {
-
     if (!this.context.extras.isEditor || e.data.isCamera) {
       return;
     }
@@ -95,6 +94,10 @@ export default class ThreeSixtyScene extends React.Component {
       if (target.parentNode) {
         const parent = target.parentNode;
         if (parent.classList.contains('context-menu')) {
+          e.defaultPrevented = true;
+          return false;
+        }
+        if (target.classList.contains('drag')) {
           e.defaultPrevented = true;
           return false;
         }
@@ -308,6 +311,8 @@ export default class ThreeSixtyScene extends React.Component {
         isFocused={this.props.focusedInteraction === index}
         rendered={this.state.isUpdated}
         showAsActiveField={interaction.label.showAsActiveField}
+        sceneId = {this.props.sceneId}
+        interactionIndex = {index}
       >
         {
           this.context.extras.isEditor &&
