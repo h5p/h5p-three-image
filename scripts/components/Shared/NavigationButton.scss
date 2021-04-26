@@ -94,6 +94,10 @@ $labelWidth: 9em;
       background-color: #1d5cff;
       opacity: .75;
     }
+    &:focus {
+      background-color: #1d5cff;
+      opacity: .75;
+    }
 
     &:active {
       border: 0.25em solid $activeBorder;
