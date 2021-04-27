@@ -46,7 +46,9 @@ export default class Main extends React.Component {
       });
     });
     // Show scene description when scene starts for the first time, if specified
+	if(!this.context.extras.isEditor) {
     this.handleSceneDescriptionInitially(this.props.currentScene);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
