@@ -28,29 +28,35 @@ export default class HotspotNavButton extends React.Component {
 
   toggleDrag = (e) => {
 
-    if(this.state.canDrag) {
-
-      this.context.threeSixty.startRendering()
-      this.context.threeSixty.setCameraPosition(this.state.camPosYaw, this.state.camPosPitch)
-    } else {
-
-      this.setState({
-        camPosYaw : this.context.threeSixty.getCurrentPosition().yaw,
-        camPosPitch : this.context.threeSixty.getCurrentPosition().pitch
-      })
-
-      this.context.threeSixty.stopRendering()
-    }
 
     const dragBool = !this.state.canDrag
     this.setState({
       canDrag: dragBool
     })
+    if (!this.props.staticScene){
+      //If we cant drag anymore, we start the rendering of the threesixty scene,
+      // we also set the camera position that is stored wen we start the hotspot scaling
+      if(!this.state.canDrag) {
+        this.context.threeSixty.startRendering()
+        this.context.threeSixty.setCameraPosition(this.state.camPosYaw, this.state.camPosPitch)
+      } else {
+
+        //We store the current position, because we are technically still dragging the background around here
+        this.setState({
+          camPosYaw : this.context.threeSixty.getCurrentPosition().yaw,
+          camPosPitch : this.context.threeSixty.getCurrentPosition().pitch
+        })
+        //We stop rendering the threesixty scene so it doesnt look like we are moving around
+        this.context.threeSixty.stopRendering()
+      }
+    }
 
 
   }
   onAnchorDragMouseDown = (e, horizontalDrag) => {
 
+    /*Based on the direction, we store the X or Y start position of the mouse,
+     and finds the center of the div, startMidPoint, which is needed for scaling from*/
     this.setState({
       anchorDrag: true,
       startMousePos : horizontalDrag ? e.clientX : e.clientY,
@@ -60,10 +66,23 @@ export default class HotspotNavButton extends React.Component {
   }
   onMouseMove = (event, horizontalDrag) => {
 
+    //We record the currentMouseposition for everytime the mouse moves
     const currentPosMouse = horizontalDrag ? event.clientX : event.clientY
-    const midPoint = this.state.startMousePos - (this.state.startMidPoint)
-    let finalValue = ((currentPosMouse - midPoint) * 2);
+
+    /*divStartWidth is the start mouse position subtracted by the midpoint, technically this
+    half the size of the actual div, this is used for keeping the original widtrh of the div
+    everytime we drag */
+    const divStartWidth = this.state.startMousePos - (this.state.startMidPoint)
+
+    /* The final width is calculated by subtracting the position of the
+    mouse with the the divStartWidth, this is technically the offset between the
+    divStartWidth and the current mouse position. Since the div scales from the center,
+    we have to multiply the result by two*/
+
+    let finalValue = ((currentPosMouse - divStartWidth) * 2);
     if(finalValue > 32 && finalValue < 512) {
+      /*These values are used for inline styling in the div in the render loop,
+        updating the div dimensions when the mousemove event fires*/
       horizontalDrag ?
         this.setState({
           sizeWidth: finalValue
@@ -82,7 +101,7 @@ export default class HotspotNavButton extends React.Component {
     this.setState({
       anchorDrag: false,
     })
-
+//Used for writing the data into to editor, for them to persist into the viewer
     this.props.setHotspotValues(newSizeWidth, newSizeHeight)
   }
 
@@ -94,6 +113,7 @@ export default class HotspotNavButton extends React.Component {
       const mouseMoveHandler = (e) => {
         this.onMouseMove(e, innerProps.horizontalDrag)
       }
+      //Here we add a mouseup listener on the document so the user can release the mouse on anything on the document
       const handleMouseDown = useCallback(e => {
         this.onAnchorDragMouseDown(e, innerProps.horizontalDrag)
         this.toggleDrag()
@@ -111,6 +131,8 @@ export default class HotspotNavButton extends React.Component {
       }, []);
 
       useEffect(() => {
+        /*In order to take control of the mousedown listener, we have to it when the component mount,
+       the reason for trhis is that we have to stop the propagation early on, since mousedown is already listened to by threesixty */
         hotspotBtnRef.current.addEventListener("mousedown", (e) => {
           e.stopPropagation();
           handleMouseDown(e)
@@ -128,7 +150,7 @@ export default class HotspotNavButton extends React.Component {
       )}
 
     return (
-      <div className={"nav-button-hotspot-wrapper"}>
+      <div className={`nav-button-hotspot-wrapper ${this.props.staticScene ? 'nav-button-hotspot-wrapper--is-static' : ''} `}>
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}

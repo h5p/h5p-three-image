@@ -443,6 +443,8 @@ export default class StaticScene extends React.Component {
                   wrapperHeight={this.overLayRef.current ? this.overLayRef.current.clientHeight : 0}
                   staticScene={true}
                   showAsHotspot={interaction.label.showAsHotspot}
+                  sceneId = {this.props.sceneId}
+                  interactionIndex = {index}
                 >
                   {
                     this.context.extras.isEditor &&

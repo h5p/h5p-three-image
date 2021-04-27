@@ -385,6 +385,7 @@ export default class NavigationButton extends React.Component {
               onBlurEvent={() => this.setState({innerButtonFocused: false})}
               setHotspotValues={this.setHotspotValues.bind(this)}
               getHotspotValues={this.getHotspotValues.bind(this)}
+              staticScene={this.props.staticScene}
             />
             :
             <button

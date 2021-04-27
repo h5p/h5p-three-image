@@ -74,6 +74,9 @@ $labelWidth: 9em;
 .nav-button-hotspot-wrapper {
   position: relative;
   z-index: -1;
+  &--is-static {
+    z-index: 3;
+  }
   .nav-button-hotspot {
     background-color: rgba(0,0,0,0);
     transition: background-color 0.2s ease-in-out;
