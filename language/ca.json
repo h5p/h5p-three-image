@@ -39,6 +39,10 @@
                 "description": "Text que pot descriure l’escena per a l’usuari final"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Posició inicial de la càmera",
                 "description": "Posició de la càmera en guinyada o capcineig"
               },

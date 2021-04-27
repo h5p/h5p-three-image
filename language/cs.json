@@ -39,6 +39,10 @@
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Počáteční pozice kamery",
                 "description": "Pozice kamery v úhlu a sklonu"
               },

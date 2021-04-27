@@ -39,6 +39,10 @@
                 "description": "Κείμενο που περιγράφει τη σκηνή"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Αρχική θέση κάμερας",
                 "description": "Θέση κάμερας (βήμα, κάμψη)"
               },

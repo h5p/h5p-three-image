@@ -39,6 +39,10 @@
                 "description": "Besedilo udeležencem opiše prizor."
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Začetni položaj kamere",
                 "description": "Določitev začetnega pogleda na prizor."
               },

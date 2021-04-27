@@ -39,6 +39,10 @@
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Oorspronkelijke camerapositie",
                 "description": "Camerapositie in x en z stand"
               },
