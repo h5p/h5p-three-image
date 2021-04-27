@@ -186,7 +186,7 @@
             },
             {
               "label": "Values for storing the height and width for hotspot"
-            },v
+            },
             {
               "label": "Password for the interaction",
               "description": "If not empty, the user has to input the password in order to open this content."
