@@ -44,7 +44,8 @@ H5P.ThreeImage = (function () {
       showCode: 'Show code',
       hideCode: 'Hide code',
       unlockedStateAction: 'Continue',
-      lockedStateAction: 'Unlock',
+      hotspotDragHorizAlt: 'Drag horizontally to scale hotspot',
+      hotspotDragVertiAlt: 'Drag vertically to scale hotspot',
     };
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {

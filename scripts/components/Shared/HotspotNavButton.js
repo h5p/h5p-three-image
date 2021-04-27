@@ -145,7 +145,7 @@ export default class HotspotNavButton extends React.Component {
         <button className={innerProps.horizontalDrag ? "drag drag--horizontal" : "drag drag--vertical"}
                 ref={hotspotBtnRef}
                 tabIndex={this.props.tabIndexValue}
-                aria-label={innerProps.horizontalDrag ? "Drag horizontally to scale hotspot" : "Drag vertically to scale hotspot"}
+                aria-label={innerProps.horizontalDrag ? this.context.l10n.hotspotDragHorizAlt : this.context.l10n.hotspotDragVertiAlt}
         />
       )}
 

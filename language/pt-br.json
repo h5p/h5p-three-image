@@ -181,6 +181,13 @@
               "description": "If unchecked - labels will show only on mouse over"
             },
             {
+              "label": "Show as hotspot?",
+              "description": "Show as a hidden hotspot, can used for overlaying interaction on elements in image"
+            },
+            {
+              "label": "Values for storing the height and width for hotspot"
+            },
+            {
               "label": "Código para a interação",
               "description": "Se não for deixada em branco, o usuário deve inserir a senha para abrir o conteúdo."
             },
