@@ -83,6 +83,13 @@
               ]
             },
             {
+              "name": "showSceneDescriptionInitially",
+              "type": "boolean",
+              "label": "Display \"Scene Description\" initially",
+              "description": "Display the scene description when the scene starts for the first time",
+              "default": false
+            },
+            {
               "name": "cameraStartPosition",
               "type": "text",
               "label": "Initial camera position",

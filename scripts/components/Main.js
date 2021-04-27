@@ -27,6 +27,7 @@ export default class Main extends React.Component {
       focusedInteraction: null,
       nextFocus: null,
       sceneWaitingForLoad: null,
+      scenesOpened: [],
       updateThreeSixty: false,
       startBtnClicked: false,
       scoreCard: {},
@@ -44,6 +45,8 @@ export default class Main extends React.Component {
         focusedInteraction: e.data,
       });
     });
+    // Show scene description when scene starts for the first time, if specified
+    this.handleSceneDescriptionInitially(this.props.currentScene);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -167,9 +170,37 @@ export default class Main extends React.Component {
       }
     }
 
+    // Show scene description when scene starts for the first time, if specified
+    this.handleSceneDescriptionInitially(nextSceneId);
+
     this.props.setCurrentSceneId(nextSceneId);
   }
 
+  /**
+   * The user wants the scene description to display when the 
+   * scene starts for the first time, handling it.
+   *
+   * @param {string} sceneId
+   */
+   handleSceneDescriptionInitially = (sceneId) => {
+    const prevOpened = this.state.scenesOpened.includes(sceneId);
+    if (!prevOpened) {
+      // Scene has not been opened before, find scene information
+      const scene = this.context.params.scenes.find(scene => {
+        return scene.sceneId === sceneId;
+      });
+      if (scene.showSceneDescriptionInitially) {
+        // Show scene description, since specified
+        this.handleSceneDescription(scene.scenedescription);
+      }
+      // Add scene to list of opened scenes
+      const newSceneOpened = this.state.scenesOpened;
+      newSceneOpened.push(sceneId);
+      this.setState({
+        scenesOpened: newSceneOpened
+      });
+    }
+  }
 
   /**
    * The user wants to see the scene description, handling it.
@@ -462,7 +493,6 @@ export default class Main extends React.Component {
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
                 startBtnClicked={this.state.startBtnClicked}
-                
               />
             );
           })
