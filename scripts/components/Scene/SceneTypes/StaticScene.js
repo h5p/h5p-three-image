@@ -51,11 +51,11 @@ export default class StaticScene extends React.Component {
       // Let main know that scene is finished loading
       this.props.doneLoadingNextScene();
     }
-    
+
     // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
     if (this.sceneWrapperRef.current !== null && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth){
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
-    }    
+    }
   }
 
   resizeScene() {
@@ -289,7 +289,7 @@ export default class StaticScene extends React.Component {
 
   // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
   getInteractionTitle(action) {
-    const currentTitle = action.metadata.title;    
+    const currentTitle = action.metadata.title;
 
     switch (currentTitle) {
       case 'Untitled Text':
@@ -404,7 +404,7 @@ export default class StaticScene extends React.Component {
               }
 
               let title;
-              
+
               const library = H5P.libraryFromString(interaction.action.library);
               const machineName = library.machineName;
               const isGoToSceneInteraction = machineName === 'H5P.GoToScene';
@@ -414,7 +414,7 @@ export default class StaticScene extends React.Component {
                   return scene.sceneId === interaction.action.params.nextSceneId;
                 });
                 title = nextScene.scenename;
-              } 
+              }
               else {
                 title = this.getInteractionTitle(interaction.action);
               }
@@ -442,6 +442,7 @@ export default class StaticScene extends React.Component {
                   // That is not correct when moving to a new scene without resizing
                   wrapperHeight={this.overLayRef.current ? this.overLayRef.current.clientHeight : 0}
                   staticScene={true}
+                  showAsHotspot={interaction.label.showAsHotspot}
                 >
                   {
                     this.context.extras.isEditor &&

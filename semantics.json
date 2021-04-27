@@ -164,17 +164,19 @@
                         "default": "inherit"
                       },
                       {
-                        "name": "showAsActiveField",
+                        "name": "showAsHotspot",
                         "type": "boolean",
-                        "label": "Show as active field?",
+                        "label": "Show as hotspot?",
                         "optional": true
                       },
                       {
-                        "name": "activeFieldSizeValues",
+                        "name": "hotSpotSizeValues",
                         "type": "text",
-                        "default" : "32,32",
-                        "label": "Values for storing the height and width for activeField",
-                        "optional": true
+                        "default" : "48,48",
+                        "label": "Values for storing the height and width for hotspot",
+                        "optional": true,
+                        "hidden": true,
+                        "widget": "none"
                       },
                       {
                         "name": "interactionPassword",

@@ -310,7 +310,7 @@ export default class ThreeSixtyScene extends React.Component {
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}
         rendered={this.state.isUpdated}
-        showAsActiveField={interaction.label.showAsActiveField}
+        showAsHotspot={interaction.label.showAsHotspot}
         sceneId = {this.props.sceneId}
         interactionIndex = {index}
       >

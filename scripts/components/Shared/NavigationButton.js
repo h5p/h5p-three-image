@@ -2,7 +2,7 @@ import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
-import ActiveFieldNavButton from "./ActiveFieldNavButton";
+import HotspotNavButton from "./HotspotNavButton";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -288,22 +288,23 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
-  setActiveFieldValues(widthX, heightY) {
+  setHotspotValues(widthX, heightY) {
     const scene = this.context.params.scenes.find(scene => {
       return scene.sceneId === this.props.sceneId;
     });
+    console.log(scene)
     const interaction = scene.interactions[this.props.interactionIndex];
-    interaction.label.activeFieldSizeValues = widthX + "," + heightY;
+    interaction.label.hotSpotSizeValues = widthX + "," + heightY;
   }
 
-  getActiveFieldValues() {
+  getHotspotValues() {
     const scene = this.context.params.scenes.find(scene => {
       return scene.sceneId === this.props.sceneId;
     });
     const interaction = scene.interactions[this.props.interactionIndex];
 
-    return interaction.label.activeFieldSizeValues ?
-      interaction.label.activeFieldSizeValues.split(",") : [16,16]
+    return interaction.label.hotSpotSizeValues ?
+      interaction.label.hotSpotSizeValues.split(",") : [16,16]
   }
   render() {
     let wrapperClasses = [
@@ -371,8 +372,8 @@ export default class NavigationButton extends React.Component {
       >
 
         {
-          this.props.showAsActiveField ?
-            <ActiveFieldNavButton
+          this.props.showAsHotspot ?
+            <HotspotNavButton
               reference={this.navButton}
               ariaLabel={getLabelText(label, title)}
               tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
@@ -382,8 +383,8 @@ export default class NavigationButton extends React.Component {
               onMouseUpEvent={this.setFocus.bind(this)}
               onFocusEvent={() => this.setState({innerButtonFocused: true})}
               onBlurEvent={() => this.setState({innerButtonFocused: false})}
-              setActiveFieldValues={this.setActiveFieldValues.bind(this)}
-              getActiveFieldValues={this.getActiveFieldValues.bind(this)}
+              setHotspotValues={this.setHotspotValues.bind(this)}
+              getHotspotValues={this.getHotspotValues.bind(this)}
             />
             :
             <button
@@ -400,7 +401,7 @@ export default class NavigationButton extends React.Component {
         }
         {this.props.children}
         {
-          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsActiveField &&
+          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsHotspot &&
           <NavigationButtonLabel
             labelText={getLabelText(label, title)}
             labelPos={labelPos}

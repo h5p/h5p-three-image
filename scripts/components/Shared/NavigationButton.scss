@@ -71,10 +71,10 @@ $labelWidth: 9em;
     background-color: $interactionHoverBg;
   }
 }
-.nav-button-active-field-wrapper {
+.nav-button-hotspot-wrapper {
   position: relative;
   z-index: -1;
-  .nav-button-active-field {
+  .nav-button-hotspot {
     background-color: rgba(0,0,0,0);
     transition: background-color 0.2s ease-in-out;
     border-radius: 0;
@@ -106,19 +106,31 @@ $labelWidth: 9em;
   .drag {
     width: 1.5em;
     height: 1.5em;
+    padding: 0;
     background-color: white;
     border: 0;
     position: absolute;
     cursor: pointer;
     z-index: 1;
     border-radius: 2px;
+    &:before {
+      font-family: "360-image";
+      vertical-align: middle;
+      color: $activeBorder;
+    }
     &--horizontal {
       left: calc(100% - 0.75em);
       top: calc(50% - 0.75em);
+      &:before {
+        content: $arrow-horiz-scale;
+      }
     }
     &--vertical {
       bottom: - 0.75em;
       left: calc(50% - 0.75em);
+      &:before {
+        content: $arrow-verti-scale;
+      }
     }
   }
 

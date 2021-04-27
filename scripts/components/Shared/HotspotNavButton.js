@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 
-export default class ActiveFieldNavButton extends React.Component {
+export default class HotspotNavButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,11 +18,11 @@ export default class ActiveFieldNavButton extends React.Component {
   }
 
   componentDidMount() {
-    const activeFieldValues = this.props.getActiveFieldValues();
+    const hotspotValues = this.props.getHotspotValues();
 
     this.setState({
-      sizeWidth : activeFieldValues[0],
-      sizeHeight : activeFieldValues[1]
+      sizeWidth : hotspotValues[0],
+      sizeHeight : hotspotValues[1]
     })
   }
 
@@ -83,24 +83,16 @@ export default class ActiveFieldNavButton extends React.Component {
       anchorDrag: false,
     })
 
-    this.props.setActiveFieldValues(newSizeWidth, newSizeHeight)
+    this.props.setHotspotValues(newSizeWidth, newSizeHeight)
   }
 
   render() {
 
     const DragButton = (innerProps) => {
-      const activeFieldBtnRef = useRef(null);
+      const hotspotBtnRef = useRef(null);
 
       const mouseMoveHandler = (e) => {
         this.onMouseMove(e, innerProps.horizontalDrag)
-      }
-      const handleOnFocus = (e) => {
-        const newValue = ""
-        console.log("onFocused")
-      }
-      const handleOnBlur = (e) => {
-
-        const newValue = ""
       }
       const handleMouseDown = useCallback(e => {
         this.onAnchorDragMouseDown(e, innerProps.horizontalDrag)
@@ -119,7 +111,7 @@ export default class ActiveFieldNavButton extends React.Component {
       }, []);
 
       useEffect(() => {
-        activeFieldBtnRef.current.addEventListener("mousedown", (e) => {
+        hotspotBtnRef.current.addEventListener("mousedown", (e) => {
           e.stopPropagation();
           handleMouseDown(e)
         })
@@ -129,18 +121,19 @@ export default class ActiveFieldNavButton extends React.Component {
 
       return(
         <button className={innerProps.horizontalDrag ? "drag drag--horizontal" : "drag drag--vertical"}
-                ref={activeFieldBtnRef}
+                ref={hotspotBtnRef}
                 tabIndex={this.props.tabIndexValue}
+                aria-label={innerProps.horizontalDrag ? "Drag horizontally to scale hotspot" : "Drag vertically to scale hotspot"}
         />
       )}
 
     return (
-      <div className={"nav-button-active-field-wrapper"}>
+      <div className={"nav-button-hotspot-wrapper"}>
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
           style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
-          className={ `nav-button ${this.context.extras.isEditor ? "nav-button-active-field nav-button-active-field--editor" : 'nav-button-active-field'}`}
+          className={ `nav-button ${this.context.extras.isEditor ? "nav-button-hotspot nav-button-hotspot--editor" : 'nav-button-hotspot'}`}
           tabIndex={this.props.tabIndexValue}
           onClick={this.props.onClickEvent}
           onDoubleClick={this.props.onDoubleClickEvent}
@@ -160,4 +153,4 @@ export default class ActiveFieldNavButton extends React.Component {
     );
   }
 }
-ActiveFieldNavButton.contextType = H5PContext;
+HotspotNavButton.contextType = H5PContext;
