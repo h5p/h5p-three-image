@@ -39,6 +39,10 @@
                 "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Kameran aloitussijainti",
                 "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
               },

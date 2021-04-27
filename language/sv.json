@@ -39,6 +39,10 @@
                 "description": "En text som kan beskriva scenen för slutanvändaren"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Initial kameraposition",
                 "description": "Kameraposition i pitch-and-yaw"
               },

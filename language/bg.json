@@ -39,6 +39,10 @@
                 "description": "Текст, който описва сцената за ученика"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Начална позиция на камерата",
                 "description": "Позиция на камерата във височина и отклонение"
               },

@@ -39,6 +39,10 @@
                 "description": "Ein Text, der die Szene für den Benutzer beschreibt"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Anfangs-Kameraposition",
                 "description": "Kameraposition in Winkelangabe (oben-unten und links-rechts)"
               },

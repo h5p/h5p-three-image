@@ -39,6 +39,10 @@
                 "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Algne kaamera asukoht",
                 "description": "Kaamera asukoht koordinaadistikus (pitch ja yaw)"
               },

@@ -39,6 +39,10 @@
                 "description": "O texto que pode descrever a cena para o usuário final"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Posição da camera inicial",
                 "description": "Posição da camera em arfagem e guinada"
               },

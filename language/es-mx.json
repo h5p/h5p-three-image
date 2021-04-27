@@ -39,6 +39,10 @@
                 "description": "Un texto que puede describir la escena para el usuario final"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Posición inicial de la cámara",
                 "description": "Posición de la cámara en in pitch y yaw"
               },

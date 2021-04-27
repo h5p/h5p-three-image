@@ -39,6 +39,10 @@
                 "description": "Testo che può descrivere la scena per l'utente finale"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Posizione iniziale della fotocamera",
                 "description": "Rotazione laterale e verticale della fotocamera"
               },

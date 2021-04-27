@@ -39,6 +39,10 @@
                 "description": "Erabiltzaileari eszena deskribatzen dion testua"
               },
               {
+                "label": "Display \"Scene Description\" initially",
+                "description": "Display the scene description when the scene starts for the first time",
+              },
+              {
                 "label": "Kameraren hasierako kokapena",
                 "description": "Kamerak hasieran izango duen kokapena"
               },
