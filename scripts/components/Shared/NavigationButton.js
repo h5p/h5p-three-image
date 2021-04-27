@@ -2,6 +2,7 @@ import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
+import HotspotNavButton from "./HotspotNavButton";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
@@ -233,7 +234,6 @@ export default class NavigationButton extends React.Component {
   onMouseDown(e) {
     const hasMouseDownHandler = this.context.extras.isEditor
       && this.props.mouseDownHandler;
-
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
     }
@@ -288,7 +288,24 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
+  setHotspotValues(widthX, heightY) {
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.sceneId;
+    });
+    console.log(scene)
+    const interaction = scene.interactions[this.props.interactionIndex];
+    interaction.label.hotSpotSizeValues = widthX + "," + heightY;
+  }
 
+  getHotspotValues() {
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === this.props.sceneId;
+    });
+    const interaction = scene.interactions[this.props.interactionIndex];
+
+    return interaction.label.hotSpotSizeValues ?
+      interaction.label.hotSpotSizeValues.split(",") : [16,16]
+  }
   render() {
     let wrapperClasses = [
       'nav-button-wrapper',
@@ -343,7 +360,6 @@ export default class NavigationButton extends React.Component {
 
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
-
     return (
 
       <div
@@ -354,36 +370,56 @@ export default class NavigationButton extends React.Component {
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
       >
-        <button
-          ref={this.navButton}
-          aria-label={getLabelText(label, title)}
-          className='nav-button'
-          tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
-          onClick={this.onClick.bind(this)}
-          onDoubleClick={this.onDoubleClick.bind(this)}
-          onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
-          onFocus={() => this.setState({ innerButtonFocused: true })}
-          onBlur={() => this.setState({ innerButtonFocused: false })} />
-        {this.props.children}
-        {this.props.icon !== 'h5p-go-back-button' &&
-        <NavigationButtonLabel
-          labelText={getLabelText(label, title)}
-          labelPos={labelPos}
-          hoverOnly={hoverLabel}
-          onMount={this.props.onMount}
-          forwardRef={this.expandButton}
-          onFocus={this.handleExpandButtonFocus.bind(this)}
-          onBlur={() => this.setState({ expandButtonFocused: false })}
-          topPosition={this.props.topPosition*this.props.wrapperHeight/100}
-          wrapperHeight={this.props.wrapperHeight}
-          leftPosition={this.props.leftPosition}
-          navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
-          staticScene={this.props.staticScene}
-          navButtonFocused={this.state.innerButtonFocused}
-          rendered={this.props.rendered}
-        />
+
+        {
+          this.props.showAsHotspot ?
+            <HotspotNavButton
+              reference={this.navButton}
+              ariaLabel={getLabelText(label, title)}
+              tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
+              onClickEvent={this.onClick.bind(this)}
+              onDoubleClickEvent={this.onDoubleClick.bind(this)}
+              onMouseDownEvent={this.onMouseDown.bind(this)}
+              onMouseUpEvent={this.setFocus.bind(this)}
+              onFocusEvent={() => this.setState({innerButtonFocused: true})}
+              onBlurEvent={() => this.setState({innerButtonFocused: false})}
+              setHotspotValues={this.setHotspotValues.bind(this)}
+              getHotspotValues={this.getHotspotValues.bind(this)}
+              staticScene={this.props.staticScene}
+            />
+            :
+            <button
+              ref={this.navButton}
+              aria-label={getLabelText(label, title)}
+              className='nav-button'
+              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
+              onClick={this.onClick.bind(this)}
+              onDoubleClick={this.onDoubleClick.bind(this)}
+              onMouseDown={this.onMouseDown.bind(this)}
+              onMouseUp={this.setFocus.bind(this)}
+              onFocus={() => this.setState({innerButtonFocused: true})}
+              onBlur={() => this.setState({innerButtonFocused: false})}/>
         }
+        {this.props.children}
+        {
+          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsHotspot &&
+          <NavigationButtonLabel
+            labelText={getLabelText(label, title)}
+            labelPos={labelPos}
+            hoverOnly={hoverLabel}
+            onMount={this.props.onMount}
+            forwardRef={this.expandButton}
+            onFocus={this.handleExpandButtonFocus.bind(this)}
+            onBlur={() => this.setState({expandButtonFocused: false})}
+            topPosition={this.props.topPosition*this.props.wrapperHeight/100}
+            wrapperHeight={this.props.wrapperHeight}
+            leftPosition={this.props.leftPosition}
+            navButtonHeight={this.navButton.current ? this.navButton.current.offsetHeight : null}
+            staticScene={this.props.staticScene}
+            navButtonFocused={this.state.innerButtonFocused}
+            rendered={this.props.rendered}
+          />}
+
       </div>
     );
   }
