@@ -177,6 +177,36 @@
                         "optional": true
                       },
                       {
+                        "name": "showHotspotOnHover",
+                        "type": "boolean",
+                        "label": "Show hotspot when mouse is hovering?",
+                        "optional": true,
+                        "widget": "showWhen",
+                        "showWhen": {
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": true
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "name": "isHotspotTabbable",
+                        "type": "boolean",
+                        "label": "Can the hotspot be tabbable?",
+                        "optional": true,
+                        "widget": "showWhen",
+                        "showWhen": {
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": true
+                            }
+                          ]
+                        }
+                      },
+                      {
                         "name": "hotSpotSizeValues",
                         "type": "text",
                         "default" : "48,48",

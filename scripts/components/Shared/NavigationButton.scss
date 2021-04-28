@@ -68,7 +68,6 @@ $labelWidth: 9em;
   }
 
   &:hover .nav-button {
-    background-color: $interactionHoverBg;
   }
 }
 .nav-button-hotspot-wrapper {
@@ -85,26 +84,36 @@ $labelWidth: 9em;
     &:before {
       display: none;
     }
-    &--editor {
-      background-color: #1d5cff;
-      opacity: .75;
-      &:before {
-        display: inherit;
+    &:focus {
+      background-color: rgb(0,0,0,0);
+    }
+    &:active {
+      border: 0.125em solid $activeBorder;
+    }
+    /*Modifiers*/
+    &--show-hotspot-on-hover {
+      background-color: rgba(0,0,0,0);
+
+      &:focus {
+        background-color: $hotspotAlteredState;
         opacity: 1;
       }
-    }
-    &:hover {
-      background-color: #1d5cff;
-      opacity: .75;
-    }
-    &:focus {
-      background-color: #1d5cff;
-      opacity: .75;
+      &:hover {
+        background-color: $hotspotAlteredState;
+      }
     }
 
-    &:active {
-      border: 0.25em solid $activeBorder;
+    &--editor {
+      background-color: $hotspotEditor;
+      &:before {
+        display: inherit;
+      }
+      &:hover, &:focus, &:active {
+        background-color: $hotspotAlteredState;
+      }
     }
+
+
   }
   .drag {
     width: 1.5em;

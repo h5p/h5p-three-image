@@ -105,8 +105,13 @@ export default class HotspotNavButton extends React.Component {
     this.props.setHotspotValues(newSizeWidth, newSizeHeight)
   }
 
-  render() {
+  determineTabIndex = () => {
+    return this.context.extras.isEditor || this.props.isHotspotTabbable ? this.props.tabIndexValue : -1
+  }
 
+  render() {
+    console.log(this.props.showHotspotOnHover)
+    console.log(this.props.isHotspotTabbable)
     const DragButton = (innerProps) => {
       const hotspotBtnRef = useRef(null);
 
@@ -155,8 +160,8 @@ export default class HotspotNavButton extends React.Component {
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
           style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
-          className={ `nav-button ${this.context.extras.isEditor ? "nav-button-hotspot nav-button-hotspot--editor" : 'nav-button-hotspot'}`}
-          tabIndex={this.props.tabIndexValue}
+          className={ `nav-button nav-button-hotspot ${this.props.showHotspotOnHover ? "nav-button-hotspot--show-hotspot-on-hover" : ""} ${this.context.extras.isEditor ? "nav-button-hotspot--editor" : ''} `}
+          tabIndex={this.determineTabIndex()}
           onClick={this.props.onClickEvent}
           onDoubleClick={this.props.onDoubleClickEvent}
           onMouseDown={ this.props.onMouseDownEvent}
