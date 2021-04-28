@@ -311,6 +311,8 @@ export default class ThreeSixtyScene extends React.Component {
         isFocused={this.props.focusedInteraction === index}
         rendered={this.state.isUpdated}
         showAsHotspot={interaction.label.showAsHotspot}
+        showHotspotOnHover={interaction.label.showHotspotOnHover}
+        isHotspotTabbable={interaction.label.isHotspotTabbable}
         sceneId = {this.props.sceneId}
         interactionIndex = {index}
       >

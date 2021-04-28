@@ -173,8 +173,38 @@
                       {
                         "name": "showAsHotspot",
                         "type": "boolean",
-                        "label": "Show as hotspot?",
+                        "label": "Show as hotspot",
                         "optional": true
+                      },
+                      {
+                        "name": "showHotspotOnHover",
+                        "type": "boolean",
+                        "label": "Show hotspot when mouse is hovering",
+                        "optional": true,
+                        "widget": "showWhen",
+                        "showWhen": {
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": true
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "name": "isHotspotTabbable",
+                        "type": "boolean",
+                        "label": "Set the hotspot be tabbable",
+                        "optional": true,
+                        "widget": "showWhen",
+                        "showWhen": {
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": true
+                            }
+                          ]
+                        }
                       },
                       {
                         "name": "hotSpotSizeValues",
