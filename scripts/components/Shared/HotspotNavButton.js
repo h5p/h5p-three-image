@@ -110,8 +110,6 @@ export default class HotspotNavButton extends React.Component {
   }
 
   render() {
-    console.log(this.props.showHotspotOnHover)
-    console.log(this.props.isHotspotTabbable)
     const DragButton = (innerProps) => {
       const hotspotBtnRef = useRef(null);
 
