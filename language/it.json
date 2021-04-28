@@ -185,14 +185,14 @@
               "description": "If unchecked - labels will show only on mouse over"
             },
             {
-              "label": "Show as hotspot?",
+              "label": "Show as hotspot",
               "description": "Show as a hidden hotspot, can used for overlaying interaction on elements in image"
             },
             {
-              "label": "Show hotspot when mouse is hovering?"
+              "label": "Show hotspot when mouse is hovering"
             },
             {
-              "label": "Can the hotspot be tabbable?"
+              "label": "Set the hotspot be tabbable"
             },
             {
               "label": "Values for storing the height and width for hotspot"

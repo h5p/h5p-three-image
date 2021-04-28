@@ -173,13 +173,13 @@
                       {
                         "name": "showAsHotspot",
                         "type": "boolean",
-                        "label": "Show as hotspot?",
+                        "label": "Show as hotspot",
                         "optional": true
                       },
                       {
                         "name": "showHotspotOnHover",
                         "type": "boolean",
-                        "label": "Show hotspot when mouse is hovering?",
+                        "label": "Show hotspot when mouse is hovering",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
@@ -194,7 +194,7 @@
                       {
                         "name": "isHotspotTabbable",
                         "type": "boolean",
-                        "label": "Can the hotspot be tabbable?",
+                        "label": "Set the hotspot be tabbable",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
