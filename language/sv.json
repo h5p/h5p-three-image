@@ -9,7 +9,7 @@
           "field": {
             "fields": [
               {
-                "label": "Scen-typ",
+                "label": "Scentyp",
                 "options": [
                   {
                     "label": "360 bild"
@@ -26,7 +26,7 @@
               {},
               {
                 "label": "Scen-titel",
-                "description": "Används för att identifiera scenen för kursskapare"
+                "description": "Används för att identifiera scenen"
               },
               {
                 "label": "Scen-bakgrund"
@@ -40,52 +40,50 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Etikett",
+                      "description": "Om detta lämnas tomt så kommer ingen etikett att visas och titelfältet kommer istället användas för skärmläsare"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Etikett-inställningar",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Etikett-position",
+                          "description": "Välj var etiketten ska visas",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Använd beteende-inställning"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Högerlinjerad"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Vänsterlinjerad"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Linjerad i överkant"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Linjerad i underkant"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Visa etikett",
+                          "description": "Om dold så kommer etiketter endast visas vid hovring",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Använd beteende-inställning"
                             },
                             {
-                              "label": "Show"
+                              "label": "Visa"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Dölj"
                             }
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -94,16 +92,16 @@
                 "description": "Avgör hur knappar som visar på denna scen ska se ut. För scener som är statiska och inte leder till nya scener så rekommenderas knappen \"Mer information\".",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Ny scen (pil)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Mer information (plus)"
                   }
                 ]
               },
               {
-                "label": "Audio Track",
-                "description": "Add an audio track that's specific for this scene."
+                "label": "Ljudspår",
+                "description": "Lägg till ett ljudspår som är specifikt för denna scen."
               }
             ]
           }
@@ -138,76 +136,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Etikett-inställningar",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Etikett-position",
+              "description": "Förvald etikett-position. Positionen kan ignoreras per interaktion.",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Högerlinjerad"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Vänsterlinjerad"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Linjerad i överkant"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Linjerad i underkant"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Visa etiketter",
+              "description": "Om ej ibockat, så kommer etiketter endast visas vid hovring"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Lokalisera",
       "fields": [
         {
-          "label": "Aria label for content type",
+          "label": "Aria-etikett för innehållstyp",
           "default": "Virtual Tour"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Etikett för att spela ljud",
+          "default": "Spela ljudspår"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Etikett för att pausa ljud",
+          "default": "Pausa ljudspår"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Titel för scendialog",
+          "default": "Scenbeskrivning"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Etikett för knapp för att återställa kamera",
+          "default": "Återställ kamera"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Etikett för skicka-in-dialog-knapp",
+          "default": "Skicka in dialog"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Etikett för stäng-dialog-knapp",
+          "default": "Stäng dialog"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Aria-etikett för knappen expandera etikett",
+          "default": "Expandera visuell etikett"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Etikett som visas när bakgrundsbild laddas i en 360-scen",
+          "default": "Laddar bakgrundsbild ..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Etikett för när det inte finns något innehåll",
+          "default": "Inget innehåll"
         }
       ]
     }
