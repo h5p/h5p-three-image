@@ -370,7 +370,6 @@ export default class NavigationButton extends React.Component {
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
       >
-
         {
           this.props.showAsHotspot ?
             <HotspotNavButton

@@ -5,6 +5,7 @@ import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
 import loading from '../../../assets/loading.svg';
 import './ThreeSixtyScene.scss';
+import OpenContent from "../../Shared/OpenContent";
 
 export const sceneRenderingQualityMapping = {
   high: 128,
@@ -260,7 +261,7 @@ export default class ThreeSixtyScene extends React.Component {
    *
    * @param {Object} interaction
    * @param {number} index
-   * @return {NavigationButton}
+   * @return {JSX.Element}
    */
   createInteraction = (interaction, index) => {
 
@@ -279,7 +280,54 @@ export default class ThreeSixtyScene extends React.Component {
     else {
       title = this.getInteractionTitle(interaction.action);
     }
+    console.log()
     return (
+      interaction.label.showAsOpenSceneContent ?
+        <OpenContent
+          key={'interaction-' + this.props.sceneId + index}
+          onMount={ el => this.props.threeSixty.add(
+            el,
+            ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+            this.context.extras.isEditor
+          )}
+          onUnmount={ el => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
+          onUpdate={ el => H5P.ThreeSixty.setElementPosition(
+            this.props.threeSixty.find(el),
+            ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
+          )}
+          title={title}
+          label={getLabelFromInteraction(interaction)}
+          buttonClasses={ className }
+          icon={getIconFromInteraction(interaction, this.context.params.scenes)}
+          isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+          nextFocus={ this.props.nextFocus }
+          type={ 'interaction-' + index }
+          clickHandler={this.props.showInteraction.bind(this, index)}
+          doubleClickHandler={() => {
+            this.context.trigger('doubleClickedInteraction', index);
+          }}
+          onFocus={ () => {
+            this.handleInteractionFocus(interaction);
+          }}
+          onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
+          onBlur={this.props.onBlurInteraction}
+          isFocused={this.props.focusedInteraction === index}
+          rendered={this.state.isUpdated}
+          showAsHotspot={interaction.label.showAsHotspot}
+          showHotspotOnHover={interaction.label.showHotspotOnHover}
+          isHotspotTabbable={interaction.label.isHotspotTabbable}
+          sceneId = {this.props.sceneId}
+          interactionIndex = {index}
+        >
+          {
+            this.context.extras.isEditor &&
+            <ContextMenu
+              isGoToScene={isGoToSceneInteraction}
+              interactionIndex={index}
+            />
+          }
+        </OpenContent>
+        :
       <NavigationButton
         key={'interaction-' + this.props.sceneId + index}
         onMount={ el => this.props.threeSixty.add(

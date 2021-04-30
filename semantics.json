@@ -175,6 +175,11 @@
                         "type": "boolean",
                         "label": "Show as hotspot",
                         "optional": true
+                      },{
+                        "name": "showAsOpenSceneContent",
+                        "type": "boolean",
+                        "label": "Show as content open in the scene",
+                        "optional": true
                       },
                       {
                         "name": "showHotspotOnHover",

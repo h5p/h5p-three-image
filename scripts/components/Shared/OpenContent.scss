@@ -1,0 +1,191 @@
+@import '../../styles/icons';
+@import '../../styles/colors';
+
+$labelPadding: 0.5em;
+$labelWidth: 9em;
+
+.open-content-wrapper {
+  position: absolute;
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &.active-element {
+    z-index: 2;
+  }
+}
+
+.open-content {
+  position: relative;
+  width: $buttonSize;
+  height: $buttonSize;
+  padding: 0;
+  line-height: 1;
+
+  background-color: $buttonBg;
+  border: none;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 1;
+  box-shadow: 0.2em 0.2em 0.3em rgba(0,0,0,0.2);
+  transition: border 100ms linear;
+
+  &:hover {
+    background-color: $hoverBg;
+  }
+
+  &:active {
+    background-color: $activeBg;
+    border: 0.25em solid $activeBorder;
+  }
+}
+
+.open-content-wrapper {
+  &:hover {
+    z-index: 3;
+  }
+
+  &.dragging, &.focused {
+    z-index: 3;
+  }
+}
+
+  .open-content {
+    background-color: white;
+
+    &:active {
+      background-color: $interactionActiveBg;
+      border-color: $interactionActiveBorder;
+    }
+  }
+
+.open-content-hotspot-wrapper {
+  position: relative;
+  z-index: -1;
+  &--is-static {
+    z-index: 3;
+  }
+  .drag {
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0;
+    background-color: white;
+    border: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 2px;
+    &:before {
+      font-family: "360-image";
+      vertical-align: middle;
+      color: $activeBorder;
+    }
+    &--horizontal {
+      left: calc(100% - 0.75em);
+      top: calc(50% - 0.75em);
+      &:before {
+        content: $arrow-horiz-scale;
+      }
+    }
+    &--vertical {
+      bottom: - 0.75em;
+      left: calc(50% - 0.75em);
+      &:before {
+        content: $arrow-verti-scale;
+      }
+    }
+  }
+
+
+}
+
+.disabled .open-content {
+  opacity: 0.5;
+}
+
+
+.bottom .open-content {
+  top: auto;
+  left: 0.75em;
+  bottom: 0.5em;
+}
+
+.open-content:before {
+  font-family: "360-image";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  font-size: 1.25em;
+  height: 1.025em;
+}
+
+.h5p-question-button .open-content:before {
+  content: $question;
+}
+
+.h5p-info-button .open-content:before {
+  content: $info;
+  font-size: 1.6em;
+}
+
+.h5p-go-to-scene-button .open-content:before {
+  content: $goToScene;
+}
+.h5p-locked-button .open-content:before {
+  content: $lock-icon;
+}
+.h5p-unlocked-button .open-content:before {
+  content: $unlock-icon;
+}
+
+.h5p-audio-button .open-content:before {
+  content: $audioOn;
+}
+.h5p-video-button .open-content:before {
+  content: $video;
+}
+.h5p-image-button .open-content:before {
+  content: $image;
+}
+.h5p-info-mark-button .open-content:before {
+  content: $info-mark;
+}
+.h5p-audio-button.active .open-content:before {
+  content: $audioOff;
+}
+
+.h5p-go-back-button {
+  top: 1em;
+  left: 1em;
+  // It is nessecary to show the back button on
+  // top of labels so it can be clicked even when covered
+  z-index: 3;
+}
+
+.h5p-go-back-button .open-content {
+  width: 2em;
+  height: 2em;
+  border-width: 0.2em;
+}
+
+.h5p-go-back-button .open-content:before {
+  content: $goBack;
+  font-size: 1em;
+}
+
+.h5p-go-back-button .open-content:active {
+  border-color: $activeBorder;
+}
+
+.h5p-scene-description-button .open-content:before {
+  content: $sceneDescription;
+}
