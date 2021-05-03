@@ -67,7 +67,7 @@ export const getIconFromInteraction = (interaction, scenes) => {
 };
 
 export const getLabelFromInteraction = (interaction) => {
-  return interaction.label;
+  return {...interaction.label, labelText: interaction.labelText};
 };
 
 export default class NavigationButton extends React.Component {
@@ -95,7 +95,6 @@ export default class NavigationButton extends React.Component {
   onFocus() {
     // Already focused
     if (this.state.isFocused) {
-      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       return;
     }
 
@@ -106,7 +105,6 @@ export default class NavigationButton extends React.Component {
       this.props.onFocusedInteraction();
     }
 
-    this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
   }
 
   onBlur(e) {
@@ -129,9 +127,6 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-    if (this.navButtonWrapper && this.navButtonWrapper.current) {
-      this.navButtonWrapper.current.removeEventListener('blur', this.onBlur);
-    }
   }
 
   componentDidMount() {
@@ -182,7 +177,6 @@ export default class NavigationButton extends React.Component {
 
   componentWillUnmount() {
     if (this.navButtonWrapper) {
-      this.navButtonWrapper.current.addEventListener('blur', this.onBlur);
       this.navButtonWrapper.current.removeEventListener('focus', this.onFocus);
     }
 
@@ -346,20 +340,15 @@ export default class NavigationButton extends React.Component {
       title = titleText.textContent;
     }
 
-    let label = {};
-
-    if (this.props.label) {
-      label = this.props.label;
-    }
-    else {
-      label = {
-        "labelPosition": "inherit",
-        "showLabel": "inherit"
-      };
-    }
+    let label = this.props.label ? this.props.label : {
+      labelPosition: "inherit",
+      showLabel: "inherit"
+    };
 
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
+
+    const labelText = getLabelText(label);
     return (
 
       <div
@@ -369,6 +358,7 @@ export default class NavigationButton extends React.Component {
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
+        onBlur={this.onBlur.bind(this)}
       >
 
         {
@@ -404,9 +394,9 @@ export default class NavigationButton extends React.Component {
         }
         {this.props.children}
         {
-          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsHotspot &&
+          this.props.icon !== 'h5p-go-back-button' && labelText !== '' && !this.props.showAsHotspot &&
           <NavigationButtonLabel
-            labelText={getLabelText(label, title)}
+            labelText={labelText}
             labelPos={labelPos}
             hoverOnly={hoverLabel}
             onMount={this.props.onMount}
@@ -420,6 +410,7 @@ export default class NavigationButton extends React.Component {
             staticScene={this.props.staticScene}
             navButtonFocused={this.state.innerButtonFocused}
             rendered={this.props.rendered}
+            onDoubleClick={this.onDoubleClick.bind(this)}
           />}
 
       </div>

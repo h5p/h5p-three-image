@@ -52,9 +52,7 @@
             },
             {
               "name": "sceneId",
-              "type": "number",
-              "label": "Unique scene id",
-              "description": "Must be unique, used for navigation between scenes"
+              "type": "number"
             },
             {
               "name": "scenename",
@@ -91,35 +89,29 @@
             },
             {
               "name": "cameraStartPosition",
-              "type": "text",
-              "label": "Initial camera position",
-              "description": "Camera position in pitch and yaw"
+              "type": "text"
             },
             {
               "name": "interactions",
               "type": "list",
-              "label": "Interactions",
-              "entity": "Interaction",
               "min": 0,
               "field": {
                 "name": "interaction",
                 "type": "group",
                 "fields": [
                   {
+                    "name": "labelText",
+                    "type": "text",
+                    "label": "Label",
+                    "optional": true,
+                    "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                  },
+                  {
                     "name": "label",
                     "type": "group",
-                    "label": "Interaction data",
+                    "label": "Label Settings",
                     "importance": "low",
-                    "expanded": true,
-                    "description": "A label that describes the icon.",
                     "fields": [
-                      {
-                        "name": "labelText",
-                        "type": "text",
-                        "label": "Label",
-                        "optional": true,
-                        "description": "If left blank we'll try to use the title as a label"
-                      },
                       {
                         "name": "labelPosition",
                         "type": "select",
@@ -234,8 +226,6 @@
                   {
                     "name": "action",
                     "type": "library",
-                    "label": "Interaction",
-                    "description": "Hotspot with an interaction",
                     "options": [
                       "H5P.GoToScene 0.1",
                       "H5P.AdvancedText 1.1",
@@ -248,9 +238,7 @@
                   },
                   {
                     "name": "interactionpos",
-                    "type": "text",
-                    "label": "Interaction position",
-                    "description": "Interaction position in pitch and yaw"
+                    "type": "text"
                   }
                 ]
               }
@@ -290,7 +278,6 @@
       {
         "name": "startSceneId",
         "type": "number",
-        "label": "Start scene id",
         "default": 0
       },
       {
@@ -345,7 +332,6 @@
         "label": "Label settings",
         "importance": "low",
         "expanded": true,
-        "description": "A label that describes the icon.",
         "fields": [
           {
             "name": "labelPosition",
@@ -393,7 +379,7 @@
         "name": "title",
         "type": "text",
         "label": "Aria label for content type",
-        "default": "Interactive Explorer"
+        "default": "Virtual Tour"
       },
       {
         "name": "playAudioTrack",
@@ -448,24 +434,6 @@
         "type": "text",
         "label": "Label for when there is no content",
         "default": "No content"
-      },
-      {
-        "name": "goToScene",
-        "type": "text",
-        "label": "Label for context menu button for go to scene",
-        "default": "Go to scene"
-      },
-      {
-        "name": "edit",
-        "type": "text",
-        "label": "Label for context menu button for edit",
-        "default": "Edit"
-      },
-      {
-        "name": "delete",
-        "type": "text",
-        "label": "Label for context menu button for delete",
-        "default": "Delete"
       }
     ]
   }
