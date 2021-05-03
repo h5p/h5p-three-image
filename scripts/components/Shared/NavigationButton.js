@@ -344,9 +344,11 @@ export default class NavigationButton extends React.Component {
       labelPosition: "inherit",
       showLabel: "inherit"
     };
-    
+
     let labelPos = getLabelPos(this.context.behavior.label, label);
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
+
+    const labelText = getLabelText(label);
     return (
 
       <div
@@ -392,7 +394,7 @@ export default class NavigationButton extends React.Component {
         }
         {this.props.children}
         {
-          this.props.icon !== 'h5p-go-back-button' && !this.props.showAsHotspot &&
+          this.props.icon !== 'h5p-go-back-button' && labelText !== '' && !this.props.showAsHotspot &&
           <NavigationButtonLabel
             labelText={labelText}
             labelPos={labelPos}
