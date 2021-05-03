@@ -23,10 +23,7 @@
                 "label": "Mostra il pulsante \"Indietro\"",
                 "description": "Mostra il pulsante per tornare alla scena precedente"
               },
-              {
-                "label": "ID unico della scena",
-                "description": "Deve essere unico. Usato per navigare tra le scene"
-              },
+              {},
               {
                 "label": "Titolo della scena",
                 "description": "Usato per individuare la scena per gli autori"
@@ -38,6 +35,7 @@
                 "label": "Descrizione della scena",
                 "description": "Testo che può descrivere la scena per l'utente finale"
               },
+              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -52,13 +50,12 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Interazione",
-                      "description": "Hotspot con un'interazione",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -97,14 +94,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Posizione dell'interazione",
-                      "description": "Rotazione laterale e verticale dell'interazione"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -127,9 +118,7 @@
             ]
           }
         },
-        {
-          "label": "ID di inizio scena"
-        },
+        {},
         {
           "label": "Traccia audio"
         }
@@ -160,7 +149,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -214,7 +202,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -251,18 +239,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

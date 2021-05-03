@@ -53,7 +53,9 @@ export default class StaticScene extends React.Component {
     }
 
     // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
-    if (this.sceneWrapperRef.current !== null && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth){
+    if (this.sceneWrapperRef.current !== null
+      && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth
+      && this.imageElementRef.current.clientWidth > 0) {
       this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
     }
   }
@@ -67,7 +69,12 @@ export default class StaticScene extends React.Component {
     const wrapperSize = wrapper.getBoundingClientRect();
     const defaultSize = 938;
     const defaultFontSize = 16;
-    this.sceneWrapperRef.current.style.width = `auto`;
+    this.sceneWrapperRef.current.style.width = `100%`;
+    
+    // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
+    if (this.imageElementRef.current.clientWidth > 0) {
+      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
+    }
 
     // Only make icons smaller if necessary
     if (wrapperSize.width > defaultSize) {
@@ -76,14 +83,10 @@ export default class StaticScene extends React.Component {
         this.sceneWrapperRef.current.style.fontSize = `${defaultFontSize}px`;
         this.forceUpdate();
       }
-      // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
-      if (this.imageElementRef.current.clientWidth > 0 && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
-        this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
-      }
       return;
     }
 
-    const minFontSize = 13;
+    const minFontSize = 14;
     const fontIncrementThreshold = 55;
     const widthDiff = defaultSize - wrapperSize.width;
     let newFontSize = defaultFontSize - (widthDiff / fontIncrementThreshold);
@@ -91,10 +94,6 @@ export default class StaticScene extends React.Component {
       newFontSize = minFontSize;
     }
 
-    // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
-    if (this.imageElementRef.current.clientWidth > 0 && this.sceneWrapperRef.current.clientWidth !== this.imageElementRef.current.clientWidth) {
-      this.sceneWrapperRef.current.style.width = `${this.imageElementRef.current.clientWidth}px`;
-    }
     this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
     this.forceUpdate();
   }
@@ -294,7 +293,7 @@ export default class StaticScene extends React.Component {
     switch (currentTitle) {
       case 'Untitled Text':
         return action.params.text;
-      case "Untitled Image":
+      case 'Untitled Image':
         return action.params.alt;
       default:
         return currentTitle;
@@ -351,7 +350,7 @@ export default class StaticScene extends React.Component {
       <div
         ref={this.overLayRef}
         className='image-scene-overlay'
-        aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
+        aria-hidden={this.props.isHiddenBehindOverlay ? true : undefined}
       >
         <div
           className={imageSceneClasses.join(' ')}
@@ -359,9 +358,9 @@ export default class StaticScene extends React.Component {
         >
           <img
             tabIndex='-1'
-            alt={ this.props.sceneParams.scenename }
+            alt={this.props.sceneParams.scenename}
             className='image-scene'
-            src={ H5P.getPath(this.props.imageSrc.path, this.context.contentId) }
+            src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
             onLoad={this.onSceneLoaded.bind(this)}
             ref={this.imageElementRef}
           />
@@ -425,9 +424,9 @@ export default class StaticScene extends React.Component {
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
                   label={getLabelFromInteraction(interaction)}
-                  type={ 'interaction-' + index }
-                  isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-                  nextFocus={ this.props.nextFocus }
+                  type={'interaction-' + index}
+                  isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
+                  nextFocus={this.props.nextFocus}
                   topPosition={posY}
                   leftPosition={posX}
                   mouseDownHandler={this.startDragging.bind(this, index)}
@@ -435,7 +434,7 @@ export default class StaticScene extends React.Component {
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
                   }}
-                  buttonClasses={ buttonClasses }
+                  buttonClasses={buttonClasses}
                   onBlur={this.props.onBlurInteraction}
                   isFocused={this.props.focusedInteraction === index}
                   // Use the overlay height instead of getWrapperSize because
@@ -463,7 +462,7 @@ export default class StaticScene extends React.Component {
           <NavigationButton
             title='Back'
             icon={Icons.GO_BACK}
-            isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+            isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
             clickHandler={this.goToPreviousScene.bind(this)}
             forceClickHandler={true}
             buttonClasses={backButtonClasses}
