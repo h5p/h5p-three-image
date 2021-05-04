@@ -23,10 +23,7 @@
                 "label": "Visa knapp \"Tillbaka\"",
                 "description": "Visa knapp för att navigera bakåt till din föregående scen"
               },
-              {
-                "label": "Unikt scen-ID",
-                "description": "Måste vara unikt, används för navigering mellan scener"
-              },
+              {},
               {
                 "label": "Scen-titel",
                 "description": "Används för att identifiera scenen för kursskapare"
@@ -38,6 +35,7 @@
                 "label": "Scen-beskrivning",
                 "description": "En text som kan beskriva scenen för slutanvändaren"
               },
+              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -52,13 +50,12 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaktion",
-                      "description": "Hotspot med en interaktion",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -97,14 +94,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Interaktions position",
-                      "description": "Interaktions position i pitch-and-yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -113,23 +104,21 @@
                 "description": "Avgör hur knappar som visar på denna scen ska se ut. För scener som är statiska och inte leder till nya scener så rekommenderas knappen \"Mer information\".",
                 "options": [
                   {
-                    "label": ""
+                    "label": "New scene (arrow)"
                   },
                   {
-                    "label": ""
+                    "label": "More information (plus)"
                   }
                 ]
               },
               {
-                "label": "",
-                "description": ""
+                "label": "Audio Track",
+                "description": "Add an audio track that's specific for this scene."
               }
             ]
           }
         },
-        {
-          "label": "ID för startscen"
-        },
+        {},
         {
           "label": "Ljudspår"
         }
@@ -160,7 +149,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -214,7 +202,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -251,18 +239,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

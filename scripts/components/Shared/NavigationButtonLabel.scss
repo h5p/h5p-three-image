@@ -76,7 +76,8 @@ $arrowDownTop: calc(-50% + 1px);
     right: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-right: 1.5em;
+      // The font-size is varying, so if em is used the padding will be to small in some cases
+      padding-right: 23px;
     }
   }
 
@@ -84,7 +85,8 @@ $arrowDownTop: calc(-50% + 1px);
     left: $buttonSize / 2;
     @include center-vertically();
     .nav-label {
-      padding-left: 1.5em;
+      // The font-size is varying, so if em is used the padding will be to small in some cases
+      padding-left: 23px;
     }
   }
 
@@ -119,11 +121,7 @@ $arrowDownTop: calc(-50% + 1px);
     .nav-label {
       max-width: unset;
       .nav-label-inner {
-        text-overflow: unset;
-        white-space: normal;
-        display: block;
-        -webkit-line-clamp: unset;
-        -webkit-box-orient: unset;
+        -webkit-line-clamp: 14;
       }
     }
     .nav-label-expand-button {
@@ -151,6 +149,7 @@ $arrowDownTop: calc(-50% + 1px);
     font-size: 0.9em;
     min-width: $labelMinWidth;
     max-width: $labelMaxWidth;
+    max-height: 20.5em;
 
     .nav-label-inner {
       white-space: pre;
@@ -231,16 +230,7 @@ $arrowDownTop: calc(-50% + 1px);
     max-height: 3em;
   }
 }
-.nav-button-wrapper:focus {
-  .nav-label-container.hover-only {
-    visibility: visible;
-    .nav-label {
-      max-width: $labelMaxWidth;
-      max-height: 3em;
-    }
-  }
-}
-.nav-button-wrapper .nav-label-container.hover-only.nav-button-focused {
+.nav-button-wrapper .nav-label-container.hover-only.show-label {
   visibility: visible;
   .nav-label {
     max-width: $labelMaxWidth;
