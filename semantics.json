@@ -166,17 +166,14 @@
                         "name": "showAsHotspot",
                         "type": "boolean",
                         "label": "Show as hotspot",
-                        "optional": true
-                      },{
-                        "name": "showAsOpenSceneContent",
-                        "type": "boolean",
-                        "label": "Show as content open in the scene",
+                        "description": "Allows for adding interaction areas to the background image that can be custom size.",
                         "optional": true
                       },
                       {
                         "name": "showHotspotOnHover",
                         "type": "boolean",
                         "label": "Show hotspot when mouse is hovering",
+                        "description": "Will allow hotspot to be visible when mouse is hovering the area.",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
@@ -192,6 +189,7 @@
                         "name": "isHotspotTabbable",
                         "type": "boolean",
                         "label": "Set the hotspot be tabbable",
+                        "description": "Will allow hotspot to be tabbable. Can be used for accessibilty.",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
@@ -204,12 +202,27 @@
                         }
                       },
                       {
+                        "name": "showAsOpenSceneContent",
+                        "description": "Allows the content to be shown in an open dialog than be placed in the scene.",
+                        "type": "boolean",
+                        "label": "Show as content open in the scene",
+                        "optional": true,
+                        "widget": "showWhen",
+                        "showWhen": {
+                        "rules": [
+                          {
+                            "field": "showAsHotspot",
+                            "equals": false
+                          }
+                        ]
+                      }
+                      },
+                      {
                         "name": "hotSpotSizeValues",
                         "type": "text",
                         "default" : "48,48",
                         "label": "Values for storing the height and width for hotspot",
                         "optional": true,
-                        "hidden": true,
                         "widget": "none"
                       },
                       {

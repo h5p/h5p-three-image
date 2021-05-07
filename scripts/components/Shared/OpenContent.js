@@ -227,7 +227,7 @@ export default class OpenContent extends React.Component {
     we have to multiply the result by two*/
 
     let finalValue = ((currentPosMouse - divStartWidth) * 2);
-    if(finalValue > 32 && finalValue < 512) {
+    if(finalValue > 64 && finalValue < 512) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
       horizontalDrag ?
@@ -359,7 +359,7 @@ export default class OpenContent extends React.Component {
     const interaction = scene.interactions[this.props.interactionIndex];
 
     return interaction.label.hotSpotSizeValues ?
-      interaction.label.hotSpotSizeValues.split(",") : [16,16]
+      interaction.label.hotSpotSizeValues.split(",") : [128,128]
   }
 
   getContentFromInteraction() {
@@ -368,9 +368,19 @@ export default class OpenContent extends React.Component {
     });
     const interaction = scene.interactions[this.props.interactionIndex];
     const library = interaction.action.library;
+    const machineName = H5P.libraryFromString(library).machineName;
+    if (machineName === 'H5P.AdvancedText') {
+      return interaction.action.params.text
+    } else if (machineName === 'H5P.Image') {
+      const imgSrc = H5P.getPath(interaction.action.params.file.path, this.context.contentId);
+      const image = `<img src=${imgSrc} alt=${interaction.action.params.alt}/>`
+      return image;
+    }
 
+    else {
+      return "";
 
-    return interaction.action.params;
+    }
   };
 
 
@@ -451,7 +461,7 @@ export default class OpenContent extends React.Component {
 
       useEffect(() => {
         /*In order to take control of the mousedown listener, we have to it when the component mount,
-       the reason for trhis is that we have to stop the propagation early on, since mousedown is already listened to by threesixty */
+       the reason for this is that we have to stop the propagation early on, since mousedown is already listened to by threesixty */
         hotspotBtnRef.current.addEventListener("mousedown", (e) => {
           e.stopPropagation();
           handleMouseDown(e)
@@ -476,35 +486,34 @@ export default class OpenContent extends React.Component {
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
-        onClick={this.onClick.bind(this)}
       >
 
-          <div className={`open-content-hotspot-wrapper ${this.props.staticScene ? 'open-content-hotspot-wrapper--is-static' : ''} `}>
-            <div
-              ref={this.props.reference}
-              aria-label={this.props.ariaLabel}
-              style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
-              className={ `open-content open-content-hotspot ${this.props.showHotspotOnHover ? "open-content-hotspot--show-hotspot-on-hover" : ""} ${this.context.extras.isEditor ? "open-content-hotspot--editor" : ''} `}
-              tabIndex={this.props.tabIndexValue}
-              onClick={this.onClick.bind(this)}
-              onDoubleClick={this.onDoubleClick.bind(this)}
-              onMouseDown={this.onMouseDown.bind(this)}
-              onMouseUp={this.setFocus.bind(this)}
-              onFocus={() => this.setState({innerButtonFocused: true})}
-              onBlur={() => this.setState({innerButtonFocused: false})}/>
+        <div
+          className={
+            `open-content ${this.context.extras.isEditor ? "open-content--editor" : ''}
+             
+             `}
+          ref={this.props.reference}
+          aria-label={this.props.ariaLabel}
+          style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
+          tabIndex={this.props.tabIndexValue}
+          onDoubleClick={this.onDoubleClick.bind(this)}
+          onMouseDown={this.onMouseDown.bind(this)}
+          onMouseUp={this.setFocus.bind(this)}
+          onFocus={() => this.setState({innerButtonFocused: true})}
+          onBlur={() => this.setState({innerButtonFocused: false})}>
+          <div className={"inner-content"} dangerouslySetInnerHTML={{__html: this.getContentFromInteraction()}}/>
+          {
+            this.context.extras.isEditor ? <>
+                <DragButton horizontalDrag = {true}/>
+                <DragButton horizontalDrag = {false}/>
+              </>
+              : ""
+          }
 
-            {
-              this.context.extras.isEditor ? <>
-                  <DragButton horizontalDrag = {true}/>
-                  <DragButton horizontalDrag = {false}/>
-                </>
-                : ""
-            }
+        </div>
 
-            {
-              console.log(this.getContentFromInteraction())
-            }
-          </div>
+
         {this.props.children}
 
       </div>
