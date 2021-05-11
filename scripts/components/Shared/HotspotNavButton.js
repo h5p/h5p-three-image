@@ -80,7 +80,7 @@ export default class HotspotNavButton extends React.Component {
     we have to multiply the result by two*/
 
     let finalValue = ((currentPosMouse - divStartWidth) * 2);
-    if(finalValue > 32 && finalValue < 512) {
+    if(finalValue > 128 && finalValue < 512) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
       horizontalDrag ?

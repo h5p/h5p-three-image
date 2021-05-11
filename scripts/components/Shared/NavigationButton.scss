@@ -108,6 +108,7 @@ $labelWidth: 9em;
       background-color: $hotspotEditor;
       &:before {
         display: inherit;
+        font-size: 2.5em;
       }
       &:hover, &:focus, &:active {
         background-color: $hotspotAlteredState;
@@ -117,8 +118,8 @@ $labelWidth: 9em;
 
   }
   .drag {
-    width: 1.5em;
-    height: 1.5em;
+    width: 3em;
+    height: 3em;
     padding: 0;
     background-color: white;
     border: 0;
@@ -130,6 +131,7 @@ $labelWidth: 9em;
       font-family: "360-image";
       vertical-align: middle;
       color: $activeBorder;
+      font-size: 2em;
     }
     &--horizontal {
       left: calc(100% - 0.75em);

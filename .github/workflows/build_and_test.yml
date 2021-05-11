@@ -38,8 +38,8 @@ jobs:
           if [ -d "h5p-open-ended-question" ]; then pushd h5p-open-ended-question && npm install && npm run build; popd; fi
           if [ -d "h5p-simple-multiple-choice" ]; then pushd h5p-simple-multiple-choice && npm install && npm run build; popd; fi
 
-          if [ -d "h5p-editor-audio-recorder" ]; then 
-            pushd h5p-editor-audio-recorder 
+          if [ -d "h5p-editor-audio-recorder" ]; then
+            pushd h5p-editor-audio-recorder
             git checkout bec6fe1
             npm cache clean -f
             npm i webpack@2.7.0 webpack-sources@1.0.1 -g
@@ -55,6 +55,7 @@ jobs:
           git clone https://github.com/NDLANO/h5p-shape.git
           git clone https://github.com/NDLANO/h5p-editor-shape.git
           git clone https://github.com/NDLANO/h5p-editor-image-radio-group
+          git clone https://github.com/NDLANO/h5p-three-sixty.git
 
 
           if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm i -g webpack@2.7.0 && npm install && npm run build; popd; fi

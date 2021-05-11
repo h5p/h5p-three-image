@@ -312,7 +312,9 @@ export default class NavigationButton extends React.Component {
     if (this.props.icon) {
       wrapperClasses.push(this.props.icon);
     }
-
+    if(this.props.showAsHotspot) {
+      wrapperClasses = wrapperClasses.concat("nav-btn-hotspot render-in-3d");
+    }
     if (this.state.isMouseOver) {
       wrapperClasses.push('hover');
     }
