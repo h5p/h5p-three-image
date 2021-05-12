@@ -268,7 +268,6 @@ export default class ThreeSixtyScene extends React.Component {
    * @return {JSX.Element}
    */
   createInteraction = (interaction, index) => {
-
     const className = ['three-sixty'];
     if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
       className.push('active');
@@ -284,7 +283,7 @@ export default class ThreeSixtyScene extends React.Component {
     else {
       title = this.getInteractionTitle(interaction.action);
     }
-    console.log()
+
     return (
       interaction.label.showAsOpenSceneContent ?
         <OpenContent
@@ -299,11 +298,6 @@ export default class ThreeSixtyScene extends React.Component {
             this.props.threeSixty.find(el),
             ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
           )}
-          title={title}
-          label={getLabelFromInteraction(interaction)}
-          buttonClasses={ className }
-          icon={getIconFromInteraction(interaction, this.context.params.scenes)}
-          isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
           nextFocus={ this.props.nextFocus }
           type={ 'interaction-' + index }
           clickHandler={this.props.showInteraction.bind(this, index)}
@@ -316,10 +310,6 @@ export default class ThreeSixtyScene extends React.Component {
           onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
           onBlur={this.props.onBlurInteraction}
           isFocused={this.props.focusedInteraction === index}
-          rendered={this.state.isUpdated}
-          showAsHotspot={interaction.label.showAsHotspot}
-          showHotspotOnHover={interaction.label.showHotspotOnHover}
-          isHotspotTabbable={interaction.label.isHotspotTabbable}
           sceneId = {this.props.sceneId}
           interactionIndex = {index}
         >
