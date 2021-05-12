@@ -22,23 +22,12 @@ const infoInteractions = [
   "H5P.Video",
 ];
 
-const isInfoInteraction = (machineName) => {
-  return infoInteractions.includes(machineName);
-};
-
-
-
-
-export const getLabelFromInteraction = (interaction) => {
-  return interaction.label;
-};
-
 export default class OpenContent extends React.Component {
   constructor(props) {
     super(props);
 
     this.openContentWrapper = React.createRef();
-    this.navButton = React.createRef();
+    this.openContent = React.createRef();
     this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
@@ -82,10 +71,10 @@ export default class OpenContent extends React.Component {
   }
 
   onBlur(e) {
-    const navButtonWrapper = this.openContentWrapper
+    const openContentWrapper = this.openContentWrapper
       && this.openContentWrapper.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+    if (openContentWrapper && openContentWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
       this.openContentWrapper.current.focus({
         preventScroll: true
@@ -389,13 +378,7 @@ export default class OpenContent extends React.Component {
       'open-content-wrapper',
     ];
 
-    if (this.props.buttonClasses) {
-      wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
-    }
 
-    if (this.props.icon) {
-      wrapperClasses.push(this.props.icon);
-    }
 
     if (this.state.isMouseOver) {
       wrapperClasses.push('hover');
@@ -414,27 +397,9 @@ export default class OpenContent extends React.Component {
     }
 
     const isWrapperTabbable = this.context.extras.isEditor;
-    const isInnerButtonTabbable = !this.context.extras.isEditor
-      && !this.props.isHiddenBehindOverlay;
-
-    let title = '';
-    if (this.props.title) {
-      const titleText = document.createElement('div');
-      titleText.innerHTML = this.props.title;
-      title = titleText.textContent;
-    }
 
     let label = {};
 
-    if (this.props.label) {
-      label = this.props.label;
-    }
-    else {
-      label = {
-        "labelPosition": "inherit",
-        "showLabel": "inherit"
-      };
-    }
 
     const DragButton = (innerProps) => {
       const hotspotBtnRef = useRef(null);
@@ -487,13 +452,9 @@ export default class OpenContent extends React.Component {
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
       >
-
         <div
-          className={
-            `open-content ${this.context.extras.isEditor ? "open-content--editor" : ''}
-             
-             `}
-          ref={this.props.reference}
+          className={`open-content ${this.context.extras.isEditor ? "open-content--editor" : ''}`}
+          ref={this.openContent}
           aria-label={this.props.ariaLabel}
           style={{width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px'}}
           tabIndex={this.props.tabIndexValue}
@@ -512,7 +473,6 @@ export default class OpenContent extends React.Component {
           }
 
         </div>
-
 
         {this.props.children}
 
