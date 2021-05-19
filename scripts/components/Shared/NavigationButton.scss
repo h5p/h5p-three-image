@@ -85,9 +85,6 @@ $labelWidth: 9em;
     &:before {
       display: none;
     }
-    &:focus {
-      background-color: rgb(0,0,0,0);
-    }
     &:active {
       border: 0.125em solid $activeBorder;
     }
