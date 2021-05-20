@@ -188,7 +188,7 @@ export default class Main extends React.Component {
   }
 
   /**
-   * The user wants the scene description to display when the 
+   * The user wants the scene description to display when the
    * scene starts for the first time, handling it.
    *
    * @param {string} sceneId
@@ -386,7 +386,7 @@ export default class Main extends React.Component {
     });
     const interaction = scene.interactions[this.state.currentInteraction];
 
-    const isCorrectPassword = interaction.label.interactionPassword === inputPassword;
+    const isCorrectPassword = interaction.label.interactionPassword.toLowerCase() === inputPassword.toLowerCase();
     interaction.unlocked = interaction.unlocked || isCorrectPassword;
 
     return isCorrectPassword;
