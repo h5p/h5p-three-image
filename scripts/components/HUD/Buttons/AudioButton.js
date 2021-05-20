@@ -217,7 +217,8 @@ export default class AudioButton extends React.Component {
    * @param {number} id Content ID
    * @param {Array} sources
    * @param {function} onPlay Callback
-   * @param {function} onStop Callback
+   * @param {Function} onEnd Callback, run when the track ends
+   * @param {Function} onStop Callback, run when the player is paused
    * @param {boolean} loop
    */
   static createAudioPlayer(id, sources, onPlay, onEnd, onStop, loop) {
