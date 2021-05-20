@@ -1,10 +1,18 @@
-import React from "react";
+import React, {useRef} from "react";
 import { H5PContext } from "../../context/H5PContext";
 import "./PasswordContent.scss";
+
+const utilizeFocus = () => {
+  const ref = React.createRef()
+  const setFocus = () => {ref.current &&  ref.current.focus()}
+
+  return {setFocus, ref}
+}
 
 export default class PasswordContent extends React.Component {
   constructor(props) {
     super(props);
+    this.inputRef = utilizeFocus();
     this.state = {
       unlocked: false,
       hasClicked: false,
@@ -44,6 +52,10 @@ export default class PasswordContent extends React.Component {
       });
     }, 500);
   };
+  componentDidMount(){
+    this.inputRef.setFocus()
+  }
+
   render() {
     return (
       <div className="h5p-password-content">
@@ -86,6 +98,8 @@ export default class PasswordContent extends React.Component {
             <div className={"h5p-wrapper-inner"}>
               <input
                 type="text"
+                autoComplete="off"
+                ref={this.inputRef.ref}
                 className="h5p-field-input"
                 id={"field-code-" + this.props.currentInteractionIndex}
                 placeholder={this.context.l10n.code}

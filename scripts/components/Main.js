@@ -451,6 +451,7 @@ export default class Main extends React.Component {
           title={ dialogTitle }
           onHideTextDialog={this.hideInteraction.bind(this)}
           dialogClasses={dialogClasses}
+          focusOnTitle={!showPasswordDialog}
         >
           {showPasswordDialog ? <PasswordContent
               handlePassword = {this.handlePassword.bind(this)}

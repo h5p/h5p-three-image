@@ -8,8 +8,10 @@ export default class Dialog extends React.Component {
   }
 
   componentDidMount() {
-    // Focus must be set to the first focusable element
-    this.title.focus();
+    // Focus must be set to the first focusable element, if it contains password, <PasswordContent/> sets the focus to its input field
+    if (this.props.focusOnTitle) {
+      this.title.focus();
+    }
   }
 
   handleDialogRef = (el) => {
