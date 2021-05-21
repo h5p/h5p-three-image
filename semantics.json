@@ -203,9 +203,9 @@
                       },
                       {
                         "name": "showAsOpenSceneContent",
-                        "description": "Allows the content to be shown in an open dialog than be placed in the scene.",
+                        "description": "Allows the content to be shown in an open dialog box directly in the scene.",
                         "type": "boolean",
-                        "label": "Show as content open in the scene",
+                        "label": "Show as open content in the scene",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
