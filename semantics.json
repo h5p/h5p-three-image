@@ -281,10 +281,66 @@
         "default": 0
       },
       {
+        "name": "audio-type",
+        "type": "select",
+        "options": [
+          {
+            "label": "Audio",
+            "value": "audio"
+          },
+          {
+            "label": "Playlist",
+            "value": "playlist"
+          }
+        ],
+        "default": "audio"
+      },
+      {
         "name": "audio",
         "type": "audio",
         "label": "Audio track",
-        "optional": true
+        "optional": true,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [{
+            "field": "audio-type",
+            "equals": "audio"
+          }] 
+        }
+      },
+      {
+        "name": "playlists",
+        "type": "list",
+        "label": "Playlists",
+        "optional": true,
+        "field": {
+          "name": "playlist",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Playlist title",
+              "name": "title",
+              "type": "text",
+              "optional": false
+            },
+            {
+              "label": "Audio tracks",
+              "name": "audio-tracks",
+              "type": "audio"
+            },
+            {
+              "name": "id",
+              "type": "text"
+            }            
+          ]
+        },
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [{
+            "field": "audio-type",
+            "equals": "playlist"
+          }] 
+        }
       }
     ]
   },
