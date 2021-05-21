@@ -31,6 +31,7 @@ export const defaultAppContext = {
       {
         sceneId: 1,
         scenename: "test",
+        showSceneDescriptionInitially: false,
         interactions: [
           {
             label: {
