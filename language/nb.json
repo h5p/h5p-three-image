@@ -187,6 +187,10 @@
               "label": "Set the hotspot be tabbable"
             },
             {
+              "label": "Show as open content in the scene",
+              "description": "Allows the content to be shown in an open dialog box directly in the scene."
+            },
+            {
               "label": "Values for storing the height and width for hotspot"
             },
             {

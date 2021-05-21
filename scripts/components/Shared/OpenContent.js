@@ -348,7 +348,7 @@ export default class OpenContent extends React.Component {
     const interaction = scene.interactions[this.props.interactionIndex];
 
     return interaction.label.hotSpotSizeValues ?
-      interaction.label.hotSpotSizeValues.split(",") : [128,128]
+      interaction.label.hotSpotSizeValues.split(",") : [256,128]
   }
 
   getContentFromInteraction() {

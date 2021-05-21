@@ -220,7 +220,7 @@
                       {
                         "name": "hotSpotSizeValues",
                         "type": "text",
-                        "default" : "48,48",
+                        "default" : "256,128",
                         "label": "Values for storing the height and width for hotspot",
                         "optional": true,
                         "widget": "none"
