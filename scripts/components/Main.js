@@ -261,6 +261,14 @@ export default class Main extends React.Component {
           });
         },
         () => {
+          // Track ended, stop playing
+          if (this.state.audioIsPlaying === id) {
+            this.setState({
+              audioIsPlaying: null  // Clear state on track ended
+            });
+          }
+        },
+        () => {
           if (this.state.audioIsPlaying === id) {
             this.setState({
               audioIsPlaying: null  // Clear state on playing ended
