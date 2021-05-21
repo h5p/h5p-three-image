@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+import 'core-js/stable';
 import React from 'react';
 import ReactDOM from "react-dom";
 import Main from "./components/Main";
@@ -56,6 +56,7 @@ H5P.ThreeImage = (function () {
       hotspotDragVertiAlt: 'Drag vertically to scale hotspot',
       backgroundLoading: 'Loading background image...',
       noContent: 'No content',
+      hint: 'Hint',
       ...params.l10n,
     };
 

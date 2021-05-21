@@ -188,7 +188,7 @@ export default class Main extends React.Component {
   }
 
   /**
-   * The user wants the scene description to display when the 
+   * The user wants the scene description to display when the
    * scene starts for the first time, handling it.
    *
    * @param {string} sceneId
@@ -259,6 +259,14 @@ export default class Main extends React.Component {
           this.setState({
             audioIsPlaying: id // Set state on starting to play
           });
+        },
+        () => {
+          // Track ended, stop playing
+          if (this.state.audioIsPlaying === id) {
+            this.setState({
+              audioIsPlaying: null  // Clear state on track ended
+            });
+          }
         },
         () => {
           if (this.state.audioIsPlaying === id) {
@@ -386,7 +394,7 @@ export default class Main extends React.Component {
     });
     const interaction = scene.interactions[this.state.currentInteraction];
 
-    const isCorrectPassword = interaction.label.interactionPassword === inputPassword;
+    const isCorrectPassword = interaction.label.interactionPassword.toLowerCase() === inputPassword.toLowerCase();
     interaction.unlocked = interaction.unlocked || isCorrectPassword;
 
     return isCorrectPassword;
@@ -451,6 +459,7 @@ export default class Main extends React.Component {
           title={ dialogTitle }
           onHideTextDialog={this.hideInteraction.bind(this)}
           dialogClasses={dialogClasses}
+          focusOnTitle={!showPasswordDialog}
         >
           {showPasswordDialog ? <PasswordContent
               handlePassword = {this.handlePassword.bind(this)}

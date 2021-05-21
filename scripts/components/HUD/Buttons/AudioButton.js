@@ -52,13 +52,32 @@ export default class AudioButton extends React.Component {
       this.players[id] = AudioButton.createAudioPlayer(
         this.context.contentId,
         this.getTrack(id),
-        () => this.props.onIsPlaying(id),
+        () => {
+          this.props.onIsPlaying(id);
+          if (!this.players[id].audioTrack) {
+            this.players[id].audioTrack = 0;
+          }
+        },
+        () => {
+          // Current track ended, and player has multiple tracks (else it is looped)
+          const currentTrackNumber = this.players[id].audioTrack ? this.players[id].audioTrack : 0;
+          const trackList = this.getTrack(id);
+          const newTrackNumber = trackList.length - 1 === currentTrackNumber ? 0 : currentTrackNumber + 1;
+          const newTrackPath = H5P.getPath(trackList[newTrackNumber].path, this.context.contentId);
+          const currentPlayer = this.players[id];
+          // Play next track
+          currentPlayer.audioTrack = newTrackNumber;
+          currentPlayer.src = newTrackPath;
+          currentPlayer.load();
+          currentPlayer.play();
+          this.props.onIsPlaying(id);
+        },
         () => {
           if (this.props.isPlaying === id) {
             this.props.onIsPlaying(null);
           }
         },
-        true
+        !(this.getTrack(id) && this.getTrack(id).length > 1)
       );
     }
 
@@ -198,10 +217,11 @@ export default class AudioButton extends React.Component {
    * @param {number} id Content ID
    * @param {Array} sources
    * @param {function} onPlay Callback
-   * @param {function} onStop Callback
+   * @param {Function} onEnd Callback, run when the track ends
+   * @param {Function} onStop Callback, run when the player is paused
    * @param {boolean} loop
    */
-  static createAudioPlayer(id, sources, onPlay, onStop, loop) {
+  static createAudioPlayer(id, sources, onPlay, onEnd, onStop, loop) {
     // Check if browser supports audio.
     let player = document.createElement('audio');
     if (player.canPlayType !== undefined) {
@@ -224,7 +244,7 @@ export default class AudioButton extends React.Component {
       player.preload = 'auto';
       player.loop = loop;
       player.addEventListener('play', onPlay);
-      player.addEventListener('ended', onStop);
+      player.addEventListener('ended', onEnd);
       player.addEventListener('pause', onStop);
     }
 
