@@ -56,6 +56,7 @@ H5P.ThreeImage = (function () {
       hotspotDragVertiAlt: 'Drag vertically to scale hotspot',
       backgroundLoading: 'Loading background image...',
       noContent: 'No content',
+      hint: 'Hint',
       ...params.l10n,
     };
 
