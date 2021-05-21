@@ -40,7 +40,13 @@ $labelWidth: 9em;
     &.dragging, &.focused{
       z-index: 3;
     }
-
+&--editor {
+  /* for "deactivating" a tags so we don't accidentally click them when positioning the content box*/
+  a {
+    pointer-events: none;
+    cursor: default;
+  }
+}
     .drag {
       width: 1.5em;
       height: 1.5em;
