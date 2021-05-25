@@ -207,6 +207,10 @@ $labelWidth: 9em;
   content: $audioOff;
 }
 
+.h5p-text-block-button .nav-button:before {
+  content: $text-block;
+}
+
 .h5p-go-back-button {
   top: 1em;
   left: 1em;
