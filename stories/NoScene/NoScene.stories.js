@@ -29,6 +29,7 @@ No_Scene.args = {
   forceStartScreen: undefined,
   forceStartCamera: undefined,
   currentScene: 0,
+  showSceneDescriptionInitially: false,
   setCurrentSceneId: 0,
   addThreeSixty: (tS) => undefined,
   onSetCameraPos: () => undefined,

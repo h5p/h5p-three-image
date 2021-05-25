@@ -111,8 +111,17 @@
   border-color: #6d6d6d;
 }
 
+.open-content-wrapper.focused {
+  .open-content {
+    border: .25em solid #70b0ff;
+  }
 
-.nav-button-wrapper.left-aligned {
+  .context-menu {
+    display: block;
+  }
+}
+
+.open-content-wrapper.left-aligned {
   .context-menu {
     transform: translate(-100%, -100%);
   }
@@ -129,3 +138,4 @@
     transform: scaleX(-1);
   }
 }
+

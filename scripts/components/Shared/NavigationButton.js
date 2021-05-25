@@ -362,7 +362,6 @@ export default class NavigationButton extends React.Component {
         onClick={this.onClick.bind(this)}
         onBlur={this.onBlur.bind(this)}
       >
-
         {
           this.props.showAsHotspot ?
             <HotspotNavButton
