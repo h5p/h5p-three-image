@@ -73,20 +73,6 @@ SceneStory.args = {
   addThreeSixty: (tS) => undefined,
   onSetCameraPos: () => undefined,
 };
-/*
-export const SceneStoryWithOpenSceneContent = openSceneContentTemplate().bind({});
-SceneStoryWithOpenSceneContent.args = {
-  label: "Open Scene Content",
-  forceStartScreen: undefined,
-  forceStartCamera: undefined,
-  currentScene: 1,
-  setCurrentSceneId: (id)=>1,
-  imageSrc: {
-    path: imageScene,
-  },
-  addThreeSixty: (tS) => undefined,
-  onSetCameraPos: () => undefined,
-};*/
 
 export const SceneStoryWithAssignment = assignmentTemplate.bind({});
 SceneStoryWithAssignment.args = {
