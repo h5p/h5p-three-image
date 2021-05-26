@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "Editor tří obrázků",
+      "label": "Editor 3D obrázků",
       "fields": [
         {
           "label": "Scény",
@@ -12,7 +12,7 @@
                 "label": "Typ scény",
                 "options": [
                   {
-                    "label": "360 obázek"
+                    "label": "360 obrázek"
                   },
                   {
                     "label": "Statický obrázek"
@@ -20,13 +20,13 @@
                 ]
               },
               {
-                "label": "Zobrazit tlačítko \"Zpět\" ",
+                "label": "Zobrazit tlačítko \"Zpět\"",
                 "description": "Zobrazit tlačítko pro navigaci zpět na předchozí scénu"
               },
               {},
               {
                 "label": "Název scény",
-                "description": "Slouží k identifikaci scény pro autory"
+                "description": "Slouží k identifikaci"
               },
               {
                 "label": "Pozadí scény"
@@ -50,57 +50,55 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Popisek",
+                      "description": "Pokud nevyplníte, nebude zobrazen žádný popisek a my se pokusíme použít pole nadpisu pro čtečky obrazovky"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Nastavení popisku",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Pozice popisku",
+                          "description": "Vybrat, kde se má popisek objevit",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Použít nastavení chování"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Zarovnáno doprava"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Zarovnáno doleva"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Zarovnáno nahoru"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Zarovnáno dolů"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Zobrazit popisek",
+                          "description": "Pokud jsou skryté - popisky se zobrazí pouze při najetí myší",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Použít nastavení chování"
                             },
                             {
-                              "label": "Show"
+                              "label": "Zobrazit"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Skrýt"
                             }
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
               {
-                "label": "Styp tlačítka",
+                "label": "Typ tlačítka",
                 "description": "Rozhodněte se, jak by měla vypadat tlačítka směřující k této scéně. Pro scény, které jsou statické a nevedou k novým scénám, doporučujeme tlačítko \"Více informací\" .",
                 "options": [
                   {
@@ -148,29 +146,29 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Nastavení popisku",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Pozice popisku",
+              "description": "Výchozí poloha popisku. Pozici lze přepsat interakcí",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Zarovnáno doprava"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Zarovnáno doleva"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Zarovnáno nahoru"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Zarovnáno dolů"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Zobrazit popisky",
+              "description": "Pokud není zaškrtnuto - popisky se zobrazí pouze při najetí myší"
             },
             {
               "label": "Show as hotspot",
@@ -202,47 +200,47 @@
       ]
     },
     {
-      "label": "Localize",
+      "label": "Lokalizovat",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Aria label pro typ obsahu",
+          "default": "Virtuální prohlídka"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Popisek pro přehrávání zvuku",
+          "default": "Přehrát zvukovou stopu"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Popisek pro pozastavení zvuku",
+          "default": "Pozastavit zvukovou stopu"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Nadpis dialogu scény",
+          "default": "Popis scény"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Popisek pro tlačítko pro resetování kamery",
+          "default": "Resetovat kameru"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Popisek pro tlačítko pro odeslání dialogu",
+          "default": "Odeslat dialog"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Popisek pro dialogové tlačítko zavřít",
+          "default": "Zavřít dialog"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Aria label pro popisek tlačítka rozbalit",
+          "default": "Rozbalit vizuální popisky"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Popisek, když se obrázek na pozadí načítá ve scéně 360",
+          "default": "Načítání obrázku na pozadí ..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Popisek pro případ, že není žádný obsah",
+          "default": "Bez obsahu"
         }
       ]
     }
