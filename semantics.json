@@ -292,10 +292,12 @@
               ],
               "widget": "showWhen",
               "showWhen": {
-                "rules": [{
-                  "field": "audioType",
-                  "equals": "audio"
-                }] 
+                "rules": [
+                  {
+                    "field": "audioType",
+                    "equals": "audio"
+                  }
+                ] 
               }
             }
           ]
