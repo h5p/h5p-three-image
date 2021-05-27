@@ -263,6 +263,25 @@
               "default": "arrow"
             },
             {
+              "name": "audioType",
+              "type": "select",
+              "label": "Audio type",
+              "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+              "widget": "radioGroup",
+              "alignment": "horizontal",
+              "options": [
+                {
+                  "label": "Audio Track",
+                  "value": "audio"
+                },
+                {
+                  "label": "Playlist",
+                  "value": "playlist"
+                }
+              ],
+              "default": "audio"
+            },
+            {
               "name": "audio",
               "type": "audio",
               "label": "Audio Track",
@@ -270,7 +289,14 @@
               "optional": true,
               "widgetExtensions": [
                 "AudioRecorder"
-              ]
+              ],
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [{
+                  "field": "audioType",
+                  "equals": "audio"
+                }] 
+              }
             }
           ]
         }
@@ -279,34 +305,6 @@
         "name": "startSceneId",
         "type": "number",
         "default": 0
-      },
-      {
-        "name": "audio-type",
-        "type": "select",
-        "options": [
-          {
-            "label": "Audio",
-            "value": "audio"
-          },
-          {
-            "label": "Playlist",
-            "value": "playlist"
-          }
-        ],
-        "default": "audio"
-      },
-      {
-        "name": "audio",
-        "type": "audio",
-        "label": "Audio track",
-        "optional": true,
-        "widget": "showWhen",
-        "showWhen": {
-          "rules": [{
-            "field": "audio-type",
-            "equals": "audio"
-          }] 
-        }
       },
       {
         "name": "playlists",
@@ -325,21 +323,14 @@
             },
             {
               "label": "Audio tracks",
-              "name": "audio-tracks",
+              "name": "audioTracks",
               "type": "audio"
             },
             {
-              "name": "id",
-              "type": "text"
+              "name": "playlistId",
+              "type": "number"
             }            
           ]
-        },
-        "widget": "showWhen",
-        "showWhen": {
-          "rules": [{
-            "field": "audio-type",
-            "equals": "playlist"
-          }] 
         }
       }
     ]
