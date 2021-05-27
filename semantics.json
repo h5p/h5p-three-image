@@ -271,9 +271,10 @@
                           "equals": ["H5P.AdvancedText"]
                         }
                       ],
-                      "widget": "radioGroup"
+                      "widget": "imageRadioGroup"
                     },
                     "alignment": "horizontal",
+                    "fontFamily": "360-Image",
                     "options": [
                       {
                         "value": "text-icon",
