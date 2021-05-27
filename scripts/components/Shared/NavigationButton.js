@@ -50,7 +50,7 @@ export const getIconFromInteraction = (interaction, scenes) => {
     icon = Icons.AUDIO;
   }
   else if (machineName === 'H5P.AdvancedText') {
-    if(interaction.iconTypeTextBox && interaction.iconTypeTextBox == 'text-icon') {
+    if (interaction.iconTypeTextBox === 'text-icon') {
       icon = Icons.TEXT_BLOCK;
     } else {
       icon = Icons.INFO_MARK;
