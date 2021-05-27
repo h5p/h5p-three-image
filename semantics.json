@@ -257,6 +257,37 @@
                   {
                     "name": "interactionpos",
                     "type": "text"
+                  },
+                  {
+                    "name": "iconTypeTextBox",
+                    "type": "select",
+                    "label": "Button style",
+                    "description": "Decide how the icon should look.",
+                    "widget": "showWhen",
+                    "showWhen": {
+                      "rules": [
+                        {
+                          "field": "action",
+                          "equals": ["H5P.AdvancedText"]
+                        }
+                      ],
+                      "widget": "imageRadioGroup"
+                    },
+                    "alignment": "horizontal",
+                    "fontFamily": "360-Image",
+                    "options": [
+                      {
+                        "value": "text-icon",
+                        "label": "Text icon",
+                        "fontIcon": "e91f"
+                      },
+                      {
+                        "value": "info-icon",
+                        "label": "Info icon",
+                        "fontIcon": "e91a"
+                      }
+                    ],
+                    "default": "text-icon"
                   }
                 ]
               }

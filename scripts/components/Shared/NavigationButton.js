@@ -16,6 +16,7 @@ export const Icons = {
   INFO_MARK: 'h5p-info-mark-button h5p-interaction-button',
   LOCK: 'h5p-locked-button h5p-interaction-button',
   UNLOCK: 'h5p-unlocked-button h5p-interaction-button',
+  TEXT_BLOCK: 'h5p-text-block-button h5p-interaction-button',
 };
 
 const infoInteractions = [
@@ -49,7 +50,11 @@ export const getIconFromInteraction = (interaction, scenes) => {
     icon = Icons.AUDIO;
   }
   else if (machineName === 'H5P.AdvancedText') {
-    icon = Icons.INFO_MARK;
+    if (interaction.iconTypeTextBox === 'text-icon') {
+      icon = Icons.TEXT_BLOCK;
+    } else {
+      icon = Icons.INFO_MARK;
+    }
   }
   else if (machineName === 'H5P.Video') {
     icon = Icons.VIDEO;
