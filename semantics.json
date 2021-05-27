@@ -278,12 +278,12 @@
                     "options": [
                       {
                         "value": "text-icon",
-                        "label": "text",
+                        "label": "Text icon",
                         "fontIcon": "e91f"
                       },
                       {
                         "value": "info-icon",
-                        "label": "info",
+                        "label": "Info icon",
                         "fontIcon": "e91a"
                       }
                     ],
