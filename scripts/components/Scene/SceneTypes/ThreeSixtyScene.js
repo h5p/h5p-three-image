@@ -5,6 +5,7 @@ import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
 import loading from '../../../assets/loading.svg';
 import './ThreeSixtyScene.scss';
+import OpenContent from "../../Shared/OpenContent";
 
 export const sceneRenderingQualityMapping = {
   high: 128,
@@ -264,10 +265,9 @@ export default class ThreeSixtyScene extends React.Component {
    *
    * @param {Object} interaction
    * @param {number} index
-   * @return {NavigationButton}
+   * @return {JSX.Element}
    */
   createInteraction = (interaction, index) => {
-
     const className = ['three-sixty'];
     if (this.props.audioIsPlaying === 'interaction-' + this.props.sceneId + '-' + index) {
       className.push('active');
@@ -283,7 +283,45 @@ export default class ThreeSixtyScene extends React.Component {
     else {
       title = this.getInteractionTitle(interaction.action);
     }
+
     return (
+      interaction.label.showAsOpenSceneContent ?
+        <OpenContent
+          key={'interaction-' + this.props.sceneId + index}
+          onMount={ el => this.props.threeSixty.add(
+            el,
+            ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+            this.context.extras.isEditor
+          )}
+          onUnmount={ el => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
+          onUpdate={ el => H5P.ThreeSixty.setElementPosition(
+            this.props.threeSixty.find(el),
+            ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
+          )}
+          nextFocus={ this.props.nextFocus }
+          type={ 'interaction-' + index }
+          clickHandler={this.props.showInteraction.bind(this, index)}
+          doubleClickHandler={() => {
+            this.context.trigger('doubleClickedInteraction', index);
+          }}
+          onFocus={ () => {
+            this.handleInteractionFocus(interaction);
+          }}
+          onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
+          onBlur={this.props.onBlurInteraction}
+          isFocused={this.props.focusedInteraction === index}
+          sceneId = {this.props.sceneId}
+          interactionIndex = {index}
+        >
+          {
+            this.context.extras.isEditor &&
+            <ContextMenu
+              isGoToScene={isGoToSceneInteraction}
+              interactionIndex={index}
+            />
+          }
+        </OpenContent>
+        :
       <NavigationButton
         key={'interaction-' + this.props.sceneId + index}
         onMount={ el => this.props.threeSixty.add(
