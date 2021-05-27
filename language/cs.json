@@ -119,6 +119,18 @@
         {},
         {
           "label": "Zvuková stopa"
+        },
+        {
+          "label": "Button style",
+          "description": "Decide how the icon should look.",
+          "options": [
+            {
+              "label": "Text icon"
+            },
+            {
+              "label": "Info icon"
+            }
+          ]
         }
       ]
     },
