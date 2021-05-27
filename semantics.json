@@ -318,15 +318,21 @@
           "type": "group",
           "fields": [
             {
-              "label": "Playlist title",
+              "label": "Playlist Title",
               "name": "title",
               "type": "text",
+              "description": "Used to identify the playlist",
               "optional": false
             },
             {
-              "label": "Audio tracks",
+              "label": "Audio Tracks",
               "name": "audioTracks",
-              "type": "audio"
+              "type": "audio",
+              "description": "Add audio tracks to the playlist.",
+              "optional": true,
+              "widgetExtensions": [
+                "AudioRecorder"
+              ]
             },
             {
               "name": "playlistId",
