@@ -348,6 +348,10 @@
                   }
                 ] 
               }
+            },
+            {
+              "name": "playlist",
+              "type": "number"
             }
           ]
         }
