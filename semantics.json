@@ -251,7 +251,9 @@
                       "H5P.Audio 1.4",
                       "H5P.Video 1.5",
                       "H5P.Summary 1.10",
-                      "H5P.SingleChoiceSet 1.11"
+                      "H5P.SingleChoiceSet 1.11",
+                      "H5P.MultiChoice 1.14",
+                      "H5P.Blanks 1.12"
                     ]
                   },
                   {
