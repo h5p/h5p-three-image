@@ -1,3 +1,5 @@
+// @ts-check
+
 import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
@@ -287,10 +289,15 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
+
+  /**
+   * @param {number} widthX 
+   * @param {number} heightY 
+   */
   setHotspotValues(widthX, heightY) {
-    const scene = this.context.params.scenes.find(scene => {
-      return scene.sceneId === this.props.sceneId;
-    });
+    const scene = this.context.params.scenes.find(
+      (/** @type {Scene} */ scene) => scene.sceneId === this.props.sceneId,
+    );
     console.log(scene)
     const interaction = scene.interactions[this.props.interactionIndex];
     interaction.label.hotSpotSizeValues = widthX + "," + heightY;
@@ -362,7 +369,7 @@ export default class NavigationButton extends React.Component {
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
-        tabIndex={isWrapperTabbable ? '0' : undefined}
+        tabIndex={isWrapperTabbable ? 0 : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
         onBlur={this.onBlur.bind(this)}
@@ -371,7 +378,7 @@ export default class NavigationButton extends React.Component {
           this.props.showAsHotspot ?
             <HotspotNavButton
               reference={this.navButton}
-              ariaLabel={getLabelText(label, title)}
+              ariaLabel={getLabelText(label)}
               tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
               onClickEvent={this.onClick.bind(this)}
               onDoubleClickEvent={this.onDoubleClick.bind(this)}
@@ -388,9 +395,9 @@ export default class NavigationButton extends React.Component {
             :
             <button
               ref={this.navButton}
-              aria-label={getLabelText(label, title)}
+              aria-label={getLabelText(label)}
               className='nav-button'
-              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
+              tabIndex={isInnerButtonTabbable ? undefined : -1}
               onClick={this.onClick.bind(this)}
               onDoubleClick={this.onDoubleClick.bind(this)}
               onMouseDown={this.onMouseDown.bind(this)}

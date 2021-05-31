@@ -1,8 +1,11 @@
+// @ts-check
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction, getLabelFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
+// @ts-expect-error
 import loading from '../../../assets/loading.svg';
 import './ThreeSixtyScene.scss';
 import OpenContent from "../../Shared/OpenContent";
@@ -14,6 +17,28 @@ export const sceneRenderingQualityMapping = {
 };
 
 export default class ThreeSixtyScene extends React.Component {
+  /**
+   * @param {{
+   *  startBtnClicked: boolean;
+   *  sceneParams: Scene;
+   *  threeSixty: any;
+   *  addThreeSixty: (threeSixty: any) => void;
+   *  imageSrc: { path: string; };
+   *  audioIsPlaying: string;
+   *  sceneId: number;
+   *  onFocusedInteraction: () => void;
+   *  onBlurInteraction: () => void;
+   *  nextFocus: number;
+   *  focusedInteraction: number;
+   *  showInteraction: (interactionIndex: number) => void;
+   *  isHiddenBehindOverlay: boolean;
+   *  onSetCameraPos: (interactionPosition: string) => void;
+   *  isActive: boolean;
+   *  sceneIcons: { id: number; iconType: string; }[];
+   *  updateThreeSixty: boolean;
+   *  isEditingInteraction: boolean;
+   * }} props 
+   */
   constructor(props) {
     super(props);
 
@@ -55,7 +80,7 @@ export default class ThreeSixtyScene extends React.Component {
       pointerLockElement: element,
     });
 
-    this.pointerLockTimeout = setTimeout(() => {
+    this.pointerLockTimeout = window.setTimeout(() => {
       this.setState({
         hasPointerLock: true,
       });
@@ -263,7 +288,7 @@ export default class ThreeSixtyScene extends React.Component {
   /**
    * Creates a button for each interaction
    *
-   * @param {Object} interaction
+   * @param {Interaction} interaction
    * @param {number} index
    * @return {JSX.Element}
    */
@@ -284,20 +309,35 @@ export default class ThreeSixtyScene extends React.Component {
       title = this.getInteractionTitle(interaction.action);
     }
 
+    const onMount = (/** @type {HTMLElement} */ element) => { 
+      this.props.threeSixty.add(
+        element,
+        ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+        this.context.extras.isEditor
+      );
+    }
+
+    const onUnmount = (/** @type {HTMLElement} */ element) => {
+      const threeElement = this.props.threeSixty.find(element);
+      this.props.threeSixty.remove(this.props.threeSixty.find(element));
+    }
+
+    const onUpdate = (/** @type {HTMLElement} */ element) => {
+      const threeElement = this.props.threeSixty.find(element);
+      
+      H5P.ThreeSixty.setElementPosition(
+        threeElement,
+        ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
+      );
+    }
+    
     return (
       interaction.label.showAsOpenSceneContent ?
         <OpenContent
           key={'interaction-' + this.props.sceneId + index}
-          onMount={ el => this.props.threeSixty.add(
-            el,
-            ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
-            this.context.extras.isEditor
-          )}
-          onUnmount={ el => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
-          onUpdate={ el => H5P.ThreeSixty.setElementPosition(
-            this.props.threeSixty.find(el),
-            ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
-          )}
+          onMount={onMount}
+          onUnmount={onUnmount}
+          onUpdate={onUpdate}
           nextFocus={ this.props.nextFocus }
           type={ 'interaction-' + index }
           clickHandler={this.props.showInteraction.bind(this, index)}
@@ -324,16 +364,9 @@ export default class ThreeSixtyScene extends React.Component {
         :
       <NavigationButton
         key={'interaction-' + this.props.sceneId + index}
-        onMount={ el => this.props.threeSixty.add(
-          el,
-          ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
-          this.context.extras.isEditor
-        )}
-        onUnmount={ el => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
-        onUpdate={ el => H5P.ThreeSixty.setElementPosition(
-          this.props.threeSixty.find(el),
-          ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
-        )}
+        onMount={onMount}
+        onUnmount={onUnmount}
+        onUpdate={onUpdate}
         title={title}
         label={getLabelFromInteraction(interaction)}
         buttonClasses={ className }
@@ -377,10 +410,10 @@ export default class ThreeSixtyScene extends React.Component {
    * @return {Object} yaw, pitch
    */
   static getPositionFromString(position) {
-    position = position.split(',');
+    const [yaw, pitch] = position.split(',');
     return {
-      yaw: position[0],
-      pitch: position[1]
+      yaw,
+      pitch,
     };
   }
 
@@ -451,6 +484,7 @@ export default class ThreeSixtyScene extends React.Component {
     }
     else {
       document.exitPointerLock = document.exitPointerLock
+        // @ts-expect-error
         || document.mozExitPointerLock;
       if (document.exitPointerLock) {
         if (this.state.pointerLockElement) {
@@ -485,6 +519,7 @@ export default class ThreeSixtyScene extends React.Component {
 
       // Check if the scene that interactions point to has changed icon type
       // This is only relevant when changing the icon using the H5P editor
+      // @ts-ignore
       if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
         shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
           const library = H5P.libraryFromString(interaction.action.library);

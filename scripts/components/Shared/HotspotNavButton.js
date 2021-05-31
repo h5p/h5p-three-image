@@ -18,17 +18,15 @@ export default class HotspotNavButton extends React.Component {
   }
 
   componentDidMount() {
-    const hotspotValues = this.props.getHotspotValues();
+    const [sizeWidth, sizeHeight] = this.props.getHotspotValues();
 
     this.setState({
-      sizeWidth : hotspotValues[0],
-      sizeHeight : hotspotValues[1]
+      sizeWidth,
+      sizeHeight,
     })
   }
 
   toggleDrag = (e) => {
-
-
     const dragBool = !this.state.canDrag
     this.setState({
       canDrag: dragBool
