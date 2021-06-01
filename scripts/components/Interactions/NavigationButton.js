@@ -132,7 +132,6 @@ export default class NavigationButton extends React.Component {
    */
   constructor(props) {
     super(props);
-    // this.props = {...this.props, ...props};
 
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
