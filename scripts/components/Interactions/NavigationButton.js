@@ -1,3 +1,5 @@
+// @ts-check
+
 import React from 'react';
 import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
@@ -79,7 +81,55 @@ export const getLabelFromInteraction = (interaction) => {
   return {...interaction.label, labelText: interaction.labelText};
 };
 
+
+/**
+ * @typedef {{
+ *  sceneId: number;
+ *  interactionIndex: number;
+ *  isFocused: boolean;
+ *  buttonClasses: Array<string>;
+ *  icon: string;
+ *  showAsHotspot: boolean;
+ *  isHiddenBehindOverlay: boolean;
+ *  title: string;
+ *  label: string;
+ *  staticScene: boolean;
+ *  leftPosition: number;
+ *  topPosition: number;
+ *  type: string;
+ *  forceClickHandler: boolean;
+ *  nextFocus: string;
+ *  showHotspotOnHover: boolean;
+ *  isHotspotTabbable: boolean;
+ *  wrapperHeight: number;
+ *  rendered: boolean;
+ *  is3d: boolean;
+ *  clickHandler: () => void;
+ *  doubleClickHandler: () => void;
+ *  mouseDownHandler: (event: MouseEvent) => void;
+ *  onFocus: () => void;
+ *  onBlur: () => void;
+ *  onFocusedInteraction: () => void;
+ *  onMount: (wrapper: HTMLElement) => void;
+ *  onUnmount: (wrapper: HTMLElement) => void;
+ *  onUpdate: (wrapper: HTMLElement) => void;
+ * }} Props
+ */
+
+/**
+ * @typedef {{
+ *  isFocused: boolean;
+ *  expandButtonFocused: boolean;
+ *  innerButtonFocused: boolean;
+ *  isMouseOver: boolean;
+ * }} State
+ */
+
+
 export default class NavigationButton extends React.Component {
+  /**
+   * @param {Props} props 
+   */
   constructor(props) {
     super(props);
 
@@ -154,17 +204,20 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  /**
+   * @param {Props} prevProps 
+   */
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButtonWrapper.current.focus({
+      this.navButtonWrapper.current && this.navButtonWrapper.current.focus({
         preventScroll: true
       });
     }
 
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
-        this.navButtonWrapper.current.focus({
+        this.navButtonWrapper.current && this.navButtonWrapper.current.focus({
           preventScroll: true
         });
       }, 0);
@@ -291,11 +344,15 @@ export default class NavigationButton extends React.Component {
       this.props.onFocus();
     }
   }
+
+  /**
+   * @param {number} widthX 
+   * @param {number} heightY 
+   */
   setHotspotValues(widthX, heightY) {
-    const scene = this.context.params.scenes.find(scene => {
-      return scene.sceneId === this.props.sceneId;
-    });
-    console.log(scene)
+    const scene = this.context.params.scenes.find(
+      (/** @type {Scene} */ scene) => scene.sceneId === this.props.sceneId,
+    );
     const interaction = scene.interactions[this.props.interactionIndex];
     interaction.label.hotSpotSizeValues = widthX + "," + heightY;
   }
@@ -321,9 +378,11 @@ export default class NavigationButton extends React.Component {
     if (this.props.icon) {
       wrapperClasses.push(this.props.icon);
     }
-    if(this.props.showAsHotspot) {
+
+    if (this.props.is3d) {
       wrapperClasses = wrapperClasses.concat("nav-btn-hotspot render-in-3d");
     }
+
     if (this.state.isMouseOver) {
       wrapperClasses.push('hover');
     }
@@ -366,7 +425,7 @@ export default class NavigationButton extends React.Component {
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
         style={this.getStyle()}
-        tabIndex={isWrapperTabbable ? '0' : undefined}
+        tabIndex={isWrapperTabbable ? 0 : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
         onBlur={this.onBlur.bind(this)}
@@ -375,7 +434,7 @@ export default class NavigationButton extends React.Component {
           this.props.showAsHotspot ?
             <HotspotNavButton
               reference={this.navButton}
-              ariaLabel={getLabelText(label, title)}
+              ariaLabel={getLabelText(label)}
               tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
               onClickEvent={this.onClick.bind(this)}
               onDoubleClickEvent={this.onDoubleClick.bind(this)}
@@ -392,9 +451,9 @@ export default class NavigationButton extends React.Component {
             :
             <button
               ref={this.navButton}
-              aria-label={getLabelText(label, title)}
+              aria-label={getLabelText(label)}
               className='nav-button'
-              tabIndex={isInnerButtonTabbable ? undefined : '-1'}
+              tabIndex={isInnerButtonTabbable ? undefined : -1}
               onClick={this.onClick.bind(this)}
               onDoubleClick={this.onDoubleClick.bind(this)}
               onMouseDown={this.onMouseDown.bind(this)}

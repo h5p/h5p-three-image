@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaticScene.scss';
-import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons} from "../../Shared/NavigationButton";
+import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons} from "../../Interactions/NavigationButton";
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
