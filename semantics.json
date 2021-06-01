@@ -28,6 +28,10 @@
                   "label": "360 image"
                 },
                 {
+                  "value": "panorama",
+                  "label": "panorama image"
+                },
+                {
                   "value": "static",
                   "label": "Static image"
                 }
