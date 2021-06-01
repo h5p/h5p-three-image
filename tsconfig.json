@@ -1,5 +1,5 @@
 {
-  "include": ["index.d.ts", "scripts/*"],
+  "include": ["./index.d.ts", "./scripts/*"],
   "exclude": [
     "node_modules"
   ],
