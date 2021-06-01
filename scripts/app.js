@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import Main from "./components/Main";
 import {H5PContext} from './context/H5PContext';
 import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeSixtyScene";
+import {createUUID} from "./utils/utils";
 
 // Load library
 H5P = H5P || {};
@@ -21,6 +22,8 @@ H5P.ThreeImage = (function () {
     // Initialize event inheritance
     H5P.EventDispatcher.call(self);
 
+    params.threeImage.scenes = Wrapper.addUniqueIdsToInteractions(params.threeImage.scenes);
+    
     let wrapper;
     this.behavior = {
       label: {
@@ -223,6 +226,26 @@ H5P.ThreeImage = (function () {
       this.sceneRenderingQuality = quality;
     };
   }
+
+  /**
+  * Add unique ids to interactions.
+  * The ids are used as key for mapping React components.
+  * TODO: Create the ids in editor-time and store them in semantics
+  *
+  * @param {Array<Scene>} scenes 
+  * @returns {Array<Scene>}
+  */
+  Wrapper.addUniqueIdsToInteractions = scenes =>
+   scenes.map(scene => scene.interactions 
+     ? ({
+         ...scene,
+         interactions: scene.interactions.map(
+           interaction => ({...interaction, id: createUUID()}),
+         ),
+       }) 
+     : scene
+   );
+ 
 
   return Wrapper;
 })();
