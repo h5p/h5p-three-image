@@ -23,6 +23,10 @@ const infoInteractions = [
   "H5P.AdvancedText",
   "H5P.Image",
   "H5P.Video",
+  "H5P.Summary",
+  "H5P.SingleChoiceSet",
+  "H5P.MultiChoice",
+  "H5P.Blanks"
 ];
 
 const isInfoInteraction = (machineName) => {
