@@ -151,7 +151,14 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  onFocus() {
+  /**
+   * @param {FocusEvent} event 
+   */
+  onFocus(event) {
+    // By preventing default,
+    // ThreeSixty's focus listener will not trigger camera movement
+    event.preventDefault();
+
     // Already focused
     if (this.state.isFocused) {
       return;
@@ -160,17 +167,20 @@ export default class NavigationButton extends React.Component {
     this.setState({
       isFocused: true,
     });
+
     if (this.props.onFocusedInteraction) {
       this.props.onFocusedInteraction();
     }
-
   }
 
-  onBlur(e) {
+  /**
+   * @param {FocusEvent} event 
+   */
+  onBlur(event) {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+    if (navButtonWrapper && navButtonWrapper.contains(event.relatedTarget) && (!this.expandButton || event.relatedTarget !== this.expandButton.current)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
       this.navButtonWrapper.current.focus({
         preventScroll: true
@@ -178,14 +188,12 @@ export default class NavigationButton extends React.Component {
       return;
     }
 
-
     this.setState({
       isFocused: false,
     });
     if (this.props.onBlur) {
       this.props.onBlur();
     }
-
   }
 
   componentDidMount() {
