@@ -155,10 +155,6 @@ export default class NavigationButton extends React.Component {
    * @param {FocusEvent} event 
    */
   onFocus(event) {
-    // By preventing default,
-    // ThreeSixty's focus listener will not trigger camera movement
-    event.preventDefault();
-
     // Already focused
     if (this.state.isFocused) {
       return;
