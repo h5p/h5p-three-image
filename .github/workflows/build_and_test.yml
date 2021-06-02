@@ -87,7 +87,15 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v${{ fromJson(steps.set_library.output.library).majorVersion }}.${{ fromJson(steps.set_library.output.library).minorVersion }}.${{ fromJson(steps.set_library.output.library).patchVersion }}"
+          automatic_release_tag: |
+            ${{ 
+              format(
+                "v{0}.{1}.{2}",
+                fromJson(steps.set_library.output.library).majorVersion,
+                fromJson(steps.set_library.output.library).minorVersion,
+                fromJson(steps.set_library.output.library).patchVersion
+              )
+            }}
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
