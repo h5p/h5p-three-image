@@ -77,8 +77,7 @@ jobs:
         with:
           name: h5p-three-image.h5p
           path: dist/h5p-three-image.h5p      
-      - name: Set library version var
-        id: set_library
+      - id: set_library
         run: |
           ls
           JSON=$(cat ./h5p-three-image/library.json)
