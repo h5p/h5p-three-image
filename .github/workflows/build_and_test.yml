@@ -82,6 +82,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest_release"
+          title: "Release"
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
