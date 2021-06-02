@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import Main from "./components/Main";
 import {H5PContext} from './context/H5PContext';
 import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeSixtyScene";
-import {createUUID} from "./utils/utils";
 
 // Load library
 H5P = H5P || {};
@@ -240,7 +239,7 @@ H5P.ThreeImage = (function () {
      ? ({
          ...scene,
          interactions: scene.interactions.map(
-           interaction => ({...interaction, id: createUUID()}),
+           interaction => ({...interaction, id: H5P.createUUID()}),
          ),
        }) 
      : scene
