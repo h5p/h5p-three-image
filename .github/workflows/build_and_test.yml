@@ -77,10 +77,10 @@ jobs:
         with:
           name: h5p-three-image.h5p
           path: dist/h5p-three-image.h5p
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
-          if: ${{ github.ref == 'refs/heads/master' }}
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          prerelease: false
           files: |
             dist/h5p-three-image.h5p
