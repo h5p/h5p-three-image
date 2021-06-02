@@ -91,9 +91,9 @@ jobs:
             "${{ 
               format(
                 'v{0}.{1}.{2}',
-                fromJson(steps.set_library.output.library).majorVersion,
-                fromJson(steps.set_library.output.library).minorVersion,
-                fromJson(steps.set_library.output.library).patchVersion
+                fromJson(steps.set_library.outputs.library).majorVersion,
+                fromJson(steps.set_library.outputs.library).minorVersion,
+                fromJson(steps.set_library.outputs.library).patchVersion
               )
             }}"
           prerelease: false
