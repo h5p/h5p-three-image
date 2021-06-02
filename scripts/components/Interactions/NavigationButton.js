@@ -151,7 +151,10 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  onFocus() {
+  /**
+   * @param {FocusEvent} event 
+   */
+  onFocus(event) {
     // Already focused
     if (this.state.isFocused) {
       return;
@@ -160,24 +163,24 @@ export default class NavigationButton extends React.Component {
     this.setState({
       isFocused: true,
     });
+
     if (this.props.onFocusedInteraction) {
       this.props.onFocusedInteraction();
     }
-
   }
 
-  onBlur(e) {
+  /**
+   * @param {FocusEvent} event 
+   */
+  onBlur(event) {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
 
-    if (navButtonWrapper && navButtonWrapper.contains(e.relatedTarget) && (!this.expandButton || e.relatedTarget !== this.expandButton.current)) {
+    if (navButtonWrapper && navButtonWrapper.contains(event.relatedTarget) && (!this.expandButton || event.relatedTarget !== this.expandButton.current)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
-      this.navButtonWrapper.current.focus({
-        preventScroll: true
-      });
+      this.setFocus();
       return;
     }
-
 
     this.setState({
       isFocused: false,
@@ -185,7 +188,6 @@ export default class NavigationButton extends React.Component {
     if (this.props.onBlur) {
       this.props.onBlur();
     }
-
   }
 
   componentDidMount() {
@@ -197,9 +199,7 @@ export default class NavigationButton extends React.Component {
     this.addFocusListener();
     if (this.state.isFocused) {
       setTimeout(() => {
-        this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
+        this.setFocus();
       }, 0);
     }
   }
@@ -210,16 +210,13 @@ export default class NavigationButton extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButtonWrapper.current && this.navButtonWrapper.current.focus({
-        preventScroll: true
-      });
+      this.setFocus();
     }
 
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
-        this.navButtonWrapper.current && this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
+        this.context.threeSixty.preventCameraMovement = true;
+        this.setFocus(true);
       }, 0);
     }
 
@@ -295,7 +292,10 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  setFocus() {
+  setFocus(preventCameraMovement = false) {
+    if(preventCameraMovement) {
+      this.context.threeSixty.setPreventCameraMovement(true);
+    }
     const isFocusable = this.context.extras.isEditor
       && this.navButtonWrapper
       && this.navButtonWrapper.current;
@@ -309,9 +309,7 @@ export default class NavigationButton extends React.Component {
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
       if (this.navButtonWrapper && this.navButtonWrapper.current && this.navButtonWrapper === e.target) {
-        this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
+        this.setFocus();
       }
       return;
     }
