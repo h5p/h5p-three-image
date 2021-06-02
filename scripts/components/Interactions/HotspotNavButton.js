@@ -26,19 +26,20 @@ export default class HotspotNavButton extends React.Component {
     })
   }
 
-  toggleDrag = (e) => {
-    const dragBool = !this.state.canDrag
+  toggleDrag = () => {
+    const canDrag = this.state.canDrag
     this.setState({
-      canDrag: dragBool
+      canDrag: !canDrag
     })
-    if (!this.props.staticScene){
+
+    if (!this.props.staticScene) {
       //If we cant drag anymore, we start the rendering of the threesixty scene,
       // we also set the camera position that is stored wen we start the hotspot scaling
-      if(!this.state.canDrag) {
+      if (canDrag) { 
         this.context.threeSixty.startRendering()
         this.context.threeSixty.setCameraPosition(this.state.camPosYaw, this.state.camPosPitch)
-      } else {
 
+      } else {
         //We store the current position, because we are technically still dragging the background around here
         this.setState({
           camPosYaw : this.context.threeSixty.getCurrentPosition().yaw,
