@@ -77,3 +77,10 @@ jobs:
         with:
           name: h5p-three-image.h5p
           path: dist/h5p-three-image.h5p
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          if: ${{ github.ref == 'refs/heads/master' }}
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          files: |
+            dist/h5p-three-image.h5p
