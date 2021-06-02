@@ -210,13 +210,13 @@ export default class NavigationButton extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButtonWrapper.current && this.setFocus();
+      this.setFocus();
     }
 
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
         this.context.threeSixty.preventCameraMovement = true;
-        this.navButtonWrapper.current && this.setFocus(true);
+        this.setFocus(true);
       }, 0);
     }
 
