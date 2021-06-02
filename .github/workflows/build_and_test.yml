@@ -76,13 +76,19 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: h5p-three-image.h5p
-          path: dist/h5p-three-image.h5p
+          path: dist/h5p-three-image.h5p      
+      - name: Set library version var
+        id: set_library
+        run: |
+          JSON=$(cat ./library.json)
+          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.libraryJson).version}}"
       - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          title: "Release"
+          automatic_release_tag: "v${{ fromJson(steps.set_library.output).majorVersion }}.${{ fromJson(steps.set_library.output).minorVersion }}.${{ fromJson(steps.set_library.output).patchVersion }}"
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
