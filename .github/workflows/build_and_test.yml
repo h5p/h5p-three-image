@@ -90,7 +90,7 @@ jobs:
           automatic_release_tag: |
             "${{ 
               format(
-                "v{0}.{1}.{2}",
+                'v{0}.{1}.{2}',
                 fromJson(steps.set_library.output.library).majorVersion,
                 fromJson(steps.set_library.output.library).minorVersion,
                 fromJson(steps.set_library.output.library).patchVersion
