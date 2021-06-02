@@ -300,7 +300,9 @@ export default class NavigationButton extends React.Component {
       && this.navButtonWrapper
       && this.navButtonWrapper.current;
     if (isFocusable) {
-      this.navButtonWrapper.current.focus({preventScroll: true});
+      this.navButtonWrapper.current.focus({
+        preventScroll: true
+      });
     }
   }
 
