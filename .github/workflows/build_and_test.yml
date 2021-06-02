@@ -82,12 +82,12 @@ jobs:
         run: |
           ls
           JSON=$(cat ./h5p-three-image/library.json)
-          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+          echo "::set-output name=library::${JSON//'%'/'%25'}"
       - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v${{ fromJson(steps.set_library.output).majorVersion }}.${{ fromJson(steps.set_library.output).minorVersion }}.${{ fromJson(steps.set_library.output).patchVersion }}"
+          automatic_release_tag: "v${{ fromJson(steps.set_library.output.library).majorVersion }}.${{ fromJson(steps.set_library.output.library).minorVersion }}.${{ fromJson(steps.set_library.output.library).patchVersion }}"
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
