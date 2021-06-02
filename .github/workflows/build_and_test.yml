@@ -81,6 +81,7 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest_release"
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
