@@ -81,7 +81,7 @@ jobs:
         id: set_library
         run: |
           ls
-          JSON=$(cat ./library.json)
+          JSON=$(cat ./h5p-three-image/library.json)
           echo "::set-output name=matrix::${JSON//'%'/'%25'}"
       - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
