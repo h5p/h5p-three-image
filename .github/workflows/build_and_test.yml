@@ -84,4 +84,4 @@ jobs:
           prerelease: true
           title: "Release"
           files: |
-            *.zip
+            dist/h5p-three-image.h5p
