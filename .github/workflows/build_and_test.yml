@@ -77,11 +77,16 @@ jobs:
         with:
           name: h5p-three-image.h5p
           path: dist/h5p-three-image.h5p      
-      - id: set_library
+      - name: Load library.json
+        id: set_library
         run: |
           ls
           JSON=$(cat ./h5p-three-image/library.json)
           echo "::set-output name=library::${JSON//'%'/'%25'}"
+      - name: Debug
+        run: |
+          echo "${{ steps.set_library.outputs }}"
+
       - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
