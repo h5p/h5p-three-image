@@ -82,7 +82,10 @@ jobs:
         run: |
           ls
           JSON=$(cat ./h5p-three-image/library.json)
-          echo "::set-output name=library::${JSON//'%'/'%25'}"
+          JSON="${JSON//'%'/%25}"
+          JSON="${JSON//$'\n'/%0A}"
+          JSON="${JSON//$'\r'/%0D}"
+          echo "::set-output name=library::${JSON}"
       - name: Debug
         run: |
           echo "${{ steps.set_library.outputs.library }}"
