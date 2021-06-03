@@ -8,7 +8,18 @@ import { H5PContext } from "../../context/H5PContext";
  * @typedef {{
  *  sceneId: number;
  *  interactionIndex: number;
- *  handleFocus: () => void;
+ *  topPosition: number;
+ *  leftPosition: number;
+ *  staticScene: boolean;
+ *  forceClickHandler: boolean;
+ *  ariaLabel: string;
+ *  clickHandler: () => void;
+ *  doubleClickHandler: () => void;
+ *  mouseDownHandler: (event: MouseEvent) => void;
+ *  onFocus: () => void;
+ *  onMount: (openContentWrapper: HTMLElement) => void;
+ *  onUnmount: (openContentWrapper: HTMLElement) => void;
+ *  onUpdate: (openContentWrapper: HTMLElement) => void;
  * }} Props
  */
 
@@ -44,6 +55,24 @@ export default class OpenContent extends React.Component {
     if (this.props.onMount) {
       // Let parent know this element should be added to the THREE world.
       this.props.onMount(this.openContentWrapper.current);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.onUnmount) {
+      const el = this.openContentWrapper.current;
+      // We want this to run after the component is removed
+      setTimeout(() => {
+        // Let parent know this element should be remove from the THREE world.
+        this.props.onUnmount(el);
+      }, 0);
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.onUpdate) {
+      // Let parent know this element is updated. (Position might have changed.)
+      this.props.onUpdate(this.openContentWrapper.current);
     }
   }
 
@@ -302,7 +331,6 @@ export default class OpenContent extends React.Component {
               : "drag drag--vertical"
           }
           ref={hotspotBtnRef}
-          tabIndex={this.props.tabIndexValue}
           aria-label={
             innerProps.horizontalDrag
               ? this.context.l10n.hotspotDragHorizAlt
@@ -330,7 +358,6 @@ export default class OpenContent extends React.Component {
             width: this.state.sizeWidth + "px",
             height: this.state.sizeHeight + "px",
           }}
-          tabIndex={this.props.tabIndexValue}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
           onMouseUp={this.setFocus.bind(this)}
