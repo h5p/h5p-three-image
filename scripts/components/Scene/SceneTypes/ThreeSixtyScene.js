@@ -78,7 +78,7 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     // Already queued
-    if (this.pointerLockTimeout && this.pointerLockTimeout.current) {
+    if (this.pointerLockTimeout) {
       return;
     }
 
@@ -319,6 +319,8 @@ export default class ThreeSixtyScene extends React.Component {
     /** @type {[HTMLElement, HTMLElement]} */
     const [rendererElement2d, rendererElement3d] = threeSixty.getRenderers();
 
+    console.log({components2d, components3d})
+    
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         { components2d }
@@ -391,11 +393,24 @@ export default class ThreeSixtyScene extends React.Component {
       interaction.label.showAsOpenSceneContent ?
         <OpenContent
           key={key}
+          mouseDownHandler={null}
+          staticScene={false}
+          forceClickHandler={false}
           sceneId={this.props.sceneId}
+          leftPosition={null}
+          topPosition={null}
           interactionIndex={index}
           onMount={onMount}
           onUnmount={onUnmount}
           onUpdate={onUpdate}
+          clickHandler={this.props.showInteraction.bind(this, index)}
+          doubleClickHandler={() => {
+            this.context.trigger('doubleClickedInteraction', index);
+          }}
+          onFocus={ () => {
+            this.handleInteractionFocus(interaction);
+          }}
+          ariaLabel={null}
         >
           {
             this.context.extras.isEditor &&
@@ -406,42 +421,42 @@ export default class ThreeSixtyScene extends React.Component {
           }
         </OpenContent>
         :
-      <NavigationButton
-        key={key}
-        staticScene={false}
-        leftPosition={null}
-        topPosition={null}
-        forceClickHandler={false}
-        wrapperHeight={null}
-        mouseDownHandler={null}
-        onMount={onMount}
-        onUnmount={onUnmount}
-        onUpdate={onUpdate}
-        title={title}
-        label={getLabelFromInteraction(interaction)}
-        buttonClasses={ className }
-        icon={getIconFromInteraction(interaction, this.context.params.scenes)}
-        isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-        nextFocus={ this.props.nextFocus }
-        type={ 'interaction-' + index }
-        clickHandler={this.props.showInteraction.bind(this, index)}
-        doubleClickHandler={() => {
-          this.context.trigger('doubleClickedInteraction', index);
-        }}
-        onFocus={ () => {
-          this.handleInteractionFocus(interaction);
-        }}
-        onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
-        onBlur={this.props.onBlurInteraction}
-        isFocused={this.props.focusedInteraction === index}
-        rendered={this.state.isUpdated}
-        showAsHotspot={interaction.label.showAsHotspot}
-        showHotspotOnHover={interaction.label.showHotspotOnHover}
-        isHotspotTabbable={interaction.label.isHotspotTabbable}
-        sceneId = {this.props.sceneId}
-        interactionIndex = {index}
-        is3d={is3d}
-      >
+        <NavigationButton
+          key={key}
+          staticScene={false}
+          leftPosition={null}
+          topPosition={null}
+          forceClickHandler={false}
+          wrapperHeight={null}
+          mouseDownHandler={null}
+          onMount={onMount}
+          onUnmount={onUnmount}
+          onUpdate={onUpdate}
+          title={title}
+          label={getLabelFromInteraction(interaction)}
+          buttonClasses={ className }
+          icon={getIconFromInteraction(interaction, this.context.params.scenes)}
+          isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+          nextFocus={ this.props.nextFocus }
+          type={ 'interaction-' + index }
+          clickHandler={this.props.showInteraction.bind(this, index)}
+          doubleClickHandler={() => {
+            this.context.trigger('doubleClickedInteraction', index);
+          }}
+          onFocus={ () => {
+            this.handleInteractionFocus(interaction);
+          }}
+          onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
+          onBlur={this.props.onBlurInteraction}
+          isFocused={this.props.focusedInteraction === index}
+          rendered={this.state.isUpdated}
+          showAsHotspot={interaction.label.showAsHotspot}
+          showHotspotOnHover={interaction.label.showHotspotOnHover}
+          isHotspotTabbable={interaction.label.isHotspotTabbable}
+          sceneId = {this.props.sceneId}
+          interactionIndex = {index}
+          is3d={is3d}
+        >
         {
           this.context.extras.isEditor &&
           <ContextMenu
@@ -576,6 +591,7 @@ export default class ThreeSixtyScene extends React.Component {
           || this.props.isEditingInteraction;
 
       if (shouldUpdateInteractionHotspots) {
+        console.log({interactions: this.props.sceneParams.interactions})
         this.addInteractionHotspots(this.props.threeSixty, this.props.sceneParams.interactions);
       }      
       // Check if the scene that interactions point to has changed icon type
@@ -611,7 +627,7 @@ export default class ThreeSixtyScene extends React.Component {
     if (!this.props.isActive) {
       return null;
     }
-
+    
     return (
       <div className='three-sixty-scene-wrapper'>
         <div
