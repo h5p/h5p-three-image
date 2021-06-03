@@ -86,10 +86,6 @@ jobs:
           JSON="${JSON//$'\n'/%0A}"
           JSON="${JSON//$'\r'/%0D}"
           echo "::set-output name=library::${JSON}"
-      - name: Debug
-        run: |
-          echo "${{ steps.set_library.outputs.library }}"
-
       - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
