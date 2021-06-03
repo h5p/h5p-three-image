@@ -319,8 +319,6 @@ export default class ThreeSixtyScene extends React.Component {
     /** @type {[HTMLElement, HTMLElement]} */
     const [rendererElement2d, rendererElement3d] = threeSixty.getRenderers();
 
-    console.log({components2d, components3d})
-    
     ReactDOM.render(
       <H5PContext.Provider value={this.context}>
         { components2d }
@@ -591,7 +589,6 @@ export default class ThreeSixtyScene extends React.Component {
           || this.props.isEditingInteraction;
 
       if (shouldUpdateInteractionHotspots) {
-        console.log({interactions: this.props.sceneParams.interactions})
         this.addInteractionHotspots(this.props.threeSixty, this.props.sceneParams.interactions);
       }      
       // Check if the scene that interactions point to has changed icon type
