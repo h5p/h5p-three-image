@@ -91,14 +91,14 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: |
-            "${{ 
+            ${{ 
               format(
                 'v{0}.{1}.{2}',
                 fromJson(steps.set_library.outputs.library).majorVersion,
                 fromJson(steps.set_library.outputs.library).minorVersion,
                 fromJson(steps.set_library.outputs.library).patchVersion
               )
-            }}"
+            }}
           prerelease: false
           files: |
             dist/h5p-three-image.h5p
