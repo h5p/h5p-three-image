@@ -364,6 +364,8 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     const onMount = (/** @type {HTMLElement} */ element) => { 
+      element.dataset.interactionId = interaction.id;
+
       this.props.threeSixty.add(
         element,
         ThreeSixtyScene.getPositionFromString(interaction.interactionpos),

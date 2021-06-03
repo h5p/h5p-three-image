@@ -18,7 +18,7 @@ declare type Interaction = {
     showHotspotOnHover: boolean;
     showLabel: string;
   }
-  id? : string;
+  id: string;
 };
 
 declare type Action = {
