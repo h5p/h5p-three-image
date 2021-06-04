@@ -4,6 +4,7 @@ import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
+import OpenContent from "../../Interactions/OpenContent";
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -418,7 +419,40 @@ export default class StaticScene extends React.Component {
                 title = this.getInteractionTitle(interaction.action);
               }
 
+              const key = interaction.id || `interaction-${this.props.sceneId}${index}`
+
               return (
+                interaction.label.showAsOpenSceneContent ?
+                <OpenContent
+                  key={key}
+                  staticScene={false}
+                  sceneId={this.props.sceneId}
+                  leftPosition={null}
+                  topPosition={null}
+                  interactionIndex={index}
+                  mouseDownHandler={this.startDragging.bind(this, index)}
+                  // onMount={onMount}
+                  // onUnmount={onUnmount}
+                  // onUpdate={onUpdate}
+                  doubleClickHandler={() => {
+                    this.context.trigger('doubleClickedInteraction', index);
+                  }}
+                  onFocus={ () => {
+                    this.handleInteractionFocus(interaction);
+                  }}
+                  ariaLabel={null}
+                  isFocused={this.props.focusedInteraction === index}
+                  onBlur={this.props.onBlurInteraction}
+                >
+                  {
+                    this.context.extras.isEditor &&
+                    <ContextMenu
+                      isGoToScene={isGoToSceneInteraction}
+                      interactionIndex={index}
+                    />
+                  }
+                </OpenContent>
+                :
                 <NavigationButton
                   key={index}
                   title={title}
