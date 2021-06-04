@@ -11,9 +11,7 @@ import { H5PContext } from "../../context/H5PContext";
  *  topPosition: number;
  *  leftPosition: number;
  *  staticScene: boolean;
- *  forceClickHandler: boolean;
  *  ariaLabel: string;
- *  clickHandler: () => void;
  *  doubleClickHandler: () => void;
  *  mouseDownHandler: (event: MouseEvent) => void;
  *  onFocus: () => void;
@@ -21,7 +19,6 @@ import { H5PContext } from "../../context/H5PContext";
  *  onUnmount: (openContentWrapper: HTMLElement) => void;
  *  onUpdate: (openContentWrapper: HTMLElement) => void;
  *  isFocused: boolean;
- *  nextFocus: string;
  *  onBlur: () => void;
  * }} Props
  */
