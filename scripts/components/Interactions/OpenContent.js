@@ -271,12 +271,6 @@ export default class OpenContent extends React.Component {
 
     if (hasClickHandler) {
       this.props.clickHandler();
-      
-
-      // Reset button focus state when changing scenes or opening content
-      // this.setState({
-      //   innerButtonFocused: false
-      // });
     }
   }
 
@@ -387,6 +381,7 @@ export default class OpenContent extends React.Component {
               ? "drag drag--horizontal"
               : "drag drag--vertical"
           }
+          tabIndex={-1}
           ref={hotspotBtnRef}
           aria-label={
             innerProps.horizontalDrag
