@@ -339,7 +339,7 @@ export default class OpenContent extends React.Component {
     {
       wrapperClasses.push("active-element");
     }
-    
+
     const DragButton = (innerProps) => {
       const hotspotBtnRef = useRef(null);
 
@@ -397,7 +397,6 @@ export default class OpenContent extends React.Component {
         style={this.getStyle()}
         tabIndex={0}
         onFocus={this.handleFocus}
-        onClick={this.onClick.bind(this)}
         onBlur={this.onBlur.bind(this)}
       >
         <div 
