@@ -20,6 +20,9 @@ import { H5PContext } from "../../context/H5PContext";
  *  onMount: (openContentWrapper: HTMLElement) => void;
  *  onUnmount: (openContentWrapper: HTMLElement) => void;
  *  onUpdate: (openContentWrapper: HTMLElement) => void;
+ *  isFocused: boolean;
+ *  nextFocus: string;
+ *  onBlur: () => void;
  * }} Props
  */
 
@@ -30,6 +33,9 @@ export default class OpenContent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+
     this.state = {
       anchorDrag: false,
       canDrag: false,
@@ -39,10 +45,56 @@ export default class OpenContent extends React.Component {
       startMidPoint: 0,
       sizeWidth: 0,
       sizeHeight: 0,
+      isFocused: this.props.isFocused,
     };
 
     this.openContent = React.createRef();
     this.openContentWrapper = React.createRef();
+  }
+
+  addFocusListener() {
+    if (this.openContentWrapper) {
+      this.openContentWrapper.current.addEventListener('focus', this.onFocus);
+    }
+  }
+
+  /**
+   * @param {FocusEvent} event 
+   */
+   onFocus(event) {
+    // Already focused
+    if (this.state.isFocused) {
+      return;
+    }
+
+    this.setState({
+      isFocused: true,
+    });
+
+    if (this.props.onFocusedInteraction) {
+      this.props.onFocusedInteraction();
+    }
+  }
+
+  /**
+   * @param {FocusEvent} event 
+   */
+   onBlur(event) {
+    const openContentWrapper = this.openContentWrapper
+      && this.openContentWrapper.current;
+
+    if (openContentWrapper && openContentWrapper.contains(event.relatedTarget)) {
+      // Clicked target is child of button wrapper and not the expandButton, don't blur
+      this.setFocus();
+      return;
+    }
+
+    this.setState({
+      isFocused: false,
+    });
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
   }
 
   componentDidMount() {
@@ -55,6 +107,13 @@ export default class OpenContent extends React.Component {
     if (this.props.onMount) {
       // Let parent know this element should be added to the THREE world.
       this.props.onMount(this.openContentWrapper.current);
+    }
+
+    this.addFocusListener();
+    if (this.state.isFocused) {
+      setTimeout(() => {
+        this.setFocus();
+      }, 0);
     }
   }
 
@@ -212,11 +271,12 @@ export default class OpenContent extends React.Component {
 
     if (hasClickHandler) {
       this.props.clickHandler();
+      
 
       // Reset button focus state when changing scenes or opening content
-      this.setState({
-        innerButtonFocused: false
-      });
+      // this.setState({
+      //   innerButtonFocused: false
+      // });
     }
   }
 
@@ -281,11 +341,8 @@ export default class OpenContent extends React.Component {
     }
 
     // Add classname to current active element (wrapper, button or expand label button) so it can be shown on top
-    if (
-      (this.state.isFocused && this.props.children) ||
-      this.state.expandButtonFocused ||
-      this.state.innerButtonFocused
-    ) {
+    if (this.state.isFocused && this.props.children)
+    {
       wrapperClasses.push("active-element");
     }
 
@@ -347,8 +404,10 @@ export default class OpenContent extends React.Component {
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? 0 : undefined}
         onFocus={this.handleFocus}
+        onClick={this.onClick.bind(this)}
+        onBlur={this.onBlur.bind(this)}
       >
-        <div
+        <div 
           className={`open-content ${
             this.context.extras.isEditor ? "open-content--editor" : ""
           }`}
@@ -361,8 +420,6 @@ export default class OpenContent extends React.Component {
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
           onMouseUp={this.setFocus.bind(this)}
-          onFocus={() => this.setState({ innerButtonFocused: true })}
-          onBlur={() => this.setState({ innerButtonFocused: false })}
         >
           <div
             className={"inner-content"}
