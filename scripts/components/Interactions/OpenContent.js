@@ -381,7 +381,7 @@ export default class OpenContent extends React.Component {
               ? "drag drag--horizontal"
               : "drag drag--vertical"
           }
-          tabIndex={-1}
+          tabIndex={innerProps.tabIndex}
           ref={hotspotBtnRef}
           aria-label={
             innerProps.horizontalDrag
@@ -424,8 +424,14 @@ export default class OpenContent extends React.Component {
           />
           {this.context.extras.isEditor ? (
             <>
-              <DragButton horizontalDrag={true} />
-              <DragButton horizontalDrag={false} />
+              <DragButton 
+                horizontalDrag={true}
+                tabIndex={-1}
+              />
+              <DragButton 
+                horizontalDrag={false} 
+                tabIndex={-1} 
+              />
             </>
           ) : (
             ""
