@@ -425,20 +425,14 @@ export default class StaticScene extends React.Component {
                 interaction.label.showAsOpenSceneContent ?
                 <OpenContent
                   key={key}
-                  staticScene={false}
+                  staticScene={true}
                   sceneId={this.props.sceneId}
-                  leftPosition={null}
-                  topPosition={null}
+                  leftPosition={posX}
+                  topPosition={posY}
                   interactionIndex={index}
                   mouseDownHandler={this.startDragging.bind(this, index)}
-                  // onMount={onMount}
-                  // onUnmount={onUnmount}
-                  // onUpdate={onUpdate}
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
-                  }}
-                  onFocus={ () => {
-                    this.handleInteractionFocus(interaction);
                   }}
                   ariaLabel={null}
                   isFocused={this.props.focusedInteraction === index}
