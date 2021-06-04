@@ -339,9 +339,7 @@ export default class OpenContent extends React.Component {
     {
       wrapperClasses.push("active-element");
     }
-
-    const isWrapperTabbable = this.context.extras.isEditor;
-
+    
     const DragButton = (innerProps) => {
       const hotspotBtnRef = useRef(null);
 
@@ -397,7 +395,7 @@ export default class OpenContent extends React.Component {
         ref={this.openContentWrapper}
         className={wrapperClasses.join(" ")}
         style={this.getStyle()}
-        tabIndex={isWrapperTabbable ? 0 : undefined}
+        tabIndex={0}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
         onBlur={this.onBlur.bind(this)}
