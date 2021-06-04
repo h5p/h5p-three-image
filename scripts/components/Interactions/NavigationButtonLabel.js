@@ -2,7 +2,7 @@ import React from 'react';
 import './NavigationButton.scss';
 import './NavigationButtonLabel.scss';
 import { H5PContext } from "../../context/H5PContext";
-import { willOverflow } from './OverflowHelpers';
+import { willOverflow } from '../Shared/OverflowHelpers';
 
 export const getLabelPos = (globalLabel, label) => {
   const useLabelPosition = label && label.labelPosition && label.labelPosition !== 'inherit';
