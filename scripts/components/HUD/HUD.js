@@ -42,9 +42,9 @@ export default class HUD extends React.Component {
 
   checkIfPlaylist(scene, playlists) {
     const sceneHasPlaylist = (scene != null) && (scene.playlist != null) && (scene.audioType === "playlist");
-    const playlistExists = (playlists[scene.playlist] != null) && (playlists[scene.playlist].audioTracks != null);
-    if (sceneHasPlaylist && playlistExists) {
-      return true;
+    if (sceneHasPlaylist) {
+      const playlistExists = (playlists[scene.playlist] != null) && (playlists[scene.playlist].audioTracks != null);
+      return playlistExists;
     }
     return false;
   }
