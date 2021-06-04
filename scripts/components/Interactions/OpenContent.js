@@ -265,14 +265,6 @@ export default class OpenContent extends React.Component {
       return "";
     }
   }
-  onClick() {
-    const hasClickHandler = this.props.forceClickHandler
-      || !this.context.extras.isEditor;
-
-    if (hasClickHandler) {
-      this.props.clickHandler();
-    }
-  }
 
   onDoubleClick() {
     if (this.props.doubleClickHandler) {
