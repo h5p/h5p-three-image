@@ -352,8 +352,20 @@
               }
             },
             {
+              "label": "Playlist",
+              "description": "Here you can pick an existing playlist as audio.",
               "name": "playlist",
-              "type": "number"
+              "type": "number",
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "audioType",
+                    "equals": "playlist"
+                  }
+                ],
+                "widget": "playlist"
+              }
             }
           ]
         }
@@ -391,7 +403,8 @@
             },
             {
               "name": "playlistId",
-              "type": "number"
+              "type": "number",
+              "widget": "none"
             }            
           ]
         }
