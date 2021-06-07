@@ -27,7 +27,7 @@ export default class HUD extends React.Component {
       nextFocus: this.props.nextFocus
     };
 
-    if (scene && scene.audio && scene.audio.length) {
+    if (scene && scene.audio && scene.audio.length && scene.audioType === "audio") {
       props.sceneAudioTrack = scene.audio;
       props.sceneId = scene.sceneId;
     }
@@ -37,13 +37,18 @@ export default class HUD extends React.Component {
       props.playlistId = scene.playlist;
     }
 
+    if (scene && !scene.audio && !scene.playlist && this.checkIfPlaylist(this.context.behavior, this.context.params.playlists)) {
+      props.sceneAudioTrack = this.context.params.playlists[this.context.behavior.playlist].audioTracks;
+      props.playlistId = this.context.behavior.playlist;
+    }
+
     return props;
   }
 
-  checkIfPlaylist(scene, playlists) {
-    const sceneHasPlaylist = (scene != null) && (scene.playlist != null) && (scene.audioType === "playlist");
+  checkIfPlaylist(parent, playlists) {
+    const sceneHasPlaylist = (parent != null) && (parent.playlist != null) && (parent.audioType === "playlist");
     if (sceneHasPlaylist) {
-      const playlistExists = (playlists[scene.playlist] != null) && (playlists[scene.playlist].audioTracks != null);
+      const playlistExists = (playlists[parent.playlist] != null) && (playlists[parent.playlist].audioTracks != null);
       return playlistExists;
     }
     return false;

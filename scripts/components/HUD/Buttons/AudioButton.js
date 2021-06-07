@@ -27,6 +27,9 @@ export default class AudioButton extends React.Component {
     if (this.context.behavior.audio && this.context.behavior.audio.length) {
       return 'global';
     }
+    if (this.context.behavior.playlist && this.context.behavior.audioType === "playlist") {
+      return 'playlist-' + this.context.behavior.playlist;
+    }
   }
 
   /**

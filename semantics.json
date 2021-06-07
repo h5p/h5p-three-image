@@ -424,6 +424,25 @@
     "description": "These options will let you control how the world behaves.",
     "fields": [
       {
+        "name": "audioType",
+        "type": "select",
+        "label": "Audio type",
+        "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+        "widget": "radioGroup",
+        "alignment": "horizontal",
+        "options": [
+          {
+            "label": "Global Audio",
+            "value": "audio"
+          },
+          {
+            "label": "Playlist",
+            "value": "playlist"
+          }
+        ],
+        "default": "audio"
+      },
+      {
         "name": "audio",
         "type": "audio",
         "label": "Global Audio",
@@ -431,7 +450,32 @@
         "optional": true,
         "widgetExtensions": [
           "AudioRecorder"
-        ]
+        ],
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "audioType",
+              "equals": "audio"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Playlist",
+        "description": "Here you can pick an existing playlist as audio.",
+        "name": "playlist",
+        "type": "number",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "audioType",
+              "equals": "playlist"
+            }
+          ],
+          "widget": "playlist"
+        }
       },
       {
         "name": "sceneRenderingQuality",
