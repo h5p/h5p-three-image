@@ -39,6 +39,8 @@ jobs:
             popd
           fi
 
+          rm -rf h5p-editor-three-image h5p-three-sixty
+
           git clone https://github.com/NDLANO/h5p-editor-three-image.git
           git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
           git clone https://github.com/NDLANO/h5p-three-sixty.git
