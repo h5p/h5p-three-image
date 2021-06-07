@@ -35,11 +35,6 @@
                 "label": "Scenebeskrivelse",
                 "description": "En beskrivelse av scenen"
               },
-              {},
-              {
-                "label": "Scene Description",
-                "description": "A text that can describe the scene for the end-user"
-              },
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -50,7 +45,6 @@
               },
               {
                 "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
@@ -95,20 +89,48 @@
                               "label": "Skjul"
                             }
                           ]
+                        },
+                        {
+                          "label": "Vis som aktivt felt",
+                          "description": "Gjør knappen om til en trykkflate av egendefinert størrelse som legger seg over bakgrunnsbildet."
+                        },
+                        {
+                          "label": "Vis aktivt felt når musen holdes over",
+                          "description": "Lar brukeren se den aktive trykkflaten når musen holdes over den. Uten denne innstillingen vil det aktive feltet alltid være gjennomsiktig."
+                        },
+                        {
+                          "label": "La det aktive feltet nås med tab-knappen",
+                          "description": "Gjør trykkflaten mer tastaturvennlig."
+                        },
+                        {
+                          "label": "Vis innhold i scenen",
+                          "description": "Lar innholdet vises åpent rett i scenen."
+                        },
+                        {
+                          "default": "256,128",
+                          "label": "Bredde og høyde"
+                        },
+                        {
+                          "label": "Kode for å åpne innholdet",
+                          "description": "Hvis feltet ikke er tomt, må brukeren skrive inn koden for å se innholdet."
+                        },
+                        {
+                          "label": "Kode-hint",
+                          "description": "Valgfri: Hint som vil vises der koden skrives inn."
                         }
                       ]
                     },
                     {},
                     {},
                     {
-                      "label": "Button style",
-                      "description": "Decide how the icon should look.",
+                      "label": "Knappetype",
+                      "description": "Velg hvilket ikon som skal vises.",
                       "options": [
                         {
-                          "label": "Text icon"
+                          "label": "Tekstikon"
                         },
                         {
-                          "label": "Info icon"
+                          "label": "Informasjonsikon"
                         }
                       ]
                     }
@@ -187,31 +209,6 @@
             {
               "label": "Display Labels",
               "description": "If unchecked - labels will show only on mouse over"
-            },
-            {
-              "label": "Show as hotspot",
-              "description": "Show as a hidden hotspot, can used for overlaying interaction on elements in image"
-            },
-            {
-              "label": "Show hotspot when mouse is hovering"
-            },
-            {
-              "label": "Set the hotspot be tabbable"
-            },
-            {
-              "label": "Show as open content in the scene",
-              "description": "Allows the content to be shown in an open dialog box directly in the scene."
-            },
-            {
-              "label": "Values for storing the height and width for hotspot"
-            },
-            {
-              "label": "Password for the interaction",
-              "description": "If not empty, the user has to input the password in order to open this content."
-            },
-            {
-              "label": "A hint for the interaction code",
-              "description": "An optional hint for the code, can be left empty if wanted"
             }
           ]
         }

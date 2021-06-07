@@ -4,6 +4,7 @@ import NavigationButton, {getIconFromInteraction, getLabelFromInteraction, Icons
 import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
+import OpenContent from "../../Interactions/OpenContent";
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -363,6 +364,7 @@ export default class StaticScene extends React.Component {
             src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
             onLoad={this.onSceneLoaded.bind(this)}
             ref={this.imageElementRef}
+            draggable={false}
           />
           {
             interactions.map((interaction, index) => {
@@ -418,9 +420,36 @@ export default class StaticScene extends React.Component {
                 title = this.getInteractionTitle(interaction.action);
               }
 
+              const key = interaction.id || `interaction-${this.props.sceneId}${index}`
+
               return (
+                interaction.label.showAsOpenSceneContent ?
+                <OpenContent
+                  key={key}
+                  staticScene={true}
+                  sceneId={this.props.sceneId}
+                  leftPosition={posX}
+                  topPosition={posY}
+                  interactionIndex={index}
+                  mouseDownHandler={this.startDragging.bind(this, index)}
+                  doubleClickHandler={() => {
+                    this.context.trigger('doubleClickedInteraction', index);
+                  }}
+                  ariaLabel={null}
+                  isFocused={this.props.focusedInteraction === index}
+                  onBlur={this.props.onBlurInteraction}
+                >
+                  {
+                    this.context.extras.isEditor &&
+                    <ContextMenu
+                      isGoToScene={isGoToSceneInteraction}
+                      interactionIndex={index}
+                    />
+                  }
+                </OpenContent>
+                :
                 <NavigationButton
-                  key={index}
+                  key={key}
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
                   label={getLabelFromInteraction(interaction)}
@@ -444,6 +473,7 @@ export default class StaticScene extends React.Component {
                   showAsHotspot={interaction.label.showAsHotspot}
                   sceneId = {this.props.sceneId}
                   interactionIndex = {index}
+                  isHotspotTabbable={interaction.label.isHotspotTabbable}
                 >
                   {
                     this.context.extras.isEditor &&

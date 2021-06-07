@@ -35,7 +35,6 @@
                 "label": "Description de la scène",
                 "description": "Un texte pour décirire la scène à l'utilisateur final"
               },
-              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -46,7 +45,6 @@
               },
               {
                 "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
@@ -91,6 +89,34 @@
                               "label": "Hide"
                             }
                           ]
+                        },
+                        {
+                          "label": "Show as hotspot",
+                          "description": "Allows for adding interaction areas to the background image that can be custom size."
+                        },
+                        {
+                          "label": "Show hotspot when mouse is hovering",
+                          "description": "Will allow hotspot to be visible when mouse is hovering the area."
+                        },
+                        {
+                          "label": "Set the hotspot be tabbable",
+                          "description": "Will allow hotspot to be tabbable. Can be used for accessibilty."
+                        },
+                        {
+                          "label": "Show as open content in the scene",
+                          "description": "Allows the content to be shown in an open dialog box directly in the scene."
+                        },
+                        {
+                          "default": "256,128",
+                          "label": "Values for storing the height and width for hotspot"
+                        },
+                        {
+                          "label": "Code for the interaction",
+                          "description": "If not empty, the user has to input the code in order to open this content."
+                        },
+                        {
+                          "label": "A hint for the interaction code",
+                          "description": "An optional hint for the code, can be left empty if wanted"
                         }
                       ]
                     },
@@ -183,31 +209,6 @@
             {
               "label": "Display Labels",
               "description": "If unchecked - labels will show only on mouse over"
-            },
-            {
-              "label": "Show as hotspot",
-              "description": "Show as a hidden hotspot, can used for overlaying interaction on elements in image"
-            },
-            {
-              "label": "Show hotspot when mouse is hovering"
-            },
-            {
-              "label": "Set the hotspot be tabbable"
-            },
-            {
-              "label": "Show as open content in the scene",
-              "description": "Allows the content to be shown in an open dialog box directly in the scene."
-            },
-            {
-              "label": "Values for storing the height and width for hotspot"
-            },
-            {
-              "label": "Password for the interaction",
-              "description": "If not empty, the user has to input the password in order to open this content."
-            },
-            {
-              "label": "A hint for the interaction code",
-              "description": "An optional hint for the code, can be left empty if wanted"
             }
           ]
         }

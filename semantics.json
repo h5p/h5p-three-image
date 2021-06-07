@@ -89,10 +89,13 @@
             },
             {
               "name": "cameraStartPosition",
-              "type": "text"
+              "type": "text",
+              "label": "Initial camera position",
+              "description": "Camera position in pitch and yaw"
             },
             {
               "name": "interactions",
+              "label": "Interactions",
               "type": "list",
               "min": 0,
               "field": {
@@ -203,24 +206,24 @@
                       },
                       {
                         "name": "showAsOpenSceneContent",
-                        "description": "Allows the content to be shown in an open dialog box directly in the scene.",
                         "type": "boolean",
                         "label": "Show as open content in the scene",
+                        "description": "Allows the content to be shown in an open dialog box directly in the scene.",
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
-                        "rules": [
-                          {
-                            "field": "showAsHotspot",
-                            "equals": false
-                          }
-                        ]
-                      }
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": false
+                            }
+                          ]
+                        }
                       },
                       {
                         "name": "hotSpotSizeValues",
                         "type": "text",
-                        "default" : "256,128",
+                        "default": "256,128",
                         "label": "Values for storing the height and width for hotspot",
                         "optional": true,
                         "widget": "none"
@@ -229,15 +232,15 @@
                         "name": "interactionPassword",
                         "type": "text",
                         "label": "Code for the interaction",
-                        "optional": true,
-                        "description": "If not empty, the user has to input the code in order to open this content."
+                        "description": "If not empty, the user has to input the code in order to open this content.",
+                        "optional": true
                       },
                       {
                         "name": "interactionPasswordHint",
                         "type": "text",
                         "label": "A hint for the interaction code",
-                        "optional": true,
-                        "description": "An optional hint for the code, can be left empty if wanted"
+                        "description": "An optional hint for the code, can be left empty if wanted",
+                        "optional": true
                       }
                     ]
                   },
@@ -270,7 +273,9 @@
                       "rules": [
                         {
                           "field": "action",
-                          "equals": ["H5P.AdvancedText"]
+                          "equals": [
+                            "H5P.AdvancedText"
+                          ]
                         }
                       ],
                       "widget": "imageRadioGroup"
