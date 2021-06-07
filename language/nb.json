@@ -35,7 +35,6 @@
                 "label": "Scenebeskrivelse",
                 "description": "En beskrivelse av scenen"
               },
-              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -46,7 +45,6 @@
               },
               {
                 "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
@@ -109,6 +107,7 @@
                           "description": "Lar innholdet vises åpent rett i scenen."
                         },
                         {
+                          "default": "256,128",
                           "label": "Bredde og høyde"
                         },
                         {

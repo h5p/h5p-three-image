@@ -35,7 +35,6 @@
                 "label": "Stseeni kirjeldus",
                 "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
               },
-              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -46,7 +45,6 @@
               },
               {
                 "label": "Interaktsioonid",
-                "entity": "Interaktsioon",
                 "field": {
                   "fields": [
                     {
@@ -109,6 +107,7 @@
                           "description": "Allows the content to be shown in an open dialog box directly in the scene."
                         },
                         {
+                          "default": "256,128",
                           "label": "Values for storing the height and width for hotspot"
                         },
                         {
