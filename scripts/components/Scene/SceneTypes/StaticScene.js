@@ -449,7 +449,7 @@ export default class StaticScene extends React.Component {
                 </OpenContent>
                 :
                 <NavigationButton
-                  key={index}
+                  key={key}
                   title={title}
                   icon={getIconFromInteraction(interaction, scenes)}
                   label={getLabelFromInteraction(interaction)}
@@ -473,6 +473,7 @@ export default class StaticScene extends React.Component {
                   showAsHotspot={interaction.label.showAsHotspot}
                   sceneId = {this.props.sceneId}
                   interactionIndex = {index}
+                  isHotspotTabbable={interaction.label.isHotspotTabbable}
                 >
                   {
                     this.context.extras.isEditor &&
