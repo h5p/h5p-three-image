@@ -364,6 +364,7 @@ export default class StaticScene extends React.Component {
             src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
             onLoad={this.onSceneLoaded.bind(this)}
             ref={this.imageElementRef}
+            draggable={false}
           />
           {
             interactions.map((interaction, index) => {
