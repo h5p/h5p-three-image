@@ -48,45 +48,45 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Etiketa",
+                      "description": "Hutsik utziz gero ez da etiketarik erakutsiko eta pantaila-irakurleentzat izenburuko eremua erabiltzen saiatuko gara"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Etiketen Ezarpenak",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Etiketaren kokapena",
+                          "description": "Aukeratu etiketa non agertuko den",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Erabili jokaeraren ezarpena"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Eskuinera lerrokatuta"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Ezkerrera lerrokatuta"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Gora lerrokatuta"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Behera lerrokatuta"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Erakutsi etiketa",
+                          "description": "Ezkutatuz gero - etiketak sagua gainetik pasatzerakoan erakutsiko da",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Erabili jokaeraren ezarpena"
                             },
                             {
-                              "label": "Show"
+                              "label": "Erakutsi"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Ezkutatu"
                             }
                           ]
                         },
@@ -186,76 +186,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Etiketen ezarpena",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Etiketaren kokapena",
+              "description": "Etiketaren kokapen lehenetsia. Kokapena interakzioetan baliogabetu daiteke",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Eskuinera lerrokatuta"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Ezkerrera lerrokatuta"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Gora lerrokatuta"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Behera lerrokatuta"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Erakutsi etiketak",
+              "description": "Ezkutatuz gero - etiketak sagua gainetik pasatzerakoan erakutsiko da"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Mugatu",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Aria etiketa eduki-motarentzat",
+          "default": "Ibilbide Birtuala"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Audioa erreproduzitzeko etiketa",
+          "default": "Erreproduzitu Audio Pista"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Audioa geratzeko etiketa",
+          "default": "Geratu Audio Pista"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Eszena-elkarrizketarako izenburua",
+          "default": "Eszenaren Deskribapena"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Kamera berrabiarazteko botoiaren etiketa",
+          "default": "Berrabiarazi kamera"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Elkarrizketa bidaltzeko botoiaren etiketa",
+          "default": "Bidali Elkarrizketa"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Elkarrizketa ixteko botoiaren etiketa",
+          "default": "Itxi Elkarrizketa"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Zabaldu botoiaren etiketaren Aria etiketa",
+          "default": "Zabaldu etiketa bisuala"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Atzeko planoko irudia 360 eszenan zabaltzen ari denerako etiketa",
+          "default": "Atzeko planoko irudia kargatzen..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Edukirik ez dagoenerako etiketa",
+          "default": "Edukirik ez"
         }
       ]
     }
