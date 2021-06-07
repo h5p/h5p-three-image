@@ -18,7 +18,7 @@ jobs:
           cd h5p-three-image
           npm ci
           npm run build
-      
+
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
@@ -28,7 +28,7 @@ jobs:
           cd dist
 
           while read -r repo; do git clone ${repo}; done < ../h5p-three-image/build_info/repos
-          
+
           if [ -d "h5p-editor-audio-recorder" ]; then
             pushd h5p-editor-audio-recorder
             git checkout bec6fe1
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: h5p-three-image.h5p
-          path: dist/h5p-three-image.h5p      
+          path: dist/h5p-three-image.h5p
       - name: Load library.json
         id: set_library
         run: |
