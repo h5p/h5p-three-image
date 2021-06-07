@@ -293,7 +293,7 @@ export default class NavigationButton extends React.Component {
   }
 
   setFocus(preventCameraMovement = false) {
-    if(preventCameraMovement) {
+    if (preventCameraMovement && !this.props.staticScene) {
       this.context.threeSixty.setPreventCameraMovement(true);
     }
     const isFocusable = this.context.extras.isEditor
