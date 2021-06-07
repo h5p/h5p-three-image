@@ -213,7 +213,7 @@ export default class NavigationButton extends React.Component {
       this.setFocus();
     }
 
-    if (this.props.isFocused && !prevProps.isFocused && !this.props.staticScene) {
+    if (this.props.isFocused && !prevProps.isFocused && this.context.threeSixty) {
       setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
         this.context.threeSixty.preventCameraMovement = true;
         this.setFocus(true);
