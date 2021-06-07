@@ -212,18 +212,18 @@
                         "optional": true,
                         "widget": "showWhen",
                         "showWhen": {
-                        "rules": [
-                          {
-                            "field": "showAsHotspot",
-                            "equals": false
-                          }
-                        ]
-                      }
+                          "rules": [
+                            {
+                              "field": "showAsHotspot",
+                              "equals": false
+                            }
+                          ]
+                        }
                       },
                       {
                         "name": "hotSpotSizeValues",
                         "type": "text",
-                        "default" : "256,128",
+                        "default": "256,128",
                         "label": "Values for storing the height and width for hotspot",
                         "optional": true,
                         "widget": "none"
@@ -273,7 +273,9 @@
                       "rules": [
                         {
                           "field": "action",
-                          "equals": ["H5P.AdvancedText"]
+                          "equals": [
+                            "H5P.AdvancedText"
+                          ]
                         }
                       ],
                       "widget": "imageRadioGroup"

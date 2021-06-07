@@ -35,7 +35,6 @@
                 "label": "Popis scény",
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
-              {},
               {
                 "label": "Display \"Scene Description\" initially",
                 "description": "Display the scene description when the scene starts for the first time"
@@ -46,7 +45,6 @@
               },
               {
                 "label": "Interakce",
-                "entity": "Interakce",
                 "field": {
                   "fields": [
                     {
@@ -109,6 +107,7 @@
                           "description": "Allows the content to be shown in an open dialog box directly in the scene."
                         },
                         {
+                          "default": "256,128",
                           "label": "Values for storing the height and width for hotspot"
                         },
                         {
