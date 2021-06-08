@@ -606,6 +606,12 @@
         "type": "text",
         "label": "Label for when there is no content",
         "default": "No content"
+      },
+      {
+        "name": "noPlaylists",
+        "type": "text",
+        "label": "Label for when there is no playlists",
+        "default": "No playlists added"
       }
     ]
   }
