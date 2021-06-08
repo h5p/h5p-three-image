@@ -6,6 +6,7 @@ import StaticScene from "./SceneTypes/StaticScene";
 export const SceneTypes = {
   THREE_SIXTY_SCENE: '360',
   STATIC_SCENE: 'static',
+  PANORAMA: 'panorama',
   PREVIOUS_SCENE: -1,
 };
 
@@ -62,6 +63,7 @@ export default class Scene extends React.Component {
         doneLoadingNextScene={this.props.doneLoadingNextScene}
         startBtnClicked={this.props.startBtnClicked}
         updateScoreCard={this.props.updateScoreCard}
+        isPanorama={this.props.sceneParams.sceneType === SceneTypes.PANORAMA}
       />
     );
   }

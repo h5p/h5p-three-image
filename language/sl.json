@@ -15,6 +15,9 @@
                     "label": "360 slika"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Statična slika"
                   }
                 ]
