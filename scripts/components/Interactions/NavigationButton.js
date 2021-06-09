@@ -273,6 +273,8 @@ export default class NavigationButton extends React.Component {
         innerButtonFocused: false
       });
     }
+
+    this.setFocus(true);
   }
 
   onDoubleClick() {
@@ -418,7 +420,6 @@ export default class NavigationButton extends React.Component {
 
     const labelText = getLabelText(label);
     return (
-
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
@@ -437,7 +438,6 @@ export default class NavigationButton extends React.Component {
               onClickEvent={this.onClick.bind(this)}
               onDoubleClickEvent={this.onDoubleClick.bind(this)}
               onMouseDownEvent={this.onMouseDown.bind(this)}
-              onMouseUpEvent={this.setFocus.bind(this)}
               onFocusEvent={() => this.setState({innerButtonFocused: true})}
               onBlurEvent={() => this.setState({innerButtonFocused: false})}
               setHotspotValues={this.setHotspotValues.bind(this)}
@@ -455,7 +455,6 @@ export default class NavigationButton extends React.Component {
               onClick={this.onClick.bind(this)}
               onDoubleClick={this.onDoubleClick.bind(this)}
               onMouseDown={this.onMouseDown.bind(this)}
-              onMouseUp={this.setFocus.bind(this)}
               onFocus={() => this.setState({innerButtonFocused: true})}
               onBlur={() => this.setState({innerButtonFocused: false})}/>
         }
