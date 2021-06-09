@@ -22,6 +22,7 @@ export default class ContextMenu extends Component {
         {
           this.props.isGoToScene &&
           <button
+            type="button"
             className='go-to-scene'
             onClick={this.goToScene.bind(this)}
             tabIndex="-1"
@@ -30,6 +31,7 @@ export default class ContextMenu extends Component {
           </button>
         }
         <button
+          type="button"
           className='edit'
           onClick={this.handlEdit.bind(this)}
           tabIndex="-1"
@@ -37,6 +39,7 @@ export default class ContextMenu extends Component {
           <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.extras.l10n.edit }} />
         </button>
         <button
+          type="button"
           className='delete'
           onClick={this.handleDelete.bind(this)}
           tabIndex="-1"
