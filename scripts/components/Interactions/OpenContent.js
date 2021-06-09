@@ -290,7 +290,6 @@ export default class OpenContent extends React.Component {
     }
   }
 
-
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
       if (this.openContentWrapper && this.openContentWrapper.current && this.openContentWrapper === e.target) {
@@ -400,7 +399,7 @@ export default class OpenContent extends React.Component {
           }}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
+          onClick={this.setFocus.bind(this)}
         >
           <div
             className={"inner-content"}
