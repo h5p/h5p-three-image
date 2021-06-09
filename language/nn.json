@@ -4,24 +4,27 @@
       "label": "Three Image Editor",
       "fields": [
         {
-          "label": "Scenes",
+          "label": "Scener",
           "entity": "Scene",
           "field": {
             "fields": [
               {
-                "label": "Scene type",
+                "label": "Scenetype",
                 "options": [
                   {
-                    "label": "360 image"
+                    "label": "360-graders bilete"
                   },
                   {
-                    "label": "Static image"
+                    "label": "Panoramabilete"
+                  },
+                  {
+                    "label": "Statisk bilete"
                   }
                 ]
               },
               {
-                "label": "Display \"Back\" button",
-                "description": "Display button for navigating back to your previous scene"
+                "label": "Vis \"Tilbake\"-knapp",
+                "description": "Vis knapp som tar brukaren tilbake til forrige scene"
               },
               {},
               {

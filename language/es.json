@@ -15,6 +15,9 @@
                     "label": "Imagen 360"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Imagen estática"
                   }
                 ]
