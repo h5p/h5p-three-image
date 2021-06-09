@@ -474,6 +474,7 @@ export default class StaticScene extends React.Component {
                   sceneId = {this.props.sceneId}
                   interactionIndex = {index}
                   isHotspotTabbable={interaction.label.isHotspotTabbable}
+                  showHotspotOnHover={interaction.label.showHotspotOnHover}
                 >
                   {
                     this.context.extras.isEditor &&
