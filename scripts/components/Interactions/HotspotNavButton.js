@@ -68,18 +68,18 @@ export default class HotspotNavButton extends React.Component {
     //We record the currentMouseposition for everytime the mouse moves
     const currentPosMouse = horizontalDrag ? event.clientX : event.clientY
 
-    /*divStartWidth is the start mouse position subtracted by the midpoint, technically this
+    /*divStartPos is the start mouse position subtracted by the midpoint, technically this
     half the size of the actual div, this is used for keeping the original widtrh of the div
     everytime we drag */
-    const divStartWidth = this.state.startMousePos - (this.state.startMidPoint)
+    const divStartPos = this.state.startMousePos - (this.state.startMidPoint)
 
     /* The final width is calculated by subtracting the position of the
-    mouse with the the divStartWidth, this is technically the offset between the
-    divStartWidth and the current mouse position. Since the div scales from the center,
+    mouse with the the divStartPos, this is technically the offset between the
+    divStartPos and the current mouse position. Since the div scales from the center,
     we have to multiply the result by two*/
 
-    let finalValue = ((currentPosMouse - divStartWidth) * 2);
-    if(finalValue > 128 && finalValue < 512) {
+    let finalValue = ((currentPosMouse - divStartPos) * 2);
+    if(finalValue > 128 && finalValue < 2048) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
       horizontalDrag ?
