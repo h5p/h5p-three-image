@@ -5,6 +5,7 @@ import { assignmentAppContext } from "../../.storybook/config/assignement-contex
 import { H5PContext } from "../../scripts/context/H5PContext";
 import Scene from "../../scripts/components/Scene/Scene";
 import imageScene from "../static/alem-omerovic-2W3HhsqKHt8-unsplash.jpg";
+import panoramaScene from "../static/panorama.jpg";
 import {openSceneContentAppContext} from "../../.storybook/config/openSceneContent-contexts";
 
 const appContext = { ...defaultAppContext };
@@ -27,6 +28,14 @@ openSceneContentAppContext.params.scenes[0] = {
   ...openSceneContentAppContext.params.scenes[0],
   scenesrc: { path: imageScene },
   cameraStartPosition: "0,0",
+};
+
+const panoramaContentContext = { ...defaultAppContext };
+panoramaContentContext.params.scenes[0] = {
+  ...panoramaContentContext.params.scenes[0],
+  scenesrc: { path: panoramaScene },
+  cameraStartPosition: "0,0",
+  sceneType: "panorama",
 };
 
 export default {
@@ -52,6 +61,15 @@ const openSceneContentTemplate = (args) => (
     </Main>
   </H5PContext.Provider>
 );
+
+const panoramaContentTemplate = (args) => (
+  <H5PContext.Provider value={panoramaContentContext}>
+    <Main {...args}>
+      <Scene {...args}></Scene>
+    </Main>
+  </H5PContext.Provider>
+);
+
 const Template = (args) => (
   <H5PContext.Provider value={appContext}>
     <Main {...args}>
@@ -59,6 +77,8 @@ const Template = (args) => (
     </Main>
   </H5PContext.Provider>
 );
+
+
 
 export const SceneStory = Template.bind({});
 SceneStory.args = {
@@ -87,9 +107,25 @@ SceneStoryWithAssignment.args = {
   addThreeSixty: (tS) => undefined,
   onSetCameraPos: () => undefined,
 };
+
 export const SceneStoryWithOpenSceneContent = openSceneContentTemplate.bind({});
 SceneStoryWithOpenSceneContent.args = {
   label: "Open Scene Content",
+  forceStartScreen: undefined,
+  forceStartCamera: undefined,
+  currentScene: 1,
+  setCurrentSceneId: (id)=>1,
+  imageSrc: {
+    path: imageScene,
+  },
+  addThreeSixty: (tS) => undefined,
+  onSetCameraPos: () => undefined,
+};
+
+
+export const SceneStoryWithPanoramaSceneContent = panoramaContentTemplate.bind({});
+SceneStoryWithPanoramaSceneContent.args = {
+  label: "Panorama Scene Content",
   forceStartScreen: undefined,
   forceStartCamera: undefined,
   currentScene: 1,

@@ -15,6 +15,9 @@
                     "label": "360°-Bild"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Unbewegliches Bild"
                   }
                 ]

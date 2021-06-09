@@ -15,6 +15,9 @@
                     "label": "360-kuva"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Staattinen kuva"
                   }
                 ]

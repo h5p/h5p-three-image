@@ -15,6 +15,9 @@
                     "label": "360 graden foto"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Statische afbeelding"
                   }
                 ]
