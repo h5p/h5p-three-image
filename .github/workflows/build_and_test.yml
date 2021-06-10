@@ -13,30 +13,21 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "15.x"
+          node-version: "16.x"
       - run: |
           cd h5p-three-image
           npm ci
           npm run build
-      - name: Use Node.js 8
+
+      - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "8"
       - run: |
-
           mkdir -p dist
           cd dist
 
-
           while read -r repo; do git clone ${repo}; done < ../h5p-three-image/build_info/repos
-          if [ -d "h5p-editor-color-selector" ]; then pushd h5p-editor-color-selector && git checkout b0ae8c941cedcec73df6b186663eae6df8679810; popd; fi
-          if [ -d "h5p-dialogcards" ]; then pushd h5p-dialogcards && npm install && npm run build; popd; fi
-          if [ -d "h5p-drag-text" ]; then pushd h5p-drag-text && npm install && npm run build; popd; fi
-          if [ -d "h5p-questionnaire" ]; then pushd h5p-questionnaire && npm install && npm run build; popd; fi
-          if [ -d "h5p-drag-question" ]; then pushd h5p-drag-question && npm install && npm run build; popd; fi
-          if [ -d "h5p-interactive-video" ]; then pushd h5p-interactive-video && npm install && npm run build; popd; fi
-          if [ -d "h5p-open-ended-question" ]; then pushd h5p-open-ended-question && npm install && npm run build; popd; fi
-          if [ -d "h5p-simple-multiple-choice" ]; then pushd h5p-simple-multiple-choice && npm install && npm run build; popd; fi
 
           if [ -d "h5p-editor-audio-recorder" ]; then
             pushd h5p-editor-audio-recorder
@@ -48,24 +39,19 @@ jobs:
             popd
           fi
 
-          rm -rf h5p-chart h5p-shape h5p-editor-shape h5p-editor-three-image
+          rm -rf h5p-editor-three-image h5p-three-sixty
 
           git clone https://github.com/NDLANO/h5p-editor-three-image.git
-          git clone https://github.com/NDLANO/h5p-chart.git
-          git clone https://github.com/NDLANO/h5p-shape.git
-          git clone https://github.com/NDLANO/h5p-editor-shape.git
-          git clone https://github.com/NDLANO/h5p-editor-image-radio-group
+          git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
           git clone https://github.com/NDLANO/h5p-three-sixty.git
 
-
-          if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm i -g webpack@2.7.0 && npm install && npm run build; popd; fi
-
+          if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm ci && npm run build; popd; fi
 
           cp -r ../h5p-three-image .
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "15.x"
+          node-version: "16.x"
       - run: |
           cd dist
           ls
@@ -76,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: h5p-three-image.h5p
-          path: dist/h5p-three-image.h5p      
+          path: dist/h5p-three-image.h5p
       - name: Load library.json
         id: set_library
         run: |
