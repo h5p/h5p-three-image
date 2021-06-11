@@ -366,6 +366,13 @@
         ]
       },
       {
+        "name": "showScoresButton",
+        "type": "boolean",
+        "label": "Display \"Scores\" button",
+        "description": "Display button for showing the scores from assignments.",
+        "default": false
+      },
+      {
         "name": "sceneRenderingQuality",
         "type": "select",
         "label": "Scene rendering quality",
@@ -494,7 +501,68 @@
         "type": "text",
         "label": "Label for when there is no content",
         "default": "No content"
+      },
+      {
+        "name": "goToScene",
+        "type": "text",
+        "label": "Label for context menu button for go to scene",
+        "default": "Go to scene"
+      },
+      {
+        "name": "edit",
+        "type": "text",
+        "label": "Label for context menu button for edit",
+        "default": "Edit"
+      },
+      {
+        "name": "delete",
+        "type": "text",
+        "label": "Label for context menu button for delete",
+        "default": "Delete"
+      },
+      {
+        "name": "score",
+        "type": "text",
+        "label": "Translation for \"Score\"",
+        "importance": "low",
+        "default": "Score"
+      },
+      {
+        "name": "assignment",
+        "type": "text",
+        "label": "Translation for \"Assignment\"",
+        "importance": "low",
+        "default": "Assignment"
+      },
+      {
+        "name": "total",
+        "type": "text",
+        "label": "Translation for \"Total\"",
+        "importance": "low",
+        "default": "Total"
+      },
+      {
+        "name": "totalScore",
+        "type": "text",
+        "label": "Translation for \"Total Score\"",
+        "importance": "low",
+        "default": "Total Score"
+      },
+      {
+        "name": "scoreSummary",
+        "type": "text",
+        "label": "Label for button to show score summary",
+        "importance": "low",
+        "default": "Show Score Summary"
+      },
+      {
+        "name": "scene",
+        "type": "text",
+        "label": "Translation fot 'Scene'",
+        "importance": "low",
+        "default": "Scene"
       }
+      
     ]
   }
 ]

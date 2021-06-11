@@ -9,7 +9,6 @@ import {SceneTypes} from "../Scene/Scene";
 export default class HUD extends React.Component {
   constructor(props) {
     super(props);
-
     this.buttons = {};
   }
 
@@ -43,8 +42,8 @@ export default class HUD extends React.Component {
    * React - create DOM elements
    */
   render() {
-    const isThreeSixty = this.props.scene.sceneType
-      === SceneTypes.THREE_SIXTY_SCENE;
+    const showScoresButton = this.props.showScoresButton;
+    const isThreeSixty = this.props.scene.sceneType === SceneTypes.THREE_SIXTY_SCENE;
 
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
@@ -78,6 +77,15 @@ export default class HUD extends React.Component {
               nextFocus={ this.props.nextFocus }
               onClick={ this.props.onGoToStartScene }
               disabled = {this.props.isStartScene}
+            />
+          }{
+            showScoresButton &&
+            <Button
+              type={ 'score-summary' }
+              label={ this.context.l10n.scoreSummary }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
+              onClick={ this.props.onShowingScoreSummary }
             />
           }
           { false &&
