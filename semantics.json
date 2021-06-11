@@ -421,6 +421,58 @@
     ]
   },
   {
+    "name": "audioPlaylistsGroup",
+    "type": "group",
+    "label": "Playlists",
+    "importance": "low",
+    "description": "These options will let you add playlists for the scenes.",
+    "fields": [
+      {
+        "name": "audioPlaylists",
+        "type": "number",
+        "label": "Added playlists",
+        "description": "Make playlists that's available for all scenes by default.",
+        "widget": "playlist",
+        "canEdit": true
+      },
+      {
+        "name": "playlists",
+        "type": "list",
+        "label": "Playlists",
+        "optional": true,
+        "widget": "none",
+        "field": {
+          "name": "playlist",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Playlist Title",
+              "name": "title",
+              "type": "text",
+              "description": "Used to identify the playlist",
+              "optional": false
+            },
+            {
+              "label": "Audio Tracks",
+              "name": "audioTracks",
+              "type": "audio",
+              "description": "Add audio tracks to the playlist.",
+              "optional": true,
+              "widgetExtensions": [
+                "AudioRecorder"
+              ]
+            },
+            {
+              "name": "playlistId",
+              "type": "number",
+              "widget": "none"
+            }            
+          ]
+        }
+      }
+    ]
+  },
+  {
     "name": "behaviour",
     "type": "group",
     "label": "Behavioral settings",
@@ -610,12 +662,6 @@
         "type": "text",
         "label": "Label for when there is no content",
         "default": "No content"
-      },
-      {
-        "name": "noPlaylists",
-        "type": "text",
-        "label": "Label for when there is no playlists",
-        "default": "No playlists added"
       }
     ]
   }
