@@ -35,26 +35,26 @@ const Template = (args) => {
 
 export const Empty = Template.bind({});
 Empty.args = {scores: {
-  "0": {
+  "numQuestionsInTour": 2,
+  "totalQuestionsCompleted": 0,
+  "sceneScoreCards": {
     "0": {
-      "min": 0,
-      "max": 1,
-      "raw": 1,
-      "scaled": 1
-    },
-    "1": {
-      "min": 0,
-      "max": 1,
-      "raw": 0,
-      "scaled": 0
-    }
-  },
-  "1": {
-    "0": {
-      "min": 0,
-      "max": 2,
-      "raw": 1,
-      "scaled": 0.5
+      "title": "test",
+      "numQuestionsInScene": 2,
+      "scores": {
+        "0": {
+          "title": "svar riktig",
+          "raw": 0,
+          "max": 2,
+          "scaled": 0
+        },
+        "1": {
+          "title": "svar riktig",
+          "raw": 0,
+          "max": 1,
+          "scaled": 0
+        }
+      }
     }
   }
 }};

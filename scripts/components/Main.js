@@ -60,7 +60,7 @@ export default class Main extends React.Component {
 	  if (!this.context.extras.isEditor && this.props.currentScene) {
       this.handleSceneDescriptionInitially(this.props.currentScene);
     }
-    this.state.scoreCard = this.initialScoreCard();
+    this.setState({scoreCard: this.initialScoreCard()});
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -138,6 +138,18 @@ export default class Main extends React.Component {
         }
       }
     }
+
+    //Makes sure the user is warned before closing the window
+    window.addEventListener('beforeunload', (e) => {
+      if(e.target.body.firstChild.classList.contains("h5p-threeimage-editor")
+        || this.state.scoreCard.numQuestionsInTour === 0
+        || this.state.scoreCard.totalQuestionsCompleted === 0)
+      {
+        return;
+      }
+      e.preventDefault();
+      e.returnValue = '';
+    });
   }
 
   setFocusedInteraction(focusedInteraction) {
@@ -153,27 +165,36 @@ export default class Main extends React.Component {
   }
 
   initialScoreCard() {
-    const scoreCard = {}
+    const scoreCard = {
+      numQuestionsInTour: 0,
+      totalQuestionsCompleted: 0,
+      sceneScoreCards: {}
+    };
     for(const sceneId in this.context.params.scenes){
       const scene = this.context.params.scenes[sceneId];
-      scoreCard[sceneId] = this.initialSceneScoreCard(scene);
+      scoreCard.sceneScoreCards[sceneId] = this.initialSceneScoreCard(scene);
+      scoreCard.numQuestionsInTour = scoreCard.numQuestionsInTour + scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
     }
     return scoreCard;
   }
 
   initialSceneScoreCard(scene) {
     const sceneScoreCard = {
-      title: scene.scenename
+      title: scene.scenename,
+      numQuestionsInScene: 0,
+      scores: {}
     };
     for(let i = 0; i < scene.interactions.length; i++){
       const interaction = scene.interactions[i];
       const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
       switch(libraryName) {
         case "H5P.Summary":
-          sceneScoreCard[i]={title: interaction.label.labelText, raw: 0, max: 1, scaled: 0};
+          sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: 1, scaled: 0};
+          sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
           break;
         case "H5P.SingleChoiceSet":
-          sceneScoreCard[i]={title: interaction.label.labelText, raw: 0, max: interaction.action.params.choices.length, scaled: 0};
+          sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: interaction.action.params.choices.length, scaled: 0};
+          sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
           break;
         default:
           // Noop
@@ -463,11 +484,13 @@ export default class Main extends React.Component {
     return isCorrectPassword;
   }
 
+
   updateScoreCard(sceneId, assignmentId, score){
-    if(!this.state.scoreCard[sceneId]){
+    this.state.scoreCard.totalQuestionsCompleted = this.state.scoreCard.totalQuestionsCompleted + 1;
+    if(!this.state.scoreCard.sceneScoreCards[sceneId]){
       this.state.scoreCard[sceneId] = {};
     }
-    this.state.scoreCard[sceneId][assignmentId] = score;
+    this.state.scoreCard.sceneScoreCards[sceneId].scores[assignmentId] = score;
   }
 
   render() {

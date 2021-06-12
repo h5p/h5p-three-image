@@ -13,11 +13,9 @@ export default class ScoreSummary extends React.Component {
     const totalScores = {score: 0, max:0};
     for(const scene in this.context.params.scenes){
       const sceneScores = scores[scene];
-      for(const [id, score] of Object.entries(sceneScores)){
-        if(id !== "title") {
+      for(const [id, score] of Object.entries(sceneScores.scores)){
           totalScores.score += score.raw;
           totalScores.max += score.max;  
-        }
       }
     }
     return totalScores;
@@ -25,8 +23,8 @@ export default class ScoreSummary extends React.Component {
   
   render() {
     const items = []
-    const totalScores = this.getTotalScores(this.props.scores);
-    for (const [sceneId, sceneScores] of Object.entries(this.props.scores)) {
+    const totalScores = this.getTotalScores(this.props.scores.sceneScoreCards);
+    for (const [sceneId, sceneScores] of Object.entries(this.props.scores.sceneScoreCards)) {
         items.push(<SceneScores sceneId={sceneId} sceneScores={sceneScores}></SceneScores>);
     }
     const children = (

@@ -17,10 +17,8 @@ export default class SceneTotalScores extends React.Component {
     const sceneTitle = this.getSceneTitle(this.props.sceneId, this.props.sceneScores.title);
     const totalScore = 0;
     const items = []
-    for (const [scoreId, score] of Object.entries(this.props.sceneScores)){
-      if(scoreId !== "title"){
+    for (const [scoreId, score] of Object.entries(this.props.sceneScores.scores)){
         items.push(<tr><td class="h5p-td h5p-summary-task-title">{score.title ? score.title : scoreId}</td><td class="h5p-td h5p-summary-score-bar">{score.raw}/{score.max}</td></tr>)
-      }
     }
     return (
       <tbody>
