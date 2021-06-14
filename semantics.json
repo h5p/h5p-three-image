@@ -364,7 +364,7 @@
               "label": "Playlist",
               "description": "Here you can pick an existing playlist as audio.",
               "name": "playlist",
-              "type": "number",
+              "type": "text",
               "widget": "showWhen",
               "showWhen": {
                 "rules": [
@@ -412,7 +412,7 @@
             },
             {
               "name": "playlistId",
-              "type": "number",
+              "type": "text",
               "widget": "none"
             }            
           ]
@@ -464,7 +464,7 @@
             },
             {
               "name": "playlistId",
-              "type": "number",
+              "type": "text",
               "widget": "none"
             }            
           ]
@@ -521,7 +521,7 @@
         "label": "Playlist",
         "description": "Here you can pick an existing playlist as audio.",
         "name": "playlist",
-        "type": "number",
+        "type": "text",
         "widget": "showWhen",
         "showWhen": {
           "rules": [
