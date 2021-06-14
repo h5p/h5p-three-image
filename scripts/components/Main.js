@@ -184,22 +184,26 @@ export default class Main extends React.Component {
       numQuestionsInScene: 0,
       scores: {}
     };
-    for(let i = 0; i < scene.interactions.length; i++){
-      const interaction = scene.interactions[i];
-      const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
-      switch(libraryName) {
-        case "H5P.Summary":
-          sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: 1, scaled: 0};
-          sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
-          break;
-        case "H5P.SingleChoiceSet":
-          sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: interaction.action.params.choices.length, scaled: 0};
-          sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
-          break;
-        default:
-          // Noop
+
+    if (scene.interactions) {
+      for(let i = 0; i < scene.interactions.length; i++){
+        const interaction = scene.interactions[i];
+        const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+        switch(libraryName) {
+          case "H5P.Summary":
+            sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: 1, scaled: 0};
+            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            break;
+          case "H5P.SingleChoiceSet":
+            sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: interaction.action.params.choices.length, scaled: 0};
+            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            break;
+          default:
+            // Noop
+        }
       }
     }
+
     return sceneScoreCard;
   }
 
