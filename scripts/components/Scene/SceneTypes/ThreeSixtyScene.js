@@ -77,17 +77,12 @@ export default class ThreeSixtyScene extends React.Component {
       return;
     }
 
-    // Already queued
-    if (this.pointerLockTimeout) {
-      return;
-    }
-
     this.setState({
       willPointerLock: true,
       pointerLockElement: element,
     });
 
-    this.pointerLockTimeout = window.setTimeout(() => {
+    window.setTimeout(() => {
       this.setState({
         hasPointerLock: true,
       });
@@ -110,7 +105,7 @@ export default class ThreeSixtyScene extends React.Component {
    * @private
    * 
    * Called when the scene is moved, caused by a drag event.
-   * @param  {H5P.Event} e
+   * @param {any} e
    */
   handleSceneMoveStart = (e) => {
     if (!this.context.extras.isEditor || e.data.isCamera) {
