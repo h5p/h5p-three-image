@@ -31,26 +31,36 @@ export default class HUD extends React.Component {
       props.sceneId = scene.sceneId;
     }
 
-    if (this.checkIfPlaylist(scene, this.context.params.playlists)) {
-      props.sceneAudioTrack = this.context.params.playlists[scene.playlist].audioTracks;
-      props.playlistId = scene.playlist;
+    if (scene?.audioType === "playlist" && scene?.playlist) {
+      const playlist = this.checkIfPlaylist(scene, this.context.params.playlists);
+      if (playlist != null) {
+        props.sceneAudioTrack = playlist.audioTracks;
+        props.playlistId = playlist.playlistId;
+      }
     }
 
-    if (scene && !scene.audio && !scene.playlist && this.checkIfPlaylist(this.context.behavior, this.context.params.playlists)) {
-      props.sceneAudioTrack = this.context.params.playlists[this.context.behavior.playlist].audioTracks;
-      props.playlistId = this.context.behavior.playlist;
+    const noSceneAudio = (scene?.audioType === "audio") && !scene?.audio;
+    const noScenePlaylist = (scene?.audioType === "playlist") && !scene?.playlist;
+    if (scene && (noSceneAudio || noScenePlaylist) && this.context.behavior?.playlist) {
+      const playlist = this.checkIfPlaylist(this.context.behavior, this.context.params.playlists);
+      if (playlist != null) {
+        props.sceneAudioTrack = playlist.audioTracks;
+        props.playlistId = playlist.playlistId;
+      }
     }
 
     return props;
   }
 
   checkIfPlaylist(parent, playlists) {
-    const sceneHasPlaylist = (parent != null) && (parent.playlist != null) && (parent.audioType === "playlist");
-    if (sceneHasPlaylist && playlists != null) {
-      const playlistExists = (playlists[parent.playlist] != null) && (playlists[parent.playlist].audioTracks != null);
+    const parentHasPlaylist = (parent != null) && (parent.playlist != null) && (parent.audioType === "playlist");
+    if (parentHasPlaylist && (playlists != null)) {
+      const playlistExists = playlists.find(playlist => {
+        return playlist.playlistId === parent.playlist
+      });
       return playlistExists;
     }
-    return false;
+    return null;
   }
 
   handleSceneDescription = () => {
