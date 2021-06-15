@@ -18,7 +18,7 @@ export default class SceneTotalScores extends React.Component {
     const totalScore = 0;
     const items = []
     for (const [scoreId, score] of Object.entries(this.props.sceneScores.scores)){
-        items.push(<tr><td class="h5p-td h5p-summary-task-title">{score.title ? score.title : scoreId}</td><td class="h5p-td h5p-summary-score-bar">{score.raw}/{score.max}</td></tr>)
+        items.push(<tr key={scoreId}><td className="h5p-td h5p-summary-task-title">{score.title ? score.title : scoreId}</td><td className="h5p-td h5p-summary-score-bar">{score.raw}/{score.max}</td></tr>)
     }
     return (
       <tbody>
@@ -30,4 +30,3 @@ export default class SceneTotalScores extends React.Component {
 }
 
 SceneTotalScores.contextType = H5PContext;
-
