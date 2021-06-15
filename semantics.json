@@ -357,7 +357,7 @@
                     "field": "audioType",
                     "equals": "audio"
                   }
-                ] 
+                ]
               }
             },
             {
@@ -383,6 +383,12 @@
         "name": "startSceneId",
         "type": "number",
         "default": 0
+      },
+      {
+        "name": "audio",
+        "type": "audio",
+        "label": "Audio track",
+        "optional": true
       },
       {
         "name": "playlists",
@@ -414,7 +420,7 @@
               "name": "playlistId",
               "type": "text",
               "widget": "none"
-            }            
+            }
           ]
         }
       }
@@ -691,11 +697,10 @@
       {
         "name": "scene",
         "type": "text",
-        "label": "Translation fot 'Scene'",
+        "label": "Translation for 'Scene'",
         "importance": "low",
         "default": "Scene"
       }
-      
     ]
   }
 ]
