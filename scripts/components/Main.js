@@ -8,6 +8,7 @@ import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
 import PasswordContent from "./Dialog/PasswordContent";
+import ScoreSummary from './Dialog/ScoreSummary';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class Main extends React.Component {
       currentText: null,
       showingInteraction: false,
       showingPassword: false,
+      showingScoreSummary: false,
       currentInteraction: null,
       sceneHistory: [],
       audioIsPlaying: null,
@@ -58,6 +60,7 @@ export default class Main extends React.Component {
 	  if (!this.context.extras.isEditor && this.props.currentScene) {
       this.handleSceneDescriptionInitially(this.props.currentScene);
     }
+    this.setState({scoreCard: this.initialScoreCard()});
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -135,6 +138,18 @@ export default class Main extends React.Component {
         }
       }
     }
+
+    //Makes sure the user is warned before closing the window
+    window.addEventListener('beforeunload', (e) => {
+      if(e.target.body.firstChild.classList.contains("h5p-threeimage-editor")
+        || this.state.scoreCard.numQuestionsInTour === 0
+        || this.state.scoreCard.totalQuestionsCompleted === 0)
+      {
+        return;
+      }
+      e.preventDefault();
+      e.returnValue = '';
+    });
   }
 
   setFocusedInteraction(focusedInteraction) {
@@ -147,6 +162,68 @@ export default class Main extends React.Component {
     this.setState({
       focusedInteraction: null,
     });
+  }
+
+  initialScoreCard() {
+    const scoreCard = {
+      numQuestionsInTour: 0,
+      totalQuestionsCompleted: 0,
+      sceneScoreCards: {}
+    };
+    for(const sceneId in this.context.params.scenes){
+      const scene = this.context.params.scenes[sceneId];
+      scoreCard.sceneScoreCards[sceneId] = this.initialSceneScoreCard(scene);
+      scoreCard.numQuestionsInTour = scoreCard.numQuestionsInTour + scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
+    }
+    return scoreCard;
+  }
+
+  initialSceneScoreCard(scene) {
+    const sceneScoreCard = {
+      title: scene.scenename,
+      numQuestionsInScene: 0,
+      scores: {}
+    };
+
+    if (scene.interactions) {
+      for(let i = 0; i < scene.interactions.length; i++){
+        const interaction = scene.interactions[i];
+        const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+        switch(libraryName) {
+          case "H5P.Summary":
+            sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: 1, scaled: 0};
+            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            break;
+          case "H5P.SingleChoiceSet":
+            sceneScoreCard.scores[i]={title: interaction.label.labelText, raw: 0, max: interaction.action.params.choices.length, scaled: 0};
+            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            break;
+          default:
+            // Noop
+        }
+      }
+    }
+
+    return sceneScoreCard;
+  }
+
+  hasOneQuestion() {
+    for(const sceneId in this.context.params.scenes){
+      const scene = this.context.params.scenes[sceneId];
+      for(let i = 0; i < scene.interactions.length; i++){
+        const interaction = scene.interactions[i];
+        switch(interaction.action.library) {
+          case "H5P.Summary 1.10":
+            return true;
+            break;
+          case "H5P.SingleChoiceSet 1.11":
+            return true;
+          default:
+            // Noop
+        }
+      }
+    }
+    return false;
   }
 
   navigateToScene(sceneId) {
@@ -227,11 +304,22 @@ export default class Main extends React.Component {
   }
 
   /**
+   * The user wants to see the score summary, handling it.
+   */
+   handleScoreSummary = () => {
+    this.setState({
+      showingScoreSummary: true,
+      nextFocus: null
+    });
+  }
+
+  /**
    * The user wants to close the text dialog, handling it.
    */
   handleCloseTextDialog = () => {
     this.setState({
       showingTextDialog: false,
+      showingScoreSummary: false,
       currentText: null,
       nextFocus: 'scene-description' // Should probably come in as an arg when opening the dialog
     });
@@ -400,11 +488,13 @@ export default class Main extends React.Component {
     return isCorrectPassword;
   }
 
+
   updateScoreCard(sceneId, assignmentId, score){
-    if(!this.state.scoreCard[sceneId]){
+    this.state.scoreCard.totalQuestionsCompleted = this.state.scoreCard.totalQuestionsCompleted + 1;
+    if(!this.state.scoreCard.sceneScoreCards[sceneId]){
       this.state.scoreCard[sceneId] = {};
     }
-    this.state.scoreCard[sceneId][assignmentId] = score;
+    this.state.scoreCard.sceneScoreCards[sceneId].scores[assignmentId] = score;
   }
 
   render() {
@@ -440,6 +530,7 @@ export default class Main extends React.Component {
     const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
     const showPasswordDialog = (this.state.showingPassword && this.state.currentInteraction !== null && !scene.interactions[this.state.currentInteraction].unlocked);
     const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
+    const showingScoreSummary = this.state.showingScoreSummary;
     // Whenever a dialog is shown we need to hide all the elements behind the overlay
     const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
     let dialogTitle;
@@ -486,6 +577,13 @@ export default class Main extends React.Component {
           <div dangerouslySetInnerHTML={{__html: this.state.currentText }} />
         </Dialog>
         }
+        { showingScoreSummary &&
+              <ScoreSummary 
+                title={this.context.l10n.scoreSummary}
+                onHideTextDialog={  this.handleCloseTextDialog  }
+                scores={this.state.scoreCard}></ScoreSummary>
+
+        }
         {
           this.context.params.scenes.map(sceneParams => {
             return (
@@ -529,6 +627,8 @@ export default class Main extends React.Component {
           onCenterScene={ this.centerScene.bind(this) }
           isStartScene = {isStartScene}
           onGoToStartScene={ this.goToStartScene.bind(this) }
+          onShowingScoreSummary={this.handleScoreSummary}
+          showScoresButton={this.context.behavior.showScoresButton && this.hasOneQuestion()}
         />
       </div>
     );

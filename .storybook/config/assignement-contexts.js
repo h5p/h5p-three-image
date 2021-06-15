@@ -24,6 +24,11 @@ export const assignmentAppContext = {
     hideCode: "Hide code",
     unlockedStateAction: "Continue",
     lockedStateAction: "Unlock",
+    total: "Total",
+    score: "Score",
+    assignment: "Assignment",
+    scoreSummary: "scoreSummary",
+    scene: "Scene",
   },
   params: {
     startSceneId: 1,
@@ -39,7 +44,7 @@ export const assignmentAppContext = {
             },
             action: {
               library: "H5P.SingleChoiceSet 1.11",
-              params: {  },
+              params: { choices: [{}, {}] },
               metadata: {},
             },
             interactionpos: "50,0",

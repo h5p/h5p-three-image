@@ -92,6 +92,9 @@
   &.go-to-start:before {
     content: $goToStart;
   }
+  &.score-summary:before {
+    content: $scoreSummary;
+  }
   &.submit-dialog:before {
     content: " ";
     background-image: url('../../../../../assets/the-h5p-star.svg');

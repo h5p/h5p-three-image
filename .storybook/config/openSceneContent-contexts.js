@@ -24,6 +24,8 @@ export const openSceneContentAppContext = {
     hideCode: "Hide code",
     unlockedStateAction: "Continue",
     lockedStateAction: "Unlock",
+    scoreSummary: "scoreSummary",
+    scene: "Scene",
   },
   params: {
     startSceneId: 1,

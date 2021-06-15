@@ -80,11 +80,12 @@ export default class InteractionContent extends React.Component {
 
     this.instance.on('resize', () => this.props.onResize());
     this.instance.on("xAPI", (event) => {
-        if(event.data.statement.verb.id === "http://adlnet.gov/expapi/verbs/answered"){
+        if(event.data.statement.verb.id === "http://adlnet.gov/expapi/verbs/completed"){
           this.props.updateScoreCard(this.props.currentScene, this.props.currentInteraction, event.data.statement.result.score);
         }
     });
   }
+  
   render() {
     return (
       <div ref={ el => this.initializeContent(el) } />

@@ -7,10 +7,13 @@ import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeS
 
 // Load library
 H5P = H5P || {};
+
+
 H5P.ThreeImage = (function () {
 
   function Wrapper(params, contentId, extras) {
     extras = extras || {};
+
     this.forceStartScreen = (extras.forceStartScreen !== undefined
       && extras.forceStartScreen >= 0)
       ? extras.forceStartScreen : null;
@@ -224,6 +227,8 @@ H5P.ThreeImage = (function () {
       this.threeSixty.setSegmentNumber(segments);
       this.sceneRenderingQuality = quality;
     };
+    
+    
   }
 
   /**
