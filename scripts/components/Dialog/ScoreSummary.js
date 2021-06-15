@@ -21,9 +21,16 @@ export default class ScoreSummary extends React.Component {
     return totalScores;
   }
   
+  componentDidMount() {
+    const totalScores = this.getTotalScores(this.props.scores.sceneScoreCards);
+    const scoreBar = new H5P.JoubelScoreBar(totalScores.max, "label", "helpText", "scoreExplanationButtonLabel");
+    scoreBar.setScore(totalScores.score);
+    const wrapper = H5P.jQuery("#total-scores")
+    scoreBar.appendTo(wrapper);
+  }
+
   render() {
     const items = []
-    const totalScores = this.getTotalScores(this.props.scores.sceneScoreCards);
     for (const [sceneId, sceneScores] of Object.entries(this.props.scores.sceneScoreCards)) {
         items.push(<SceneScores sceneId={sceneId} sceneScores={sceneScores}></SceneScores>);
     }
@@ -38,7 +45,7 @@ export default class ScoreSummary extends React.Component {
         </thead>
         {items}
         <tfoot>
-          <tr><td class="h5p-td h5p-summary-task-title">Total:</td><td class="h5p-td h5p-summary-score-bar"><p>{totalScores.score}/{totalScores.max}</p></td></tr>
+          <tr><td class="h5p-td h5p-summary-task-title">Total:</td><td id="total-scores" class="h5p-td h5p-summary-score-bar"></td></tr>
         </tfoot>
        </table>
     </div>);
