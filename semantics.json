@@ -405,7 +405,7 @@
               "name": "audioTracks",
               "type": "audio",
               "description": "Add audio tracks to the playlist.",
-              "optional": true,
+              "optional": false,
               "widgetExtensions": [
                 "AudioRecorder"
               ]
@@ -457,7 +457,7 @@
               "name": "audioTracks",
               "type": "audio",
               "description": "Add audio tracks to the playlist.",
-              "optional": true,
+              "optional": false,
               "widgetExtensions": [
                 "AudioRecorder"
               ]
