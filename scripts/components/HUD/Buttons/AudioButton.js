@@ -52,10 +52,7 @@ export default class AudioButton extends React.Component {
     if (!id) {
       return null;
     }
-    var playerId = this.context.contentId;
-    if (this.props.playerId) {
-      playerId = this.props.playerId;
-    }
+    const playerId = this.props.playerId || this.context.contentId;
     
     // Create player if none exist
     if (this.players[id] === undefined) {
