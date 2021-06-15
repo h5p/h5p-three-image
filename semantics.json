@@ -434,41 +434,6 @@
         "description": "Make playlists that's available for all scenes by default.",
         "widget": "playlist",
         "canEdit": true
-      },
-      {
-        "name": "playlists",
-        "type": "list",
-        "label": "Playlists",
-        "optional": true,
-        "widget": "none",
-        "field": {
-          "name": "playlist",
-          "type": "group",
-          "fields": [
-            {
-              "label": "Playlist Title",
-              "name": "title",
-              "type": "text",
-              "description": "Used to identify the playlist",
-              "optional": false
-            },
-            {
-              "label": "Audio Tracks",
-              "name": "audioTracks",
-              "type": "audio",
-              "description": "Add audio tracks to the playlist.",
-              "optional": false,
-              "widgetExtensions": [
-                "AudioRecorder"
-              ]
-            },
-            {
-              "name": "playlistId",
-              "type": "text",
-              "widget": "none"
-            }            
-          ]
-        }
       }
     ]
   },
