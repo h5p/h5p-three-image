@@ -32,7 +32,7 @@ export default class ScoreSummary extends React.Component {
   render() {
     const items = []
     for (const [sceneId, sceneScores] of Object.entries(this.props.scores.sceneScoreCards)) {
-        items.push(<SceneScores sceneId={sceneId} sceneScores={sceneScores}></SceneScores>);
+        items.push(<SceneScores key={sceneId} sceneId={sceneId} sceneScores={sceneScores}></SceneScores>);
     }
     const children = (
     <div class="h5p-summary-table-pages">
