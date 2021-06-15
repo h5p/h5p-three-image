@@ -70,14 +70,15 @@
 }
 .h5p-medium-tablet-size .h5p-text-dialog {
   width: 86%;
-  margin: 0em;
+  margin: 0;
+  max-width: 30em;
   padding: 0.25em;
 }
 .h5p-text-content {
   flex: 1;
   max-height: 100%;
-  max-width: 100%;
   overflow-y: auto;
+  padding: 0 1em;
 }
 .h5p-text-content::-webkit-scrollbar {
   width: 0.5em;
