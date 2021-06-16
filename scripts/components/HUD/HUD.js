@@ -26,7 +26,7 @@ export default class HUD extends React.Component {
       nextFocus: this.props.nextFocus
     };
 
-    if (scene?.audio?.length > 0 (!scene.audioType || scene.audioType === "audio")) {
+    if (scene?.audio?.length > 0 && (!scene.audioType || scene.audioType === "audio")) {
       props.sceneAudioTrack = scene.audio;
       props.sceneId = scene.sceneId;
     }
