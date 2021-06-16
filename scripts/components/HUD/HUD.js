@@ -22,6 +22,8 @@ export default class HUD extends React.Component {
     const props = {
       isPlaying: this.props.audioIsPlaying,
       onIsPlaying: this.props.onAudioIsPlaying,
+      wasPlaying: this.props.audioWasPlaying,
+      onWasPlaying: this.props.onAudioWasPlaying,
       isHiddenBehindOverlay: this.props.isHiddenBehindOverlay,
       nextFocus: this.props.nextFocus
     };
