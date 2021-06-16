@@ -26,12 +26,41 @@ export default class HUD extends React.Component {
       nextFocus: this.props.nextFocus
     };
 
-    if (scene && scene.audio && scene.audio.length) {
+    if (scene && scene.audio && scene.audio.length && scene.audioType === "audio") {
       props.sceneAudioTrack = scene.audio;
       props.sceneId = scene.sceneId;
     }
 
+    if (scene?.audioType === "playlist" && scene?.playlist) {
+      const playlist = this.checkIfPlaylist(scene, this.context.params.playlists);
+      if (playlist != null) {
+        props.sceneAudioTrack = playlist.audioTracks;
+        props.playlistId = playlist.playlistId;
+      }
+    }
+
+    const noSceneAudio = (scene?.audioType === "audio") && !scene?.audio;
+    const noScenePlaylist = (scene?.audioType === "playlist") && !scene?.playlist;
+    if (scene && (noSceneAudio || noScenePlaylist) && this.context.behavior?.playlist) {
+      const playlist = this.checkIfPlaylist(this.context.behavior, this.context.params.playlists);
+      if (playlist != null) {
+        props.sceneAudioTrack = playlist.audioTracks;
+        props.playlistId = playlist.playlistId;
+      }
+    }
+
     return props;
+  }
+
+  checkIfPlaylist(parent, playlists) {
+    const parentHasPlaylist = (parent != null) && (parent.playlist != null) && (parent.audioType === "playlist");
+    if (parentHasPlaylist && (playlists != null)) {
+      const playlistExists = playlists.find(playlist => {
+        return playlist.playlistId === parent.playlist
+      });
+      return playlistExists;
+    }
+    return null;
   }
 
   handleSceneDescription = () => {

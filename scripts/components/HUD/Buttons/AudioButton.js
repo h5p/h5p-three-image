@@ -21,8 +21,14 @@ export default class AudioButton extends React.Component {
     if (props.sceneId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
       return 'scene-' + props.sceneId;
     }
+    if (props.playlistId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
+      return 'playlist-' + props.playlistId;
+    }
     if (this.context.behavior.audio && this.context.behavior.audio.length) {
       return 'global';
+    }
+    if (this.context.behavior.playlist && this.context.behavior.audioType === "playlist") {
+      return 'playlist-' + this.context.behavior.playlist;
     }
   }
 
@@ -46,11 +52,12 @@ export default class AudioButton extends React.Component {
     if (!id) {
       return null;
     }
+    const playerId = this.props.playerId || this.context.contentId;
     
     // Create player if none exist
     if (this.players[id] === undefined) {
       this.players[id] = AudioButton.createAudioPlayer(
-        this.context.contentId,
+        playerId,
         this.getTrack(id),
         () => {
           this.props.onIsPlaying(id);
@@ -128,7 +135,7 @@ export default class AudioButton extends React.Component {
     if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
       // The Audio Player has changed
 
-      if (AudioButton.isSceneAudio(prevProps.isPlaying)) {
+      if (AudioButton.isSceneAudio(prevProps.isPlaying) || AudioButton.isPlaylistAudio(prevProps.isPlaying)) {
         // Thas last player was us, we need to stop it
 
         const lastPlayer = this.getPlayer(prevProps.isPlaying);
@@ -139,7 +146,7 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (AudioButton.isSceneAudio(this.props.isPlaying)) {
+    if (AudioButton.isSceneAudio(this.props.isPlaying) || AudioButton.isPlaylistAudio(this.props.isPlaying)) {
       // We are playing something
 
       const currentPlayerId = this.getPlayerId(this.props);
@@ -209,6 +216,16 @@ export default class AudioButton extends React.Component {
    */
   static isVideoAudio(id) {
     return id && (id.substr(0, 6) === 'video-');
+  }
+
+  /**
+   * Determine if the ID of the player belongs to a playlist.
+   *
+   * @param {string} id
+   * @return {boolean}
+   */
+   static isPlaylistAudio(id) {
+    return id && (id === 'global' || id.substr(0, 9) === 'playlist-');
   }
 
   /**

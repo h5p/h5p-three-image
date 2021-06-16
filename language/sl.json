@@ -153,8 +153,24 @@
                 ]
               },
               {
+                "label": "Audio type",
+                "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+                "options": [
+                  {
+                    "label": "Audio Track"
+                  },
+                  {
+                    "label": "Playlist"
+                  }
+                ]
+              },
+              {
                 "label": "Avdioposnetek",
                 "description": "Posnetek naj bo značilen za ta prizor."
+              },
+              {
+                "label": "Playlist",
+                "description": "Here you can pick an existing playlist as audio."
               }
             ]
           }
@@ -162,6 +178,32 @@
         {},
         {
           "label": "Avdioposnetek"
+        },
+        {
+          "label": "Playlists",
+          "field": {
+            "fields": [
+              {
+                "label": "Playlist Title",
+                "description": "Used to identify the playlist"
+              },
+              {
+                "label": "Audio Tracks",
+                "description": "Add audio tracks to the playlist."
+              },
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Playlists",
+      "description": "These options will let you add playlists for the scenes.",
+      "fields": [
+        {
+          "label": "Added playlists",
+          "description": "Make playlists that's available for all scenes by default."
         }
       ]
     },
@@ -170,8 +212,28 @@
       "description": "Nastavitve omogočajo nadzor nad interakcijo aktivnosti za udeležence.",
       "fields": [
         {
+          "label": "Audio type",
+          "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+          "options": [
+            {
+              "label": "Global Audio"
+            },
+            {
+              "label": "Playlist"
+            }
+          ]
+        },
+        {
           "label": "Splošen avdioposnetek",
           "description": "Posnetek se predvaja pri vseh prizorih (privzeto). Značilni posnetki posameznih prizorov se lahko dodajajo pri nastavitvah teh prizorov."
+        },
+        {
+          "label": "Playlist",
+          "description": "Here you can pick an existing playlist as audio."
+        },
+        {
+          "label": "Display \"Scores\" button",
+          "description": "Display button for showing the scores from assignments."
         },
         {
           "label": "Kakovost prikazovanja prizorov",
@@ -259,6 +321,42 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
+        },
+        {
+          "label": "Label for context menu button for go to scene",
+          "default": "Go to scene"
+        },
+        {
+          "label": "Label for context menu button for edit",
+          "default": "Edit"
+        },
+        {
+          "label": "Label for context menu button for delete",
+          "default": "Delete"
+        },
+        {
+          "label": "Translation for \"Score\"",
+          "default": "Score"
+        },
+        {
+          "label": "Translation for \"Assignment\"",
+          "default": "Assignment"
+        },
+        {
+          "label": "Translation for \"Total\"",
+          "default": "Total"
+        },
+        {
+          "label": "Translation for \"Total Score\"",
+          "default": "Total Score"
+        },
+        {
+          "label": "Label for button to show score summary",
+          "default": "Show Score Summary"
+        },
+        {
+          "label": "Translation for 'Scene'",
+          "default": "Scene"
         }
       ]
     }

@@ -323,6 +323,25 @@
               "default": "arrow"
             },
             {
+              "name": "audioType",
+              "type": "select",
+              "label": "Audio type",
+              "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+              "widget": "radioGroup",
+              "alignment": "horizontal",
+              "options": [
+                {
+                  "label": "Audio Track",
+                  "value": "audio"
+                },
+                {
+                  "label": "Playlist",
+                  "value": "playlist"
+                }
+              ],
+              "default": "audio"
+            },
+            {
               "name": "audio",
               "type": "audio",
               "label": "Audio Track",
@@ -330,7 +349,32 @@
               "optional": true,
               "widgetExtensions": [
                 "AudioRecorder"
-              ]
+              ],
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "audioType",
+                    "equals": "audio"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Playlist",
+              "description": "Here you can pick an existing playlist as audio.",
+              "name": "playlist",
+              "type": "text",
+              "widget": "showWhen",
+              "showWhen": {
+                "rules": [
+                  {
+                    "field": "audioType",
+                    "equals": "playlist"
+                  }
+                ],
+                "widget": "playlist"
+              }
             }
           ]
         }
@@ -345,6 +389,57 @@
         "type": "audio",
         "label": "Audio track",
         "optional": true
+      },
+      {
+        "name": "playlists",
+        "type": "list",
+        "label": "Playlists",
+        "optional": true,
+        "field": {
+          "name": "playlist",
+          "type": "group",
+          "fields": [
+            {
+              "label": "Playlist Title",
+              "name": "title",
+              "type": "text",
+              "description": "Used to identify the playlist",
+              "optional": false
+            },
+            {
+              "label": "Audio Tracks",
+              "name": "audioTracks",
+              "type": "audio",
+              "description": "Add audio tracks to the playlist.",
+              "optional": false,
+              "widgetExtensions": [
+                "AudioRecorder"
+              ]
+            },
+            {
+              "name": "playlistId",
+              "type": "text",
+              "widget": "none"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "audioPlaylistsGroup",
+    "type": "group",
+    "label": "Playlists",
+    "importance": "low",
+    "description": "These options will let you add playlists for the scenes.",
+    "fields": [
+      {
+        "name": "audioPlaylists",
+        "type": "number",
+        "label": "Added playlists",
+        "description": "Make playlists that's available for all scenes by default.",
+        "widget": "playlist",
+        "canEdit": true
       }
     ]
   },
@@ -356,6 +451,25 @@
     "description": "These options will let you control how the world behaves.",
     "fields": [
       {
+        "name": "audioType",
+        "type": "select",
+        "label": "Audio type",
+        "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+        "widget": "radioGroup",
+        "alignment": "horizontal",
+        "options": [
+          {
+            "label": "Global Audio",
+            "value": "audio"
+          },
+          {
+            "label": "Playlist",
+            "value": "playlist"
+          }
+        ],
+        "default": "audio"
+      },
+      {
         "name": "audio",
         "type": "audio",
         "label": "Global Audio",
@@ -363,7 +477,32 @@
         "optional": true,
         "widgetExtensions": [
           "AudioRecorder"
-        ]
+        ],
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "audioType",
+              "equals": "audio"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Playlist",
+        "description": "Here you can pick an existing playlist as audio.",
+        "name": "playlist",
+        "type": "text",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "audioType",
+              "equals": "playlist"
+            }
+          ],
+          "widget": "playlist"
+        }
       },
       {
         "name": "showScoresButton",
@@ -558,11 +697,10 @@
       {
         "name": "scene",
         "type": "text",
-        "label": "Translation fot 'Scene'",
+        "label": "Translation for 'Scene'",
         "importance": "low",
         "default": "Scene"
       }
-      
     ]
   }
 ]
