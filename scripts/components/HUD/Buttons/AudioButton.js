@@ -46,7 +46,7 @@ export default class AudioButton extends React.Component {
    * Get the audio player for the current track.
    *
    * @param {string} id
-   * @return {AudioElement} or 'null' if track isn't playable.
+   * @return {HTMLAudioElement} or 'null' if track isn't playable.
    */
   getPlayer = (id) => {
     if (!id) {
@@ -170,6 +170,17 @@ export default class AudioButton extends React.Component {
         if (currentPlayer) {
           currentPlayer.play();
         }
+      }
+
+      const isNewScene = this.props.sceneId !== prevProps.sceneId;
+      if (this.props.restartAudioOnSceneStart && isNewScene) {
+        const currentPlayerId = this.getPlayerId(this.props);
+        const player = this.getPlayer(currentPlayerId);
+  
+        player.audioTrack = 0;
+        player.currentTime = 0;
+  
+        console.log({player})
       }
     }
 

@@ -39,12 +39,12 @@
                 "description": "En beskrivelse av scenen"
               },
               {
-                "label": "Display \"Scene Description\" initially",
-                "description": "Display the scene description when the scene starts for the first time"
+                "label": "Vis scenens beskrivelse første gang",
+                "description": "Vis scenens beskrivelse første gang scenen vises."
               },
               {
-                "label": "Initial camera position",
-                "description": "Camera position in pitch and yaw"
+                "label": "Kameraets startposisjon",
+                "description": ""
               },
               {
                 "label": "Interactions",
@@ -142,7 +142,7 @@
               },
               {
                 "label": "Knappetype",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "description": "Bestem hvordan knapper som peker til denne scenen skal se ut. Vi anbefaler \"Mer informasjon (pluss)\".",
                 "options": [
                   {
                     "label": "Ny scene (pil)"
@@ -153,24 +153,27 @@
                 ]
               },
               {
-                "label": "Audio type",
-                "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+                "label": "Lydtype",
+                "description": "Velg om det skal spilles av et lydspor eller en spilleliste når scenen er åpen.",
                 "options": [
                   {
-                    "label": "Audio Track"
+                    "label": "Lydspor"
                   },
                   {
-                    "label": "Playlist"
+                    "label": "Spilleliste"
                   }
                 ]
               },
               {
                 "label": "Lydspor",
-                "description": "Add an audio track that's specific for this scene."
+                "description": "Legg til et lydspor som skal spilles av når scenen er åpen."
               },
               {
-                "label": "Playlist",
-                "description": "Here you can pick an existing playlist as audio."
+                "label": "Spilleliste",
+                "description": "Velg en spilleliste som skal spilles av når scenen er åpen."
+              },
+              {
+                "label": "Start lyden på nytt når scenen åpnes"
               }
             ]
           }
@@ -180,16 +183,16 @@
           "label": "Lydspor"
         },
         {
-          "label": "Playlists",
+          "label": "Spillelister",
           "field": {
             "fields": [
               {
-                "label": "Playlist Title",
-                "description": "Used to identify the playlist"
+                "label": "Navn på spilleliste",
+                "description": "Brukes for å gjenkjenne spillelisten"
               },
               {
-                "label": "Audio Tracks",
-                "description": "Add audio tracks to the playlist."
+                "label": "Lydspor",
+                "description": "Legg ett eller flere lydspor til i spillelisten."
               },
               {}
             ]
@@ -198,8 +201,8 @@
       ]
     },
     {
-      "label": "Playlists",
-      "description": "These options will let you add playlists for the scenes.",
+      "label": "Spillelister",
+      "description": "Disse valgene lar deg legge til spillelister i scenene.",
       "fields": [
         {
           "label": "Added playlists",
@@ -225,19 +228,19 @@
         },
         {
           "label": "Global lyd",
-          "description": "Add an audio track that's available for all of the scenes by default."
+          "description": "Velg et lydspor som kan høres i alle scener."
         },
         {
-          "label": "Playlist",
-          "description": "Here you can pick an existing playlist as audio."
+          "label": "Spilleliste",
+          "description": "Velg en spilleliste som kan høres i alle scener."
         },
         {
-          "label": "Display \"Scores\" button",
-          "description": "Display button for showing the scores from assignments."
+          "label": "Vis \"Poeng\"-knappen",
+          "description": "Vis en knapp som lar brukeren se antall poeng som er scoret."
         },
         {
           "label": "Kvalitet på scene-rendering",
-          "description": "Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
+          "description": "Velg Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
           "options": [
             {
               "label": "Høy kvalitet (128x128)"
