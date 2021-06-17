@@ -26,7 +26,7 @@ export default class Main extends React.Component {
       currentInteraction: null,
       sceneHistory: [],
       audioIsPlaying: null,
-      audioWasPlaying: null,
+      sceneAudioWasPlaying: null,
       focusedInteraction: null,
       isEditingInteraction: false,
       nextFocus: null,
@@ -468,9 +468,9 @@ export default class Main extends React.Component {
     });
   }
 
-  handleAudioWasPlaying = (id) => {
+  handleSceneAudioWasPlaying = (id) => {
     this.setState({
-      audioWasPlaying: id // Set the prev player
+      sceneAudioWasPlaying: id // Set the prev player
     });
   }
 
@@ -642,11 +642,11 @@ export default class Main extends React.Component {
         <HUD
           scene={ scene }
           audioIsPlaying={ this.state.audioIsPlaying }
-          audioWasPlaying={ this.state.audioWasPlaying }
+          sceneAudioWasPlaying={ this.state.sceneAudioWasPlaying }
           isHiddenBehindOverlay={ isHiddenBehindOverlay }
           nextFocus={ this.state.nextFocus }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
-          onAudioWasPlaying={ this.handleAudioWasPlaying }
+          onSceneAudioWasPlaying={ this.handleSceneAudioWasPlaying }
           onSceneDescription={ this.handleSceneDescription }
           onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
           onCenterScene={ this.centerScene.bind(this) }
