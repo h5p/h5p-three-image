@@ -375,6 +375,12 @@
                 ],
                 "widget": "playlist"
               }
+            },
+            {
+              "label": "Restart audio when scene is reopened",
+              "name": "restartAudioOnSceneStart",
+              "type": "boolean",
+              "default": "false"
             }
           ]
         }
