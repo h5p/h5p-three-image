@@ -179,8 +179,6 @@ export default class AudioButton extends React.Component {
   
         player.audioTrack = 0;
         player.currentTime = 0;
-  
-        console.log({player})
       }
     }
 
