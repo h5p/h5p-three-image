@@ -216,14 +216,22 @@ export default class Main extends React.Component {
   }
 
   getQuestionMaxScore(interaction) {
-    const question = H5P.newRunnable(
-      interaction.action,
-      this.context.contentId
-    );
-    return question.getMaxScore();
+    if(this.context.extras.isEditor){
+      return 1;
+    } else {
+      const question = H5P.newRunnable(
+        interaction.action,
+        this.context.contentId
+      );
+      return question.getMaxScore();
+    }
   }
 
   hasOneQuestion() {
+    if(!scene.interactions) {
+      return false;
+    }
+
     for(const sceneId in this.context.params.scenes){
       const scene = this.context.params.scenes[sceneId];
       for(let i = 0; i < scene.interactions.length; i++){
