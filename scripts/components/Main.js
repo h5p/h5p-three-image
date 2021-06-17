@@ -228,13 +228,13 @@ export default class Main extends React.Component {
   }
 
   hasOneQuestion() {
-    if(!scene.interactions) {
+    if(this.context.extras.isEditor || !this.context.params.scenes) {
       return false;
     }
 
     for(const sceneId in this.context.params.scenes){
       const scene = this.context.params.scenes[sceneId];
-      for(let i = 0; i < scene.interactions.length; i++){
+      for(let i = 0; i < scene?.interactions?.length; i++){
         const interaction = scene.interactions[i];
         switch(interaction.action.library) {
           case "H5P.Summary 1.10":
