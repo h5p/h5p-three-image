@@ -173,7 +173,8 @@ export default class AudioButton extends React.Component {
       // An interaction audio is over and we played scene audio or global audio before that!
       
       const lastPlayer = this.getPlayer(this.props.sceneWasPlaying);
-      if (lastPlayer) {
+      const currentPlayerId = this.getPlayerId(this.props);
+      if (lastPlayer && (this.props.sceneWasPlaying === currentPlayerId)) {
         // Play the audio of the last scene/global player
         lastPlayer.play();
       }
