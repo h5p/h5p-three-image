@@ -100,6 +100,9 @@ export default class AudioButton extends React.Component {
     const player = this.getPlayer(id);
     if (player) {
       if (id === this.props.isPlaying) {
+        // Reset sceneWasPlaying
+        this.props.onSceneWasPlaying(null);
+
         // Pause and reset the player
         player.pause();
       }
@@ -140,6 +143,9 @@ export default class AudioButton extends React.Component {
 
         const lastPlayer = this.getPlayer(prevProps.isPlaying);
         if (lastPlayer) {
+          // Save the prev player from this scene
+          this.props.onSceneWasPlaying(prevProps.isPlaying);
+
           // Pause and reset the last player
           lastPlayer.pause();
         }
@@ -162,6 +168,27 @@ export default class AudioButton extends React.Component {
         // and start the current player
         const currentPlayer = this.getPlayer(currentPlayerId);
         if (currentPlayer) {
+          currentPlayer.play();
+        }
+      }
+    }
+
+    if (!this.props.isPlaying && this.props.sceneWasPlaying && AudioButton.isInteractionAudio(prevProps.isPlaying)) {
+      // An interaction audio is over and we played scene audio or global audio before that!
+      
+      const lastPlayer = this.getPlayer(this.props.sceneWasPlaying);
+      const currentPlayerId = this.getPlayerId(this.props);
+
+      if (lastPlayer && (this.props.sceneWasPlaying === currentPlayerId)) {
+        // Play the scene audio or global audio if it matches the current scene
+        lastPlayer.play();
+      }
+      else if (currentPlayerId) {
+        // Else the user moved directly to new scene when playing interaction audio
+        const currentPlayer = this.getPlayer(currentPlayerId);
+
+        if (currentPlayer) {
+          // Then play the current scene audio or global audio
           currentPlayer.play();
         }
       }
