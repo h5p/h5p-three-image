@@ -524,11 +524,16 @@ export default class Main extends React.Component {
   }
 
   updateEscapeScoreCard(isUnlocked){
-    this.state.scoreCard.totalCodesEntered = this.state.scoreCard.totalCodesEntered + 1;
+    const totalCodesEntered = this.state.scoreCard.totalCodesEntered + 1;
+	const totalCodesUnlocked = this.state.scoreCard.totalCodesUnlocked + (isUnlocked ? 1 : 0);
 
-    if(isUnlocked){
-      this.state.scoreCard.totalCodesUnlocked = this.state.scoreCard.totalCodesUnlocked + 1;
-    }
+    this.setState({ 
+      scoreCard: {
+        ...this.state.scoreCard,
+        totalCodesEntered,
+        totalCodesUnlocked,
+      }
+    });
   }
 
 
