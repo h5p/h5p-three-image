@@ -1,62 +1,99 @@
-import React from 'react';
+// @ts-check
 
-import { H5PContext } from '../../../context/H5PContext';
+import React from "react";
+
+import { H5PContext } from "../../../context/H5PContext";
+import {
+  createAudioPlayer,
+  isPlaylistAudio,
+  isSceneAudio,
+} from "../../../utils/audio-utils";
 import Button from "./Button/Button";
 
+/**
+ * @typedef {{
+ *   sceneAudioTrack: Array<unknown>;
+ *   sceneId: string;
+ *   playlistId: string;
+ *   onIsPlaying: (playerId: string) => void;
+ *   playerId: string;
+ *   isPlaying: string;
+ *   isHiddenBehindOverlay: boolean;
+ * }} Props
+ */
 export default class AudioButton extends React.Component {
+  /**
+   * @param {Props} props
+   */
   constructor(props) {
     super(props);
+
+    /** @type {Props} */
+    this.props = this.props;
 
     // Separate players for the different scenes
     this.players = {};
   }
 
   /**
-   * Determine player ID from given props
+   * Determine player ID
    *
-   * @param {Object} props
    * @return {string}
    */
-  getPlayerId = (props) => {
-    if (props.sceneId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
-      return 'scene-' + props.sceneId;
+  getPlayerId = () => {
+    if (
+      this.props.sceneId !== undefined &&
+      this.props.sceneAudioTrack?.length
+    ) {
+      return "scene-" + this.props.sceneId;
     }
-    if (props.playlistId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
-      return 'playlist-' + props.playlistId;
+
+    if (
+      this.props.playlistId !== undefined &&
+      this.props.sceneAudioTrack?.length
+    ) {
+      return "playlist-" + this.props.playlistId;
     }
-    if (this.context.behavior.audio && this.context.behavior.audio.length) {
-      return 'global';
+
+    if (this.context.behavior.audio?.length) {
+      return "global";
     }
-    if (this.context.behavior.playlist && this.context.behavior.audioType === "playlist") {
-      return 'playlist-' + this.context.behavior.playlist;
+
+    if (
+      this.context.behavior.playlist &&
+      this.context.behavior.audioType === "playlist"
+    ) {
+      return "playlist-" + this.context.behavior.playlist;
     }
-  }
+  };
 
   /**
    * Get track from given player ID
    *
-   * @param {string} props
+   * @param {string} id
    * @return {Array}
    */
   getTrack = (id) => {
-    return (id === 'global' ? this.context.behavior.audio : this.props.sceneAudioTrack);
-  }
+    return id === "global"
+      ? this.context.behavior.audio
+      : this.props.sceneAudioTrack;
+  };
 
   /**
    * Get the audio player for the current track.
    *
    * @param {string} id
-   * @return {AudioElement} or 'null' if track isn't playable.
+   * @return {HTMLAudioElement} or 'null' if track isn't playable.
    */
   getPlayer = (id) => {
     if (!id) {
       return null;
     }
-    const playerId = this.props.playerId || this.context.contentId;
-    
+    const playerId = this.props.playerId || this.context.contentId;
+
     // Create player if none exist
     if (this.players[id] === undefined) {
-      this.players[id] = AudioButton.createAudioPlayer(
+      this.players[id] = createAudioPlayer(
         playerId,
         this.getTrack(id),
         () => {
@@ -67,10 +104,18 @@ export default class AudioButton extends React.Component {
         },
         () => {
           // Current track ended, and player has multiple tracks (else it is looped)
-          const currentTrackNumber = this.players[id].audioTrack ? this.players[id].audioTrack : 0;
+          const currentTrackNumber = this.players[id].audioTrack
+            ? this.players[id].audioTrack
+            : 0;
           const trackList = this.getTrack(id);
-          const newTrackNumber = trackList.length - 1 === currentTrackNumber ? 0 : currentTrackNumber + 1;
-          const newTrackPath = H5P.getPath(trackList[newTrackNumber].path, this.context.contentId);
+          const newTrackNumber =
+            trackList.length - 1 === currentTrackNumber
+              ? 0
+              : currentTrackNumber + 1;
+          const newTrackPath = H5P.getPath(
+            trackList[newTrackNumber].path,
+            this.context.contentId
+          );
           const currentPlayer = this.players[id];
           // Play next track
           currentPlayer.audioTrack = newTrackNumber;
@@ -89,53 +134,55 @@ export default class AudioButton extends React.Component {
     }
 
     return this.players[id];
-  }
+  };
 
   /**
    * Handle audio button clicked
    */
   handleClick = () => {
     // Determine player ID
-    const id = this.getPlayerId(this.props);
+    const id = this.getPlayerId();
     const player = this.getPlayer(id);
     if (player) {
       if (id === this.props.isPlaying) {
         // Pause and reset the player
         player.pause();
-      }
-      else {
+      } else {
         // Start the playback!
         player.play();
       }
     }
-  }
+  };
 
   /**
    * Handle audio started playing
    */
   handlePlay = () => {
     this.setState({
-      isPlaying: true
+      isPlaying: true,
     });
-  }
+  };
 
   /**
    * Handle audio stopped playing
    */
   handleStop = () => {
     this.setState({
-      isPlaying: false
+      isPlaying: false,
     });
-  }
+  };
 
   /**
-   * React - runs after render.
+   * @param {Props} prevProps
    */
   componentDidUpdate(prevProps) {
     if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
       // The Audio Player has changed
 
-      if (AudioButton.isSceneAudio(prevProps.isPlaying) || AudioButton.isPlaylistAudio(prevProps.isPlaying)) {
+      if (
+        isSceneAudio(prevProps.isPlaying) ||
+        isPlaylistAudio(prevProps.isPlaying)
+      ) {
         // Thas last player was us, we need to stop it
 
         const lastPlayer = this.getPlayer(prevProps.isPlaying);
@@ -146,10 +193,13 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (AudioButton.isSceneAudio(this.props.isPlaying) || AudioButton.isPlaylistAudio(this.props.isPlaying)) {
+    if (
+      isSceneAudio(this.props.isPlaying) ||
+      isPlaylistAudio(this.props.isPlaying)
+    ) {
       // We are playing something
 
-      const currentPlayerId = this.getPlayerId(this.props);
+      const currentPlayerId = this.getPlayerId();
       if (this.props.isPlaying !== currentPlayerId) {
         // We are playing the audio track from another scene... we need to change track!
 
@@ -172,100 +222,24 @@ export default class AudioButton extends React.Component {
    * React - adds dom elements.
    */
   render() {
-    const id = this.getPlayerId(this.props);
+    const id = this.getPlayerId();
     if (!id) {
       return null;
     }
 
-    const type = ('audio-track' + (this.props.isPlaying === id ? ' active' : ''));
+    const type = "audio-track" + (this.props.isPlaying === id ? " active" : "");
     return (
       <Button
-        type={ type }
-        label={ this.props.isPlaying === id ? this.context.l10n.pauseAudioTrack : this.context.l10n.playAudioTrack }
-        isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-        onClick={ this.handleClick }
+        type={type}
+        label={
+          this.props.isPlaying === id
+            ? this.context.l10n.pauseAudioTrack
+            : this.context.l10n.playAudioTrack
+        }
+        isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
+        onClick={this.handleClick}
       />
     );
-  }
-
-  /**
-   * Determine if the ID of the player belongs to a scene audio track.
-   *
-   * @param {string} id
-   * @return {boolean}
-   */
-  static isSceneAudio(id) {
-    return id && (id === 'global' || id.substr(0, 6) === 'scene-');
-  }
-
-  /**
-   * Determine if the ID of the player belongs to a scene audio track.
-   *
-   * @param {string} id
-   * @return {boolean}
-   */
-  static isInteractionAudio(id) {
-    return id && (id.substr(0, 12) === 'interaction-');
-  }
-
-  /**
-   * Determine if the ID of the player belongs to a video interaction.
-   *
-   * @param {string} id
-   * @return {boolean}
-   */
-  static isVideoAudio(id) {
-    return id && (id.substr(0, 6) === 'video-');
-  }
-
-  /**
-   * Determine if the ID of the player belongs to a playlist.
-   *
-   * @param {string} id
-   * @return {boolean}
-   */
-   static isPlaylistAudio(id) {
-    return id && (id === 'global' || id.substr(0, 9) === 'playlist-');
-  }
-
-  /**
-   * Help create the audio player and find the approperiate source.
-   *
-   * @param {number} id Content ID
-   * @param {Array} sources
-   * @param {function} onPlay Callback
-   * @param {Function} onEnd Callback, run when the track ends
-   * @param {Function} onStop Callback, run when the player is paused
-   * @param {boolean} loop
-   */
-  static createAudioPlayer(id, sources, onPlay, onEnd, onStop, loop) {
-    // Check if browser supports audio.
-    let player = document.createElement('audio');
-    if (player.canPlayType !== undefined) {
-      // Add supported source files.
-      for (var i = 0; i < sources.length; i++) {
-        if (player.canPlayType(sources[i].mime)) {
-          var source = document.createElement('source');
-          source.src = H5P.getPath(sources[i].path, id);
-          source.type = sources[i].mime;
-          player.appendChild(source);
-        }
-      }
-    }
-
-    if (!player.children.length) {
-      player = null; // Not supported
-    }
-    else {
-      player.controls = false;
-      player.preload = 'auto';
-      player.loop = loop;
-      player.addEventListener('play', onPlay);
-      player.addEventListener('ended', onEnd);
-      player.addEventListener('pause', onStop);
-    }
-
-    return player;
   }
 }
 

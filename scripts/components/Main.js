@@ -5,10 +5,10 @@ import InteractionContent from "./Dialog/InteractionContent";
 import {H5PContext} from "../context/H5PContext";
 import './Main.scss';
 import HUD from './HUD/HUD';
-import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
 import PasswordContent from "./Dialog/PasswordContent";
 import ScoreSummary from './Dialog/ScoreSummary';
+import { createAudioPlayer, isInteractionAudio } from "../utils/audio-utils";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -127,7 +127,7 @@ export default class Main extends React.Component {
     if (this.state.audioIsPlaying && this.state.audioIsPlaying !== prevState.audioIsPlaying) {
       // Something is playing audio
 
-      if (AudioButton.isInteractionAudio(prevState.audioIsPlaying)) {
+      if (isInteractionAudio(prevState.audioIsPlaying)) {
         // Thas last player was us, we need to stop it
 
         const lastPlayer = this.getAudioPlayer(prevState.audioIsPlaying);
@@ -272,7 +272,7 @@ export default class Main extends React.Component {
 
     // Pause any playing interaction audio on navigation
     const isInteractionAudioPlaying = this.state.audioIsPlaying
-      && AudioButton.isInteractionAudio(this.state.audioIsPlaying);
+      && isInteractionAudio(this.state.audioIsPlaying);
     if (isInteractionAudioPlaying) {
       const lastPlayer = this.getAudioPlayer(this.state.audioIsPlaying);
       if (lastPlayer) {
@@ -353,18 +353,17 @@ export default class Main extends React.Component {
    * Get the audio player for the current track.
    *
    * @param {string} id
-   * @param {Object} [interaction] Parameters (Only needed initially)
+   * @param {Interaction} [interaction] Parameters (Only needed initially)
    * @return {AudioElement} or 'null' if track isn't playable.
    */
   getAudioPlayer = (id, interaction) => {
     // Create player if none exist
     if (this.audioPlayers[id] === undefined) {
-      if (!interaction || !interaction.action || !interaction.action.params ||
-        !interaction.action.params.files ||
-        !interaction.action.params.files.length) {
+      const noTrackToPlay = !interaction?.action?.params?.files?.length;
+      if (noTrackToPlay) {
         return; // No track to play
       }
-      this.audioPlayers[id] = AudioButton.createAudioPlayer(
+      this.audioPlayers[id] = createAudioPlayer(
         this.context.contentId,
         interaction.action.params.files,
         () => {
