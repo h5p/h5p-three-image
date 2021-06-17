@@ -141,9 +141,10 @@ export default class Main extends React.Component {
 
     //Makes sure the user is warned before closing the window
     window.addEventListener('beforeunload', (e) => {
+      console.log("state", this.state?.scoreCard);
       if(e.target.body.firstChild.classList.contains("h5p-threeimage-editor")
-        || this.state.scoreCard.numQuestionsInTour === 0
-        || this.state.scoreCard.totalQuestionsCompleted === 0)
+        || (this.state.scoreCard.totalQuestionsCompleted === 0
+            && this.state.scoreCard.totalCodesEntered === 0))
       {
         return;
       }
@@ -168,6 +169,8 @@ export default class Main extends React.Component {
     const scoreCard = {
       numQuestionsInTour: 0,
       totalQuestionsCompleted: 0,
+      totalCodesEntered: 0,
+      totalCodesUnlocked: 0,
       sceneScoreCards: {}
     };
     for(const sceneId in this.context.params.scenes){
@@ -521,6 +524,15 @@ export default class Main extends React.Component {
     this.state.scoreCard.sceneScoreCards[sceneId].scores[assignmentId] = score;
   }
 
+  updateEscapeScoreCard(isUnlocked){
+    this.state.scoreCard.totalCodesEntered = this.state.scoreCard.totalCodesEntered + 1;
+
+    if(isUnlocked){
+      this.state.scoreCard.totalCodesUnlocked = this.state.scoreCard.totalCodesUnlocked + 1;
+    }
+  }
+
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -583,6 +595,7 @@ export default class Main extends React.Component {
               currentInteraction = {scene.interactions[this.state.currentInteraction]}
               isInteractionUnlocked = {scene.interactions[this.state.currentInteraction].unlocked}
               hint = {scene.interactions[this.state.currentInteraction].label.interactionPasswordHint}
+              updateEscapeScoreCard={this.updateEscapeScoreCard.bind(this)}
             /> :
             <InteractionContent
               currentScene={this.props.currentScene}

@@ -33,6 +33,8 @@ export default class PasswordContent extends React.Component {
     if (this.props.currentInteraction.unlocked) {
       this.props.showInteraction(this.props.currentInteractionIndex);
     } else {
+      this.props.updateEscapeScoreCard(this.props.handlePassword(this.state.inputPassword));
+
       this.setState({
         unlocked: this.props.handlePassword(this.state.inputPassword),
       });
