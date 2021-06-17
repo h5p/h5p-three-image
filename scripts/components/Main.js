@@ -292,13 +292,13 @@ export default class Main extends React.Component {
    * The user wants the scene description to display when the
    * scene starts for the first time, handling it.
    *
-   * @param {string} sceneId
+   * @param {number} sceneId
    */
    handleSceneDescriptionInitially = (sceneId) => {
     const prevOpened = this.state.scenesOpened.includes(sceneId);
     if (!prevOpened) {
       // Scene has not been opened before, find scene information
-      const scene = this.context.params.scenes.find(scene => {
+      const scene = this.context.params.scenes.find((/** @type {SceneParams} */ scene) => {
         return scene.sceneId === sceneId;
       });
       if (scene.showSceneDescriptionInitially) {
@@ -414,6 +414,9 @@ export default class Main extends React.Component {
       this.setState({
         currentInteraction: null,
       });
+
+      
+      
       const nextSceneId = parseInt(interaction.action.params.nextSceneId);
       this.navigateToScene(nextSceneId);
     }

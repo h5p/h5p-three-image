@@ -20,7 +20,7 @@ export const sceneRenderingQualityMapping = {
 /**
  * @typedef {{
  *  startBtnClicked: boolean;
- *  sceneParams: Scene;
+ *  sceneParams: SceneParams;
  *  threeSixty: any;
  *  addThreeSixty: (threeSixty: any) => void;
  *  imageSrc: { path: string; };
@@ -40,6 +40,7 @@ export const sceneRenderingQualityMapping = {
  * }} Props 
  */
 
+/** @type {ThreeSixtyScene extends React.Component<Props>} */
 export default class ThreeSixtyScene extends React.Component {
   /**
    * @param {Props} props
@@ -61,7 +62,6 @@ export default class ThreeSixtyScene extends React.Component {
       hasPointerLock: false,
     };
   }
-
 
   /**
    * @private

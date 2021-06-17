@@ -236,8 +236,8 @@ H5P.ThreeImage = (function () {
   * The ids are used as key for mapping React components.
   * TODO: Create the ids in editor-time and store them in semantics
   *
-  * @param {Array<Scene>} scenes 
-  * @returns {Array<Scene>}
+  * @param {Array<SceneParams>} scenes 
+  * @returns {Array<SceneParams>}
   */
   Wrapper.addUniqueIdsToInteractions = scenes =>
    scenes.map(scene => scene.interactions 

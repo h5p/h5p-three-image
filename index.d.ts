@@ -1,4 +1,4 @@
-declare type Scene = {
+declare type SceneParams = {
   sceneId: number;
   interactions: Interaction[];
   cameraStartPosition: string;
