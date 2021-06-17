@@ -5,6 +5,7 @@ import React from "react";
 import { H5PContext } from "../../../context/H5PContext";
 import {
   createAudioPlayer,
+  isInteractionAudio,
   isPlaylistAudio,
   isSceneAudio,
 } from "../../../utils/audio-utils";
@@ -19,6 +20,8 @@ import Button from "./Button/Button";
  *   playerId: string;
  *   isPlaying: string;
  *   isHiddenBehindOverlay: boolean;
+ *   sceneWasPlaying: string;
+ *   onSceneWasPlaying: (playerId: string) => void;
  * }} Props
  */
 export default class AudioButton extends React.Component {
@@ -223,17 +226,20 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (!this.props.isPlaying && this.props.sceneWasPlaying && AudioButton.isInteractionAudio(prevProps.isPlaying)) {
+    if (
+      !this.props.isPlaying &&
+      this.props.sceneWasPlaying &&
+      isInteractionAudio(prevProps.isPlaying)
+    ) {
       // An interaction audio is over and we played scene audio or global audio before that!
-      
-      const lastPlayer = this.getPlayer(this.props.sceneWasPlaying);
-      const currentPlayerId = this.getPlayerId(this.props);
 
-      if (lastPlayer && (this.props.sceneWasPlaying === currentPlayerId)) {
+      const lastPlayer = this.getPlayer(this.props.sceneWasPlaying);
+      const currentPlayerId = this.getPlayerId();
+
+      if (lastPlayer && this.props.sceneWasPlaying === currentPlayerId) {
         // Play the scene audio or global audio if it matches the current scene
         lastPlayer.play();
-      }
-      else if (currentPlayerId) {
+      } else if (currentPlayerId) {
         // Else the user moved directly to new scene when playing interaction audio
         const currentPlayer = this.getPlayer(currentPlayerId);
 
