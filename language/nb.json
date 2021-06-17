@@ -205,7 +205,7 @@
       "description": "Disse valgene lar deg legge til spillelister i scenene.",
       "fields": [
         {
-          "label": "Added playlists",
+          "label": "Spillelister lagt til",
           "description": "Make playlists that's available for all scenes by default."
         }
       ]
