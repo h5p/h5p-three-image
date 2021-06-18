@@ -152,7 +152,10 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (AudioButton.isSceneAudio(this.props.isPlaying) || AudioButton.isPlaylistAudio(this.props.isPlaying)) {
+    const isSceneAudio = AudioButton.isSceneAudio(this.props.isPlaying);
+    const isPlaylistAudio = AudioButton.isPlaylistAudio(this.props.isPlaying);
+
+    if (isSceneAudio || isPlaylistAudio) {
       // We are playing something
 
       const currentPlayerId = this.getPlayerId(this.props);
@@ -171,8 +174,10 @@ export default class AudioButton extends React.Component {
           currentPlayer.play();
         }
       }
+    }
 
-      const isNewScene = this.props.sceneId !== prevProps.sceneId;
+    if (isSceneAudio) {
+      const isNewScene = this.props.sceneId !== prevProps.sceneId; 
       if (this.props.restartAudioOnSceneStart && isNewScene) {
         const currentPlayerId = this.getPlayerId(this.props);
         const player = this.getPlayer(currentPlayerId);
