@@ -51,3 +51,12 @@ declare type ScenePreview = {
 }
 
 declare const H5P: any;
+
+declare type H5PEvent = {
+  data: any;
+  defaultPrevented: boolean;
+  getBubbles: () => boolean;
+  preventBubbling: () => void;
+  scheduleForExternal: () => void;
+  type: string;
+}
