@@ -351,7 +351,7 @@ export default class NavigationButton extends React.Component {
    */
   setHotspotValues(widthX, heightY) {
     const scene = this.context.params.scenes.find(
-      (/** @type {Scene} */ scene) => scene.sceneId === this.props.sceneId,
+      (/** @type {SceneParams} */ scene) => scene.sceneId === this.props.sceneId,
     );
     const interaction = scene.interactions[this.props.interactionIndex];
     interaction.label.hotSpotSizeValues = widthX + "," + heightY;
