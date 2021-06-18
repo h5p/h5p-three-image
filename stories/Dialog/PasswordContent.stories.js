@@ -17,6 +17,7 @@ const defaultArguments = {
   currentInteractionIndex: 0,
   showInteraction: () => {},
   handlePassword: () => {},
+  updateEscapeScoreCard: (isUnlocked) => {},
   hint: "",
 };
 
