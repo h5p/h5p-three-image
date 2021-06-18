@@ -39,11 +39,16 @@ jobs:
             popd
           fi
 
-          rm -rf h5p-editor-three-image h5p-three-sixty
+          # Override dependencies
+          rm -rf \
+            h5p-editor-three-image \
+            h5p-three-sixty \
+            h5p-video
 
           git clone https://github.com/NDLANO/h5p-editor-three-image.git
           git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
           git clone https://github.com/NDLANO/h5p-three-sixty.git
+          git clone https://github.com/NDLANO/h5p-video.git
 
           if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm ci && npm run build; popd; fi
 
