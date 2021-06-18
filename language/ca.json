@@ -171,6 +171,9 @@
               {
                 "label": "Playlist",
                 "description": "Here you can pick an existing playlist as audio."
+              },
+              {
+                "label": "Restart audio when scene is reopened"
               }
             ]
           }
@@ -194,6 +197,16 @@
               {}
             ]
           }
+        }
+      ]
+    },
+    {
+      "label": "Playlists",
+      "description": "These options will let you add playlists for the scenes.",
+      "fields": [
+        {
+          "label": "Added playlists",
+          "description": "Make playlists that's available for all scenes by default."
         }
       ]
     },
