@@ -25,7 +25,8 @@ export default class HUD extends React.Component {
       sceneWasPlaying: this.props.sceneAudioWasPlaying,
       onSceneWasPlaying: this.props.onSceneAudioWasPlaying,
       isHiddenBehindOverlay: this.props.isHiddenBehindOverlay,
-      nextFocus: this.props.nextFocus
+      nextFocus: this.props.nextFocus,
+      restartAudioOnSceneStart: scene.restartAudioOnSceneStart,
     };
 
     if (scene?.audio?.length > 0 && (!scene.audioType || scene.audioType === "audio")) {

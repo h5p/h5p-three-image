@@ -171,6 +171,9 @@
               {
                 "label": "Playlist",
                 "description": "Here you can pick an existing playlist as audio."
+              },
+              {
+                "label": "Restart audio when scene is reopened"
               }
             ]
           }
