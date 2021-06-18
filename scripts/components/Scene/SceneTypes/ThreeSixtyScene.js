@@ -543,7 +543,6 @@ export default class ThreeSixtyScene extends React.Component {
         });
       }
       else {
-        console.log("pointerlockelement", this.state.pointerLockElement)
         this.state.pointerLockElement.requestPointerLock();
         this.state.pointerLockElement.classList.add('dragging');
       }
