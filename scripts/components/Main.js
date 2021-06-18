@@ -226,6 +226,12 @@ export default class Main extends React.Component {
         interaction.action,
         this.context.contentId
       );
+
+      const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+      if(libraryName === "H5P.Blanks"){
+        question.createQuestions("");
+      }
+
       return question.getMaxScore();
     }
   }
@@ -239,11 +245,15 @@ export default class Main extends React.Component {
       const scene = this.context.params.scenes[sceneId];
       for(let i = 0; i < scene?.interactions?.length; i++){
         const interaction = scene.interactions[i];
-        switch(interaction.action.library) {
-          case "H5P.Summary 1.10":
+        const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+        switch(libraryName) {
+          case "H5P.Summary":
             return true;
-            break;
-          case "H5P.SingleChoiceSet 1.11":
+          case "H5P.SingleChoiceSet":
+            return true;
+          case "H5P.Blanks":
+            return true;
+          case "H5P.MultiChoice":
             return true;
           default:
             // Noop
