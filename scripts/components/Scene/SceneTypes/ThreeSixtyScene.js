@@ -67,12 +67,11 @@ export default class ThreeSixtyScene extends React.Component {
    * @private
    * 
    * Locks the dragged Navigation Button to the pointer
-   * @param {Object} element
+   * @param {HTMLElement} element
    */
   initializePointerLock(element) {
-    // Not supported
-    element.requestPointerLock = element.requestPointerLock
-      || element.mozRequestPointerLock;
+    // @ts-expect-error mozRequestPointerLock is not standardized
+    element.requestPointerLock = element.requestPointerLock|| element.mozRequestPointerLock;
     if (!element.requestPointerLock) {
       return;
     }
@@ -103,48 +102,40 @@ export default class ThreeSixtyScene extends React.Component {
 
   /**
    * @private
-   * 
+   *
    * Called when the scene is moved, caused by a drag event.
-   * @param {any} e
+   * 
+   * @param {H5PEvent} event
    */
-  handleSceneMoveStart = (e) => {
-    if (!this.context.extras.isEditor || e.data.isCamera) {
+   handleSceneMoveStart = (event) => {
+    if (!this.context.extras.isEditor || event.data.isCamera) {
       return;
     }
 
-    const target = e.data.target;
+    /** @type {HTMLElement} */
+    const target = event.data.target;
     if (target) {
-      // Don't move when dragging context menu
-      if (target.classList.contains('context-menu')) {
-        e.defaultPrevented = true;
+      const isOrIsInContextMenu = !!target.closest('.context-menu');
+
+      // Don't move when dragging context menu or context menu children
+      if (isOrIsInContextMenu || target.classList.contains('drag')) {
+        event.defaultPrevented = true;
         return false;
       }
 
-      // Don't move when dragging context menu children
-      if (target.parentNode) {
-        const parent = target.parentNode;
-        if (parent.classList.contains('context-menu')) {
-          e.defaultPrevented = true;
-          return false;
-        }
-        if (target.classList.contains('drag')) {
-          e.defaultPrevented = true;
-          return false;
-        }
+      const draggableWrapperClasses = [
+        'nav-button-wrapper',
+        'open-content-wrapper',
+      ];
+      const isDraggable = draggableWrapperClasses.some(
+        (className) => !!target.closest(`.${className}`),
+      );
+
+      if (isDraggable) {
+        const element = event.data.element;
+        this.initializePointerLock(element);
       }
     }
-
-    // Make sure we don't start movement on contextmenu actions
-    if (target && (
-      target.classList.contains('nav-button')
-      || target.classList.contains('nav-label-container')
-      || target.classList.contains('nav-label')
-      || target.classList.contains('nav-label-inner'))) {
-      const element = e.data.element;
-      this.initializePointerLock(element);
-    }
-
-    return;
   }
 
   /**
@@ -552,6 +543,7 @@ export default class ThreeSixtyScene extends React.Component {
         });
       }
       else {
+        console.log("pointerlockelement", this.state.pointerLockElement)
         this.state.pointerLockElement.requestPointerLock();
         this.state.pointerLockElement.classList.add('dragging');
       }
