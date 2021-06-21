@@ -165,7 +165,11 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+   * @returns {ScoreCard}
+   */
   initialScoreCard() {
+    /** @type {ScoreCard} */
     const scoreCard = {
       numQuestionsInTour: 0,
       totalQuestionsCompleted: 0,
@@ -176,12 +180,17 @@ export default class Main extends React.Component {
     for(const sceneId in this.context.params.scenes){
       const scene = this.context.params.scenes[sceneId];
       scoreCard.sceneScoreCards[sceneId] = this.initialSceneScoreCard(scene);
-      scoreCard.numQuestionsInTour = scoreCard.numQuestionsInTour + scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
+      scoreCard.numQuestionsInTour += scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
     }
     return scoreCard;
   }
 
+  /**
+   * @param {SceneParams} scene 
+   * @returns {SceneScoreCard}
+   */
   initialSceneScoreCard(scene) {
+    /** @type {SceneScoreCard} */
     const sceneScoreCard = {
       title: scene.scenename,
       numQuestionsInScene: 0,
@@ -195,19 +204,19 @@ export default class Main extends React.Component {
         switch(libraryName) {
           case "H5P.Summary":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.SingleChoiceSet":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.Blanks":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.MultiChoice":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           default:
             // Noop

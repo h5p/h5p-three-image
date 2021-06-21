@@ -59,4 +59,25 @@ declare type H5PEvent = {
   preventBubbling: () => void;
   scheduleForExternal: () => void;
   type: string;
-}
+};
+
+declare type ScoreCard = {
+  numQuestionsInTour: number,
+  totalQuestionsCompleted: number,
+  totalCodesEntered: number,
+  totalCodesUnlocked: number,
+  sceneScoreCards: Record<number, SceneScoreCard>;
+};
+
+declare type SceneScoreCard = {
+  title: string;
+  numQuestionsInScene: number;
+  scores: Record<number, SceneScoreCardScore>;
+};
+
+declare type SceneScoreCardScore = {
+  title: string;
+  raw: number;
+  max: number;
+  scaled: number;
+};
