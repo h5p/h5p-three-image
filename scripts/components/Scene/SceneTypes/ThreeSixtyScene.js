@@ -48,6 +48,8 @@ export default class ThreeSixtyScene extends React.Component {
   constructor(props) {
     super(props);
 
+    this.props = this.props;
+
     this.sceneRef = React.createRef();
     this.renderedInteractions = 0;
 
@@ -488,7 +490,7 @@ export default class ThreeSixtyScene extends React.Component {
    * 
    * Handle interaction focused.
    *
-   * @param {Object} interaction
+   * @param {Interaction} interaction
    */
   handleInteractionFocus = (interaction) => {
     this.props.onSetCameraPos(interaction.interactionpos);
