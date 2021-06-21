@@ -27,8 +27,8 @@ export const createAudioPlayer = (
       .filter((source) => player.canPlayType(source.mime))
       .forEach((source) => {
         const sourceElement = document.createElement("source");
-        source.src = H5P.getPath(source.path, contentId);
-        source.type = source.mime;
+        sourceElement.src = H5P.getPath(source.path, contentId);
+        sourceElement.type = source.mime;
         player.appendChild(sourceElement);
       });
   }
