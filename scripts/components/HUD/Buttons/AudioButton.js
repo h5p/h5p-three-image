@@ -133,7 +133,7 @@ export default class AudioButton extends React.Component {
             this.props.onIsPlaying(null);
           }
         },
-        !(this.getTrack(id) && this.getTrack(id).length > 1)
+        !this.props.playlistId
       );
     }
 
