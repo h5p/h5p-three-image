@@ -237,3 +237,9 @@ $labelWidth: 9em;
 .h5p-scene-description-button .nav-button:before {
   content: $sceneDescription;
 }
+
+.h5p-interaction-answered {
+  .nav-button {
+    box-shadow: 0 0 0 4px hsl(128, 64%, 40%);
+  }
+}

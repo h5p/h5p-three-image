@@ -4,21 +4,30 @@ declare type SceneParams = {
   cameraStartPosition: string;
   sceneType: "360" | "static" | null;
   scenename: string;
+  iconType?: string;
 };
 
 declare type Interaction = {
   interactionpos: string;
   action: Action;
-  label?: {
-    hotSpotSizeValues: string;
-    isHotspotTabbable: boolean;
-    labelPosition: string;
-    showAsHotspot: boolean;
-    showAsOpenSceneContent: boolean;
-    showHotspotOnHover: boolean;
-    showLabel: string;
-  }
+  labelText: string;
+  label?: InteractionLabel;
+  iconTypeTextBox?: string;
   id: string;
+  unlocked?: boolean;
+  isAnswered?: boolean; 
+};
+
+declare type InteractionLabel = {
+  labelText?: string;
+  hotSpotSizeValues: string;
+  isHotspotTabbable: boolean;
+  labelPosition: string;
+  showAsHotspot: boolean;
+  showAsOpenSceneContent: boolean;
+  showHotspotOnHover: boolean;
+  showLabel: string;
+  interactionPassword?: string;
 };
 
 declare type Action = {

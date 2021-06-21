@@ -410,6 +410,10 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push(this.props.icon);
     }
 
+    if (interaction.isAnswered) {
+      wrapperClasses.push('h5p-interaction-answered');
+    } 
+
     if (this.props.is3d) {
       wrapperClasses = wrapperClasses.concat("nav-btn-hotspot render-in-3d");
     }

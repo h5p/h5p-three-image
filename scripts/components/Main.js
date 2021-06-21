@@ -34,7 +34,7 @@ export default class Main extends React.Component {
       scenesOpened: [],
       updateThreeSixty: false,
       startBtnClicked: false,
-      scoreCard: {},
+      /** @type {ScoreCard} */ scoreCard: {},
       labelBehavior: {
         showLabel: true,
         labelPosition: "right"
@@ -386,7 +386,7 @@ export default class Main extends React.Component {
    *
    * @param {string} id
    * @param {Interaction} [interaction] Parameters (Only needed initially)
-   * @return {AudioElement} or 'null' if track isn't playable.
+   * @return {HTMLAudioElement} or 'null' if track isn't playable.
    */
   getAudioPlayer = (id, interaction) => {
     // Create player if none exist
@@ -539,7 +539,10 @@ export default class Main extends React.Component {
     });
   }
 
-
+  /**
+   * @param {string} inputPassword 
+   * @returns {boolean}
+   */
   handlePassword(inputPassword) {
     const scene = this.context.params.scenes.find(scene => {
       return scene.sceneId === this.props.currentScene;
@@ -552,13 +555,24 @@ export default class Main extends React.Component {
     return isCorrectPassword;
   }
 
-
-  updateScoreCard(sceneId, assignmentId, score){
-    this.state.scoreCard.totalQuestionsCompleted = this.state.scoreCard.totalQuestionsCompleted + 1;
+  /**
+   * @param {number} sceneId 
+   * @param {number} interactionId 
+   * @param {SceneScoreCardScore} score 
+   */
+  updateScoreCard(sceneId, interactionId, score){
+    this.state.scoreCard.totalQuestionsCompleted += 1;
     if(!this.state.scoreCard.sceneScoreCards[sceneId]){
       this.state.scoreCard[sceneId] = {};
     }
-    this.state.scoreCard.sceneScoreCards[sceneId].scores[assignmentId] = score;
+    this.state.scoreCard.sceneScoreCards[sceneId].scores[interactionId] = score;
+
+    /** @type {SceneParams} */
+    const scene = this.context.params.scenes.find(scene => {
+      return scene.sceneId === sceneId;
+    });
+ 
+    scene.interactions[interactionId].isAnswered = true;
   }
 
   updateEscapeScoreCard(isUnlocked){
