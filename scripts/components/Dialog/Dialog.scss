@@ -29,7 +29,6 @@
   left: 50%;
   top: 50%;
   width: 80%;
-  max-width: 23em;
   max-height: 90%;
   background: white;
   z-index: 1;
@@ -66,6 +65,10 @@
     font-family: "360-image";
     content: $close;
     vertical-align: text-bottom;
+  }
+
+  &.h5p-advancedtext {
+    max-width: 21em;
   }
 }
 .h5p-medium-tablet-size .h5p-text-dialog {
