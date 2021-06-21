@@ -107,7 +107,7 @@ export default class AudioButton extends React.Component {
           }
         },
         () => {
-          // Current track ended, and player has multiple tracks (else it is looped)
+          // Current track ended, and player is playlist with multiple tracks (else it is looped)
           const currentTrackNumber = this.players[id].audioTrack
             ? this.players[id].audioTrack
             : 0;
@@ -133,7 +133,7 @@ export default class AudioButton extends React.Component {
             this.props.onIsPlaying(null);
           }
         },
-        !(this.getTrack(id) && this.getTrack(id).length > 1)
+        (!this.props.playlistId || this.getTrack(id).length < 2)
       );
     }
 
