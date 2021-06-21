@@ -169,7 +169,11 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+   * @returns {ScoreCard}
+   */
   initialScoreCard() {
+    /** @type {ScoreCard} */
     const scoreCard = {
       numQuestionsInTour: 0,
       totalQuestionsCompleted: 0,
@@ -180,12 +184,17 @@ export default class Main extends React.Component {
     for(const sceneId in this.context.params.scenes){
       const scene = this.context.params.scenes[sceneId];
       scoreCard.sceneScoreCards[sceneId] = this.initialSceneScoreCard(scene);
-      scoreCard.numQuestionsInTour = scoreCard.numQuestionsInTour + scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
+      scoreCard.numQuestionsInTour += scoreCard.sceneScoreCards[sceneId].numQuestionsInScene
     }
     return scoreCard;
   }
 
+  /**
+   * @param {SceneParams} scene 
+   * @returns {SceneScoreCard}
+   */
   initialSceneScoreCard(scene) {
+    /** @type {SceneScoreCard} */
     const sceneScoreCard = {
       title: scene.scenename,
       numQuestionsInScene: 0,
@@ -199,19 +208,19 @@ export default class Main extends React.Component {
         switch(libraryName) {
           case "H5P.Summary":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.SingleChoiceSet":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.Blanks":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.MultiChoice":
             sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
-            sceneScoreCard.numQuestionsInScene = sceneScoreCard.numQuestionsInScene + 1;
+            sceneScoreCard.numQuestionsInScene += 1;
             break;
           default:
             // Noop
@@ -222,24 +231,31 @@ export default class Main extends React.Component {
     return sceneScoreCard;
   }
 
+  /**
+   * @param {Interaction} interaction 
+   * @returns {number} 
+   */
   getQuestionMaxScore(interaction) {
     if(this.context.extras.isEditor){
       return 1;
-    } else {
-      const question = H5P.newRunnable(
-        interaction.action,
-        this.context.contentId
-      );
-
-      const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
-      if(libraryName === "H5P.Blanks"){
-        question.createQuestions("");
-      }
-
-      return question.getMaxScore();
     }
+
+    const question = H5P.newRunnable(
+      interaction.action,
+      this.context.contentId
+    );
+
+    const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+    if(libraryName === "H5P.Blanks"){
+      question.createQuestions("");
+    }
+
+    return question.getMaxScore();
   }
 
+  /**
+   * @returns {boolean}
+   */
   hasOneQuestion() {
     if(this.context.extras.isEditor || !this.context.params.scenes) {
       return false;
@@ -267,6 +283,9 @@ export default class Main extends React.Component {
     return false;
   }
 
+  /**
+   * @param {number} sceneId 
+   */
   navigateToScene(sceneId) {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
