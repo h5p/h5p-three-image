@@ -227,24 +227,31 @@ export default class Main extends React.Component {
     return sceneScoreCard;
   }
 
+  /**
+   * @param {Interaction} interaction 
+   * @returns {number} 
+   */
   getQuestionMaxScore(interaction) {
     if(this.context.extras.isEditor){
       return 1;
-    } else {
-      const question = H5P.newRunnable(
-        interaction.action,
-        this.context.contentId
-      );
-
-      const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
-      if(libraryName === "H5P.Blanks"){
-        question.createQuestions("");
-      }
-
-      return question.getMaxScore();
     }
+
+    const question = H5P.newRunnable(
+      interaction.action,
+      this.context.contentId
+    );
+
+    const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
+    if(libraryName === "H5P.Blanks"){
+      question.createQuestions("");
+    }
+
+    return question.getMaxScore();
   }
 
+  /**
+   * @returns {boolean}
+   */
   hasOneQuestion() {
     if(this.context.extras.isEditor || !this.context.params.scenes) {
       return false;
@@ -272,6 +279,9 @@ export default class Main extends React.Component {
     return false;
   }
 
+  /**
+   * @param {number} sceneId 
+   */
   navigateToScene(sceneId) {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
