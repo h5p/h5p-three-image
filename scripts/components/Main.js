@@ -8,7 +8,11 @@ import HUD from './HUD/HUD';
 import NoScene from "./Scene/NoScene";
 import PasswordContent from "./Dialog/PasswordContent";
 import ScoreSummary from './Dialog/ScoreSummary';
-import { createAudioPlayer, isInteractionAudio } from "../utils/audio-utils";
+import { 
+  createAudioPlayer, 
+  isInteractionAudio, 
+  fadeAudioInAndOut 
+} from "../utils/audio-utils";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -445,9 +449,8 @@ export default class Main extends React.Component {
       else {
         // Start current audio playback
         const player = this.getAudioPlayer(playerId, interaction);
-        if (player) {
-          player.play();
-        }
+        const lastPlayer = this.state.audioIsPlaying ? this.getAudioPlayer(this.state.audioIsPlaying) : null;
+        fadeAudioInAndOut(lastPlayer, player);
       }
     }
     else {

@@ -87,3 +87,38 @@ export const isPlaylistAudio = (id) => {
 export const isSceneAudio = (id) => {
   return id && (id === "global" || id.substr(0, 6) === "scene-");
 };
+
+export const fadeAudioInAndOut = (oldPlayer, newPlayer) => {
+  // First, fade out old player
+  if (oldPlayer) {
+    fadeAudioOut(oldPlayer);
+  }
+  // Second, fade in new player
+  if (newPlayer) {
+    fadeAudioIn(newPlayer);
+  }
+};
+
+function fadeAudioOut(player) {
+  if (player.volume > 0.1) {
+    var newVolume = player.volume - 0.05;
+    player.volume = newVolume;
+    setTimeout(this.fadeAudioOut(player), 2);
+  } 
+  else {
+    player.volume = 0;
+    player.pause();
+  }
+};
+
+function fadeAudioIn(player) {
+  if (player.volume < 0.9) {
+    var newVolume = player.volume + 0.05;
+    player.volume = newVolume;
+    setTimeout(this.fadeAudioIn(player), 2);
+  }
+  else {
+    player.volume = 1;
+    player.play();
+  }
+};
