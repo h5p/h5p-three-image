@@ -22,6 +22,7 @@ import Button from "./Button/Button";
  *   isHiddenBehindOverlay: boolean;
  *   sceneWasPlaying: string;
  *   onSceneWasPlaying: (playerId: string) => void;
+ *   restartAudioOnSceneStart: boolean;
  * }} Props
  */
 export default class AudioButton extends React.Component {
@@ -202,10 +203,7 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    const isSceneAudio = isSceneAudio(this.props.isPlaying);
-    const isPlaylistAudio = isPlaylistAudio(this.props.isPlaying);
-
-    if (isSceneAudio || isPlaylistAudio) {
+    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying)) {
       // We are playing something
 
       const currentPlayerId = this.getPlayerId();
@@ -226,10 +224,10 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (isSceneAudio) {
+    if (isSceneAudio(this.props.isPlaying)) {
       const isNewScene = this.props.sceneId !== prevProps.sceneId; 
       if (this.props.restartAudioOnSceneStart && isNewScene) {
-        const currentPlayerId = this.getPlayerId(this.props);
+        const currentPlayerId = this.getPlayerId();
         const player = this.getPlayer(currentPlayerId);
   
         player.audioTrack = 0;
