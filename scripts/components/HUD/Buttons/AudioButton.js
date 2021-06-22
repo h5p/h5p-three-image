@@ -24,6 +24,7 @@ import Button from "./Button/Button";
  *   sceneWasPlaying: string;
  *   onSceneWasPlaying: (playerId: string) => void;
  *   restartAudioOnSceneStart: boolean;
+ *   updateSceneAudioPlayers: (players) => void
  * }} Props
  */
 export default class AudioButton extends React.Component {
@@ -138,6 +139,8 @@ export default class AudioButton extends React.Component {
       );
     }
 
+    this.props.updateSceneAudioPlayers(this.players);
+
     return this.players[id];
   };
 
@@ -154,10 +157,10 @@ export default class AudioButton extends React.Component {
         this.props.onSceneWasPlaying(null);
 
         // Pause and reset the player
-        player.pause();
+        fadeAudioInAndOut(player, null, false);
       } else {
         // Start the playback!
-        player.play();
+        fadeAudioInAndOut(null, player, false);
       }
     }
   };
@@ -199,7 +202,7 @@ export default class AudioButton extends React.Component {
           this.props.onSceneWasPlaying(prevProps.isPlaying);
 
           // Pause and reset the last player
-          lastPlayer.pause();
+          fadeAudioInAndOut(lastPlayer, null, false);
         }
       }
     }
@@ -212,16 +215,9 @@ export default class AudioButton extends React.Component {
         // We are playing the audio track from another scene... we need to change track!
 
         const isPlayer = this.getPlayer(this.props.isPlaying);
-        if (isPlayer) {
-          // Pause and reset last player
-          isPlayer.pause();
-        }
-
-        // and start the current player
         const currentPlayer = this.getPlayer(currentPlayerId);
-        if (currentPlayer) {
-          currentPlayer.play();
-        }
+        // Pause and reset last player, and start the current player
+        fadeAudioInAndOut(isPlayer, currentPlayer, false);
       }
     }
 
@@ -248,14 +244,14 @@ export default class AudioButton extends React.Component {
 
       if (lastPlayer && this.props.sceneWasPlaying === currentPlayerId) {
         // Play the scene audio or global audio if it matches the current scene
-        lastPlayer.play();
+        fadeAudioInAndOut(null, lastPlayer, false);
       } else if (currentPlayerId) {
         // Else the user moved directly to new scene when playing interaction audio
         const currentPlayer = this.getPlayer(currentPlayerId);
 
         if (currentPlayer) {
           // Then play the current scene audio or global audio
-          currentPlayer.play();
+          fadeAudioInAndOut(null, currentPlayer, false);
         }
       }
     }

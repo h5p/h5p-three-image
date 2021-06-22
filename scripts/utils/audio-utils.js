@@ -88,37 +88,65 @@ export const isSceneAudio = (id) => {
   return id && (id === "global" || id.substr(0, 6) === "scene-");
 };
 
-export const fadeAudioInAndOut = (oldPlayer, newPlayer) => {
-  // First, fade out old player
-  if (oldPlayer) {
-    fadeAudioOut(oldPlayer);
+export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
+  // Fade out old player
+  if (oldPlayer && !newPlayer) {
+    fadeAudioOut(oldPlayer, resetCurrentTime, null);
   }
-  // Second, fade in new player
-  if (newPlayer) {
-    fadeAudioIn(newPlayer);
+  
+  // Fade out old player, then fade in new player
+  else if (oldPlayer && newPlayer) {
+    fadeAudioOut(
+      oldPlayer, 
+      resetCurrentTime, 
+      function() { 
+        fadeAudioIn(newPlayer, 0); 
+      }
+    );
+  }
+
+  // Fade in new player
+  else if (!oldPlayer && newPlayer) {
+    fadeAudioIn(newPlayer, 0);
   }
 };
 
-function fadeAudioOut(player) {
-  if (player.volume > 0.1) {
-    var newVolume = player.volume - 0.05;
+function fadeAudioOut(player, resetCurrentTime, callback) {
+  if (player.volume > 0) {
+    var newVolume = Number(player.volume - 0.1).toFixed(1);
     player.volume = newVolume;
-    setTimeout(this.fadeAudioOut(player), 2);
+    setTimeout(function() {
+      fadeAudioOut(player, resetCurrentTime, callback)
+    }, 20);
   } 
   else {
     player.volume = 0;
     player.pause();
+    
+    if (resetCurrentTime) {
+      player.currentTime = 0;
+    }
+
+    // Then, fade in new player
+    if (callback) {
+      callback();
+    }
   }
 };
 
-function fadeAudioIn(player) {
-  if (player.volume < 0.9) {
-    var newVolume = player.volume + 0.05;
-    player.volume = newVolume;
-    setTimeout(this.fadeAudioIn(player), 2);
+function fadeAudioIn(player, int) {
+  if (player.volume === 1 && int === 0) {
+    player.volume = 0;
   }
-  else {
-    player.volume = 1;
-    player.play();
+  var newint = 1;
+  if (player.volume < 1) {
+    if (player.volume === 0) {
+      player.play();
+    }
+    var newVolume = Number(player.volume + 0.1).toFixed(1);
+    player.volume = newVolume;
+    setTimeout(function() {
+      fadeAudioIn(player, newint)
+    }, 20);
   }
 };
