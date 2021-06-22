@@ -24,7 +24,8 @@ import Button from "./Button/Button";
  *   sceneWasPlaying: string;
  *   onSceneWasPlaying: (playerId: string) => void;
  *   restartAudioOnSceneStart: boolean;
- *   updateSceneAudioPlayers: (players) => void
+ *   updateSceneAudioPlayers: (players) => void;
+ *   interactionAudioPlayers: Array;
  * }} Props
  */
 export default class AudioButton extends React.Component {
@@ -159,8 +160,13 @@ export default class AudioButton extends React.Component {
         // Pause and reset the player
         fadeAudioInAndOut(player, null, false);
       } else {
-        // Start the playback!
-        fadeAudioInAndOut(null, player, false);
+        // Find out if there is an interaction playing
+        const lastPlayer = isInteractionAudio(this.props.isPlaying) 
+          ? this.props.interactionAudioPlayers[this.props.isPlaying] 
+          : null;
+          
+        // Pause if lastplayer, then start the playback!
+        fadeAudioInAndOut(lastPlayer, player, true);
       }
     }
   };

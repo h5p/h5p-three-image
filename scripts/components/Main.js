@@ -718,6 +718,7 @@ export default class Main extends React.Component {
           onShowingScoreSummary={this.handleScoreSummary}
           showScoresButton={this.context.behavior.showScoresButton && this.hasOneQuestion()}
           updateSceneAudioPlayers={ this.getSceneAudioPlayers }
+          interactionAudioPlayers={ this.audioPlayers }
         />
       </div>
     );

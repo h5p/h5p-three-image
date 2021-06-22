@@ -117,7 +117,7 @@ function fadeAudioOut(player, resetCurrentTime, callback) {
     player.volume = newVolume;
     setTimeout(function() {
       fadeAudioOut(player, resetCurrentTime, callback)
-    }, 20);
+    }, 25);
   } 
   else {
     player.volume = 0;
@@ -147,6 +147,6 @@ function fadeAudioIn(player, int) {
     player.volume = newVolume;
     setTimeout(function() {
       fadeAudioIn(player, newint)
-    }, 20);
+    }, 25);
   }
 };
