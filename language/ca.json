@@ -243,10 +243,10 @@
           "description": "Trieu l’amplada i l’alçada que utilitzaran els segments per renderitzar una escena, ja que això influeix directament en la seva qualitat. Si una escena es veu pixelada o s’hi veuen ones, proveu d’augmentar-ne la qualitat. Tingueu en compte que les renderitzacions en alta qualitat tarden més a carregar-se.",
           "options": [
             {
-              "label": "Alta qualitat (128 x 128)"
+              "label": "Alta qualitat (128 x 128)"
             },
             {
-              "label": "Qualitat mitjana (64 x 64)"
+              "label": "Qualitat mitjana (64 x 64)"
             },
             {
               "label": "Qualitat baixa (16x16)"
