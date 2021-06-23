@@ -396,18 +396,17 @@ export default class NavigationButton extends React.Component {
     const scene = this.context.params.scenes.find((/** @type {SceneParams} */ scene) => {
       return scene.sceneId === this.props.sceneId;
     });
-    
-    return scene.interactions[this.props.interactionIndex];
+    return scene?.interactions ? scene.interactions[this.props.interactionIndex] : null;
   }
 
   render() {
     const interaction = this.getCurrentInteraction();
-    const [_, libraryName] = H5P.libraryFromString(interaction.action.library).machineName.split(".");
+    const [_, libraryName] = interaction ? H5P.libraryFromString(interaction?.action?.library).machineName?.split(".") : [null];
     
-    let wrapperClasses = [
+    let wrapperClasses = interaction ? [
       'nav-button-wrapper',
       `nav-button-wrapper--${libraryName.toLowerCase()}`,
-    ];
+    ] : ['nav-button-wrapper'];
 
 
     if (this.props.buttonClasses) {
@@ -418,7 +417,7 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push(this.props.icon);
     }
 
-    if (interaction.isAnswered) {
+    if (interaction?.isAnswered) {
       wrapperClasses.push('h5p-interaction-answered');
     } 
 
