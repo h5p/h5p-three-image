@@ -462,7 +462,7 @@ export default class Main extends React.Component {
       this.navigateToScene(nextSceneId);
     }
     else if (machineName === 'H5P.Audio') {
-      const playerId = 'interaction-' + scene.sceneId + '-' + interactionIndex;
+      const playerId = 'interaction-' + this.props.currentScene + '-' + interactionIndex;
       if (this.state.audioIsPlaying === playerId) {
         // Pause and reset player
         const lastPlayer = this.getAudioPlayer(playerId);
