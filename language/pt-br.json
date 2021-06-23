@@ -360,6 +360,10 @@
         {
           "label": "Translation for 'Scene'",
           "default": "Scene"
+        },
+        {
+          "label": "Untitled",
+          "default": "Untitled"
         }
       ]
     }

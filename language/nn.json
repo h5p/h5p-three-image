@@ -360,6 +360,10 @@
         {
           "label": "Translation for 'Scene'",
           "default": "Scene"
+        },
+        {
+          "label": "Utan tittel",
+          "default": "Utan tittel"
         }
       ]
     }
