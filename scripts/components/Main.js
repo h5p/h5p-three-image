@@ -8,13 +8,20 @@ import HUD from './HUD/HUD';
 import NoScene from "./Scene/NoScene";
 import PasswordContent from "./Dialog/PasswordContent";
 import ScoreSummary from './Dialog/ScoreSummary';
-import { createAudioPlayer, isInteractionAudio } from "../utils/audio-utils";
+import { 
+  createAudioPlayer, 
+  isInteractionAudio, 
+  fadeAudioInAndOut, 
+  isSceneAudio,
+  isPlaylistAudio
+} from "../utils/audio-utils";
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.audioPlayers = {};
+    this.sceneAudioPlayers = {};
 
     this.state = {
       threeSixty: null,
@@ -132,11 +139,7 @@ export default class Main extends React.Component {
         // Thas last player was us, we need to stop it
 
         const lastPlayer = this.getAudioPlayer(prevState.audioIsPlaying);
-        if (lastPlayer) {
-          // Pause and reset the last player
-          lastPlayer.pause();
-          lastPlayer.currentTime = 0;
-        }
+        fadeAudioInAndOut(lastPlayer, null, true);
       }
     }
 
@@ -307,11 +310,7 @@ export default class Main extends React.Component {
       && isInteractionAudio(this.state.audioIsPlaying);
     if (isInteractionAudioPlaying) {
       const lastPlayer = this.getAudioPlayer(this.state.audioIsPlaying);
-      if (lastPlayer) {
-        // Pause and reset the interaction player from last scene
-        lastPlayer.pause();
-        lastPlayer.currentTime = 0;
-      }
+      fadeAudioInAndOut(lastPlayer, null, true);
     }
 
     // Show scene description when scene starts for the first time, if specified
@@ -424,11 +423,20 @@ export default class Main extends React.Component {
     return this.audioPlayers[id];
   }
 
+  /**
+   * @param {number} interactionIndex 
+   * @returns {Interaction}
+   */
+  getInteractionFromCurrentScene(interactionIndex) {
+    const scene = this.context.params.scenes.find(
+      scene => scene.sceneId === this.props.currentScene,
+    );
+
+    return scene.interactions[interactionIndex];
+  }
+
   showInteraction(interactionIndex) {
-    const scene = this.context.params.scenes.find(scene => {
-      return scene.sceneId === this.props.currentScene;
-    });
-    const interaction = scene.interactions[interactionIndex];
+    const interaction = this.getInteractionFromCurrentScene(interactionIndex);
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
 
@@ -446,8 +454,6 @@ export default class Main extends React.Component {
         currentInteraction: null,
       });
 
-      
-      
       const nextSceneId = parseInt(interaction.action.params.nextSceneId);
       this.navigateToScene(nextSceneId);
     }
@@ -456,17 +462,21 @@ export default class Main extends React.Component {
       if (this.state.audioIsPlaying === playerId) {
         // Pause and reset player
         const lastPlayer = this.getAudioPlayer(playerId);
-        if (lastPlayer) {
-          lastPlayer.pause();
-          lastPlayer.currentTime = 0;
-        }
+        fadeAudioInAndOut(lastPlayer, null, true);
       }
       else {
         // Start current audio playback
-        const player = this.getAudioPlayer(playerId, interaction);
-        if (player) {
-          player.play();
+        if (this.state.audioIsPlaying && (isSceneAudio(this.state.audioIsPlaying) || isPlaylistAudio(this.state.audioIsPlaying)) ) {
+          this.setState({
+            sceneAudioWasPlaying: this.state.audioIsPlaying
+          });
         }
+        const player = this.getAudioPlayer(playerId, interaction);
+        const lastPlayer = 
+          this.state.audioIsPlaying && isInteractionAudio(this.state.audioIsPlaying) 
+            ? this.getAudioPlayer(this.state.audioIsPlaying) 
+            : this.sceneAudioPlayers[this.state.audioIsPlaying];
+        fadeAudioInAndOut(lastPlayer, player, false);
       }
     }
     else {
@@ -515,6 +525,10 @@ export default class Main extends React.Component {
     });
   }
 
+  getSceneAudioPlayers = (players) => {
+    this.sceneAudioPlayers = players;
+  }
+
   centerScene() {
     const sceneParams = this.context.params.scenes;
     const scene = sceneParams.find(scene => {
@@ -544,11 +558,7 @@ export default class Main extends React.Component {
    * @returns {boolean}
    */
   handlePassword(inputPassword) {
-    const scene = this.context.params.scenes.find(scene => {
-      return scene.sceneId === this.props.currentScene;
-    });
-    const interaction = scene.interactions[this.state.currentInteraction];
-
+    const interaction = this.getInteractionFromCurrentScene(this.state.currentInteraction);
     const isCorrectPassword = interaction.label.interactionPassword.toLowerCase() === inputPassword.toLowerCase();
     interaction.unlocked = interaction.unlocked || isCorrectPassword;
 
@@ -606,35 +616,37 @@ export default class Main extends React.Component {
     const isShowingInteraction = this.state.showingInteraction &&
       this.state.currentInteraction !== null;
 
+    const currentInteraction = scene.interactions?.[this.state.currentInteraction];
+
     let dialogClasses = [];
-    if (isShowingInteraction) {
-      const scene = this.context.params.scenes.find(scene => {
-        return scene.sceneId === this.props.currentScene;
-      });
-      const interaction = scene.interactions[this.state.currentInteraction];
-      const library = H5P.libraryFromString(interaction.action.library);
+    if (currentInteraction && isShowingInteraction) {
+      const library = H5P.libraryFromString(currentInteraction.action.library);
       const interactionClass = library.machineName
         .replace('.', '-')
         .toLowerCase();
 
       dialogClasses.push(interactionClass);
     }
-    const showInteractionDialog = (this.state.showingInteraction && this.state.currentInteraction !== null);
-    const showPasswordDialog = (this.state.showingPassword && this.state.currentInteraction !== null && !scene.interactions[this.state.currentInteraction].unlocked);
-    const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
+    const showInteractionDialog = this.state.showingInteraction && this.state.currentInteraction !== null;
+    const showPasswordDialog = this.state.showingPassword && this.state.currentInteraction !== null;
+    const showTextDialog = this.state.showingTextDialog && this.state.currentText;
     const showingScoreSummary = this.state.showingScoreSummary;
     // Whenever a dialog is shown we need to hide all the elements behind the overlay
     const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
+
     let dialogTitle;
+
     if (showInteractionDialog) {
-      dialogTitle = scene.interactions[this.state.currentInteraction].action.metadata.title;
+      dialogTitle = currentInteraction.action.metadata.title;
     }
+
     const sceneIcons = this.context.params.scenes.map(sceneParams => {
       return {
         id: sceneParams.sceneId,
         iconType: sceneParams.iconType,
       };
     });
+
     return (
       <div role="document" aria-label={ this.context.l10n.title }>
         { showInteractionDialog &&
@@ -645,12 +657,12 @@ export default class Main extends React.Component {
           focusOnTitle={!showPasswordDialog}
         >
           {showPasswordDialog ? <PasswordContent
-              handlePassword = {this.handlePassword.bind(this)}
-              showInteraction = {this.showInteraction.bind(this)}
-              currentInteractionIndex = {this.state.currentInteraction}
-              currentInteraction = {scene.interactions[this.state.currentInteraction]}
-              isInteractionUnlocked = {scene.interactions[this.state.currentInteraction].unlocked}
-              hint = {scene.interactions[this.state.currentInteraction].label.interactionPasswordHint}
+              handlePassword={this.handlePassword.bind(this)}
+              showInteraction={this.showInteraction.bind(this)}
+              currentInteractionIndex={this.state.currentInteraction}
+              currentInteraction={currentInteraction}
+              isInteractionUnlocked={currentInteraction.unlocked}
+              hint={currentInteraction.label.interactionPasswordHint}
               updateEscapeScoreCard={this.updateEscapeScoreCard.bind(this)}
             /> :
             <InteractionContent
@@ -724,6 +736,8 @@ export default class Main extends React.Component {
           onGoToStartScene={ this.goToStartScene.bind(this) }
           onShowingScoreSummary={this.handleScoreSummary}
           showScoresButton={this.context.behavior.showScoresButton && this.hasOneQuestion()}
+          updateSceneAudioPlayers={ this.getSceneAudioPlayers }
+          interactionAudioPlayers={ this.audioPlayers }
         />
       </div>
     );
