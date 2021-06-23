@@ -206,19 +206,19 @@ export default class Main extends React.Component {
         const libraryName = H5P.libraryFromString(interaction.action.library).machineName;
         switch(libraryName) {
           case "H5P.Summary":
-            sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
+            sceneScoreCard.scores[i]={title: this.getScoreLabelFromInteraction(interaction), raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
             sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.SingleChoiceSet":
-            sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
+            sceneScoreCard.scores[i]={title: this.getScoreLabelFromInteraction(interaction), raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
             sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.Blanks":
-            sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
+            sceneScoreCard.scores[i]={title: this.getScoreLabelFromInteraction(interaction), raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
             sceneScoreCard.numQuestionsInScene += 1;
             break;
           case "H5P.MultiChoice":
-            sceneScoreCard.scores[i]={title: interaction.labelText, raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
+            sceneScoreCard.scores[i]={title: this.getScoreLabelFromInteraction(interaction), raw: 0, max: this.getQuestionMaxScore(interaction), scaled: 0};
             sceneScoreCard.numQuestionsInScene += 1;
             break;
           default:
@@ -228,6 +228,10 @@ export default class Main extends React.Component {
     }
 
     return sceneScoreCard;
+  }
+
+  getScoreLabelFromInteraction(interaction){
+    return interaction.labelText ? interaction.labelText : interaction.action?.metadata?.title;
   }
 
   /**

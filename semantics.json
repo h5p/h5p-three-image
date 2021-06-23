@@ -715,6 +715,13 @@
         "label": "Translation for 'Scene'",
         "importance": "low",
         "default": "Scene"
+      },
+      {
+        "name": "untitled",
+        "type": "text",
+        "label": "Untitled",
+        "importance": "low",
+        "default": "Untitled"
       }
     ]
   }
