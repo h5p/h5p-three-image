@@ -117,6 +117,7 @@ export const getLabelFromInteraction = (interaction) => {
  *  wrapperHeight: number;
  *  rendered: boolean;
  *  is3d: boolean;
+ *  children: React.ReactChildren;
  *  clickHandler: () => void;
  *  doubleClickHandler: () => void;
  *  mouseDownHandler: (event: MouseEvent) => void;
@@ -146,6 +147,7 @@ export default class NavigationButton extends React.Component {
   constructor(props) {
     super(props);
 
+    /** @type {Props} */
     this.props = this.props;
 
     this.navButtonWrapper = React.createRef();
@@ -153,10 +155,13 @@ export default class NavigationButton extends React.Component {
     this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    
+    /** @type {State} */
     this.state = {
       isFocused: this.props.isFocused,
       expandButtonFocused: false,
-      innerButtonFocused: false
+      innerButtonFocused: false,
+      isMouseOver: false,
     };
   }
 
@@ -397,10 +402,13 @@ export default class NavigationButton extends React.Component {
 
   render() {
     const interaction = this.getCurrentInteraction();
+    const [_, libraryName] = H5P.libraryFromString(interaction.action.library).machineName.split(".");
     
     let wrapperClasses = [
       'nav-button-wrapper',
+      `nav-button-wrapper--${libraryName.toLowerCase()}`,
     ];
+
 
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);

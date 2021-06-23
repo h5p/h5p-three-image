@@ -232,28 +232,31 @@ $labelWidth: 9em;
   content: $sceneDescription;
 }
 
-/**
- * {1} The z-index needs to be greater than the z-index of the `.nav-button`
- */
+$answerable-interactions: (
+  "nav-button-wrapper--summary",
+  "nav-button-wrapper--singlechoiceset",
+  "nav-button-wrapper--blanks",
+  "nav-button-wrapper--multichoice",
+);
+
+@each $interaction in $answerable-interactions {
+  .#{$interaction} {
+    &::before {
+      $offset: 0.5rem;
+      border: 3px dashed $interactionBg;
+      border-radius: 50%;
+      bottom: -$offset;
+      content: "";
+      left: -$offset;
+      position: absolute;
+      right: -$offset;
+      top: -$offset;
+    }
+  }
+}
+
 .h5p-interaction-answered {
   &::before {
-    $badge-size: 1.5em;
-
-    background-color: lighten($interactionBg, 12.5%);
-    border-radius: 50%;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
-    color: #fff;
-    content: $checkmark;
-    font-size: 0.75rem;
-    font-weight: 600;
-    height: $badge-size;
-    line-height: $badge-size;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    transform: translateX(20%) translateY(-20%);
-    width: $badge-size;
-    z-index: 2; /* {1} */
+    border-style: solid;
   }
 }
