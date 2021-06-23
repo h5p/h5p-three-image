@@ -111,12 +111,12 @@ export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   }
 };
 
-function fadeAudioOut(player, resetCurrentTime, callback) {
+function fadeAudioOut(player, resetCurrentTime, fadeInAudio) {
   if (player.volume > 0) {
     var newVolume = Number(player.volume - 0.1).toFixed(1);
     player.volume = newVolume;
     setTimeout(function() {
-      fadeAudioOut(player, resetCurrentTime, callback)
+      fadeAudioOut(player, resetCurrentTime, fadeInAudio)
     }, 25);
   } 
   else {
@@ -128,8 +128,8 @@ function fadeAudioOut(player, resetCurrentTime, callback) {
     }
 
     // Then, fade in new player
-    if (callback) {
-      callback();
+    if (fadeInAudio) {
+      fadeInAudio();
     }
   }
 };
