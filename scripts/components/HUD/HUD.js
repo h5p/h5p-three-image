@@ -41,6 +41,7 @@ export default class HUD extends React.Component {
       if (playlist != null) {
         props.sceneAudioTrack = playlist.audioTracks;
         props.playlistId = playlist.playlistId;
+        props.sceneId = scene.sceneId;
       }
     }
 
@@ -51,6 +52,7 @@ export default class HUD extends React.Component {
       if (playlist != null) {
         props.sceneAudioTrack = playlist.audioTracks;
         props.playlistId = playlist.playlistId;
+        props.sceneId = scene.sceneId;
       }
     }
 

@@ -380,16 +380,7 @@
               "label": "Restart audio when scene is reopened",
               "name": "restartAudioOnSceneStart",
               "type": "boolean",
-              "default": false,
-              "widget": "showWhen",
-              "showWhen": {
-                "rules": [
-                  {
-                    "field": "audioType",
-                    "equals": "audio"
-                  }
-                ]
-              }
+              "default": false
             }
           ]
         }
