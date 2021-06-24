@@ -96,6 +96,13 @@
   }
 }
 
+.nav-button-wrapper {
+  &.nav-btn-hotspot {
+    .context-menu button {
+      font-size: 1.8em;
+    }
+  }
+}
 
 .nav-button-wrapper.focused {
   .nav-button {
