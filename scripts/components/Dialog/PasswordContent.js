@@ -83,7 +83,15 @@ export default class PasswordContent extends React.Component {
         </h1>
 
         {
-          <span className={"h5p-field-description"}>
+          <span 
+            className={`h5p-field-description ${
+              this.state.unlocked
+                ? "h5p-field-description--correct-code"
+                : !this.state.hasClicked
+                ? ""
+                : "h5p-field-description--wrong-code"
+            }`}
+          >
             {this.state.unlocked
               ? this.context.l10n.contentUnlocked
               : !this.state.hasClicked
