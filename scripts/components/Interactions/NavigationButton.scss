@@ -59,7 +59,7 @@ $labelWidth: 9em;
   }
 }
 
-.h5p-interaction-button:not(.nav-button-wrapper--gotoscene) {
+.h5p-interaction-button:not(.nav-button-wrapper--gotoscene, .nav-button-hotspot) {
   .nav-button {
     background-color: $interactionBg;
 
