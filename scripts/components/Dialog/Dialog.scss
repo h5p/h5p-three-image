@@ -67,8 +67,11 @@
     vertical-align: text-bottom;
   }
 
+  /**
+   * {1} About 50 characters (500px)
+   */
   &.h5p-advancedtext {
-    max-width: 21em;
+    max-width: 31.25em; /* {1} */
   }
 }
 .h5p-medium-tablet-size .h5p-text-dialog {

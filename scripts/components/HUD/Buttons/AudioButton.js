@@ -50,7 +50,8 @@ export default class AudioButton extends React.Component {
   getPlayerId = () => {
     if (
       this.props.sceneId !== undefined &&
-      this.props.sceneAudioTrack?.length
+      this.props.sceneAudioTrack?.length &&
+      !this.props.playlistId
     ) {
       return "scene-" + this.props.sceneId;
     }
@@ -227,14 +228,32 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (isSceneAudio(this.props.isPlaying)) {
+    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying)) {
       const isNewScene = this.props.sceneId !== prevProps.sceneId; 
       if (this.props.restartAudioOnSceneStart && isNewScene) {
         const currentPlayerId = this.getPlayerId();
         const player = this.getPlayer(currentPlayerId);
-  
-        player.audioTrack = 0;
-        player.currentTime = 0;
+        
+        if (isPlaylistAudio(currentPlayerId)) { 
+          // Pause 
+          player.pause();
+
+          // Get the first track
+          const trackList = this.getTrack(currentPlayerId);
+          const newTrackPath = H5P.getPath(
+            trackList[0].path,
+            this.context.contentId
+          );
+          player.audioTrack = 0;
+          player.src = newTrackPath;
+          player.load();
+          
+          // Play
+          player.play();
+        } 
+        else {
+          player.currentTime = 0;
+        }
       }
     }
 
