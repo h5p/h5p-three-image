@@ -129,15 +129,15 @@ $labelWidth: 9em;
       font-size: 2.25em;
     }
     &--horizontal {
-      left: calc(100% - 0.75em);
-      top: calc(50% - 0.75em);
+      left: calc(100% - 1.75em);
+      top: calc(50% - 1.75em);
       &:before {
         content: $arrow-horiz-scale;
       }
     }
     &--vertical {
-      bottom: -0.75em;
-      left: calc(50% - 0.75em);
+      bottom: -1.75em;
+      left: calc(50% - 1.75em);
       &:before {
         content: $arrow-verti-scale;
       }
