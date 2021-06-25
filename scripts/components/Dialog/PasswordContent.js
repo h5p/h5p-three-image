@@ -116,8 +116,11 @@ export default class PasswordContent extends React.Component {
                 onChange={this.handleOnChange}
               />
             </div>
-            <span className={"h5p-field-text"}>{this.context.l10n.hint + ": " + this.props.hint}</span>
-
+            {this.props.hint && (
+              <span className={"h5p-field-text"}>
+                {`${this.context.l10n.hint}: ${this.props.hint}`}
+              </span>
+            )}
           </label>
           <button className={"h5p-password-btn"} onClick={this.handleOnClick}>
             {this.state.unlocked
