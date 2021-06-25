@@ -71,8 +71,9 @@ $labelWidth: 9em;
         }
       }
       &--vertical {
-        bottom: - 1em;
-        left: calc(50% - 1em);
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(50%);
         &:before {
           content: $arrow-verti-scale;
         }
@@ -80,7 +81,6 @@ $labelWidth: 9em;
     }
   }
 }
-
 
 
 
