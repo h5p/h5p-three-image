@@ -180,7 +180,6 @@ $arrowDownTop: calc(-50% + 1px);
     position: absolute;
     bottom: -1.1em;
     background: transparent;
-    border: 0;
     border-radius: 50%;
     padding: 0.8em;
     border: 1px solid transparent;
@@ -189,14 +188,14 @@ $arrowDownTop: calc(-50% + 1px);
 
     &:focus {
       background-color: #000000;
-      box-shadow: 0 0px 10px 1px #373e94;
+      box-shadow: 0 0 10px 1px #373e94;
       border: 1px dotted #ffffff;
       outline: none;
     }
 
     &:hover {
       background-color: #ffffff;
-      box-shadow: 0 0px 10px 1px #000000;
+      box-shadow: 0 0 10px 1px #000000;
     }
 
     .nav-label-expand-arrow {
