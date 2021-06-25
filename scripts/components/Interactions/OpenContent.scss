@@ -48,8 +48,8 @@ $labelWidth: 9em;
   }
 }
     .drag {
-      width: 1.5em;
-      height: 1.5em;
+      width: 2em;
+      height: 2em;
       padding: 0;
       background-color: $dragBg;
       border: 0;
@@ -61,6 +61,7 @@ $labelWidth: 9em;
         font-family: "360-image";
         vertical-align: middle;
         color: $dragIcon;
+        font-size: 1.25em;
       }
       &--horizontal {
         left: calc(100% - 0.75em);
