@@ -91,23 +91,32 @@ export const isSceneAudio = (id) => {
 export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade out old player
   if (oldPlayer && !newPlayer) {
-    fadeAudioOut(oldPlayer, resetCurrentTime, null);
+    // But first, check if player is already fading
+    if (oldPlayer.volume === 0 || oldPlayer.volume === 1) {
+      fadeAudioOut(oldPlayer, resetCurrentTime, null);
+    }
   }
   
   // Fade out old player, then fade in new player
   else if (oldPlayer && newPlayer) {
-    fadeAudioOut(
-      oldPlayer, 
-      resetCurrentTime, 
-      function() { 
-        fadeAudioIn(newPlayer, 0); 
-      }
-    );
+    // But first, check if players are already fading
+    if ((oldPlayer.volume === 0 || oldPlayer.volume === 1) && (newPlayer.volume === 0 || newPlayer.volume === 1)) {
+      fadeAudioOut(
+        oldPlayer,
+        resetCurrentTime,
+        function() {
+          fadeAudioIn(newPlayer, 0);
+        }
+      );
+    }
   }
 
   // Fade in new player
   else if (!oldPlayer && newPlayer) {
-    fadeAudioIn(newPlayer, 0);
+    // But first, check if player is already fading
+    if (newPlayer.volume === 0 || newPlayer.volume === 1) {
+      fadeAudioIn(newPlayer, 0);
+    }
   }
 };
 
@@ -140,13 +149,15 @@ function fadeAudioIn(player, int) {
   }
   var newint = 1;
   if (player.volume < 1) {
-    if (player.volume === 0) {
+    if (player.volume === 0 && int === 0) {
       player.play();
     }
     var newVolume = Number(player.volume + 0.1).toFixed(1);
     player.volume = newVolume;
-    setTimeout(function() {
-      fadeAudioIn(player, newint)
-    }, 25);
+    if (player.volume !== 1) {
+      setTimeout(function() {
+        fadeAudioIn(player, newint)
+      }, 25);
+    }
   }
 };
