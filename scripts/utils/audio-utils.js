@@ -88,26 +88,37 @@ export const isSceneAudio = (id) => {
   return id && (id === "global" || id.substr(0, 6) === "scene-");
 };
 
+export const playerIsFading = (player) => player.volume > 0 && player.volume < 1;
+
 export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade out old player
   if (oldPlayer && !newPlayer) {
-    fadeAudioOut(oldPlayer, resetCurrentTime, null);
+    // Check that the player is not already fading
+    if (!playerIsFading(oldPlayer)) {
+      fadeAudioOut(oldPlayer, resetCurrentTime, null);
+    }
   }
   
   // Fade out old player, then fade in new player
   else if (oldPlayer && newPlayer) {
-    fadeAudioOut(
-      oldPlayer, 
-      resetCurrentTime, 
-      function() { 
-        fadeAudioIn(newPlayer, 0); 
-      }
-    );
+    // Check that the players are not already fading
+    if (!playerIsFading(oldPlayer) && !playerIsFading(newPlayer)) {
+      fadeAudioOut(
+        oldPlayer,
+        resetCurrentTime,
+        function() {
+          fadeAudioIn(newPlayer, 0);
+        }
+      );
+    }
   }
 
   // Fade in new player
   else if (!oldPlayer && newPlayer) {
-    fadeAudioIn(newPlayer, 0);
+    // Check that the player is not already fading
+    if (!playerIsFading(newPlayer)) {
+      fadeAudioIn(newPlayer, 0);
+    }
   }
 };
 
@@ -140,13 +151,15 @@ function fadeAudioIn(player, int) {
   }
   var newint = 1;
   if (player.volume < 1) {
-    if (player.volume === 0) {
+    if (player.volume === 0 && int === 0) {
       player.play();
     }
     var newVolume = Number(player.volume + 0.1).toFixed(1);
     player.volume = newVolume;
-    setTimeout(function() {
-      fadeAudioIn(player, newint)
-    }, 25);
+    if (player.volume !== 1) {
+      setTimeout(function() {
+        fadeAudioIn(player, newint)
+      }, 25);
+    }
   }
 };

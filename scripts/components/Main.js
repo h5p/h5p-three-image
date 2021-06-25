@@ -509,7 +509,7 @@ export default class Main extends React.Component {
     }));
 
     // Play scene audio again if it was played before this interaction
-    if (!this.props.audioIsPlaying && this.state.sceneAudioWasPlaying) {
+    if (!this.state.audioIsPlaying && this.state.sceneAudioWasPlaying) {
       const lastplayer = this.sceneAudioPlayers[this.state.sceneAudioWasPlaying];
       fadeAudioInAndOut(null, lastplayer, false);
     }
