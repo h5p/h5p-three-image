@@ -136,8 +136,9 @@ $labelWidth: 9em;
       }
     }
     &--vertical {
-      bottom: -1.75em;
-      left: calc(50% - 1.75em);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(50%);
       &:before {
         content: $arrow-verti-scale;
       }
