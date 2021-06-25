@@ -59,8 +59,8 @@ $labelWidth: 9em;
   }
 }
 
-.h5p-interaction-button {
-  .nav-button {
+.h5p-interaction-button:not(.nav-button-wrapper--gotoscene) {
+  .nav-button:not(.nav-button-hotspot) {
     background-color: $interactionBg;
 
     &:active {
