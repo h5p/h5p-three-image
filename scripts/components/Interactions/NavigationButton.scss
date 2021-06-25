@@ -129,8 +129,9 @@ $labelWidth: 9em;
       font-size: 2.25em;
     }
     &--horizontal {
-      left: calc(100% - 1.75em);
-      top: calc(50% - 1.75em);
+      right: 0;
+      transform: translateX(50%) translateY(-50%);
+      top: 50%;
       &:before {
         content: $arrow-horiz-scale;
       }
