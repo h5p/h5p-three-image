@@ -88,11 +88,13 @@ export const isSceneAudio = (id) => {
   return id && (id === "global" || id.substr(0, 6) === "scene-");
 };
 
+export const playerIsFading = (player) => player.volume > 0 && player.volume < 1;
+
 export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade out old player
   if (oldPlayer && !newPlayer) {
     // Check that the player is not already fading
-    if (oldPlayer.volume === 0 || oldPlayer.volume === 1) {
+    if (!playerIsFading(oldPlayer)) {
       fadeAudioOut(oldPlayer, resetCurrentTime, null);
     }
   }
@@ -100,7 +102,7 @@ export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade out old player, then fade in new player
   else if (oldPlayer && newPlayer) {
     // Check that the players are not already fading
-    if ((oldPlayer.volume === 0 || oldPlayer.volume === 1) && (newPlayer.volume === 0 || newPlayer.volume === 1)) {
+    if (!playerIsFading(oldPlayer) && !playerIsFading(newPlayer)) {
       fadeAudioOut(
         oldPlayer,
         resetCurrentTime,
@@ -114,7 +116,7 @@ export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade in new player
   else if (!oldPlayer && newPlayer) {
     // Check that the player is not already fading
-    if (newPlayer.volume === 0 || newPlayer.volume === 1) {
+    if (!playerIsFading(newPlayer)) {
       fadeAudioIn(newPlayer, 0);
     }
   }
