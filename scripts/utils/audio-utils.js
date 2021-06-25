@@ -91,7 +91,7 @@ export const isSceneAudio = (id) => {
 export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   // Fade out old player
   if (oldPlayer && !newPlayer) {
-    // But first, check if player is already fading
+    // Check that the player is not already fading
     if (oldPlayer.volume === 0 || oldPlayer.volume === 1) {
       fadeAudioOut(oldPlayer, resetCurrentTime, null);
     }
@@ -99,7 +99,7 @@ export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
   
   // Fade out old player, then fade in new player
   else if (oldPlayer && newPlayer) {
-    // But first, check if players are already fading
+    // Check that the players are not already fading
     if ((oldPlayer.volume === 0 || oldPlayer.volume === 1) && (newPlayer.volume === 0 || newPlayer.volume === 1)) {
       fadeAudioOut(
         oldPlayer,
@@ -113,7 +113,7 @@ export const fadeAudioInAndOut = (oldPlayer, newPlayer, resetCurrentTime) => {
 
   // Fade in new player
   else if (!oldPlayer && newPlayer) {
-    // But first, check if player is already fading
+    // Check that the player is not already fading
     if (newPlayer.volume === 0 || newPlayer.volume === 1) {
       fadeAudioIn(newPlayer, 0);
     }
