@@ -29,7 +29,6 @@
   left: 50%;
   top: 50%;
   width: 80%;
-  max-width: 93%;
   max-height: 90%;
   background: white;
   z-index: 1;
@@ -67,10 +66,17 @@
     content: $close;
     vertical-align: text-bottom;
   }
+
+  /**
+   * {1} About 50 characters (500px)
+   */
+  &.h5p-advancedtext {
+    max-width: 31.25em; /* {1} */
+  }
 }
 .h5p-medium-tablet-size .h5p-text-dialog {
   width: 86%;
-  margin: 0em;
+  margin: 0;
   padding: 0.25em;
 }
 .h5p-text-content {
@@ -78,6 +84,7 @@
   max-height: 100%;
   max-width: 100%;
   overflow-y: auto;
+  padding: 0 1em;
 }
 .h5p-text-content::-webkit-scrollbar {
   width: 0.5em;

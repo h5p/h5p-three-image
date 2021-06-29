@@ -15,12 +15,28 @@ H5PUpgrades['H5P.ThreeImage'] = (function () {
         finished(null, parameters);
       },
       4: function (parameters, finished) {
-        if (parameters && parameters.behaviour) {
-          parameters.behaviour.label = {
+        if (parameters && parameters.context.behaviour) {
+          parameters.context.behaviour.label = {
             showLabel: false,
             labelPosition: 'right'
           };
         }
+
+        if (parameters && parameters.context.scenes) {
+          for (const scene of parameters.context.scenes) {
+            if (scene.interactions) {
+              for (const interaction of interactions) {
+                if (!interaction.label) {
+                  interaction.label = {
+                    labelPosition: 'inherit',
+                    showLabel: 'inherit',
+                  }
+                }
+              }
+            }
+          }
+        }
+
         finished(null, parameters);
       }
     }

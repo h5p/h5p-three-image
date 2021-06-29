@@ -15,6 +15,9 @@
                     "label": "360-graders bilde"
                   },
                   {
+                    "label": "Panoramabilde"
+                  },
+                  {
                     "label": "Statisk bilde"
                   }
                 ]
@@ -36,12 +39,12 @@
                 "description": "En beskrivelse av scenen"
               },
               {
-                "label": "Display \"Scene Description\" initially",
-                "description": "Display the scene description when the scene starts for the first time"
+                "label": "Vis scenens beskrivelse første gang",
+                "description": "Vis scenens beskrivelse første gang scenen vises."
               },
               {
-                "label": "Initial camera position",
-                "description": "Camera position in pitch and yaw"
+                "label": "Kameraets startposisjon",
+                "description": ""
               },
               {
                 "label": "Interactions",
@@ -139,7 +142,7 @@
               },
               {
                 "label": "Knappetype",
-                "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
+                "description": "Bestem hvordan knapper som peker til denne scenen skal se ut. Vi anbefaler \"Mer informasjon (pluss)\".",
                 "options": [
                   {
                     "label": "Ny scene (pil)"
@@ -150,8 +153,27 @@
                 ]
               },
               {
+                "label": "Lydtype",
+                "description": "Velg om det skal spilles av et lydspor eller en spilleliste når scenen er åpen.",
+                "options": [
+                  {
+                    "label": "Lydspor"
+                  },
+                  {
+                    "label": "Spilleliste"
+                  }
+                ]
+              },
+              {
                 "label": "Lydspor",
-                "description": "Add an audio track that's specific for this scene."
+                "description": "Legg til et lydspor som skal spilles av når scenen er åpen."
+              },
+              {
+                "label": "Spilleliste",
+                "description": "Velg en spilleliste som skal spilles av når scenen er åpen."
+              },
+              {
+                "label": "Start lyden på nytt når scenen åpnes"
               }
             ]
           }
@@ -159,6 +181,32 @@
         {},
         {
           "label": "Lydspor"
+        },
+        {
+          "label": "Spillelister",
+          "field": {
+            "fields": [
+              {
+                "label": "Navn på spilleliste",
+                "description": "Brukes for å gjenkjenne spillelisten"
+              },
+              {
+                "label": "Lydspor",
+                "description": "Legg ett eller flere lydspor til i spillelisten."
+              },
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Spillelister",
+      "description": "Disse valgene lar deg legge til spillelister i scenene.",
+      "fields": [
+        {
+          "label": "Spillelister lagt til",
+          "description": "Make playlists that's available for all scenes by default."
         }
       ]
     },
@@ -167,8 +215,28 @@
       "description": "These options will let you control how the world behaves.",
       "fields": [
         {
+          "label": "Audio type",
+          "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+          "options": [
+            {
+              "label": "Global Audio"
+            },
+            {
+              "label": "Playlist"
+            }
+          ]
+        },
+        {
           "label": "Global lyd",
-          "description": "Add an audio track that's available for all of the scenes by default."
+          "description": "Velg et lydspor som kan høres i alle scener."
+        },
+        {
+          "label": "Spilleliste",
+          "description": "Velg en spilleliste som kan høres i alle scener."
+        },
+        {
+          "label": "Vis \"Poeng\"-knappen",
+          "description": "Vis en knapp som lar brukeren se antall poeng som er scoret."
         },
         {
           "label": "Kvalitet på scene-rendering",
@@ -256,6 +324,46 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
+        },
+        {
+          "label": "Label for context menu button for go to scene",
+          "default": "Go to scene"
+        },
+        {
+          "label": "Label for context menu button for edit",
+          "default": "Edit"
+        },
+        {
+          "label": "Label for context menu button for delete",
+          "default": "Delete"
+        },
+        {
+          "label": "Translation for \"Score\"",
+          "default": "Score"
+        },
+        {
+          "label": "Translation for \"Assignment\"",
+          "default": "Assignment"
+        },
+        {
+          "label": "Translation for \"Total\"",
+          "default": "Total"
+        },
+        {
+          "label": "Translation for \"Total Score\"",
+          "default": "Total Score"
+        },
+        {
+          "label": "Label for button to show score summary",
+          "default": "Show Score Summary"
+        },
+        {
+          "label": "Translation for 'Scene'",
+          "default": "Scene"
+        },
+        {
+          "label": "Uten tittel",
+          "default": "Uten tittel"
         }
       ]
     }

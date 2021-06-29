@@ -1,5 +1,5 @@
-@import '../../styles/icons';
-@import '../../styles/colors';
+@import "../../styles/icons";
+@import "../../styles/colors";
 
 $labelPadding: 0.5em;
 $labelWidth: 9em;
@@ -35,7 +35,7 @@ $labelWidth: 9em;
   -ms-user-select: none;
   user-select: none;
   z-index: 1;
-  box-shadow: 0.2em 0.2em 0.3em rgba(0,0,0,0.2);
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.2);
   transition: border 100ms linear;
 
   &:hover {
@@ -53,22 +53,20 @@ $labelWidth: 9em;
     z-index: 3;
   }
 
-  &.dragging, &.focused {
+  &.dragging,
+  &.focused {
     z-index: 3;
   }
 }
 
-.h5p-interaction-button {
-  .nav-button {
+.h5p-interaction-button:not(.nav-button-wrapper--gotoscene) {
+  .nav-button:not(.nav-button-hotspot) {
     background-color: $interactionBg;
 
     &:active {
       background-color: $interactionActiveBg;
       border-color: $interactionActiveBorder;
     }
-  }
-
-  &:hover .nav-button {
   }
 }
 .nav-button-hotspot-wrapper {
@@ -78,7 +76,7 @@ $labelWidth: 9em;
     z-index: 3;
   }
   .nav-button-hotspot {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     transition: background-color 0.2s ease-in-out;
     border-radius: 0;
     box-shadow: none;
@@ -90,7 +88,7 @@ $labelWidth: 9em;
     }
     /*Modifiers*/
     &--show-hotspot-on-hover {
-      background-color: rgba(0,0,0,0);
+      background-color: rgba(0, 0, 0, 0);
 
       &:focus {
         background-color: $hotspotAlteredState;
@@ -107,18 +105,18 @@ $labelWidth: 9em;
         display: inherit;
         font-size: 2.5em;
       }
-      &:hover, &:focus, &:active {
+      &:hover,
+      &:focus,
+      &:active {
         background-color: $hotspotAlteredState;
       }
     }
-
-
   }
   .drag {
-    width: 3em;
-    height: 3em;
+    width: 3.5em;
+    height: 3.5em;
     padding: 0;
-    background-color: white;
+    background-color: $dragBg;
     border: 0;
     position: absolute;
     cursor: pointer;
@@ -127,32 +125,31 @@ $labelWidth: 9em;
     &:before {
       font-family: "360-image";
       vertical-align: middle;
-      color: $activeBorder;
-      font-size: 2em;
+      color: $dragIcon;
+      font-size: 2.25em;
     }
     &--horizontal {
-      left: calc(100% - 0.75em);
-      top: calc(50% - 0.75em);
+      right: 0;
+      transform: translateX(50%) translateY(-50%);
+      top: 50%;
       &:before {
         content: $arrow-horiz-scale;
       }
     }
     &--vertical {
-      bottom: - 0.75em;
-      left: calc(50% - 0.75em);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(50%);
       &:before {
         content: $arrow-verti-scale;
       }
     }
   }
-
-
 }
 
 .disabled .nav-button {
   opacity: 0.5;
 }
-
 
 .bottom .nav-button {
   top: auto;
@@ -169,7 +166,6 @@ $labelWidth: 9em;
   z-index: 1;
   color: white;
   font-size: 1.25em;
-  height: 1.025em;
 }
 
 .h5p-question-button .nav-button:before {
@@ -236,4 +232,33 @@ $labelWidth: 9em;
 
 .h5p-scene-description-button .nav-button:before {
   content: $sceneDescription;
+}
+
+$answerable-interactions: (
+  "nav-button-wrapper--summary",
+  "nav-button-wrapper--singlechoiceset",
+  "nav-button-wrapper--blanks",
+  "nav-button-wrapper--multichoice",
+);
+
+@each $interaction in $answerable-interactions {
+  .#{$interaction} {
+    &::before {
+      $offset: 0.5rem;
+      border: 3px dashed $interactionBg;
+      border-radius: 50%;
+      bottom: -$offset;
+      content: "";
+      left: -$offset;
+      position: absolute;
+      right: -$offset;
+      top: -$offset;
+    }
+  }
+}
+
+.h5p-interaction-answered {
+  &::before {
+    border-style: solid;
+  }
 }

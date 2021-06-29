@@ -31,10 +31,19 @@ const infoInteractions = [
   "H5P.Blanks"
 ];
 
+/**
+ * @param {string} machineName 
+ * @returns {boolean}
+ */
 const isInfoInteraction = (machineName) => {
   return infoInteractions.includes(machineName);
 };
 
+/**
+ * @param {Interaction} interaction 
+ * @param {Array<SceneParams>} scenes 
+ * @returns {string}
+ */
 export const getIconFromInteraction = (interaction, scenes) => {
   const library = interaction.action.library;
   const machineName = H5P.libraryFromString(library).machineName;
@@ -77,6 +86,10 @@ export const getIconFromInteraction = (interaction, scenes) => {
   return icon;
 };
 
+/**
+ * @param {Interaction} interaction 
+ * @returns {InteractionLabel}
+ */
 export const getLabelFromInteraction = (interaction) => {
   return {...interaction.label, labelText: interaction.labelText};
 };
@@ -104,6 +117,7 @@ export const getLabelFromInteraction = (interaction) => {
  *  wrapperHeight: number;
  *  rendered: boolean;
  *  is3d: boolean;
+ *  children: React.ReactChildren;
  *  clickHandler: () => void;
  *  doubleClickHandler: () => void;
  *  mouseDownHandler: (event: MouseEvent) => void;
@@ -133,15 +147,21 @@ export default class NavigationButton extends React.Component {
   constructor(props) {
     super(props);
 
+    /** @type {Props} */
+    this.props = this.props;
+
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
     this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    
+    /** @type {State} */
     this.state = {
       isFocused: this.props.isFocused,
       expandButtonFocused: false,
-      innerButtonFocused: false
+      innerButtonFocused: false,
+      isMouseOver: false,
     };
   }
 
@@ -151,10 +171,7 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  /**
-   * @param {FocusEvent} event 
-   */
-  onFocus(event) {
+  onFocus() {
     // Already focused
     if (this.state.isFocused) {
       return;
@@ -273,6 +290,8 @@ export default class NavigationButton extends React.Component {
         innerButtonFocused: false
       });
     }
+
+    this.setFocus(true);
   }
 
   onDoubleClick() {
@@ -306,9 +325,12 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  handleFocus = (e) => {
+  /**
+   * @param {React.FocusEvent<HTMLElement>} event 
+   */
+  handleFocus = (event) => {
     if (this.context.extras.isEditor) {
-      if (this.navButtonWrapper && this.navButtonWrapper.current && this.navButtonWrapper === e.target) {
+      if (this.navButtonWrapper?.current === event.target) {
         this.setFocus();
       }
       return;
@@ -349,25 +371,43 @@ export default class NavigationButton extends React.Component {
    */
   setHotspotValues(widthX, heightY) {
     const scene = this.context.params.scenes.find(
-      (/** @type {Scene} */ scene) => scene.sceneId === this.props.sceneId,
+      (/** @type {SceneParams} */ scene) => scene.sceneId === this.props.sceneId,
     );
     const interaction = scene.interactions[this.props.interactionIndex];
     interaction.label.hotSpotSizeValues = widthX + "," + heightY;
   }
 
   getHotspotValues() {
-    const scene = this.context.params.scenes.find(scene => {
-      return scene.sceneId === this.props.sceneId;
-    });
-    const interaction = scene.interactions[this.props.interactionIndex];
+    const interaction = this.getCurrentInteraction();
 
     return interaction.label.hotSpotSizeValues ?
       interaction.label.hotSpotSizeValues.split(",") : [16,16]
   }
+
+  /**
+   * @private
+   * 
+   * Returns the current Interaction,
+   * based on current scene id and current interaction id.
+   * 
+   * @returns {Interaction}
+   */
+  getCurrentInteraction() {
+    const scene = this.context.params.scenes.find((/** @type {SceneParams} */ scene) => {
+      return scene.sceneId === this.props.sceneId;
+    });
+    return scene?.interactions ? scene.interactions[this.props.interactionIndex] : null;
+  }
+
   render() {
-    let wrapperClasses = [
+    const interaction = this.getCurrentInteraction();
+    const [_, libraryName] = interaction ? H5P.libraryFromString(interaction?.action?.library).machineName?.split(".") : [null];
+    
+    let wrapperClasses = interaction ? [
       'nav-button-wrapper',
-    ];
+      `nav-button-wrapper--${libraryName.toLowerCase()}`,
+    ] : ['nav-button-wrapper'];
+
 
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
@@ -376,6 +416,10 @@ export default class NavigationButton extends React.Component {
     if (this.props.icon) {
       wrapperClasses.push(this.props.icon);
     }
+
+    if (interaction?.isAnswered) {
+      wrapperClasses.push('h5p-interaction-answered');
+    } 
 
     if (this.props.is3d) {
       wrapperClasses = wrapperClasses.concat("nav-btn-hotspot render-in-3d");
@@ -418,7 +462,6 @@ export default class NavigationButton extends React.Component {
 
     const labelText = getLabelText(label);
     return (
-
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
@@ -437,7 +480,6 @@ export default class NavigationButton extends React.Component {
               onClickEvent={this.onClick.bind(this)}
               onDoubleClickEvent={this.onDoubleClick.bind(this)}
               onMouseDownEvent={this.onMouseDown.bind(this)}
-              onMouseUpEvent={this.setFocus.bind(this)}
               onFocusEvent={() => this.setState({innerButtonFocused: true})}
               onBlurEvent={() => this.setState({innerButtonFocused: false})}
               setHotspotValues={this.setHotspotValues.bind(this)}
@@ -455,7 +497,6 @@ export default class NavigationButton extends React.Component {
               onClick={this.onClick.bind(this)}
               onDoubleClick={this.onDoubleClick.bind(this)}
               onMouseDown={this.onMouseDown.bind(this)}
-              onMouseUp={this.setFocus.bind(this)}
               onFocus={() => this.setState({innerButtonFocused: true})}
               onBlur={() => this.setState({innerButtonFocused: false})}/>
         }

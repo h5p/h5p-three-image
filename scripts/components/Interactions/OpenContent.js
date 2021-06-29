@@ -149,7 +149,7 @@ export default class OpenContent extends React.Component {
    */
   setHotspotValues(widthX, heightY) {
     const scene = this.context.params.scenes.find(
-      (/** @type {Scene} */ scene) => scene.sceneId === this.props.sceneId
+      (/** @type {SceneParams} */ scene) => scene.sceneId === this.props.sceneId
     );
     const interaction = scene.interactions[this.props.interactionIndex];
     interaction.label.hotSpotSizeValues = widthX + "," + heightY;
@@ -290,7 +290,6 @@ export default class OpenContent extends React.Component {
     }
   }
 
-
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
       if (this.openContentWrapper && this.openContentWrapper.current && this.openContentWrapper === e.target) {
@@ -400,7 +399,7 @@ export default class OpenContent extends React.Component {
           }}
           onDoubleClick={this.onDoubleClick.bind(this)}
           onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
+          onClick={this.setFocus.bind(this)}
         >
           <div
             className={"inner-content"}

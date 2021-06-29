@@ -15,6 +15,9 @@
                     "label": "Imatge 360"
                   },
                   {
+                    "label": "Panoramic image"
+                  },
+                  {
                     "label": "Imatge estàtica"
                   }
                 ]
@@ -150,8 +153,27 @@
                 ]
               },
               {
+                "label": "Audio type",
+                "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+                "options": [
+                  {
+                    "label": "Audio Track"
+                  },
+                  {
+                    "label": "Playlist"
+                  }
+                ]
+              },
+              {
                 "label": "Pista d’àudio",
                 "description": "Afegiu una pista d’àudio que sigui específica per a aquest escenari."
+              },
+              {
+                "label": "Playlist",
+                "description": "Here you can pick an existing playlist as audio."
+              },
+              {
+                "label": "Restart audio when scene is reopened"
               }
             ]
           }
@@ -159,6 +181,32 @@
         {},
         {
           "label": "Pista d’àudio"
+        },
+        {
+          "label": "Playlists",
+          "field": {
+            "fields": [
+              {
+                "label": "Playlist Title",
+                "description": "Used to identify the playlist"
+              },
+              {
+                "label": "Audio Tracks",
+                "description": "Add audio tracks to the playlist."
+              },
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Playlists",
+      "description": "These options will let you add playlists for the scenes.",
+      "fields": [
+        {
+          "label": "Added playlists",
+          "description": "Make playlists that's available for all scenes by default."
         }
       ]
     },
@@ -167,18 +215,38 @@
       "description": "Aquestes opcions us permeten controlar com es comporta el món.",
       "fields": [
         {
+          "label": "Audio type",
+          "description": "Decide what audio type this scene will use, either use an audio track or choose an existing audio playlist.",
+          "options": [
+            {
+              "label": "Global Audio"
+            },
+            {
+              "label": "Playlist"
+            }
+          ]
+        },
+        {
           "label": "Àudio global",
           "description": "Afegiu una pista d’àudio que estigui disponible per a totes les escenes de manera predeterminada."
+        },
+        {
+          "label": "Playlist",
+          "description": "Here you can pick an existing playlist as audio."
+        },
+        {
+          "label": "Display \"Scores\" button",
+          "description": "Display button for showing the scores from assignments."
         },
         {
           "label": "Qualitat de la renderització de l’escena",
           "description": "Trieu l’amplada i l’alçada que utilitzaran els segments per renderitzar una escena, ja que això influeix directament en la seva qualitat. Si una escena es veu pixelada o s’hi veuen ones, proveu d’augmentar-ne la qualitat. Tingueu en compte que les renderitzacions en alta qualitat tarden més a carregar-se.",
           "options": [
             {
-              "label": "Alta qualitat (128 x 128)"
+              "label": "Alta qualitat (128 x 128)"
             },
             {
-              "label": "Qualitat mitjana (64 x 64)"
+              "label": "Qualitat mitjana (64 x 64)"
             },
             {
               "label": "Qualitat baixa (16x16)"
@@ -256,6 +324,46 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
+        },
+        {
+          "label": "Label for context menu button for go to scene",
+          "default": "Go to scene"
+        },
+        {
+          "label": "Label for context menu button for edit",
+          "default": "Edit"
+        },
+        {
+          "label": "Label for context menu button for delete",
+          "default": "Delete"
+        },
+        {
+          "label": "Translation for \"Score\"",
+          "default": "Score"
+        },
+        {
+          "label": "Translation for \"Assignment\"",
+          "default": "Assignment"
+        },
+        {
+          "label": "Translation for \"Total\"",
+          "default": "Total"
+        },
+        {
+          "label": "Translation for \"Total Score\"",
+          "default": "Total Score"
+        },
+        {
+          "label": "Label for button to show score summary",
+          "default": "Show Score Summary"
+        },
+        {
+          "label": "Translation for 'Scene'",
+          "default": "Scene"
+        },
+        {
+          "label": "Untitled",
+          "default": "Untitled"
         }
       ]
     }

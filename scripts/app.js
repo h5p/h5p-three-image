@@ -7,10 +7,12 @@ import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeS
 
 // Load library
 H5P = H5P || {};
+
 H5P.ThreeImage = (function () {
 
   function Wrapper(params, contentId, extras) {
     extras = extras || {};
+
     this.forceStartScreen = (extras.forceStartScreen !== undefined
       && extras.forceStartScreen >= 0)
       ? extras.forceStartScreen : null;
@@ -22,6 +24,7 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     params.threeImage.scenes = Wrapper.addUniqueIdsToInteractions(params.threeImage.scenes);
+    params.threeImage.scenes = Wrapper.addMissingLabelSettings(params.threeImage.scenes);
     
     let wrapper;
     this.behavior = {
@@ -224,6 +227,8 @@ H5P.ThreeImage = (function () {
       this.threeSixty.setSegmentNumber(segments);
       this.sceneRenderingQuality = quality;
     };
+    
+    
   }
 
   /**
@@ -231,20 +236,38 @@ H5P.ThreeImage = (function () {
   * The ids are used as key for mapping React components.
   * TODO: Create the ids in editor-time and store them in semantics
   *
-  * @param {Array<Scene>} scenes 
-  * @returns {Array<Scene>}
+  * @param {Array<SceneParams>} scenes 
+  * @returns {Array<SceneParams>}
   */
   Wrapper.addUniqueIdsToInteractions = scenes =>
-   scenes.map(scene => scene.interactions 
-     ? ({
-         ...scene,
-         interactions: scene.interactions.map(
-           interaction => ({...interaction, id: H5P.createUUID()}),
-         ),
-       }) 
-     : scene
-   );
+    scenes?.map(scene => scene.interactions 
+      ? ({
+          ...scene,
+          interactions: scene.interactions?.map(
+            interaction => ({...interaction, id: H5P.createUUID()}),
+          ),
+        }) 
+      : scene
+    );
  
+  /**
+   * Older interactions are missing label settings.
+   * This adds an empty `label` to avoid adding null checks everywhere.
+   * TODO: Add this to upgrades.json
+   * 
+   * @param {Array<SceneParams>} scenes 
+   * @returns {Array<SceneParams>}
+   */
+  Wrapper.addMissingLabelSettings = scenes =>
+      scenes?.map(scene => scene.interactions
+        ? ({
+          ...scene,
+          interactions: scene.interactions?.map(
+            interaction => ({...interaction, label: interaction.label ?? {}})
+          ),
+        })
+        : scene
+      );
 
   return Wrapper;
 })();
