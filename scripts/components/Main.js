@@ -491,6 +491,13 @@ export default class Main extends React.Component {
         showingPassword: false,
         nextFocus: null
       });
+
+      // Save the last scene player if any
+      if (this.state.audioIsPlaying && (isSceneAudio(this.state.audioIsPlaying) || isPlaylistAudio(this.state.audioIsPlaying)) ) {
+        this.setState({
+          sceneAudioWasPlaying: this.state.audioIsPlaying
+        });
+      }
     }
   }
 
@@ -500,6 +507,12 @@ export default class Main extends React.Component {
       currentInteraction: null,
       nextFocus: 'interaction-' + prevState.currentInteraction
     }));
+
+    // Play scene audio again if it was played before this interaction
+    if (!this.state.audioIsPlaying && this.state.sceneAudioWasPlaying) {
+      const lastplayer = this.sceneAudioPlayers[this.state.sceneAudioWasPlaying];
+      fadeAudioInAndOut(null, lastplayer, false);
+    }
   }
 
   hidePasswordDialog() {
