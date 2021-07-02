@@ -1,3 +1,5 @@
+/// <reference path="./index.d.ts" />
+
 var H5PUpgrades = H5PUpgrades || {};
 
 H5PUpgrades['H5P.ThreeImage'] = (function () {
@@ -14,18 +16,23 @@ H5PUpgrades['H5P.ThreeImage'] = (function () {
         }
         finished(null, parameters);
       },
+
+      /**
+       * @param {{ threeImage: {scenes: Array<SceneParams>}; behaviour?: any; }} parameters 
+       * @param {(param0: any, parameters: any) => void} finished 
+       */
       4: function (parameters, finished) {
-        if (parameters && parameters.context.behaviour) {
-          parameters.context.behaviour.label = {
+        if (parameters && parameters.behaviour) {
+          parameters.behaviour.label = {
             showLabel: false,
             labelPosition: 'right'
           };
         }
 
-        if (parameters && parameters.context.scenes) {
-          for (const scene of parameters.context.scenes) {
+        if (parameters && parameters.threeImage && parameters.threeImage.scenes) {
+          for (const scene of parameters.threeImage.scenes) {
             if (scene.interactions) {
-              for (const interaction of interactions) {
+              for (const interaction of scene.interactions) {
                 if (!interaction.label) {
                   interaction.label = {
                     labelPosition: 'inherit',
