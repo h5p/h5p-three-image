@@ -364,6 +364,66 @@
         {
           "label": "Uten tittel",
           "default": "Uten tittel"
+        },
+        {
+          "label": "Gå til startscenen",
+          "default": "Gå til startscenen"
+        },
+        {
+          "label": "Du er på startscenen",
+          "default": "Du er på startscenen"
+        },
+        {
+          "label": "Låst opp",
+          "default": "Låst opp"
+        },
+        {
+          "label": "Låst",
+          "default": "Låst"
+        },
+        {
+          "label": "Let i rommet til du finner koden",
+          "default": "Let i rommet til du finner koden"
+        },
+        {
+          "label": "Koden var feil, prøv igjen.",
+          "default": "Koden var feil, prøv igjen."
+        },
+        {
+          "label": "Innholdet ble låst opp!",
+          "default": "Innholdet ble låst opp!"
+        },
+        {
+          "label": "Kode",
+          "default": "Kode"
+        },
+        {
+          "label": "Vis kode",
+          "default": "Vis kode"
+        },
+        {
+          "label": "Skjul kode",
+          "default": "Skjul kode"
+        },
+        {
+          "label": "Handling når innholdet er ulåst (Fortsett)",
+          "default": "Fortsett"
+        },
+        {
+          "label": "Handling når innholdet er låst (Lås opp)",
+          "default": "Lås opp"
+        },
+        {
+          "label": "Dra vannrett for å endre størrelsen (for skjermlesere)",
+          "default": "Dra vannrett for å endre størrelsen"
+        },
+        {
+          "label": "Dra loddrett for å endre størrelsen (for skjermlesere)",
+          "default": "Dra loddrett for å endre størrelsen"
+        },
+        {
+          "label": "Hint",
+          "default": "Hint"
         }
       ]
     }

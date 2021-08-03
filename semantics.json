@@ -719,6 +719,111 @@
         "label": "Untitled",
         "importance": "low",
         "default": "Untitled"
+      },
+      {
+        "name": "goToStartScene",
+        "type": "text",
+        "label": "Go to start scene",
+        "importance": "low",
+        "default": "Go to start scene"
+      },
+      {
+        "name": "userIsAtStartScene",
+        "type": "text",
+        "label": "You are at the start scene",
+        "importance": "low",
+        "default": "You are at the start scene"
+      },
+      {
+        "name": "unlocked",
+        "type": "text",
+        "label": "Unlocked",
+        "importance": "low",
+        "default": "Unlocked"
+      },
+      {
+        "name": "locked",
+        "type": "text",
+        "label": "Locked",
+        "importance": "low",
+        "default": "Locked"
+      },
+      {
+        "name": "searchRoomForCode",
+        "type": "text",
+        "label": "Search the room until you find the code",
+        "importance": "low",
+        "default": "Search the room until you find the code"
+      },
+      {
+        "name": "wrongCode",
+        "type": "text",
+        "label": "The code was wrong, try again.",
+        "importance": "low",
+        "default": "The code was wrong, try again."
+      },
+      {
+        "name": "contentUnlocked",
+        "type": "text",
+        "label": "The content has been unlocked!",
+        "importance": "low",
+        "default": "The content has been unlocked!"
+      },
+      {
+        "name": "code",
+        "type": "text",
+        "label": "Code",
+        "importance": "low",
+        "default": "Code"
+      },
+      {
+        "name": "showCode",
+        "type": "text",
+        "label": "Show code",
+        "importance": "low",
+        "default": "Show code"
+      },
+      {
+        "name": "hideCode",
+        "type": "text",
+        "label": "Hide code",
+        "importance": "low",
+        "default": "Hide code"
+      },
+      {
+        "name": "unlockedStateAction",
+        "type": "text",
+        "label": "Unlocked interaction action (Continue)",
+        "importance": "low",
+        "default": "Continue"
+      },
+      {
+        "name": "lockedStateAction",
+        "type": "text",
+        "label": "Locked interaction action (Unlock)",
+        "importance": "low",
+        "default": "Unlock"
+      },
+      {
+        "name": "hotspotDragHorizAlt",
+        "type": "text",
+        "label": "Drag horizontally to scale (for screen readers)",
+        "importance": "low",
+        "default": "Drag horizontally to scale"
+      },
+      {
+        "name": "hotspotDragVertiAlt",
+        "type": "text",
+        "label": "Drag vertically to scale (for screen readers)",
+        "importance": "low",
+        "default": "Drag vertically to scale"
+      },
+      {
+        "name": "hint",
+        "type": "text",
+        "label": "Hint",
+        "importance": "low",
+        "default": "Hint"
       }
     ]
   }

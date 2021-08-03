@@ -364,6 +364,66 @@
         {
           "label": "Utan tittel",
           "default": "Utan tittel"
+        },
+        {
+          "label": "Go to start scene",
+          "default": "Go to start scene"
+        },
+        {
+          "label": "You are at the start scene",
+          "default": "You are at the start scene"
+        },
+        {
+          "label": "Unlocked",
+          "default": "Unlocked"
+        },
+        {
+          "label": "Locked",
+          "default": "Locked"
+        },
+        {
+          "label": "Search the room until you find the code",
+          "default": "Search the room until you find the code"
+        },
+        {
+          "label": "The code was wrong, try again.",
+          "default": "The code was wrong, try again."
+        },
+        {
+          "label": "The content has been unlocked!",
+          "default": "The content has been unlocked!"
+        },
+        {
+          "label": "Code",
+          "default": "Code"
+        },
+        {
+          "label": "Show code",
+          "default": "Show code"
+        },
+        {
+          "label": "Hide code",
+          "default": "Hide code"
+        },
+        {
+          "label": "Unlocked interaction action (Continue)",
+          "default": "Continue"
+        },
+        {
+          "label": "Locked interaction action (Unlock)",
+          "default": "Unlock"
+        },
+        {
+          "label": "Drag horizontally to scale (for screen readers)",
+          "default": "Drag horizontally to scale"
+        },
+        {
+          "label": "Drag vertically to scale (for screen readers)",
+          "default": "Drag vertically to scale"
+        },
+        {
+          "label": "Hint",
+          "default": "Hint"
         }
       ]
     }

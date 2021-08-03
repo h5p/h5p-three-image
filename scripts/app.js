@@ -24,6 +24,7 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     params.threeImage.scenes = Wrapper.addUniqueIdsToInteractions(params.threeImage.scenes);
+    params.threeImage.scenes = Wrapper.addMissingLabelSettings(params.threeImage.scenes);
     
     let wrapper;
     this.behavior = {
@@ -239,16 +240,34 @@ H5P.ThreeImage = (function () {
   * @returns {Array<SceneParams>}
   */
   Wrapper.addUniqueIdsToInteractions = scenes =>
-   scenes.map(scene => scene.interactions 
-     ? ({
-         ...scene,
-         interactions: scene.interactions.map(
-           interaction => ({...interaction, id: H5P.createUUID()}),
-         ),
-       }) 
-     : scene
-   );
+    scenes?.map(scene => scene.interactions 
+      ? ({
+          ...scene,
+          interactions: scene.interactions?.map(
+            interaction => ({...interaction, id: H5P.createUUID()}),
+          ),
+        }) 
+      : scene
+    );
  
+  /**
+   * Older interactions are missing label settings.
+   * This adds an empty `label` to avoid adding null checks everywhere.
+   * TODO: Add this to upgrades.json
+   * 
+   * @param {Array<SceneParams>} scenes 
+   * @returns {Array<SceneParams>}
+   */
+  Wrapper.addMissingLabelSettings = scenes =>
+      scenes?.map(scene => scene.interactions
+        ? ({
+          ...scene,
+          interactions: scene.interactions?.map(
+            interaction => ({...interaction, label: interaction.label ?? {}})
+          ),
+        })
+        : scene
+      );
 
   return Wrapper;
 })();
