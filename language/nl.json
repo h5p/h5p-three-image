@@ -182,8 +182,8 @@
           "default": "Audio Track pauzeren"
         },
         {
-          "label": "Titel bij scene dialaog",
-          "default": "Scene beschrijving"
+          "label": "Titel bij scène dialaog",
+          "default": "Scène beschrijving"
         },
         {
           "label": "Label voor knop om camera te resetten",
