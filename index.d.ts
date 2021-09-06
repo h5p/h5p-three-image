@@ -2,7 +2,7 @@ declare type SceneParams = {
   sceneId: number;
   interactions: Interaction[];
   cameraStartPosition: string;
-  sceneType: "360" | "static" | null;
+  sceneType: "360" | "static" | "panorama" | null;
   scenename: string;
   iconType?: string;
 };

@@ -2,7 +2,7 @@
 
 var H5PUpgrades = H5PUpgrades || {};
 
-H5PUpgrades['H5P.ThreeImage'] = (function () {
+H5PUpgrades['H5P.NDLAThreeImage'] = (function () {
   return {
     0: {
       2: function (parameters, finished) {

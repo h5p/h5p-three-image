@@ -1,6 +1,6 @@
 {
-  "machineName": "H5P.ThreeImage",
-  "title": "Virtual Tour (360)",
+  "machineName": "H5P.NDLAThreeImage",
+  "title": "NDLA Virtual Tour (360)",
   "description": "Explore an interactive world in 3D.",
   "license": "MIT",
   "author": "Joubel AS",
@@ -23,14 +23,14 @@
   ],
   "preloadedDependencies": [
     {
-      "machineName": "H5P.ThreeSixty",
+      "machineName": "H5P.NDLAThreeSixty",
       "majorVersion": 0,
       "minorVersion": 3
     }
   ],
   "editorDependencies": [
     {
-      "machineName": "H5PEditor.ThreeImage",
+      "machineName": "H5PEditor.NDLAThreeImage",
       "majorVersion": 0,
       "minorVersion": 4
     },
@@ -50,7 +50,7 @@
       "minorVersion": 0
     },
     {
-      "machineName": "H5PEditor.ShowWhen",
+      "machineName": "H5PEditor.NDLAShowWhen",
       "majorVersion": 1,
       "minorVersion": 0
     },

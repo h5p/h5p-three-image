@@ -195,7 +195,7 @@ export default class ThreeSixtyScene extends React.Component {
     let threeSixty;
     if (!this.props.threeSixty) {
       // ThreeSixty has not been used, yet. Create a new instance
-      threeSixty = new H5P.ThreeSixty(this.imageElement, {
+      threeSixty = new H5P.NDLAThreeSixty(this.imageElement, {
         ratio: 16/9,
         cameraStartPosition: cameraPosition,
         segments: sceneRenderingQualityMapping[this.context.sceneRenderingQuality],
@@ -374,7 +374,7 @@ export default class ThreeSixtyScene extends React.Component {
     const onUpdate = (/** @type {HTMLElement} */ element) => {
       const threeElement = this.props.threeSixty.find(element);
       
-      H5P.ThreeSixty.setElementPosition(
+      H5P.NDLAThreeSixty.setElementPosition(
         threeElement,
         ThreeSixtyScene.getPositionFromString(interaction.interactionpos)
       );

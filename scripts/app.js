@@ -8,7 +8,7 @@ import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeS
 // Load library
 H5P = H5P || {};
 
-H5P.ThreeImage = (function () {
+H5P.NDLAThreeImage = (function () {
 
   function Wrapper(params, contentId, extras) {
     extras = extras || {};
@@ -31,7 +31,7 @@ H5P.ThreeImage = (function () {
       label: {
         showLabel: false,
         labelPosition: 'right',
-        ...params.behaviour.label
+        ...params.behaviour?.label
       },
       ...params.behaviour
     };
