@@ -31,7 +31,7 @@ H5P.NDLAThreeImage = (function () {
       label: {
         showLabel: false,
         labelPosition: 'right',
-        ...params.behaviour.label
+        ...params.behaviour?.label
       },
       ...params.behaviour
     };
