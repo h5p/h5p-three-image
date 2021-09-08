@@ -52,7 +52,8 @@ jobs:
           git clone https://github.com/NDLA-H5P/h5p-three-sixty.git
           git clone https://github.com/NDLA-H5P/h5p-video.git
           git clone https://github.com/NDLA-H5P/h5p-font-icons.git
-          git clone https://github.com/NDLA-H5P/h5p-show-when.git
+          
+          #git clone https://github.com/NDLA-H5P/h5p-show-when.git
 
           if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm ci && npm run build; popd; fi
 
