@@ -378,7 +378,8 @@
                     "field": "audioType",
                     "equals": "playlist"
                   }
-                ]
+                ],
+                "widget": "playlist"
               }
             },
             {
