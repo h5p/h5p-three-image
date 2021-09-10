@@ -2,7 +2,7 @@
   {
     "name": "threeImage",
     "type": "group",
-    "widget": "threeImage",
+    "widget": "NDLAthreeImage",
     "label": "Three Image Editor",
     "importance": "high",
     "fields": [
@@ -44,7 +44,7 @@
               "label": "Display \"Back\" button",
               "description": "Display button for navigating back to your previous scene",
               "default": true,
-              "widget": "showWhen",
+              "widget": "NDLAShowWhen",
               "showWhen": {
                 "rules": [
                   {
@@ -182,7 +182,7 @@
                         "label": "Show hotspot when mouse is hovering",
                         "description": "Will allow hotspot to be visible when mouse is hovering the area.",
                         "optional": true,
-                        "widget": "showWhen",
+                        "widget": "NDLAShowWhen",
                         "showWhen": {
                           "rules": [
                             {
@@ -198,7 +198,7 @@
                         "label": "Set the hotspot be tabbable",
                         "description": "Will allow hotspot to be tabbable. Can be used for accessibilty.",
                         "optional": true,
-                        "widget": "showWhen",
+                        "widget": "NDLAShowWhen",
                         "showWhen": {
                           "rules": [
                             {
@@ -214,7 +214,7 @@
                         "label": "Show as open content in the scene",
                         "description": "Allows the content to be shown in an open dialog box directly in the scene.",
                         "optional": true,
-                        "widget": "showWhen",
+                        "widget": "NDLAShowWhen",
                         "showWhen": {
                           "rules": [
                             {
@@ -278,7 +278,7 @@
                     "type": "select",
                     "label": "Button style",
                     "description": "Decide how the icon should look.",
-                    "widget": "showWhen",
+                    "widget": "NDLAShowWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -356,7 +356,7 @@
               "widgetExtensions": [
                 "AudioRecorder"
               ],
-              "widget": "showWhen",
+              "widget": "NDLAShowWhen",
               "showWhen": {
                 "rules": [
                   {
@@ -371,7 +371,7 @@
               "description": "Here you can pick an existing playlist as audio.",
               "name": "playlist",
               "type": "text",
-              "widget": "showWhen",
+              "widget": "NDLAShowWhen",
               "showWhen": {
                 "rules": [
                   {
@@ -490,7 +490,7 @@
         "widgetExtensions": [
           "AudioRecorder"
         ],
-        "widget": "showWhen",
+        "widget": "NDLAShowWhen",
         "showWhen": {
           "rules": [
             {
@@ -505,7 +505,7 @@
         "description": "Here you can pick an existing playlist as audio.",
         "name": "playlist",
         "type": "text",
-        "widget": "showWhen",
+        "widget": "NDLAShowWhen",
         "showWhen": {
           "rules": [
             {
