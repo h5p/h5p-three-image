@@ -3,10 +3,10 @@
   "title": "Virtual Tour (360)",
   "description": "Explore an interactive world in 3D.",
   "license": "MIT",
-  "author": "Joubel AS (icc)",
+  "author": "Joubel AS",
   "majorVersion": 0,
   "minorVersion": 4,
-  "patchVersion": 0,
+  "patchVersion": 10,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [

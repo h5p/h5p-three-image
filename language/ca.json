@@ -23,10 +23,7 @@
                 "label": "Mostra el botó \"Enrere\"",
                 "description": "Mostra el botó per navegar enrere a l’escena anterior"
               },
-              {
-                "label": "Identificador únic de l’escena",
-                "description": "Ha de ser únic, utilitzat per a la navegació entre escenes"
-              },
+              {},
               {
                 "label": "Títol de l’escena",
                 "description": "Used to identify the scene"
@@ -38,23 +35,17 @@
                 "label": "Descripció de l’escena",
                 "description": "Text que pot descriure l’escena per a l’usuari final"
               },
+              {},
               {
-                "label": "Posició inicial de la càmera",
-                "description": "Posició de la càmera en guinyada o capcineig"
-              },
-              {
-                "label": "Interaccions",
-                "entity": "Interacció",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interacció",
-                      "description": "Zona sensible amb una interacció",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Paràmetres de l'etiqueta",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -93,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Posició de la interacció",
-                      "description": "Posició de la interacció en guinyada o capcineig"
-                    },
-                    {
-                      "label": "Interaction position",
-                      "description": "Interaction position in pitch and yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -123,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Inicia l’identificador de l’escena"
-        },
+        {},
         {
           "label": "Pista d’àudio"
         }
@@ -156,7 +139,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -185,11 +167,11 @@
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localitza",
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -201,7 +183,7 @@
         },
         {
           "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "default": "Descripció de l’escena"
         },
         {
           "label": "Label for button to reset camera",
@@ -226,18 +208,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

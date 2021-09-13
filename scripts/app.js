@@ -22,18 +22,29 @@ H5P.ThreeImage = (function () {
     H5P.EventDispatcher.call(self);
 
     let wrapper;
-    this.behavior = params.behaviour || {};
-    this.l10n = {...params.l10n,
+    this.behavior = {
+      label: {
+        showLabel: false,
+        labelPosition: 'right',
+        ...params.behaviour.label
+      },
+      ...params.behaviour
+    };
+    this.l10n = {
       // Text defaults
-      title: 'Interactive Explorer',
+      title: 'Virtual Tour',
       playAudioTrack: 'Play Audio Track',
       pauseAudioTrack: 'Pause Audio Track',
       sceneDescription: 'Scene Description',
       resetCamera: 'Reset Camera',
       submitDialog: 'Submit Dialog',
       closeDialog: 'Close Dialog',
-      expandButtonAriaLabel: 'Expand the visual label'
+      expandButtonAriaLabel: 'Expand the visual label',
+      backgroundLoading: 'Loading background image...',
+      noContent: 'No content',
+      ...params.l10n,
     };
+
     // Parameters has been wrapped in the threeImage widget group
     if (params.threeImage) {
       params = params.threeImage;
@@ -61,6 +72,10 @@ H5P.ThreeImage = (function () {
         </H5PContext.Provider>,
         wrapper
       );
+
+      window.requestAnimationFrame(() => {
+        this.trigger('resize');
+      });
     };
 
     const createElements = () => {

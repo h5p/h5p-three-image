@@ -23,10 +23,7 @@
                 "label": "Toon \"Terug\" knop",
                 "description": "Toon knop om terug te gaan naar de vorige scene"
               },
-              {
-                "label": "Unieke id van de scène",
-                "description": "Deze moet uniek zijn en wordt gebruikt voor het navigeren tussen de scènes"
-              },
+              {},
               {
                 "label": "Scènetitel",
                 "description": "Deze wordt gebruikt om de scène voor de auteurs te identificeren"
@@ -38,69 +35,57 @@
                 "label": "Scèneomschrijving",
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
+              {},
               {
-                "label": "Oorspronkelijke camerapositie",
-                "description": "Camerapositie in x en z stand"
-              },
-              {
-                "label": "Interacties",
-                "entity": "Interactie",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interactie",
-                      "description": "Hotspot met een interactie",
+                      "label": "Label",
+                      "description": "Indien leeg gelaten wordt geen label getoond en zullen we proberen het titelveld te gebruiken voor screenreaders"
+                    },
+                    {
+                      "label": "Labelinstellingen",
                       "fields": [
                         {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
-                        {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Labelpositie",
+                          "description": "Kies waar de label moet verschijnen",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Gebruik gedragsinstelling"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Rechts uitgelijnd"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Links uitgelijnd"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Boven uitgelijnd"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Onder uitgelijnd"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Label weergave",
+                          "description": "Indien verborgen worden labels alleen getoond bij mouse over",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Gebruik gedragsinstelling"
                             },
                             {
-                              "label": "Show"
+                              "label": "Tonen"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Verbergen"
                             }
                           ]
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Interactiepositie",
-                      "description": "Interactiepositie in x en z stand"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -123,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Start scène id"
-        },
+        {},
         {
           "label": "Audiobestand"
         }
@@ -155,89 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
-          "description": "A label that describes the icon.",
+          "label": "Labelinstellingen",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Labelpositie",
+              "description": "De standaard labelpositie. De positie kan per interactie worden overschreven",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Rechts uitgelijnd"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Links uitgelijnd"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Boven uitgelijnd"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Onder uitgelijnd"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Label weergave",
+              "description": "Indien uitgevinkt worden labels alleen getoond bij mouse over"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localiseren",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "label": "Aria label voor inhoudstype",
+          "default": "Virtuele Tour"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Label om audio af te spelen",
+          "default": "Audio Track afspelen"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Label om audio te pauzeren",
+          "default": "Audio Track pauzeren"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Titel bij scène dialaog",
+          "default": "Scène beschrijving"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Label voor knop om camera te resetten",
+          "default": "Camera resetten"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Label voor de dialoog indienen knop",
+          "default": "Dialoog indienen"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Label voor de dialoog sluiten knop",
+          "default": "Dialoog sluiten"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Aria label voor de label uitbreiden knop",
+          "default": "De visuele label uitbreiden"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Label voor als er een achtergorndafbeelding aan het laden is in een 360 scene",
+          "default": "Achtergrondafbeelding aan het laden..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
+          "label": "Label voor als er geen inhoud bestaat",
+          "default": "Geen inhoud"
         }
       ]
     }

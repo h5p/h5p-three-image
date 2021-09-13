@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "Editor del Tour Virtual",
+      "label": "Editor de Imagen Tres",
       "fields": [
         {
           "label": "Escenas",
@@ -20,16 +20,13 @@
                 ]
               },
               {
-                "label": "Mostrar botón \"Retroceder\" ",
+                "label": "Mostrar botón \"Retroceder\"",
                 "description": "Mostrar botón para navegar de regreso a su escena anterior"
               },
-              {
-                "label": "ID único de escena",
-                "description": "Debe ser único, usado para navegar entre escenas"
-              },
+              {},
               {
                 "label": "Título de Escena",
-                "description": "Usado para identificar la escena para autores"
+                "description": "Usado para identificar la escena"
               },
               {
                 "label": "Fondo de la Escena"
@@ -38,81 +35,69 @@
                 "label": "Descripción de la Escena",
                 "description": "Un texto que puede describir la escena para el usuario final"
               },
+              {},
               {
-                "label": "Posición inicial de la cámara",
-                "description": "Posición de la cámara en in pitch y yaw"
-              },
-              {
-                "label": "Interacciones",
-                "entity": "Interacción",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interacción",
-                      "description": "Hotspot con una interacción",
+                      "label": "Etiqueta",
+                      "description": "Si se deja vacío no se mostrará ninguna etiqueta y trataremos de usar el campo del título para Lectores de texto en voz alta"
+                    },
+                    {
+                      "label": "Configuraciones de Etiqueta",
                       "fields": [
                         {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
-                        {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Posición de etiqueta",
+                          "description": "Elegir donde debería aparecer la etiqueta",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Usar configuración del comportamiento"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Alineada por la derecha"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Alineada por la izquierda"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Alineada en superior"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Alineada en inferior"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Mostrar Etiqueta",
+                          "description": "Si se oculta - las etiquetas se mostrarán solamente al pasarles el ratón encima",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Usar configuraciones del comportamiento"
                             },
                             {
-                              "label": "Show"
+                              "label": "Mostrar"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Ocultar"
                             }
                           ]
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Posición de Interacción",
-                      "description": "Posición de interacción en pitch y yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
               {
-                "label": "Estilo del botónutton style",
+                "label": "Estilo del botón",
                 "description": "Decidir como deberían de verse los botones que apuntan a esta escena. Para escenas que sean estáticas y no conduzcan hacia nuevas escenas, recomendamos el botón de \"Más información\" .",
                 "options": [
                   {
                     "label": "Nueva escena (flecha)"
                   },
                   {
-                    "label": "Más información (plus)"
+                    "label": "Más información (más)"
                   }
                 ]
               },
@@ -123,17 +108,15 @@
             ]
           }
         },
-        {
-          "label": "ID inicar escena"
-        },
+        {},
         {
           "label": "Pista de Audio"
         }
       ]
     },
     {
-      "label": "Configuraciones de Comportamiento",
-      "description": "Estas opciones le permitirán controolar como se comporta el mundo.",
+      "label": "Configuraciones del Comportamiento",
+      "description": "Estas opciones le permitirán controlar como se comporta el mundo.",
       "fields": [
         {
           "label": "Audio Global",
@@ -141,7 +124,7 @@
         },
         {
           "label": "Calidad del renderizado de escena",
-          "description": "Elija la cantidad de segmentos de ancho y altura usados para renderizar una escena. Esto afecta directamente el nivel de calidad de la escena, intente aumentar la calidad si la escena se viera \"pixeleada\" o \"ondulaciones\" sean visibles dentro de las escenas. Tenga en cuenta que al renderizar a mayor calidad tomará más tiempo para cargar.",
+          "description": "Elija la cantidad de segmentos de ancho y altura usados para renderizar una escena. Esto afecta directamente el nivel de calidad de la escena, intente aumentar la calidad si la escena se viera \"pixeleada\" o si \"ondulaciones\" fueran visibles dentro de las escenas. Tenga en cuenta que al renderizar a mayor calidad tomará más tiempo para cargar.",
           "options": [
             {
               "label": "Alta Calidad (128x128)"
@@ -155,89 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
-          "description": "A label that describes the icon.",
+          "label": "Configuraciones de etiqueta",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Posición de etiqueta",
+              "description": "La posición predeterminada de etiqueta. La posición puede ser anulada por interacción",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Alineada por la derecha"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Alineada por la izquierda"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Alineada en superior"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Alineado en inferior"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Mostrar Etiquetas",
+              "description": "Si no se activara - etiquetas serán mostradas solamente al pasarles el ratón encima"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localizar",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "label": "Etiqueta Aria para tipo de contenido",
+          "default": "Tour Virtual"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Etiqueta para reproducir audio",
+          "default": "Reproducir Pista de Audio"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Etiqueta para pausar audio",
+          "default": "Pausar Pista de Audio"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Diálogo de título a escena",
+          "default": "Descripción de Escena"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Etiqueta para botón para reiniciar cámara",
+          "default": "Reiniciar Cámara"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Etiqueta para el botón de diálogo para enviar",
+          "default": "Diálogo para Enviar"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Etiqueta para el botón de diálogo cerrar",
+          "default": "Diálogo Cerrar"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Etiqueta Aria para botón expandir etiqueta",
+          "default": "Expandir la etiqueta visual"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Etiqueta para cuando la imagen del fondo está cargando en escena 360",
+          "default": "Cargando imagen del fondo..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
+          "label": "Etiqueta para cuando no hay contenido",
+          "default": "Sin contenido"
         }
       ]
     }

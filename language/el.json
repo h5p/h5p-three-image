@@ -23,10 +23,7 @@
                 "label": "Εμφάνιση κουμπιού \"Πίσω\"",
                 "description": "Εμφάνιση κουμπιού για μετάβαση στην προηγούμενη σκηνή"
               },
-              {
-                "label": "Μοναδικό ID σκηνής",
-                "description": "Πρέπει να είναι μοναδικό, χρησιμοποιείται για την πλοήγηση μεταξύ των σκηνών"
-              },
+              {},
               {
                 "label": "Τίτλος σκηνής",
                 "description": "Χρησιμοποιείται για να διαχωρίζει τις σκηνές"
@@ -38,23 +35,17 @@
                 "label": "Περιγραφή σκηνής",
                 "description": "Κείμενο που περιγράφει τη σκηνή"
               },
+              {},
               {
-                "label": "Αρχική θέση κάμερας",
-                "description": "Θέση κάμερας (βήμα, κάμψη)"
-              },
-              {
-                "label": "Αλληλεπιδράσεις",
-                "entity": "Αλληλεπίδραση",
                 "field": {
                   "fields": [
                     {
-                      "label": "Αλληλεπίδραση",
-                      "description": "Hotspot με αλληλεπίδραση",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -93,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Θέση αλληλεπίδρασης",
-                      "description": "Θέση αλληλεπίδρασης (βήμα, κάμψη)"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -123,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "ID σκηνής έναρξης"
-        },
+        {},
         {
           "label": "Απόσπασμα ήχου"
         }
@@ -156,7 +139,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -189,7 +171,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -226,18 +208,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

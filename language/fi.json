@@ -23,10 +23,7 @@
                 "label": "Näytä \"Back\" painike",
                 "description": "Näyttää painikkeen jolla voit palata takaisin päin edelliseen dioraamaan."
               },
-              {
-                "label": "Uniikki dioraaman id",
-                "description": "Tämän täytyy olla uniikki tunniste, jota käytetään dioraamojen välillä liikkumiseen."
-              },
+              {},
               {
                 "label": "Dioraaman otsikko",
                 "description": "Hallinoijat tunnistavat dioraaman tästä otsikosta"
@@ -38,23 +35,17 @@
                 "label": "Dioraaman kuvausteksti",
                 "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
+              {},
               {
-                "label": "Kameran aloitussijainti",
-                "description": "Kameran aloitusijainnin kaltevuus- ja kallistuskulma"
-              },
-              {
-                "label": "Interaktiiviset elementit",
-                "entity": "Interaktio",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaktio",
-                      "description": "Hotspot interaktiolla",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -93,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Interaktio sijainnilla",
-                      "description": "Interaktion sijainnin kaltevuus- ja kallistukulma"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -123,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Aloittavan dioraaman id"
-        },
+        {},
         {
           "label": "Ääniraita"
         }
@@ -156,7 +139,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -189,7 +171,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -226,18 +208,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

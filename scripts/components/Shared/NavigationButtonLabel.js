@@ -4,16 +4,13 @@ import './NavigationButtonLabel.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { willOverflow } from './OverflowHelpers';
 
-export const getLabelFromInteraction = (interaction) => {
-  return interaction.label;
-};
-
 export const getLabelPos = (globalLabel, label) => {
-  return label.labelPosition === 'inherit' ? globalLabel.labelPosition : label.labelPosition;
+  const useLabelPosition = label && label.labelPosition && label.labelPosition !== 'inherit';
+  return useLabelPosition ? label.labelPosition : globalLabel.labelPosition;
 };
 
-export const getLabelText = (label, title) => {
-  return label && label.labelText ? label.labelText : title;
+export const getLabelText = (label) => {
+  return label && label.labelText ? label.labelText : '';
 };
 
 export const isHoverLabel = (globalLabel, label) => {
@@ -44,6 +41,7 @@ export default class NavigationButtonLabel extends React.Component {
       labelPos: this.props.labelPos,
       expandDirection: null,
       alignment: null,
+      innerLabelHeight: ''
     };
   }
 
@@ -75,60 +73,46 @@ export default class NavigationButtonLabel extends React.Component {
   componentDidUpdate(prevProps) {
     // Need to calculate if expand button should be shown and height
     if (this.props.labelText !== prevProps.labelText || this.props.hoverOnly !== prevProps.hoverOnly) {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight()
-      });
+      this.setHeightProperties();
     }
 
     // Need to calculate if alignment and expanddirection should be changed
     // It is only in a static scene the label can be overflow, since camera can be moved in 360
-    if (this.props.topPosition !== prevProps.topPosition
-      || this.props.leftPosition !== prevProps.leftPosition && this.props.staticScene) {
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
-      }
+    if ((this.props.topPosition !== prevProps.topPosition
+      || this.props.leftPosition !== prevProps.leftPosition
+      || this.props.labelText !== prevProps.labelText) && this.props.staticScene) {
+      this.setExpandProperties();
     }
     if (!prevProps.rendered && this.props.rendered) {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight(),
-      });
-      const expandDirection = this.getOverflowProperties();
-      if (expandDirection.expandDirection !== this.state.expandDirection) {
-        this.setState({ expandDirection: expandDirection.expandDirection });
-      }
-      if (expandDirection.alignment !== this.state.alignment) {
-        this.setState({ alignment: expandDirection.alignment });
-      }
+      this.setHeightProperties();
+      this.setExpandProperties();
     }
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({
-        expandable: this.isExpandable(),
-        divHeight: this.getDivHeight()
-      });
+      this.setHeightProperties();
       if (this.props.staticScene) {
-        const expandDirection = this.getOverflowProperties();
-        if (expandDirection.expandDirection !== this.state.expandDirection) {
-          this.setState({ expandDirection: expandDirection.expandDirection });
-        }
-        if (expandDirection.alignment !== this.state.alignment) {
-          this.setState({ alignment: expandDirection.alignment });
-        }
+        this.setExpandProperties();
       }
-    }, 0);
+    }, 50);
     this.context.on('resize', () => {
       if (this.state.isExpanded && this.innerLabelDiv.current && this.state.divHeight !== this.innerLabelDiv.current.scrollHeight) {
-        this.setState({
-          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
-        });
+        // Font size changes when the screen resizes so we need to make sure it has the correct height
+        if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
+          this.setState({
+            divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0
+          });
+        }
+        // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
+        // The interactions in 360 scene is not proparaly remounted and this leads to
+        // Labels being expanded and not proparly shown when going back
+        else if (!this.props.staticScene && (this.state.isExpanded || this.state.divHeight !== '3em') ) {
+          this.setState({
+            isExpanded: false,
+            divHeight: '3em'
+          });
+        }
       }
     });
   }
@@ -143,11 +127,35 @@ export default class NavigationButtonLabel extends React.Component {
     });
   }
 
+  setHeightProperties() {
+    const isExpandable = this.isExpandable();
+    this.setState({
+      expandable: isExpandable,
+      divHeight: this.getDivHeight(),
+      // Safari won't show ellipsis unless height is 100%
+      // Ellipsis should only be shown if it is expandable
+      // If not the calculated height will be incorrect
+      innerLabelHeight: isExpandable ? '100%': ''
+    });
+  }
+
+  setExpandProperties() {
+    const labelProperties = this.getOverflowProperties();
+    if (labelProperties.expandDirection !== this.state.expandDirection) {
+      this.setState({ expandDirection: labelProperties.expandDirection });
+    }
+    if (labelProperties.alignment !== this.state.alignment) {
+      this.setState({ alignment: labelProperties.alignment });
+    }
+  }
+
   /**
    * Return hight of div based on scrollHeight
    */
   getDivHeight() {
     if (this.innerLabelDiv.current) {
+      // Scrollheight will be incorrect if height === 100%, therefore we reset
+      this.innerLabelDiv.current.style.height = '';
       return this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth || this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW ? '3em' : '1.5em';
     }
     return null;
@@ -159,7 +167,7 @@ export default class NavigationButtonLabel extends React.Component {
   isExpandable() {
     // If not fully loaded the scrollheight might be wrong, therefore we check if it is to wide and two lines
     if (this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH 
-      || (this.getDivHeight() === '3em' && this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth)) {
+      || (this.getDivHeight() === '3em' && this.innerLabelDiv.current.scrollWidth > this.innerLabelDiv.current.offsetWidth * 2)) {
       return true;
     }
     return false;
@@ -203,7 +211,7 @@ export default class NavigationButtonLabel extends React.Component {
     const isMultline = (this.state.divHeight != '1.5em') ? 'is-multiline' : '';
     const expandDirection = this.state.expandDirection ? 'expand-' + this.state.expandDirection : '';
     const alignment = this.state.alignment || this.props.labelPos;
-    const navButtonFocused = this.props.navButtonFocused ? 'nav-button-focused' : '';
+    const showLabel = this.props.navButtonFocused && !this.context.extras.isEditor ? 'show-label' : '';
 
     const expandButtonTabIndex = !this.context.extras.isEditor
       && this.props.isHiddenBehindOverlay ? '-1' : undefined;
@@ -217,8 +225,10 @@ export default class NavigationButtonLabel extends React.Component {
         ${hoverOnly} 
         ${expandDirection} 
         ${isMultline} 
-        ${navButtonFocused}
-        `}>
+        ${showLabel}
+        `}
+        onDoubleClick={this.props.onDoubleClick}
+      >
         <div
           style={{ height: this.state.divHeight }}
           aria-hidden='true'
@@ -226,6 +236,8 @@ export default class NavigationButtonLabel extends React.Component {
           ref={this.navLabel}>
           <div
             ref={this.innerLabelDiv}
+            // Safari won't show ellipsis unless height is 100%
+            style={{height: this.state.innerLabelHeight}}
             className='nav-label-inner'
             dangerouslySetInnerHTML={{ __html: this.props.labelText }}>
           </div>

@@ -23,10 +23,7 @@
                 "label": "Kuva \"Tagasi\" nupp",
                 "description": "Näita Tagasi nuppu, millega saab navigeerida eelmisele stseenile"
               },
-              {
-                "label": "Unikaalne stseeni id (arv)",
-                "description": "Peab olema unikaalne, kasutatakse stseenide vahel navigeerimiseks"
-              },
+              {},
               {
                 "label": "Stseeni tiitel",
                 "description": "Kasutatakse stseeni autorite näitamiseks"
@@ -38,23 +35,17 @@
                 "label": "Stseeni kirjeldus",
                 "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
               },
+              {},
               {
-                "label": "Algne kaamera asukoht",
-                "description": "Kaamera asukoht koordinaadistikus (pitch ja yaw)"
-              },
-              {
-                "label": "Interaktsioonid",
-                "entity": "Interaktsioon",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaktsioon",
-                      "description": "Interaktsiooniga tulipunkt",
+                      "label": "Silt",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -92,14 +83,6 @@
                           ]
                         }
                       ]
-                    },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Interaktsiooni asukoht",
-                      "description": "Interaktsiooni asukoht koordinaadistikus (pitch ja yaw)"
                     }
                   ]
                 }
@@ -123,9 +106,7 @@
             ]
           }
         },
-        {
-          "label": "Algusstseeni id"
-        },
+        {},
         {
           "label": "Heliriba"
         }
@@ -156,7 +137,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -189,7 +169,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -226,18 +206,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

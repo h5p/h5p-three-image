@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "Editor tří obrázků",
+      "label": "Editor 3D obrázků",
       "fields": [
         {
           "label": "Scény",
@@ -12,7 +12,7 @@
                 "label": "Typ scény",
                 "options": [
                   {
-                    "label": "360 obázek"
+                    "label": "360 obrázek"
                   },
                   {
                     "label": "Statický obrázek"
@@ -20,16 +20,13 @@
                 ]
               },
               {
-                "label": "Zobrazit tlačítko \"Zpět\" ",
+                "label": "Zobrazit tlačítko \"Zpět\"",
                 "description": "Zobrazit tlačítko pro navigaci zpět na předchozí scénu"
               },
-              {
-                "label": "Unikátní scéna id",
-                "description": "Musí být jedinečný, používá se pro navigaci mezi scénami"
-              },
+              {},
               {
                 "label": "Název scény",
-                "description": "Slouží k identifikaci scény pro autory"
+                "description": "Slouží k identifikaci"
               },
               {
                 "label": "Pozadí scény"
@@ -38,18 +35,16 @@
                 "label": "Popis scény",
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
+              {},
               {
-                "label": "Počáteční pozice kamery",
-                "description": "Pozice kamery v úhlu a sklonu"
-              },
-              {
-                "label": "Interakce",
-                "entity": "Interakce",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interakce",
-                      "description": "Aktivní body s interakcí",
+                      "label": "Popisek",
+                      "description": "Pokud nevyplníte, nebude zobrazen žádný popisek a my se pokusíme použít pole nadpisu pro čtečky obrazovky"
+                    },
+                    {
+                      "label": "Nastavení popisku",
                       "fields": [
                         {
                           "label": "Popisek",
@@ -57,10 +52,10 @@
                         },
                         {
                           "label": "Pozice popisku",
-                          "description": "Vyberte, kde se má popisek objevit",
+                          "description": "Vybrat, kde se má popisek objevit",
                           "options": [
                             {
-                              "label": "Nastavení chování"
+                              "label": "Použít nastavení chování"
                             },
                             {
                               "label": "Zarovnáno doprava"
@@ -77,11 +72,11 @@
                           ]
                         },
                         {
-                          "label": "Zobrazení popisků",
+                          "label": "Zobrazit popisek",
                           "description": "Pokud jsou skryté - popisky se zobrazí pouze při najetí myší",
                           "options": [
                             {
-                              "label": "Nastavení chování"
+                              "label": "Použít nastavení chování"
                             },
                             {
                               "label": "Zobrazit"
@@ -105,7 +100,7 @@
                 }
               },
               {
-                "label": "Styp tlačítka",
+                "label": "Typ tlačítka",
                 "description": "Rozhodněte se, jak by měla vypadat tlačítka směřující k této scéně. Pro scény, které jsou statické a nevedou k novým scénám, doporučujeme tlačítko \"Více informací\" .",
                 "options": [
                   {
@@ -123,9 +118,7 @@
             ]
           }
         },
-        {
-          "label": "Start sceény id"
-        },
+        {},
         {
           "label": "Zvuková stopa"
         }
@@ -160,7 +153,7 @@
           "fields": [
             {
               "label": "Pozice popisku",
-              "description": "Výchozí poloha popisku. Pozici lze přepsat na interakci",
+              "description": "Výchozí poloha popisku. Pozici lze přepsat interakcí",
               "options": [
                 {
                   "label": "Zarovnáno doprava"
@@ -189,7 +182,7 @@
       "fields": [
         {
           "label": "Popisek pro typ obsahu",
-          "default": "Interaktivní průzkumník"
+          "default": "Virtuální prohlídka"
         },
         {
           "label": "Popisek pro přehrávání zvuku",
@@ -227,18 +220,6 @@
           "label": "Popisek pro případ, že není žádný obsah",
           "default": "Bez obsahu"
         },
-        {
-          "label": "Popisek pro tlačítko kontextové nabídky pro přechod na scénu",
-          "default": "Přejít na scénu"
-        },
-        {
-          "label": "Popisek pro tlačítko kontextové nabídky pro úpravy",
-          "default": "Upravit"
-        },
-        {
-          "label": "Popisek pro tlačítko kontextové nabídky pro odstranění",
-          "default": "Odstranit"
-        }
       ]
     }
   ]

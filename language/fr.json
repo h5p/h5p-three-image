@@ -23,10 +23,7 @@
                 "label": "Afficher un bouton \"Retour\"",
                 "description": "Affichez un bouton pour revenir à la scène précédente"
               },
-              {
-                "label": "Identifiant unique de la scène",
-                "description": "Doit être unique, utilisé pour naviguer entre les scènes"
-              },
+              {},
               {
                 "label": "Titre de la scène",
                 "description": "Utilisé pour identifier la scène"
@@ -38,23 +35,17 @@
                 "label": "Description de la scène",
                 "description": "Un texte pour décirire la scène à l'utilisateur final"
               },
+              {},
               {
-                "label": "Position initiale de la caméra",
-                "description": "Position de la caméra (pitch and yaw)"
-              },
-              {
-                "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaction",
-                      "description": "Hotspot avec une interaction",
+                      "label": "Label",
+                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                    },
+                    {
+                      "label": "Label Settings",
                       "fields": [
-                        {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
                         {
                           "label": "Label position",
                           "description": "Choose where the label should appear",
@@ -93,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Position de l'interaction",
-                      "description": "Position de l'interaction (pitch and yaw)"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -123,9 +108,7 @@
             ]
           }
         },
-        {
-          "label": "Identifiant de la scène de début"
-        },
+        {},
         {
           "label": "Piste audio"
         }
@@ -156,7 +139,6 @@
         },
         {
           "label": "Label settings",
-          "description": "A label that describes the icon.",
           "fields": [
             {
               "label": "Label position",
@@ -189,7 +171,7 @@
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtual Tour"
         },
         {
           "label": "Label for to play audio",
@@ -226,18 +208,6 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }

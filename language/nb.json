@@ -4,159 +4,141 @@
       "label": "Three Image Editor",
       "fields": [
         {
-          "label": "Scenes",
-          "entity": "Scene",
+          "label": "Scener",
+          "entity": "scene",
           "field": {
             "fields": [
               {
-                "label": "Scene type",
+                "label": "Scenetype",
                 "options": [
                   {
-                    "label": "360 image"
+                    "label": "360-graders bilde"
                   },
                   {
-                    "label": "Static image"
+                    "label": "Statisk bilde"
                   }
                 ]
               },
               {
-                "label": "Display \"Back\" button",
-                "description": "Display button for navigating back to your previous scene"
+                "label": "Vis tilbakeknapp",
+                "description": "Vis knapp for å navigere tilbake til forrige scene"
+              },
+              {},
+              {
+                "label": "Scenetittel",
+                "description": "Brukes for å identifisere scenen"
               },
               {
-                "label": "Unique scene id",
-                "description": "Must be unique, used for navigation between scenes"
+                "label": "Scenebakgrunn"
               },
               {
-                "label": "Scene Title",
-                "description": "Used to identify the scene"
+                "label": "Scenebeskrivelse",
+                "description": "En beskrivelse av scenen"
               },
+              {},
               {
-                "label": "Scene Background"
-              },
-              {
-                "label": "Scene Description",
-                "description": "A text that can describe the scene for the end-user"
-              },
-              {
-                "label": "Initial camera position",
-                "description": "Camera position in pitch and yaw"
-              },
-              {
-                "label": "Interactions",
-                "entity": "Interaction",
                 "field": {
                   "fields": [
                     {
-                      "label": "Interaction",
-                      "description": "Hotspot with an interaction",
+                      "label": "Merkelapp",
+                      "description": "Hvis denne ikke fylles inn, vises ingen merkelapp, og vi vil prøve å bruke tittel-feltet for skjermlesere"
+                    },
+                    {
+                      "label": "Innstillinger for merkelapp",
                       "fields": [
                         {
-                          "label": "Label",
-                          "description": "If left blank we'll try to use the title as a label"
-                        },
-                        {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Posisjon",
+                          "description": "Velg hvor merkelapp skal vises",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Bruk innstillinger for oppgaveoppførsel"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "På høyre side"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "På venstre side"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Over"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Under"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Vis merkelapp",
+                          "description": "Hvis skjult er valgt, vil merkelapper bare vises når musepeker svever over",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Bruk innstillinger for oppgaveoppførsel"
                             },
                             {
-                              "label": "Show"
+                              "label": "Vis"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Skjul"
                             }
                           ]
                         }
                       ]
                     },
-                    {
-                      "label": "Label settings",
-                      "description": "A label that describes the icon."
-                    },
-                    {
-                      "label": "Interaction position",
-                      "description": "Interaction position in pitch and yaw"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
               {
-                "label": "Button style",
+                "label": "Knappetype",
                 "description": "Decide how buttons pointing to this scene should look. For scenes that are static and does not lead to new scenes, we recommend the \"More information\" button.",
                 "options": [
                   {
-                    "label": "New scene (arrow)"
+                    "label": "Ny scene (pil)"
                   },
                   {
-                    "label": "More information (plus)"
+                    "label": "Mer informasjon (pluss)"
                   }
                 ]
               },
               {
-                "label": "Audio Track",
+                "label": "Lydspor",
                 "description": "Add an audio track that's specific for this scene."
               }
             ]
           }
         },
+        {},
         {
-          "label": "Start scene id"
-        },
-        {
-          "label": "Audio track"
+          "label": "Lydspor"
         }
       ]
     },
     {
-      "label": "Behavioural settings",
+      "label": "Innstillinger for oppgaveoppførsel",
       "description": "These options will let you control how the world behaves.",
       "fields": [
         {
-          "label": "Global Audio",
+          "label": "Global lyd",
           "description": "Add an audio track that's available for all of the scenes by default."
         },
         {
-          "label": "Scene rendering quality",
+          "label": "Kvalitet på scene-rendering",
           "description": "Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
           "options": [
             {
-              "label": "High Quality (128x128)"
+              "label": "Høy kvalitet (128x128)"
             },
             {
-              "label": "Medium Quality (64x64)"
+              "label": "Medium kvalitet (64x64)"
             },
             {
-              "label": "Low Quality (16x16)"
+              "label": "Lav kvalitet (16x16)"
             }
           ]
         },
         {
-          "label": "Label settings",
-          "description": "A label that describes the icon.",
+          "label": "Innstillinger for merkelapper",
           "fields": [
             {
               "label": "Label position",
@@ -185,11 +167,11 @@
       ]
     },
     {
-      "label": "Localize",
+      "label": "Ledetekster",
       "fields": [
         {
           "label": "Aria label for content type",
-          "default": "Interactive Explorer"
+          "default": "Virtuell tur"
         },
         {
           "label": "Label for to play audio",
@@ -201,7 +183,7 @@
         },
         {
           "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "default": "Scenebeskrivelse"
         },
         {
           "label": "Label for button to reset camera",
@@ -213,7 +195,7 @@
         },
         {
           "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "default": "Lukk dialog"
         },
         {
           "label": "Aria label for the expand label button",
@@ -221,23 +203,11 @@
         },
         {
           "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "default": "Laster bakgrunnsbilde..."
         },
         {
           "label": "Label for when there is no content",
           "default": "No content"
-        },
-        {
-          "label": "Label for context menu button for go to scene",
-          "default": "Go to scene"
-        },
-        {
-          "label": "Label for context menu button for edit",
-          "default": "Edit"
-        },
-        {
-          "label": "Label for context menu button for delete",
-          "default": "Delete"
         }
       ]
     }
