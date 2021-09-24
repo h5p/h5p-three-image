@@ -28,6 +28,8 @@ jobs:
           cd dist
 
           while read -r repo; do git clone ${repo}; done < ../h5p-three-image/build_info/repos
+          
+          git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
 
           if [ -d "h5p-editor-audio-recorder" ]; then
             pushd h5p-editor-audio-recorder
