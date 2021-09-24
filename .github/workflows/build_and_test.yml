@@ -46,6 +46,7 @@ jobs:
             h5p-video \
             h5p-font-icons
           mv h5p-editor-show-when h5p-h5p-editor-show-when
+          mv h5p-editor-image-radio-group h5p-h5p-editor-image-radio-group
 
           git clone https://github.com/NDLA-H5P/h5p-editor-three-image.git
           git clone https://github.com/NDLA-H5P/h5p-editor-image-radio-group.git
