@@ -51,7 +51,7 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
+                      "label": "Silt",
                       "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
                     },
                     {
