@@ -20,12 +20,32 @@ import { H5PContext } from "../../context/H5PContext";
  *  onUpdate: (openContentWrapper: HTMLElement) => void;
  *  isFocused: boolean;
  *  onBlur: () => void;
+ *  is3DScene: boolean;
  * }} Props
  */
 
+/**
+ * @typedef {{
+ * anchorDrag: boolean;
+ * canDrag: boolean;
+ * camPosYaw: number;
+ * camPosPitch: number;
+ * startMousePos: number;
+ * startMidPoint: number;
+ * sizeWidth: number;
+ * sizeHeight: number;
+ * isFocused: boolean;
+ * isMouseOver: boolean;
+ * elementRect: DOMRect | null;
+ * }} State
+ */
+
+/**
+ * @extends {React.Component<Props, State>}
+ */
 export default class OpenContent extends React.Component {
   /**
-   * @param {Props} props
+   * @param {Props} props 
    */
   constructor(props) {
     super(props);
@@ -33,6 +53,7 @@ export default class OpenContent extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
+    /** @type {State} */
     this.state = {
       anchorDrag: false,
       canDrag: false,
@@ -43,22 +64,24 @@ export default class OpenContent extends React.Component {
       sizeWidth: 0,
       sizeHeight: 0,
       isFocused: this.props.isFocused,
+      isMouseOver: false,
+      elementRect: null,
     };
 
+    /** @type {React.RefObject<HTMLDivElement>} */
     this.openContent = React.createRef();
+
+    /** @type {React.RefObject<HTMLDivElement>} */
     this.openContentWrapper = React.createRef();
   }
 
   addFocusListener() {
     if (this.openContentWrapper) {
-      this.openContentWrapper.current.addEventListener('focus', this.onFocus);
+      this.openContentWrapper.current.addEventListener("focus", this.onFocus);
     }
   }
 
-  /**
-   * @param {FocusEvent} event 
-   */
-   onFocus(event) {
+  onFocus() {
     // Already focused
     if (this.state.isFocused) {
       return;
@@ -67,20 +90,19 @@ export default class OpenContent extends React.Component {
     this.setState({
       isFocused: true,
     });
-
-    if (this.props.onFocusedInteraction) {
-      this.props.onFocusedInteraction();
-    }
   }
 
   /**
-   * @param {FocusEvent} event 
+   * @param {FocusEvent} event
    */
-   onBlur(event) {
-    const openContentWrapper = this.openContentWrapper
-      && this.openContentWrapper.current;
+  onBlur(event) {
+    const openContentWrapper =
+      this.openContentWrapper && this.openContentWrapper.current;
 
-    if (openContentWrapper && openContentWrapper.contains(event.relatedTarget)) {
+    /** @type {Element} */
+    const target = (/** @type {Element} */ event.relatedTarget);
+
+    if (openContentWrapper?.contains(target)) {
       // Clicked target is child of button wrapper and not the expandButton, don't blur
       this.setFocus();
       return;
@@ -180,6 +202,10 @@ export default class OpenContent extends React.Component {
     }
   };
 
+  /**
+   * @param {PointerEvent} e 
+   * @param {boolean} horizontalDrag 
+   */
   onAnchorDragMouseDown = (e, horizontalDrag) => {
     /*Based on the direction, we store the X or Y start position of the mouse,
      and finds the center of the div, startMidPoint, which is needed for scaling from*/
@@ -189,37 +215,56 @@ export default class OpenContent extends React.Component {
       startMidPoint: horizontalDrag
         ? this.state.sizeWidth / 2
         : this.state.sizeHeight / 2,
+      elementRect: this.openContent.current?.getBoundingClientRect() ?? null,
     });
   };
-  onMouseMove = (event, horizontalDrag) => {
-    //We record the currentMouseposition for everytime the mouse moves
-    const currentPosMouse = horizontalDrag ? event.clientX : event.clientY;
+  onMouseMove = (event, horizontalDrag) => {    
+    if (!this.state.elementRect) {
+      return;
+    }
+    /** @type {number} */
+    let newSize;
 
-    /*divStartWidth is the start mouse position subtracted by the midpoint, technically this
-    half the size of the actual div, this is used for keeping the original widtrh of the div
-    everytime we drag */
-    const divStartWidth = this.state.startMousePos - this.state.startMidPoint;
+    if (this.props.is3DScene) {
+      // We record the currentMouseposition for everytime the mouse moves
+      const currentMousePosition = horizontalDrag
+        ? event.clientX
+        : event.clientY;
+      
+      /* divStartWidth is the start mouse position subtracted by the midpoint, technically this
+      half the size of the actual div, this is used for keeping the original widtrh of the div
+      everytime we drag */
+      const divStartWidth = this.state.startMousePos - this.state.startMidPoint;
+      newSize = (currentMousePosition - divStartWidth) * 2;
+    } else {
+      const { x: elementX, y: elementY } = this.state.elementRect;
 
-    /* The final width is calculated by subtracting the position of the
-    mouse with the the divStartWidth, this is technically the offset between the
-    divStartWidth and the current mouse position. Since the div scales from the center,
-    we have to multiply the result by two*/
+        // We record the currentMouseposition for everytime the mouse moves
+      const currentMousePosition = horizontalDrag
+        ? event.clientX - elementX
+        : event.clientY - elementY;
+      
+      newSize = currentMousePosition;
+    }
 
-    let finalValue = (currentPosMouse - divStartWidth) * 2;
-    if (finalValue > 64 && finalValue < 512) {
+    const minimumSize = 64;
+    const maximumSize = 512;
+
+    const newSizeIsValid = newSize > minimumSize && newSize < maximumSize;
+    if (newSizeIsValid) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
       horizontalDrag
         ? this.setState({
-            sizeWidth: finalValue,
+            sizeWidth: newSize,
           })
-        : this.setState({
-            sizeHeight: finalValue,
-          });
-    }
+        : this.setState({ 
+            sizeHeight: newSize,
+          }); 
+      }
   };
 
-  onAnchorDragMouseUp = (e, horizontalDrag) => {
+  onAnchorDragMouseUp = () => {
     let newSizeWidth = this.state.sizeWidth;
     let newSizeHeight = this.state.sizeHeight;
 
@@ -273,42 +318,46 @@ export default class OpenContent extends React.Component {
   }
 
   onMouseDown(e) {
-    const hasMouseDownHandler = this.context.extras.isEditor
-      && this.props.mouseDownHandler;
+    const hasMouseDownHandler =
+      this.context.extras.isEditor && this.props.mouseDownHandler;
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
     }
   }
   setFocus() {
-    const isFocusable = this.context.extras.isEditor
-      && this.openContentWrapper
-      && this.openContentWrapper.current;
+    const isFocusable =
+      this.context.extras.isEditor &&
+      this.openContentWrapper &&
+      this.openContentWrapper.current;
     if (isFocusable) {
       this.openContentWrapper.current.focus({
-        preventScroll: true
+        preventScroll: true,
       });
     }
   }
 
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
-      if (this.openContentWrapper && this.openContentWrapper.current && this.openContentWrapper === e.target) {
+      if (
+        this.openContentWrapper &&
+        this.openContentWrapper.current &&
+        this.openContentWrapper === e.target
+      ) {
         this.openContentWrapper.current.focus({
-          preventScroll: true
+          preventScroll: true,
         });
       }
       return;
     }
 
-    if (!this.context.extras.isEditor  && this.props.onFocus) {
+    if (!this.context.extras.isEditor && this.props.onFocus) {
       if (this.skipFocus) {
         this.skipFocus = false;
-      }
-      else {
+      } else {
         this.props.onFocus();
       }
     }
-  }
+  };
 
   render() {
     let wrapperClasses = ["open-content-wrapper"];
@@ -323,8 +372,7 @@ export default class OpenContent extends React.Component {
     }
 
     // Add classname to current active element (wrapper, button or expand label button) so it can be shown on top
-    if (this.state.isFocused && this.props.children)
-    {
+    if (this.state.isFocused && this.props.children) {
       wrapperClasses.push("active-element");
     }
 
@@ -345,7 +393,7 @@ export default class OpenContent extends React.Component {
           () => {
             document.removeEventListener("mousemove", mouseMoveHandler);
             this.toggleDrag();
-            this.onAnchorDragMouseUp(e, innerProps.horizontalDrag);
+            this.onAnchorDragMouseUp();
           },
           { once: true }
         );
@@ -387,7 +435,7 @@ export default class OpenContent extends React.Component {
         onFocus={this.handleFocus}
         onBlur={this.onBlur.bind(this)}
       >
-        <div 
+        <div
           className={`open-content ${
             this.context.extras.isEditor ? "open-content--editor" : ""
           }`}
@@ -409,14 +457,8 @@ export default class OpenContent extends React.Component {
           />
           {this.context.extras.isEditor ? (
             <>
-              <DragButton 
-                horizontalDrag={true}
-                tabIndex={-1}
-              />
-              <DragButton 
-                horizontalDrag={false} 
-                tabIndex={-1} 
-              />
+              <DragButton horizontalDrag={true} tabIndex={-1} />
+              <DragButton horizontalDrag={false} tabIndex={-1} />
             </>
           ) : (
             ""
