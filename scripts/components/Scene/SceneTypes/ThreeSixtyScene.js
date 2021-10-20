@@ -406,6 +406,7 @@ export default class ThreeSixtyScene extends React.Component {
           ariaLabel={null}
           isFocused={this.props.focusedInteraction === index}
           onBlur={this.props.onBlurInteraction}
+          is3DScene={true}
         >
           {
             this.context.extras.isEditor &&
