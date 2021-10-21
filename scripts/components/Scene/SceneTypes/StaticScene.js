@@ -344,7 +344,7 @@ export default class StaticScene extends React.Component {
       ? ['disabled']
       : [];
 
-    const imageSceneClasses = ['image-scene-wrapper'];
+    const imageSceneClasses = ['image-scene-wrapper', 'static-scene'];
     if (this.state.isVerticalImage) {
       imageSceneClasses.push('vertical');
     }
@@ -440,6 +440,7 @@ export default class StaticScene extends React.Component {
                   ariaLabel={null}
                   isFocused={this.props.focusedInteraction === index}
                   onBlur={this.props.onBlurInteraction}
+                  is3DScene={false}
                 >
                   {
                     this.context.extras.isEditor &&
