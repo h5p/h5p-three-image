@@ -1,10 +1,50 @@
+// @ts-check
+
 import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 
+/**
+ * @typedef {{
+ *   isHotspotTabbable: boolean;
+ *   setHotspotValues: (newWidth: number, newHeight: number) => void;
+ *   tabIndexValue: number;
+ *   reference: React.RefObject;
+ *   staticScene: boolean;
+ *   ariaLabel: string;
+ *   showHotspotOnHover: boolean;
+ *   onClickEvent: React.MouseEventHandler;
+ *   onDoubleClickEvent: React.MouseEventHandler;
+ *   onMouseDownEvent: React.MouseEventHandler;
+ *   onMouseUpEvent: React.MouseEventHandler;
+ *   onFocusEvent: React.FocusEventHandler;
+ *   onBlurEvent: React.FocusEventHandler;
+ *   getHotspotValues: () => [number, number];
+ * }} Props
+ */
+
+/**
+ * @typedef {{
+ *   anchorDrag: boolean;
+ *   canDrag: boolean;
+ *   camPosYaw: number;
+ *   camPosPitch: number;
+ *   startMousePos: number;
+ *   startMidPoint: number;
+ *   sizeWidth: number;
+ *   sizeHeight: number;
+ * }} State
+ */
+
+/**
+ * @extends {React.Component<Props, State>}
+ */
 export default class HotspotNavButton extends React.Component {
+  /** @param {Props} props */
   constructor(props) {
     super(props);
+
+    /** @type {State} */
     this.state = {
       anchorDrag : false,
       canDrag : false,
