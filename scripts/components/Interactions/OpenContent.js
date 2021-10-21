@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import "./OpenContent.scss";
 import { H5PContext } from "../../context/H5PContext";
+import { scaleOpenContentElement } from "../../utils/open-content-utils";
 
 /**
  * @typedef {{
@@ -218,34 +219,23 @@ export default class OpenContent extends React.Component {
       elementRect: this.openContent.current?.getBoundingClientRect() ?? null,
     });
   };
-  onMouseMove = (event, horizontalDrag) => {    
-    if (!this.state.elementRect) {
-      return;
-    }
-    /** @type {number} */
-    let newSize;
 
-    if (this.props.is3DScene) {
-      // We record the currentMouseposition for everytime the mouse moves
-      const currentMousePosition = horizontalDrag
-        ? event.clientX
-        : event.clientY;
-      
-      /* divStartWidth is the start mouse position subtracted by the midpoint, technically this
-      half the size of the actual div, this is used for keeping the original widtrh of the div
-      everytime we drag */
-      const divStartWidth = this.state.startMousePos - this.state.startMidPoint;
-      newSize = (currentMousePosition - divStartWidth) * 2;
-    } else {
-      const { x: elementX, y: elementY } = this.state.elementRect;
-
-        // We record the currentMouseposition for everytime the mouse moves
-      const currentMousePosition = horizontalDrag
-        ? event.clientX - elementX
-        : event.clientY - elementY;
-      
-      newSize = currentMousePosition;
-    }
+  /**
+   * 
+   * @param {React.MouseEvent} event 
+   * @param {boolean} isHorizontalDrag 
+   */
+  onMouseMove = (event, isHorizontalDrag) => {    
+    const { clientX, clientY } = event;
+    const newSize = scaleOpenContentElement(
+      clientX,
+      clientY,
+      this.props.is3DScene,
+      isHorizontalDrag,
+      this.state.elementRect,
+      this.state.startMousePos,
+      this.state.startMidPoint
+    );
 
     const minimumSize = 64;
     const maximumSize = 512;
@@ -254,14 +244,14 @@ export default class OpenContent extends React.Component {
     if (newSizeIsValid) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
-      horizontalDrag
+      isHorizontalDrag
         ? this.setState({
             sizeWidth: newSize,
           })
-        : this.setState({ 
+        : this.setState({
             sizeHeight: newSize,
-          }); 
-      }
+          });
+    }
   };
 
   onAnchorDragMouseUp = () => {

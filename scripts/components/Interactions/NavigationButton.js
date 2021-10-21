@@ -139,7 +139,9 @@ export const getLabelFromInteraction = (interaction) => {
  * }} State
  */
 
-
+/**
+ * @extends {React.Component<Props, State>}
+ */
 export default class NavigationButton extends React.Component {
   /**
    * @param {Props} props 
@@ -147,15 +149,12 @@ export default class NavigationButton extends React.Component {
   constructor(props) {
     super(props);
 
-    /** @type {Props} */
-    this.props = this.props;
-
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
     this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
-    
+
     /** @type {State} */
     this.state = {
       isFocused: this.props.isFocused,

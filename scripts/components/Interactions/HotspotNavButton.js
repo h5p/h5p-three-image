@@ -1,10 +1,52 @@
+// @ts-check
+
 import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
+import { scaleOpenContentElement } from '../../utils/open-content-utils';
 
+/**
+ * @typedef {{
+ *   isHotspotTabbable: boolean;
+ *   setHotspotValues: (newWidth: number, newHeight: number) => void;
+ *   tabIndexValue: number;
+ *   reference: React.RefObject;
+ *   staticScene: boolean;
+ *   ariaLabel: string;
+ *   showHotspotOnHover: boolean;
+ *   onClickEvent: React.MouseEventHandler;
+ *   onDoubleClickEvent: React.MouseEventHandler;
+ *   onMouseDownEvent: React.MouseEventHandler;
+ *   onMouseUpEvent: React.MouseEventHandler;
+ *   onFocusEvent: React.FocusEventHandler;
+ *   onBlurEvent: React.FocusEventHandler;
+ *   getHotspotValues: () => [number, number];
+ * }} Props
+ */
+
+/**
+ * @typedef {{
+ *   anchorDrag: boolean;
+ *   canDrag: boolean;
+ *   camPosYaw: number;
+ *   camPosPitch: number;
+ *   startMousePos: number;
+ *   startMidPoint: number;
+ *   sizeWidth: number;
+ *   sizeHeight: number;
+ *   elementRect: DOMRect | null;
+ * }} State
+ */
+
+/**
+ * @extends {React.Component<Props, State>}
+ */
 export default class HotspotNavButton extends React.Component {
+  /** @param {Props} props */
   constructor(props) {
     super(props);
+
+    /** @type {State} */
     this.state = {
       anchorDrag : false,
       canDrag : false,
@@ -13,7 +55,8 @@ export default class HotspotNavButton extends React.Component {
       startMousePos : 0,
       startMidPoint : 0,
       sizeWidth : 0,
-      sizeHeight : 0
+      sizeHeight : 0,
+      elementRect: null,
     }
   }
 
@@ -49,9 +92,8 @@ export default class HotspotNavButton extends React.Component {
         this.context.threeSixty.stopRendering()
       }
     }
-
-
   }
+
   onAnchorDragMouseDown = (e, horizontalDrag) => {
 
     /*Based on the direction, we store the X or Y start position of the mouse,
@@ -59,41 +101,46 @@ export default class HotspotNavButton extends React.Component {
     this.setState({
       anchorDrag: true,
       startMousePos : horizontalDrag ? e.clientX : e.clientY,
-      startMidPoint : horizontalDrag ? this.state.sizeWidth / 2 : this.state.sizeHeight / 2
-    })
-
+      startMidPoint : horizontalDrag ? this.state.sizeWidth / 2 : this.state.sizeHeight / 2,
+      elementRect: this.props.reference.current?.getBoundingClientRect() ?? null,
+    });
   }
-  onMouseMove = (event, horizontalDrag) => {
 
-    //We record the currentMouseposition for everytime the mouse moves
-    const currentPosMouse = horizontalDrag ? event.clientX : event.clientY
+  /**
+   * 
+   * @param {React.MouseEvent} event 
+   * @param {boolean} isHorizontalDrag 
+   */
+   onMouseMove = (event, isHorizontalDrag) => {    
+    const { clientX, clientY } = event;
+    const newSize = scaleOpenContentElement(
+      clientX,
+      clientY,
+      !this.props.staticScene,
+      isHorizontalDrag,
+      this.state.elementRect,
+      this.state.startMousePos,
+      this.state.startMidPoint
+    );
 
-    /*divStartPos is the start mouse position subtracted by the midpoint, technically this
-    half the size of the actual div, this is used for keeping the original widtrh of the div
-    everytime we drag */
-    const divStartPos = this.state.startMousePos - (this.state.startMidPoint)
+    const minimumSize = 128;
+    const maximumSize = 2048;
 
-    /* The final width is calculated by subtracting the position of the
-    mouse with the the divStartPos, this is technically the offset between the
-    divStartPos and the current mouse position. Since the div scales from the center,
-    we have to multiply the result by two*/
-
-    let finalValue = ((currentPosMouse - divStartPos) * 2);
-    if(finalValue > 128 && finalValue < 2048) {
+    const newSizeIsValid = newSize > minimumSize && newSize < maximumSize;
+    if (newSizeIsValid) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
-      horizontalDrag ?
-        this.setState({
-          sizeWidth: finalValue
-        })
-        :
-        this.setState({
-          sizeHeight: finalValue
-        })
+      isHorizontalDrag
+        ? this.setState({
+            sizeWidth: newSize,
+          })
+        : this.setState({
+            sizeHeight: newSize,
+          });
     }
-  }
+  };
 
-  onAnchorDragMouseUp = (e, horizontalDrag) => {
+  onAnchorDragMouseUp = () => {
     let newSizeWidth = this.state.sizeWidth
     let newSizeHeight = this.state.sizeHeight
 
@@ -126,7 +173,7 @@ export default class HotspotNavButton extends React.Component {
           () => {
             document.removeEventListener("mousemove",  mouseMoveHandler)
             this.toggleDrag()
-            this.onAnchorDragMouseUp(e, innerProps.horizontalDrag)
+            this.onAnchorDragMouseUp()
           },
           { once: true }
         );

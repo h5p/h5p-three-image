@@ -112,6 +112,7 @@ $labelWidth: 9em;
       }
     }
   }
+
   .drag {
     width: 3.5em;
     height: 3.5em;
@@ -142,6 +143,15 @@ $labelWidth: 9em;
       transform: translateX(-50%) translateY(50%);
       &:before {
         content: $arrow-verti-scale;
+      }
+    }
+
+    .static-scene & {
+      width: 2em;
+      height: 2em;
+
+      &::before {
+        font-size: 1.25em;
       }
     }
   }
