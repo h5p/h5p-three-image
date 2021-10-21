@@ -2,7 +2,7 @@
   {
     "name": "threeImage",
     "type": "group",
-    "widget": "threeImage",
+    "widget": "NDLAthreeImage",
     "label": "Three Image Editor",
     "importance": "high",
     "fields": [
@@ -378,7 +378,8 @@
                     "field": "audioType",
                     "equals": "playlist"
                   }
-                ]
+                ],
+                "widget": "playlist"
               }
             },
             {
