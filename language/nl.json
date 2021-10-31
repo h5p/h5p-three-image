@@ -130,7 +130,7 @@
               "label": "Hoge kwaliteit (128x128)"
             },
             {
-              "label": "Gemiddelde kwaliteit Quality (64x64)"
+              "label": "Gemiddelde kwaliteit (64x64)"
             },
             {
               "label": "Lage kwaliteit (16x16)"
@@ -202,7 +202,7 @@
           "default": "De visuele label uitbreiden"
         },
         {
-          "label": "Label voor als er een achtergorndafbeelding aan het laden is in een 360 scene",
+          "label": "Label voor als er een achtergrondafbeelding aan het laden is in een 360 scène",
           "default": "Achtergrondafbeelding aan het laden..."
         },
         {
