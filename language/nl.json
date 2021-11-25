@@ -26,7 +26,7 @@
               {},
               {
                 "label": "Scènetitel",
-                "description": "Deze wordt gebruikt om de scène voor de auteurs te identificeren"
+                "description": "Deze wordt gebruikt om de scène te identificeren"
               },
               {
                 "label": "Scèneachtergrond"
@@ -47,11 +47,11 @@
                       "label": "Labelinstellingen",
                       "fields": [
                         {
-                          "label": "Labelpositie",
-                          "description": "Kies waar de label moet verschijnen",
+                          "label": "De positie van het label",
+                          "description": "Kies waar het label moet verschijnen",
                           "options": [
                             {
-                              "label": "Gebruik gedragsinstelling"
+                              "label": "Gebruik de gedragsinstelling"
                             },
                             {
                               "label": "Rechts uitgelijnd"
@@ -68,8 +68,8 @@
                           ]
                         },
                         {
-                          "label": "Label weergave",
-                          "description": "Indien verborgen worden labels alleen getoond bij mouse over",
+                          "label": "Toon label",
+                          "description": "Indien verborgen worden labels alleen getoond als je de muis erover beweegt",
                           "options": [
                             {
                               "label": "Gebruik gedragsinstelling"
@@ -83,9 +83,7 @@
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -159,15 +157,15 @@
               ]
             },
             {
-              "label": "Label weergave",
-              "description": "Indien uitgevinkt worden labels alleen getoond bij mouse over"
+              "label": "Toon labels",
+              "description": "Indien uitgevinkt worden labels alleen getoond als je de muis erover beweegt"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localiseren",
+      "label": "Lokaliseren",
       "fields": [
         {
           "label": "Aria label voor inhoudstype",
@@ -182,8 +180,8 @@
           "default": "Audio Track pauzeren"
         },
         {
-          "label": "Titel bij scène dialaog",
-          "default": "Scène beschrijving"
+          "label": "Titel bij scène dialoog",
+          "default": "Scènebeschrijving"
         },
         {
           "label": "Label voor knop om camera te resetten",
@@ -198,11 +196,11 @@
           "default": "Dialoog sluiten"
         },
         {
-          "label": "Aria label voor de label uitbreiden knop",
-          "default": "De visuele label uitbreiden"
+          "label": "Aria label voor de uitklapknop",
+          "default": "Vergroot het visuele label"
         },
         {
-          "label": "Label voor als er een achtergrondafbeelding aan het laden is in een 360 scène",
+          "label": "Het label voor wanneer de achtergrondafbeelding wordt geladen in de 360 scène",
           "default": "Achtergrondafbeelding aan het laden..."
         },
         {
