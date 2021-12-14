@@ -64,8 +64,9 @@ export default class Main extends React.Component {
         isEditingInteraction: false
       });
     });
+
     // Show scene description when scene starts for the first time, if specified
-	  if (!this.context.extras.isEditor && this.props.currentScene) {
+	  if (!this.context.extras.isEditor && this.props.currentScene != null) {
       this.handleSceneDescriptionInitially(this.props.currentScene);
     }
     this.setState({scoreCard: this.initialScoreCard()});
@@ -329,7 +330,7 @@ export default class Main extends React.Component {
    *
    * @param {number} sceneId
    */
-   handleSceneDescriptionInitially = (sceneId) => {
+  handleSceneDescriptionInitially = (sceneId) => {
     const prevOpened = this.state.scenesOpened.includes(sceneId);
     if (!prevOpened) {
       // Scene has not been opened before, find scene information
