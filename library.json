@@ -6,7 +6,7 @@
   "author": "Joubel AS",
   "majorVersion": 0,
   "minorVersion": 4,
-  "patchVersion": 71,
+  "patchVersion": 72,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [
@@ -51,11 +51,6 @@
     },
     {
       "machineName": "H5PEditor.NDLAShowWhen",
-      "majorVersion": 1,
-      "minorVersion": 0
-    },
-    {
-      "machineName": "H5PEditor.ShowWhen",
       "majorVersion": 1,
       "minorVersion": 0
     },
