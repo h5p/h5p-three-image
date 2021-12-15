@@ -123,8 +123,8 @@ export default class HotspotNavButton extends React.Component {
       this.state.startMidPoint
     );
 
-    const minimumSize = 128;
-    const maximumSize = 2048;
+    const minimumSize = 20;
+    const maximumSize = 2000;
 
     const newSizeIsValid = newSize > minimumSize && newSize < maximumSize;
     if (newSizeIsValid) {
