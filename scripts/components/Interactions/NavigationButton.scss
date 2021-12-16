@@ -101,10 +101,12 @@ $labelWidth: 9em;
 
     &--editor {
       background-color: $hotspotEditor;
-      &:before {
+
+      &::before {
         display: inherit;
-        font-size: 2.5em;
+        font-size: 1em;
       }
+
       &:hover,
       &:focus,
       &:active {
