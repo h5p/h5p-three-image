@@ -26,7 +26,7 @@
               {},
               {
                 "label": "Eszenaren izenburua",
-                "description": "Egileentzako eszena identifikatzeko erabiltzen da"
+                "description": "Eszena identifikatzeko erabilia"
               },
               {
                 "label": "Eszenaren atzeko planoa"
@@ -69,7 +69,7 @@
                         },
                         {
                           "label": "Erakutsi etiketa",
-                          "description": "Ezkutatuz gero - etiketak sagua gainetik pasatzerakoan erakutsiko da",
+                          "description": "Ezkutuan badago - etiketak sagua gainetik pasatzerakoan erakutsiko da",
                           "options": [
                             {
                               "label": "Erabili jokaeraren ezarpena"
@@ -83,9 +83,7 @@
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -124,7 +122,7 @@
         },
         {
           "label": "Eszenaren renderizatze-kalitatea",
-          "description": "Aukeratu eszena bat renderizatzeko erabiliko diren segmentuen zabalera eta altuera. Honek eszenaren kalitatean eragin zuzena dauka, saiatu zaitez kalitatea igotzen eszena pixka bat  \"pixelatua\" edo \"lausoa\" ikusten bada. Kontuan izan renderizatze-kalitate handiagoak kargatze-denbora gehiago behar duela.",
+          "description": "Aukeratu eszena bat renderizatzeko erabiliko diren segmentuen zabalera eta altuera. Honek eszenaren kalitatean eragin zuzena dauka, saiatu zaitez kalitatea igotzen eszena pixka bat \"pixelatua\" edo \"lausoa\" ikusten bada. Kontuan izan renderizatze-kalitate handiagoak kargatze-denbora gehiago behar duela.",
           "options": [
             {
               "label": "Kalitate handia (128x128)"
@@ -138,7 +136,7 @@
           ]
         },
         {
-          "label": "Etiketen ezarpena",
+          "label": "Etiketaren ezarpenak",
           "fields": [
             {
               "label": "Etiketaren kokapena",
