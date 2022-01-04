@@ -57,7 +57,7 @@
                               "label": "Lygiuota dešinėje"
                             },
                             {
-                              "label": "Lygiuota kairėje
+                              "label": "Lygiuota kairėje"
                             },
                             {
                               "label": "Lygiuota viršuje"
@@ -186,7 +186,7 @@
           "default": "Vaizdo aprašymas"
         },
         {
-          "label": Kameros atstatymo mygtuko etiketė",
+          "label": "Kameros atstatymo mygtuko etiketė",
           "default": "Kameros atstatymas"
         },
         {
