@@ -451,6 +451,7 @@
         "label": "Added playlists",
         "description": "Make playlists that's available for all scenes by default.",
         "widget": "playlist",
+        "optional": true,
         "canEdit": true
       }
     ]
