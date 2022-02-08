@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "3-Afbeeldingseditor",
+      "label": "Three Image editor",
       "fields": [
         {
           "label": "Scènes",
@@ -12,7 +12,7 @@
                 "label": "Scènetype",
                 "options": [
                   {
-                    "label": "360 graden foto"
+                    "label": "360°-afbeelding"
                   },
                   {
                     "label": "Statische afbeelding"
@@ -20,7 +20,7 @@
                 ]
               },
               {
-                "label": "Toon \"Terug\" knop",
+                "label": "Toon \"Terug\"-knop",
                 "description": "Toon knop om terug te gaan naar de vorige scene"
               },
               {},
@@ -32,7 +32,7 @@
                 "label": "Scèneachtergrond"
               },
               {
-                "label": "Scèneomschrijving",
+                "label": "Scènebeschrijving",
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
               {},
@@ -41,7 +41,7 @@
                   "fields": [
                     {
                       "label": "Label",
-                      "description": "Indien leeg gelaten wordt geen label getoond en zullen we proberen het titelveld te gebruiken voor screenreaders"
+                      "description": "Indien leeg gelaten wordt geen label getoond en zullen we proberen het titelveld te gebruiken voor schermlezers"
                     },
                     {
                       "label": "Labelinstellingen",
@@ -78,14 +78,12 @@
                               "label": "Tonen"
                             },
                             {
-                              "label": "Verbergen"
+                              "label": "Verberg"
                             }
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -175,11 +173,11 @@
         },
         {
           "label": "Label om audio af te spelen",
-          "default": "Audio Track afspelen"
+          "default": "Geluidsbestand afspelen"
         },
         {
           "label": "Label om audio te pauzeren",
-          "default": "Audio Track pauzeren"
+          "default": "Geluidsbestand pauzeren"
         },
         {
           "label": "Titel bij scène dialoog",
@@ -190,11 +188,11 @@
           "default": "Camera resetten"
         },
         {
-          "label": "Label voor de dialoog indienen knop",
+          "label": "Label van knop om dialoog in te dienen",
           "default": "Dialoog indienen"
         },
         {
-          "label": "Label voor de dialoog sluiten knop",
+          "label": "Label van knop om dialoog te sluiten",
           "default": "Dialoog sluiten"
         },
         {
