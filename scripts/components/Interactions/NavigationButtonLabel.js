@@ -83,7 +83,7 @@ export default class NavigationButtonLabel extends React.Component {
       || this.props.labelText !== prevProps.labelText) && this.props.staticScene) {
       this.setExpandProperties();
     }
-    if (!prevProps.rendered && this.props.rendered) {
+    if (!prevProps.rendered && this.props.rendered && this.props.staticScene) {
       this.setHeightProperties();
       this.setExpandProperties();
     }
