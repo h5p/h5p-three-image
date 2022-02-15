@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { scaleOpenContentElement } from '../../utils/open-content-utils';
+import {staticWidth, staticHeight} from "../Scene/SceneTypes/StaticScene";
 import { clamp } from '../../utils/utils';
 
 /**
@@ -201,12 +202,30 @@ export default class HotspotNavButton extends React.Component {
 
     const iconSize = clamp(20, Math.min(this.state.sizeWidth / 2, this.state.sizeHeight / 2), 40);
 
+    // Resize hotspot in static scene based on wrapper if fullscreen
+    let width = this.state.sizeWidth;
+    let height = this.state.sizeHeight;
+
+    if (this.props.staticScene ) {
+      if (staticWidth && staticWidth> 0 && !isNaN(staticWidth))
+      {
+        width = (staticWidth/100)*((this.state.sizeWidth / 688)*100); 
+      }
+  
+      if (staticHeight && staticHeight> 0 && !isNaN(staticHeight))
+      {
+        height = (staticHeight/100)*((this.state.sizeHeight / 262)*100);
+      }
+  
+      console.log("width: " + width + " height: " + height);
+    }
+
     return (
       <div className={`nav-button-hotspot-wrapper ${this.props.staticScene ? 'nav-button-hotspot-wrapper--is-static' : ''} `}>
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
-          style={{ width: this.state.sizeWidth + 'px', height : this.state.sizeHeight + 'px', fontSize: iconSize }}
+          style={{ width: width + 'px', height : height + 'px', fontSize: iconSize }}
           className={ `nav-button nav-button-hotspot ${this.props.showHotspotOnHover ? "nav-button-hotspot--show-hotspot-on-hover" : ""} ${this.context.extras.isEditor ? "nav-button-hotspot--editor" : ''} `}
           tabIndex={this.determineTabIndex()}
           onClick={this.props.onClickEvent}
