@@ -216,8 +216,6 @@ export default class HotspotNavButton extends React.Component {
       {
         height = (staticHeight/100)*((this.state.sizeHeight / 262)*100);
       }
-  
-      console.log("width: " + width + " height: " + height);
     }
 
     return (
