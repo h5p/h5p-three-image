@@ -5,7 +5,7 @@ import './NavigationButton.scss';
 import {H5PContext} from "../../context/H5PContext";
 import NavigationButtonLabel, {getLabelPos, getLabelText, isHoverLabel} from "./NavigationButtonLabel";
 import HotspotNavButton from "./HotspotNavButton";
-import {staticWidth, staticHeight} from "../Scene/SceneTypes/StaticScene";
+import { staticWidth, staticHeight } from "../Scene/SceneTypes/StaticScene";
 
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
