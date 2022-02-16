@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { scaleOpenContentElement } from '../../utils/open-content-utils';
-import {staticWidth, staticHeight, staticSceneWidth, staticSceneHeight} from "../Scene/SceneTypes/StaticScene";
+import { staticWidth, staticHeight, staticSceneWidth, staticSceneHeight } from "../Scene/SceneTypes/StaticScene";
 import { clamp } from '../../utils/utils';
 
 /**
