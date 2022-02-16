@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { scaleOpenContentElement } from '../../utils/open-content-utils';
-import {staticWidth, staticHeight} from "../Scene/SceneTypes/StaticScene";
+import {staticWidth, staticHeight, staticSceneWidth, staticSceneHeight} from "../Scene/SceneTypes/StaticScene";
 import { clamp } from '../../utils/utils';
 
 /**
@@ -206,15 +206,15 @@ export default class HotspotNavButton extends React.Component {
     let width = this.state.sizeWidth;
     let height = this.state.sizeHeight;
 
-    if (this.props.staticScene ) {
+    if (this.props.staticScene && !this.context.extras.isEditor) {
       if (staticWidth && staticWidth> 0 && !isNaN(staticWidth))
       {
-        width = (staticWidth/100)*((this.state.sizeWidth / 688)*100); 
+        width = (staticWidth/100)*((this.state.sizeWidth / staticSceneWidth)*100); 
       }
   
       if (staticHeight && staticHeight> 0 && !isNaN(staticHeight))
       {
-        height = (staticHeight/100)*((this.state.sizeHeight / 262)*100);
+        height = (staticHeight/100)*((this.state.sizeHeight / staticSceneHeight)*100);
       }
     }
 

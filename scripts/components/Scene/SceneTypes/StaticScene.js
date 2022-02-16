@@ -7,8 +7,7 @@ import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
 import OpenContent from "../../Interactions/OpenContent";
-export let staticWidth;	
-export let staticHeight;
+export let staticWidth, staticHeight, staticSceneWidth, staticSceneHeight;
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -286,6 +285,13 @@ export default class StaticScene extends React.Component {
       isVerticalImage: ratio < this.context.getRatio(),
     });
     imageElement.focus();
+
+    if (!H5P.isFullscreen) {
+      staticSceneWidth = this.imageElementRef.current.clientWidth;
+      staticSceneHeight = this.imageElementRef.current.clientHeight;
+      Object.freeze(staticSceneWidth);
+      Object.freeze(staticSceneHeight);      
+    }
 
     this.context.on('resize', () => {
       this.setState({
