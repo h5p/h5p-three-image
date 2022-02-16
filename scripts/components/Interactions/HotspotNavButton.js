@@ -207,14 +207,11 @@ export default class HotspotNavButton extends React.Component {
     let height = this.state.sizeHeight;
 
     if (this.props.staticScene && !this.context.extras.isEditor) {
-      if (staticWidth && staticWidth> 0 && !isNaN(staticWidth))
-      {
-        width = (staticWidth/100)*((this.state.sizeWidth / staticSceneWidth)*100); 
+      if (staticWidth && staticWidth > 0 && !isNaN(staticWidth)) {
+        width = (staticWidth/100) * ((this.state.sizeWidth / staticSceneWidth) * 100); 
       }
-  
-      if (staticHeight && staticHeight> 0 && !isNaN(staticHeight))
-      {
-        height = (staticHeight/100)*((this.state.sizeHeight / staticSceneHeight)*100);
+      if (staticHeight && staticHeight > 0 && !isNaN(staticHeight)) {
+        height = (staticHeight/100) * ((this.state.sizeHeight / staticSceneHeight) * 100);
       }
     }
 
