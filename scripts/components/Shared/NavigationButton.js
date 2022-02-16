@@ -130,7 +130,7 @@ export default class NavigationButton extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
-      this.navButtonWrapper.current.focus({
+      this[this.context.extras.isEditor ? 'navButtonWrapper' : 'navButton'].current.focus({
         preventScroll: true
       });
     }
