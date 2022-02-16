@@ -220,7 +220,7 @@ export default class HotspotNavButton extends React.Component {
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
-          style={{ width: width + 'px', height : height + 'px', fontSize: iconSize }}
+          style={{ width: width + 'px', height: height + 'px', fontSize: iconSize }}
           className={ `nav-button nav-button-hotspot ${this.props.showHotspotOnHover ? "nav-button-hotspot--show-hotspot-on-hover" : ""} ${this.context.extras.isEditor ? "nav-button-hotspot--editor" : ''} `}
           tabIndex={this.determineTabIndex()}
           onClick={this.props.onClickEvent}
