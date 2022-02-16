@@ -202,7 +202,7 @@ export default class HotspotNavButton extends React.Component {
 
     const iconSize = clamp(20, Math.min(this.state.sizeWidth / 2, this.state.sizeHeight / 2), 40);
 
-    // Resize hotspot in static scene based on wrapper if fullscreen
+    // Resize hotspot for full screen in static scene based on wrapper
     let width = this.state.sizeWidth;
     let height = this.state.sizeHeight;
 
