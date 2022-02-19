@@ -91,7 +91,7 @@
               },
               {
                 "label": "Mygtuko stilius",
-                "description": "Nuspręskite, kaip turėtų atrodyti į šį vaizdą nukreipti mygtukai. Vaizdams, kurie yra statiški ir neveda į naujas scenas, rekomenduojame naudoti mygtuką \"Daugiau informacijos\"."
+                "description": "Nuspręskite, kaip turėtų atrodyti į šį vaizdą nukreipti mygtukai. Vaizdams, kurie yra statiški ir neveda į naujas scenas, rekomenduojame naudoti mygtuką \"Daugiau informacijos\".",
                 "options": [
                   {
                     "label": "Naujas vaizdas (rodyklė)"
