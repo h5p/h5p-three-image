@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import './NavigationButton.scss';
 import { H5PContext } from "../../context/H5PContext";
 import { scaleOpenContentElement } from '../../utils/open-content-utils';
-import { staticWidth, staticHeight, staticSceneWidth, staticSceneHeight } from "../Scene/SceneTypes/StaticScene";
+import { staticSceneWidth, staticSceneHeight } from "../Scene/SceneTypes/StaticScene";
 import { clamp } from '../../utils/utils';
 
 /**
@@ -132,13 +132,26 @@ export default class HotspotNavButton extends React.Component {
     if (newSizeIsValid) {
       /*These values are used for inline styling in the div in the render loop,
         updating the div dimensions when the mousemove event fires*/
-      isHorizontalDrag
-        ? this.setState({
-            sizeWidth: newSize,
-          })
-        : this.setState({
-            sizeHeight: newSize,
-          });
+        if (this.props.staticScene) {
+          isHorizontalDrag
+            ? this.setState({
+                sizeWidth: (newSize / staticSceneWidth) * 100,
+              })
+            : this.setState({
+                sizeHeight: (newSize / staticSceneHeight) * 100,
+              });
+        }
+        else {
+          isHorizontalDrag
+            ? this.setState({
+                sizeWidth: newSize,
+              })
+            : this.setState({
+                sizeHeight: newSize,
+              });
+        }
+          
+        this.props.resizeOnDrag(this.state.sizeWidth, this.state.sizeHeight);
     }
   };
 
@@ -149,7 +162,7 @@ export default class HotspotNavButton extends React.Component {
     this.setState({
       anchorDrag: false,
     })
-//Used for writing the data into to editor, for them to persist into the viewer
+    //Used for writing the data into to editor, for them to persist into the viewer
     this.props.setHotspotValues(newSizeWidth, newSizeHeight)
   }
 
@@ -202,25 +215,13 @@ export default class HotspotNavButton extends React.Component {
 
     const iconSize = clamp(20, Math.min(this.state.sizeWidth / 2, this.state.sizeHeight / 2), 40);
 
-    // Resize hotspot for full screen in static scene based on wrapper
-    let width = this.state.sizeWidth;
-    let height = this.state.sizeHeight;
-
-    if (this.props.staticScene && !this.context.extras.isEditor) {
-      if (staticWidth && staticWidth > 0 && !isNaN(staticWidth)) {
-        width = (staticWidth/100) * ((this.state.sizeWidth / staticSceneWidth) * 100); 
-      }
-      if (staticHeight && staticHeight > 0 && !isNaN(staticHeight)) {
-        height = (staticHeight/100) * ((this.state.sizeHeight / staticSceneHeight) * 100);
-      }
-    }
-
     return (
-      <div className={`nav-button-hotspot-wrapper ${this.props.staticScene ? 'nav-button-hotspot-wrapper--is-static' : ''} `}>
+      <div className={`nav-button-hotspot-wrapper ${this.props.staticScene ? 'nav-button-hotspot-wrapper--is-static' : ''} `} 
+        style={this.props.staticScene ? {height:'100%', width:'100%'}:{}}>
         <button
           ref={this.props.reference}
           aria-label={this.props.ariaLabel}
-          style={{ width: width + 'px', height: height + 'px', fontSize: iconSize }}
+          style={this.props.staticScene ? { width: '100%', height: '100%', fontSize: iconSize }:{ width: this.state.sizeWidth + "px", height: this.state.sizeHeight + "px", fontSize: iconSize }}
           className={ `nav-button nav-button-hotspot ${this.props.showHotspotOnHover ? "nav-button-hotspot--show-hotspot-on-hover" : ""} ${this.context.extras.isEditor ? "nav-button-hotspot--editor" : ''} `}
           tabIndex={this.determineTabIndex()}
           onClick={this.props.onClickEvent}

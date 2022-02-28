@@ -154,6 +154,7 @@ export default class NavigationButton extends React.Component {
     this.expandButton = React.createRef();
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    this.resizeOnDrag = this.resizeOnDrag.bind(this);
 
     /** @type {State} */
     this.state = {
@@ -162,6 +163,14 @@ export default class NavigationButton extends React.Component {
       innerButtonFocused: false,
       isMouseOver: false,
     };
+  }
+
+  resizeOnDrag = (width, height) => {
+    this.setHotspotValues(width, height);
+    
+    if (this.context.extras.isEditor) { 
+      this.forceUpdate();
+    }
   }
 
   addFocusListener() {
@@ -265,14 +274,23 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  getStyle() {
+  getStyle(width, height) {
     const style = {};
     if (this.props.topPosition !== undefined) {
       style.top = this.props.topPosition + '%';
     }
-
     if (this.props.leftPosition !== undefined) {
       style.left = this.props.leftPosition + '%';
+    }
+    if (this.props.staticScene) {
+      // set width and height for static scene
+      style.width = width + '%';
+      style.height = height + '%';
+    }
+    else {
+      // set width and height for 360 scene
+      style.width = width;
+      style.height = height;
     }
     return style;
   }
@@ -380,7 +398,7 @@ export default class NavigationButton extends React.Component {
     const interaction = this.getCurrentInteraction();
 
     return interaction.label.hotSpotSizeValues ?
-      interaction.label.hotSpotSizeValues.split(",") : [16,16]
+      interaction.label.hotSpotSizeValues.split(",") : [256,128]
   }
 
   /**
@@ -460,11 +478,19 @@ export default class NavigationButton extends React.Component {
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
 
     const labelText = getLabelText(label);
+
+    let width;
+    let height;
+
+    if (this.props.label && this.props.staticScene) {
+      width = parseFloat(this.getHotspotValues()[0].toString());
+      height = parseFloat(this.getHotspotValues()[1].toString());
+    }
     return (
       <div
         ref={this.navButtonWrapper}
         className={wrapperClasses.join(' ')}
-        style={this.getStyle()}
+        style={this.getStyle(width, height)}
         tabIndex={isWrapperTabbable ? 0 : undefined}
         onFocus={this.handleFocus}
         onClick={this.onClick.bind(this)}
@@ -474,6 +500,7 @@ export default class NavigationButton extends React.Component {
           this.props.showAsHotspot ?
             <HotspotNavButton
               reference={this.navButton}
+              style={{height:'100%', width:'100%'}}
               ariaLabel={getLabelText(label)}
               tabIndexValue={isInnerButtonTabbable ? undefined : '-1'}
               onClickEvent={this.onClick.bind(this)}
@@ -481,6 +508,7 @@ export default class NavigationButton extends React.Component {
               onMouseDownEvent={this.onMouseDown.bind(this)}
               onFocusEvent={() => this.setState({innerButtonFocused: true})}
               onBlurEvent={() => this.setState({innerButtonFocused: false})}
+              resizeOnDrag={this.resizeOnDrag}
               setHotspotValues={this.setHotspotValues.bind(this)}
               getHotspotValues={this.getHotspotValues.bind(this)}
               staticScene={this.props.staticScene}
