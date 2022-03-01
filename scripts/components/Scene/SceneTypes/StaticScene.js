@@ -7,7 +7,7 @@ import {H5PContext} from "../../../context/H5PContext";
 import {SceneTypes} from "../Scene";
 import ContextMenu from "../../Shared/ContextMenu";
 import OpenContent from "../../Interactions/OpenContent";
-export let staticWidth, staticHeight, staticSceneWidth, staticSceneHeight;
+export let staticSceneWidth, staticSceneHeight;
 
 export default class StaticScene extends React.Component {
   constructor(props) {
@@ -74,9 +74,6 @@ export default class StaticScene extends React.Component {
     const defaultSize = 938;
     const defaultFontSize = 16;
     this.sceneWrapperRef.current.style.width = `100%`;
-    
-    staticWidth = this.imageElementRef.current.clientWidth;
-    staticHeight = this.imageElementRef.current.clientHeight;
     
     // Specific to Firefox - Interaction buttons are moving out of scope when image is potrait
     if (this.imageElementRef.current.clientWidth > 0) {
@@ -286,14 +283,10 @@ export default class StaticScene extends React.Component {
     });
     imageElement.focus();
 
-    if (!H5P.isFullscreen) {
+    this.context.on('resize', () => {
       staticSceneWidth = this.imageElementRef.current.clientWidth;
       staticSceneHeight = this.imageElementRef.current.clientHeight;
-      Object.freeze(staticSceneWidth);
-      Object.freeze(staticSceneHeight);      
-    }
 
-    this.context.on('resize', () => {
       this.setState({
         isVerticalImage: ratio < this.context.getRatio(),
       });
