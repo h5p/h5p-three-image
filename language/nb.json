@@ -115,7 +115,7 @@
                         },
                         {
                           "label": "Kode for å åpne innholdet",
-                          "description": "Hvis feltet ikke er tomt, må brukeren skrive inn koden for å se innholdet."
+                          "description": "Hvis feltet ikke er tomt, må brukeren skrive inn koden for å se innholdet. Skill flere riktige koder med /."
                         },
                         {
                           "label": "Kode-hint",

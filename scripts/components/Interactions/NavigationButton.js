@@ -482,7 +482,7 @@ export default class NavigationButton extends React.Component {
     let width;
     let height;
 
-    if (this.props.label && this.props.staticScene) {
+    if (this.props.label && this.props.staticScene && this.props.showAsHotspot) {
       width = parseFloat(this.getHotspotValues()[0].toString());
       height = parseFloat(this.getHotspotValues()[1].toString());
     }
