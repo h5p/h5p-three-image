@@ -115,7 +115,7 @@
                         },
                         {
                           "label": "Code for the interaction",
-                          "description": "If not empty, the user has to input the code in order to open this content."
+                          "description": "If not empty, the user has to input the code in order to open this content. Separate multiple correct codes with /."
                         },
                         {
                           "label": "A hint for the interaction code",

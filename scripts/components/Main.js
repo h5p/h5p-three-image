@@ -577,7 +577,8 @@ export default class Main extends React.Component {
    */
   handlePassword(inputPassword) {
     const interaction = this.getInteractionFromCurrentScene(this.state.currentInteraction);
-    const isCorrectPassword = interaction.label.interactionPassword.toLowerCase() === inputPassword.toLowerCase();
+    const passwords = interaction.label.interactionPassword.toLowerCase().split('/');
+    const isCorrectPassword = passwords.includes(inputPassword.toLowerCase());
     interaction.unlocked = interaction.unlocked || isCorrectPassword;
 
     return isCorrectPassword;
