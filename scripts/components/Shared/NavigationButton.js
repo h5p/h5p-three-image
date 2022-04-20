@@ -137,9 +137,11 @@ export default class NavigationButton extends React.Component {
 
     if (this.props.isFocused && !prevProps.isFocused) {
       setTimeout(() => { // Note: Don't think the timeout is needed after rendering was fixed
-        this.navButtonWrapper.current.focus({
-          preventScroll: true
-        });
+        if (this.navButtonWrapper.current) {
+          this.navButtonWrapper.current.focus({
+            preventScroll: true
+          });
+        }
       }, 0);
     }
 
