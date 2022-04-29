@@ -77,10 +77,10 @@
   }
 
   &.audio-track:before {
-    content: $audioOn;
+    content: $audioOff;
   }
   &.audio-track.active:before {
-    content: $audioOff;
+    content: $audioOn;
   }
 
   &.scene-description:before {
