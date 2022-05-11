@@ -206,7 +206,7 @@ export default class ThreeSixtyScene extends React.Component {
     else {
       // Set texture + camera pos
       threeSixty = this.props.threeSixty;
-      threeSixty.setSourceElement(this.imageElement);
+      threeSixty.setSourceElement(this.imageElement, this.props.isPanorama);
       threeSixty.setCameraPosition(cameraPosition.yaw, cameraPosition.pitch);
     }
 
