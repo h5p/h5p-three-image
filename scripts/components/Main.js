@@ -754,6 +754,7 @@ export default class Main extends React.Component {
           isStartScene = {isStartScene}
           onGoToStartScene={ this.goToStartScene.bind(this) }
           onShowingScoreSummary={this.handleScoreSummary}
+          showHomeButton={this.context.behavior.showHomeButton}
           showScoresButton={this.context.behavior.showScoresButton && this.hasOneQuestion()}
           updateSceneAudioPlayers={ this.getSceneAudioPlayers }
           interactionAudioPlayers={ this.audioPlayers }
