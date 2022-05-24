@@ -525,6 +525,13 @@
         "default": false
       },
       {
+        "name": "showHomeButton",
+        "type": "boolean",
+        "label": "Display \"Home\" button",
+        "description": "Display button for going to start scene.",
+        "default": true
+      },
+      {
         "name": "sceneRenderingQuality",
         "type": "select",
         "label": "Scene rendering quality",

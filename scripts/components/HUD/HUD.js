@@ -79,6 +79,7 @@ export default class HUD extends React.Component {
    */
   render() {
     const showScoresButton = this.props.showScoresButton;
+    const showHomeButton = this.props.showHomeButton;
     const isThreeSixty = this.props.scene.sceneType === SceneTypes.THREE_SIXTY_SCENE;
 
     return (
@@ -106,6 +107,7 @@ export default class HUD extends React.Component {
               onClick={ this.props.onCenterScene }
             />
           }{
+            showHomeButton &&
             <Button
               type={ 'go-to-start' }
               label={this.props.isStartScene ? this.context.l10n.userIsAtStartScene : this.context.l10n.goToStartScene}

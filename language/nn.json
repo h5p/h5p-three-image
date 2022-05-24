@@ -239,6 +239,10 @@
           "description": "Vis en knapp som lar brukeren se antall poeng som er scoret."
         },
         {
+          "label": "Vis \"Heim\"-knappen",
+          "description": "Vis knapp som tek deg til fyrste scene."
+        },
+        {
           "label": "Kvalitet på scene-rendering",
           "description": "Choose the amount of width and height segments used to render a scene. This directly affects the quality level of the scene, try increasing the quality if a scene looks \"blocky\" or \"waves\" are seen within the scenes. Note that higher quality rendering takes more time to load.",
           "options": [

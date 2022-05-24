@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Kvalita vykreslování scén",
           "description": "Vyberte velikost segmentů šířky a výšky použitých k vykreslení scény. To přímo ovlivňuje úroveň kvality scény, zkuste zvýšit kvalitu, pokud scéna vypadá tak, že jsou ve scénách vidět \"bloky \" nebo \"vlny \". Upozorňujeme, že načítání ve vyšší kvalitě trvá déle.",
           "options": [

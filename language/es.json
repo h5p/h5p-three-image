@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Calidad del renderizado de escena",
           "description": "Elija la cantidad de segmentos de ancho y altura usados para renderizar una escena. Esto afecta directamente el nivel de calidad de la escena, intente aumentar la calidad si la escena se viera \"pixeleada\" o si \"ondulaciones\" fueran visibles dentro de las escenas. Tenga en cuenta que al renderizar a mayor calidad tomará más tiempo para cargar.",
           "options": [

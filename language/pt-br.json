@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Qualidade de renderização da cena",
           "description": "Escolha o segmento de altura e largura para renderizar a cena. Isto diretamente afetará o nivel de qualidade da cena, tente aumentar a qualidade se uma cena parece \"quadradinha\" ou \"ondas\" são são vistas na cena. Perceba que quanto maior a qualidade maior o tempo para renderizar e carregar.",
           "options": [

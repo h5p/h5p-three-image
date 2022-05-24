@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Dioraaman laatu",
           "description": "Valitse dioraaman esittämiseen tarkoitettujen korkeus- ja pituus segmenttien lukumäärä. Tämä vaikuttaa suoraan dioraaman kuvanlaatuun, jos laatu on mielestäsi \"palikkamainen\" tai aaltoileva niin kokeile korottaa laatua. Mitä parempi laatu sitä kauemmin kuvan lataaminen kestää.",
           "options": [

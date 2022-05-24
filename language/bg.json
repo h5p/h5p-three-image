@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Качество за визуализиране на сцената",
           "description": "Изберете ширина и височина за визуализиране на сцената. Това ще се отрази върху качеството. Опитайте да учеличите качеството, ако сцената изглежда размазана. Обърнете внимание, че високото качество ще отнема повече време за зареждане.",
           "options": [

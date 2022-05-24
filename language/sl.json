@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Kakovost prikazovanja prizorov",
           "description": "Izbira velikosti slike v prizorih in posledično njene kakovosti. Upoštevati je potrebno, da se slike višje kakovosti nalagajo dlje časa.",
           "options": [

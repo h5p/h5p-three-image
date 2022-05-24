@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Renderingskvalitet för scen",
           "description": "Välj hur många bredd- och höjdsegment som ska användas för att tolka (rendera) en scen. Detta har en direkt påverkan på kvalitetsnivån på scenen, pröva att öka kvaliteten om en scen ser \"rutig\" ut eller om \"vågor\" syns i scenerna. Notera att högre renderingskvalitet tar mer tid att ladda.",
           "options": [

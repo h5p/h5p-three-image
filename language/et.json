@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Stseeni renderdamise kvaliteet",
           "description": "Vali laius- ja kõrgussegmentide arv, mida kasutatakse stseeni renderdamiseks. See mõjutab otseselt stseeni kvaliteeti. Stseeni parema välimuse saavutamiseks võid proovida kvaliteeti tõsta - samas laadib kõrgema kvaliteedi korral stseen aeglasemalt.",
           "options": [

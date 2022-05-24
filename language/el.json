@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Ποιότητα rendering σκηνών",
           "description": "Επιλέξτε ποιότητα (πλάτος x ύψος) για το rendering των σκηνών. Επιχειρήστε να αυξήσετε την ποιότητα, αν σε κάποια σκηνή παρατηρείτε \"μπλοκς\" ή \"κύματα\". Σημειώνεται πως η υψηλότερη ποιότητα rendering οδηγεί σε μεγαλύτερο χρόνο φόρτωσης (load) της σκηνής.",
           "options": [

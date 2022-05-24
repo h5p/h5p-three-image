@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Qualité de rendu de la scène",
           "description": "Choisissez la résolution pour le rendu d'une scène. Ceci affecte directement le niveau de qualité de la scène. Essayez d’augmenter la qualité si une scène a l’air figée ou si des \"vagues\" sont visibles dans les scènes. Notez qu'un rendu de meilleure qualité prend plus de temps à charger.",
           "options": [

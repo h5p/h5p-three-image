@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Darstellungsqualität der Szenen",
           "description": "Erlaubt die Anzahl der Segmente zu wählen, die bei der Darstellung der Szene verwendet werden sollen. Dies wirkt sich direkt auf die Darstellungsqualität aus. Erhöhe die Qualität, wenn eine Szene \"blockartig\" aussieht oder \"Wellen\" innerhalb der Szene auftreten. Höhere Qualitätsstufen führen zu längeren Ladezeiten.",
           "options": [

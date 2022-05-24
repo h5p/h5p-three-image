@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Qualità di resa di una scena",
           "description": "Scegli larghezza e altezza dei segmenti usati per rappresentare una scena. Ciò ha effetto diretto sulla qualità della scena. Prova ad aumentare la qualità se una scena ti sembra \"squadrata\" o se nelle scene compaiono \"onde\". NB. un rendering di qualità più alta impiega più tempo a caricare",
           "options": [

@@ -239,6 +239,10 @@
           "description": "Display button for showing the scores from assignments."
         },
         {
+          "label": "Display \"Home\" button",
+          "description": "Display button for going to start scene."
+        },
+        {
           "label": "Eszenaren renderizatze-kalitatea",
           "description": "Aukeratu eszena bat renderizatzeko erabiliko diren segmentuen zabalera eta altuera. Honek eszenaren kalitatean eragin zuzena dauka, saiatu zaitez kalitatea igotzen eszena pixka bat  \"pixelatua\" edo \"lausoa\" ikusten bada. Kontuan izan renderizatze-kalitate handiagoak kargatze-denbora gehiago behar duela.",
           "options": [
