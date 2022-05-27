@@ -30,6 +30,7 @@
   top: 50%;
   width: 80%;
   max-height: 90%;
+  max-width: 40em;
   background: white;
   z-index: 1;
   padding: 2em;
@@ -67,12 +68,6 @@
     vertical-align: text-bottom;
   }
 
-  /**
-   * {1} About 50 characters (500px)
-   */
-  &.h5p-advancedtext {
-    max-width: 31.25em; /* {1} */
-  }
 }
 .h5p-medium-tablet-size .h5p-text-dialog {
   width: 86%;
