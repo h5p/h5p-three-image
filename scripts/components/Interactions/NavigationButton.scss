@@ -254,7 +254,7 @@ $answerable-interactions: (
 );
 
 @each $interaction in $answerable-interactions {
-  .#{$interaction} {
+  .#{$interaction}:not(.nav-btn-hotspot) {
     &::before {
       $offset: 0.5rem;
       border: 3px dashed $interactionBg;
