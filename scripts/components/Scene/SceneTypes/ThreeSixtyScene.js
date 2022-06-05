@@ -499,7 +499,10 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   componentDidMount() {
-    this.loadScene();
+    // Only load scene if image exists
+    if (this.props.imageSrc !== undefined) {
+      this.loadScene();
+    }
 
     this.context.on('doubleClickedInteraction', () => {
       this.cancelPointerLock();
@@ -521,8 +524,11 @@ export default class ThreeSixtyScene extends React.Component {
       });
     }
 
-    if (this.state.imagePath !== this.props.imageSrc.path) {
-      this.loadScene();
+    // Only load scene if image exists
+    if (this.props.imageSrc !== undefined) {
+      if (this.state.imagePath !== this.props.imageSrc.path) {
+        this.loadScene();
+      }
     }
 
     if (prevProps.isActive && !this.props.isActive) {
