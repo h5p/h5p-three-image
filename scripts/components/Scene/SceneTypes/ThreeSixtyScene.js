@@ -248,7 +248,7 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     this.setState({
-      imagePath: this.props.imageSrc.path,
+      imagePath: this.props.imageSrc !== undefined?this.props.imageSrc.path:'',
       isRendered: false
     });
 
