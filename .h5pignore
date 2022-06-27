@@ -3,6 +3,9 @@ scripts
 .babelrc
 .gitignore
 .h5pignore
+.storybook
+tsconfig.json
+stories
 package.json
 package-lock.json
 README.md
