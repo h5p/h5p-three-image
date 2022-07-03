@@ -30,7 +30,14 @@ var config = {
           path.resolve(__dirname, 'scripts'),
           path.resolve(__dirname, 'assets')
         ],
-        loader: 'url-loader?limit=100000'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000
+            }
+          }
+        ]
       }
     ]
   }
