@@ -1,14 +1,13 @@
 var path = require('path');
 const libraryName = process.env.npm_package_name;
 const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = (nodeEnv === 'production');
 
 module.exports = {
   context: path.resolve(__dirname, 'scripts'),
   entry: {
     dist: './app.js'
   },
-  devtool: (isProd) ? undefined : 'inline-source-map',
+  devtool: (nodeEnv === 'development') ? 'inline-source-map' : undefined,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: `${libraryName}.js`
