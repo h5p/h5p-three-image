@@ -1,10 +1,13 @@
 var path = require('path');
-var webpack = require('webpack');
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProd = (nodeEnv === 'production');
 
-var config = {
+module.exports = {
+  context: path.resolve(__dirname, 'scripts'),
   entry: {
-    dist: './scripts/app.js'
+    dist: './app.js'
   },
+  devtool: (isProd) ? undefined : 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'three-image.js'
@@ -22,7 +25,7 @@ var config = {
       {
         test:/\.(s*)css$/,
         include: path.resolve(__dirname, 'scripts'),
-        use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/,
@@ -42,11 +45,3 @@ var config = {
     ]
   }
 };
-
-module.exports = (env, argv) => {
-  if (argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-  }
-
-  return config;
-}
