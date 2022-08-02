@@ -1,4 +1,5 @@
 var path = require('path');
+const libraryName = process.env.npm_package_name;
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = (nodeEnv === 'production');
 
@@ -10,7 +11,7 @@ module.exports = {
   devtool: (isProd) ? undefined : 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'three-image.js'
+    filename: `${libraryName}.js`
   },
   module: {
     rules: [
