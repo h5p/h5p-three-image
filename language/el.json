@@ -40,45 +40,45 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Ετικέτα",
+                      "description": "Εάν μείνει κενό, δεν θα εμφανιστεί ετικέτα και θα προσπαθήσουμε να χρησιμοποιήσουμε το πεδίο τίτλου για προγράμματα ανάγνωσης οθόνης"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Ρυθμίσεις ετικέτας",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Θέση ετικέτας",
+                          "description": "Επιλέξτε πού θα εμφανίζεται η ετικέτα",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Χρησιμοποιήστε τη ρύθμιση συμπεριφοράς"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Στοίχιση δεξιά"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Στοίχιση αριστερά"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Στοίχιση πάνω"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Στοίχιση κάτω"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Εμφάνιση ετικέτας",
+                          "description": "Εάν γίνει απόκρυψη - οι ετικέτες θα εμφανίζονται μόνο με το πέρασμα του ποντικιού",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Χρήση ρυθμίσεων συμπεριφοράς"
                             },
                             {
-                              "label": "Show"
+                              "label": "Προβολή"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Απόκρυψη"
                             }
                           ]
                         }
@@ -138,76 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Ρυθμίσεις ετικέτας",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Θέση ετικέτας",
+              "description": "Η προεπιλεγμένη θέση ετικέτας. Η θέση μπορεί να παρακαμφθεί ανά αλληλεπίδραση",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Στοίχιση δεξιά"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Στοίχιση αριστερά"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Στοίχιση πάνω"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Στοίχιση κάτω"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Εμφάνιση ετικέτας",
+              "description": "Εάν γίνει απόκρυψη - οι ετικέτες θα εμφανίζονται μόνο με το πέρασμα του ποντικιού"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Μεταφράσεις",
       "fields": [
         {
-          "label": "Aria label for content type",
+          "label": "Ετικέτα Aria για τον τύπο περιεχομένου",
           "default": "Virtual Tour"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Ετικέτα για αναπαραγωγή ήχου",
+          "default": "Αναπαραγωγή ήχου"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Ετικέτα για παύση του ήχου",
+          "default": "Παύση ήχου"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Τίτλος διαλόγου σκηνής",
+          "default": "Περιγραφή σκηνής"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Ετικέτα για το κουμπί επαναφοράς της κάμερας",
+          "default": "Επαναφοράς της κάμερας"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Ετικέτα για το κουμπί υποβολής διαλόγου",
+          "default": "Υποβολή Διαλόγου"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Ετικέτα για το κουμπί κλεισίματος διαλόγου",
+          "default": "Κλείσιμο Διαλόγου"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Ετικέτα Aria για το κουμπί επέκτασης ετικέτας",
+          "default": "Επέκταση ετικέτας"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Ετικέτα για τη φόρτωση της εικόνας φόντου σε σκηνή 360°",
+          "default": "Φόρτωση εικόνας φόντου..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Ετικέτα για όταν δεν υπάρχει περιεχόμενο",
+          "default": "Δεν υπάρχει περιεχόμενο"
         }
       ]
     }
