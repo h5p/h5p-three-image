@@ -40,45 +40,45 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Oznaka",
+                      "description": "Oznaka ne bo prikazana, če polje ostane prazno. V tem primeru bo bralnik zaslona uporabil naslov."
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Nastavitve oznake",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Položaj oznake",
+                          "description": "Izbor položaja za poravnavo oznake",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Uporabi Nastavitve interakcije"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Desno"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Levo"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Zgoraj"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Spodaj"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Prikaži oznako",
+                          "description": "Skrite oznake se pokažejo ob preletu miškinega kazalca.",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Uporabi Nastavitve interakcije"
                             },
                             {
-                              "label": "Show"
+                              "label": "Prikaži"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Skrij"
                             }
                           ]
                         }
@@ -138,76 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Nastavitve oznake",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Položaj oznake",
+              "description": "Privzeta nastavitev položaja za poravnavo oznake. Položaj preglasijo nastavitve posamezne interakcije",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Desno"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Levo"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Zgoraj"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Spodaj"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Prikaži oznako",
+              "description": "Skrite oznake se pokažejo ob preletu miškinega kazalca."
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Določitev",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Besedilo za poimenovanje tipa vsebine",
+          "default": "Virtualen ogled"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Besedilo gumba za predvajanje zvočnega posnetka",
+          "default": "Predvajaj zvok"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Besedilo gumba za premor predvajanja zvočnega posnetka",
+          "default": "Zaustavi predvajanje"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Naslov okna z opisom prizora",
+          "default": "Opis prizora"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Besedilo gumba za ponastavitev kamere",
+          "default": "Ponastavi kamero"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Besedilo gumba za dodajanje opisa",
+          "default": "Dodaj opis"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Besedilo gumba za zapiranje opisa",
+          "default": "Zapri opis"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Besedilo gumba za razširitev prikaza",
+          "default": "Razširi prikaz"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Besedilo za nalaganje slike ozadja v načinu 360",
+          "default": "Nalagam sliko ozadja ..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Besedilo za zaslon brez vsebine",
+          "default": "Ni vsebine"
         }
       ]
     }
