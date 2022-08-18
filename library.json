@@ -6,7 +6,7 @@
   "author": "Joubel AS",
   "majorVersion": 0,
   "minorVersion": 5,
-  "patchVersion": 3,
+  "patchVersion": 6,
   "runnable": 1,
   "fullscreen": 1,
   "embedTypes": [
@@ -19,6 +19,11 @@
   "preloadedJs": [
     {
       "path": "dist/h5p-three-image.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/h5p-three-image.css"
     }
   ],
   "preloadedDependencies": [

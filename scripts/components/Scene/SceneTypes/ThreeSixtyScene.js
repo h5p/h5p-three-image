@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import NavigationButton, {getIconFromInteraction, getLabelFromInteraction} from "../../Shared/NavigationButton";
 import {H5PContext} from '../../../context/H5PContext';
 import ContextMenu from "../../Shared/ContextMenu";
-import loading from '../../../assets/loading.svg';
+import loading from '../../../assets/images/loading.svg';
 import './ThreeSixtyScene.scss';
 
 export const sceneRenderingQualityMapping = {

@@ -1,13 +1,15 @@
-var path = require('path');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const libraryName = process.env.npm_package_name;
-const nodeEnv = process.env.NODE_ENV || 'development';
+var nodeEnv = process.env.NODE_ENV || 'development';
+var isDev = (nodeEnv !== 'production');
 
-module.exports = {
+const config = {
   context: path.resolve(__dirname, 'scripts'),
   entry: {
     dist: './app.js'
   },
-  devtool: (nodeEnv === 'development') ? 'inline-source-map' : undefined,
+  devtool: isDev ? 'inline-source-map' : undefined,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: `${libraryName}.js`
@@ -25,23 +27,36 @@ module.exports = {
       {
         test:/\.(s*)css$/,
         include: path.resolve(__dirname, 'scripts'),
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          {
+            loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/,
-        include: [
-          path.resolve(__dirname, 'scripts'),
-          path.resolve(__dirname, 'assets')
-        ],
+        test: /loading.svg$/i,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 10000
-            }
-          }
-        ]
+              limit: true,
+            },
+          },
+        ],
       }
     ]
   }
 };
+
+if (isDev) {
+  config.devtool = 'inline-source-map';
+}
+else {
+  config.plugins = [new MiniCssExtractPlugin({
+    filename: `${libraryName}.css?`
+  })];
+}
+
+module.exports = config;
