@@ -26,15 +26,13 @@ Requirements
 - Install the [H5P cli](https://h5p.org/h5p-cli-guide).
 - Download the files from GitHub, put them in the H5P development folder and start developing!
 
-### Install all dependencies
+### Build project
 
 In folder of the content type install all dependencies.
 
 ```
 npm install
 ```
-
-### Build project
 
 Build the project.
 
