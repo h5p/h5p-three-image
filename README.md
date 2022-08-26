@@ -24,11 +24,12 @@ Requirements
 - Setup a local WordPress or Drupal environment. You can also use Docker. Just follow the guides at [H5P.org](https://h5p.org/development-environment).
 - Install node.js.
 - Install the [H5P cli](https://h5p.org/h5p-cli-guide).
-- Download the files from GitHub, put them in the H5P development folder and start developing!
+- Download the files from GitHub or fork this repositor, and put them in the H5P development folder.
+- Start developing!
 
 ### Build project
 
-In folder of the content type install all dependencies.
+Install all dependencies in the folder of the content type.
 
 ```
 npm install
@@ -39,3 +40,4 @@ Build the project.
 ```
 npm run build
 ```
+If you need to pack a H5P library, follow the [H5P cli-guide](https://h5p.org/h5p-cli-guide).
