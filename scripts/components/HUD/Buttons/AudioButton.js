@@ -42,6 +42,11 @@ export default class AudioButton extends React.Component {
     this.players = {};
   }
 
+  // Keep track if audio has been turned on or not
+  state = {
+    audioOn: false
+  }
+
   /**
    * Determine player ID
    *
@@ -150,6 +155,11 @@ export default class AudioButton extends React.Component {
    * Handle audio button clicked
    */
   handleClick = () => {
+    // Set correct status for if audio is on or off
+    this.setState({
+      audioOn: !this.state.audioOn
+    })
+
     // Determine player ID
     const id = this.getPlayerId();
     const player = this.getPlayer(id);
@@ -228,7 +238,7 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying)) {
+    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying) || this.state.audioOn) {
       const isNewScene = this.props.sceneId !== prevProps.sceneId; 
       if (this.props.restartAudioOnSceneStart && isNewScene) {
         const currentPlayerId = this.getPlayerId();
