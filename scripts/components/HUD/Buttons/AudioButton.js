@@ -42,7 +42,7 @@ export default class AudioButton extends React.Component {
     this.players = {};
   }
 
-  // Keep track if audio has been turned on or not
+  // Keep track if scene audio has been turned on or not
   state = {
     audioOn: false
   }
@@ -155,7 +155,7 @@ export default class AudioButton extends React.Component {
    * Handle audio button clicked
    */
   handleClick = () => {
-    // Set correct status for if audio is on or off
+    // Set correct state for if scene audio is on or off
     this.setState({
       audioOn: !this.state.audioOn
     })
@@ -207,6 +207,13 @@ export default class AudioButton extends React.Component {
     if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
       // The Audio Player has changed
 
+      // If not scene audio is playing then change state for audioOn
+      if (!(isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying))) {	
+        this.setState({
+          audioOn: false
+        })
+      }
+
       if (
         isSceneAudio(prevProps.isPlaying) ||
         isPlaylistAudio(prevProps.isPlaying)
@@ -224,8 +231,8 @@ export default class AudioButton extends React.Component {
       }
     }
 
-    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying) || this.state.audioOn) {
-      // We are playing something
+    if (isSceneAudio(this.props.isPlaying) || isPlaylistAudio(this.props.isPlaying) || (this.props.sceneId !== prevProps.sceneId && this.state.audioOn == true)) {
+      // We are playing something or we changed scene and scene audio is on
 
       const currentPlayerId = this.getPlayerId();
       if (this.props.isPlaying !== currentPlayerId) {
