@@ -52,7 +52,7 @@ jobs:
 
           git clone https://github.com/NDLANO/h5p-editor-three-image.git
           git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
-          git clone https://github.com/NDLA-H5P/h5p-three-sixty.git
+          git clone https://github.com/NDLANO/h5p-three-sixty.git
           git clone https://github.com/NDLANO/h5p-video.git
           git clone https://github.com/NDLA-H5P/h5p-font-icons.git
           git clone https://github.com/NDLA-H5P/h5p-editor-show-when.git
