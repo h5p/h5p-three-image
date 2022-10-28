@@ -1,10 +1,10 @@
 {
   "semantics": [
     {
-      "label": "Trijų vaizdų redagavimas",
+      "label": "Trijų vaizdų rengyklė",
       "fields": [
         {
-          "label": "Vaizdas",
+          "label": "Vaizdai",
           "entity": "Vaizdas",
           "field": {
             "fields": [
@@ -21,26 +21,26 @@
               },
               {
                 "label": "Rodyti \"Atgal\" mygtuką",
-                "description": "Rodyti mygtuką, skirtą grįžti į ankstesįvaizdą"
+                "description": "Rodyti mygtuką, skirtą grįžti į ankstesnį vaizdą"
               },
               {},
               {
                 "label": "Vaizdo pavadinimas",
-                "description": "Naudojamas vaizdiniui identifikuoti."
+                "description": "Naudojamas vaizdui identifikuoti"
               },
               {
                 "label": "Vaizdo fonas"
               },
               {
                 "label": "Vaizdo aprašymas",
-                "description": "Tekstas, kuris gali apibūdinti vaizdą vartotojui"
+                "description": "Tekstas, kuris gali apibūdinti vaizdą naudotojui"
               },
               {},
               {
                 "field": {
                   "fields": [
                     {
-                      "label": "Laukas",
+                      "label": "Pavadinimas",
                       "description": "Jei paliekama tuščia, jokia etiketė nebus rodoma, o ekrano skaitytojams bus bandoma naudoti pavadinimo lauką"
                     },
                     {
@@ -68,7 +68,7 @@
                           ]
                         },
                         {
-                          "label": "Ekrano etiketė",
+                          "label": "Rodyti etiketę",
                           "description": "Jei nepažymėta - etiketės bus rodomos tik užvedus pelę",
                           "options": [
                             {
@@ -83,9 +83,7 @@
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -97,7 +95,7 @@
                     "label": "Naujas vaizdas (rodyklė)"
                   },
                   {
-                    "label": "Daugiau informacijos (plusas)"
+                    "label": "Daugiau informacijos (plius)"
                   }
                 ]
               },
@@ -123,7 +121,7 @@
           "description": "Pridėti garso takelį, kuris pagal nutylėjimą prieinamas visose scenose."
         },
         {
-          "label": "cenos atvaizdavimo kokybė",
+          "label": "Scenos atvaizdavimo kokybė",
           "description": "Pasirinkite pločio ir aukščio parinkčių, naudojamų scenai atvaizduoti, tikslumą. Tai tiesiogiai veikia vaizdo kokybės lygį, pabandykite padidinti kokybę, jei scena atrodo \"blokinė\" arba scenose matomos \"bangos\". Atkreipkite dėmesį, kad aukštesnės kokybės atvaizdavimas užtrunka ilgiau.",
           "options": [
             {
@@ -159,7 +157,7 @@
               ]
             },
             {
-              "label": "Ekrano nustatymai",
+              "label": "Rodyti etiketes",
               "description": "Jei nepažymėta - etiketės bus rodomos tik užvedus pelę"
             }
           ]
@@ -170,7 +168,7 @@
       "label": "Lokalizuoti",
       "fields": [
         {
-          "label": "Aria turinio tipo etiketė",
+          "label": "Turinio tipo „Aria“ etiketė",
           "default": "Virtualus turas"
         },
         {
@@ -198,7 +196,7 @@
           "default": "Uždaryti"
         },
         {
-          "label": "Aria etiketė, skirta išskleisti etiketės mygtuką",
+          "label": "Etiketės išplėtimo mygtuko „Aria“ etiketė",
           "default": "Išskleisti vaizdinę etiketę"
         },
         {
