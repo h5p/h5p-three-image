@@ -1,6 +1,6 @@
 {
   "name": "h5p-three-image",
-  "version": "1.0.0",
+  "version": "0.4.99",
   "description": "Create 360 image content",
   "main": "index.js",
   "scripts": {
