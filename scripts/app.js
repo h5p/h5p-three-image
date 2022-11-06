@@ -25,7 +25,7 @@ H5P.NDLAThreeImage = (function () {
 
     params.threeImage.scenes = Wrapper.addUniqueIdsToInteractions(params.threeImage.scenes);
     params.threeImage.scenes = Wrapper.addMissingLabelSettings(params.threeImage.scenes);
-    
+
     let wrapper;
     this.behavior = {
       label: {
@@ -227,8 +227,8 @@ H5P.NDLAThreeImage = (function () {
       this.threeSixty.setSegmentNumber(segments);
       this.sceneRenderingQuality = quality;
     };
-    
-    
+
+
   }
 
   /**
@@ -236,26 +236,26 @@ H5P.NDLAThreeImage = (function () {
   * The ids are used as key for mapping React components.
   * TODO: Create the ids in editor-time and store them in semantics
   *
-  * @param {Array<SceneParams>} scenes 
+  * @param {Array<SceneParams>} scenes
   * @returns {Array<SceneParams>}
   */
   Wrapper.addUniqueIdsToInteractions = scenes =>
-    scenes?.map(scene => scene.interactions 
+    scenes?.map(scene => scene.interactions
       ? ({
           ...scene,
           interactions: scene.interactions?.map(
             interaction => ({...interaction, id: H5P.createUUID()}),
           ),
-        }) 
+        })
       : scene
     );
- 
+
   /**
    * Older interactions are missing label settings.
    * This adds an empty `label` to avoid adding null checks everywhere.
    * TODO: Add this to upgrades.json
-   * 
-   * @param {Array<SceneParams>} scenes 
+   *
+   * @param {Array<SceneParams>} scenes
    * @returns {Array<SceneParams>}
    */
   Wrapper.addMissingLabelSettings = scenes =>

@@ -1,4 +1,5 @@
-var path = require('path');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var config = {
   entry: {
@@ -6,8 +7,13 @@ var config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'three-image.js'
+    filename: 'h5p-three-image.js'
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'h5p-three-image.css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -19,9 +25,18 @@ var config = {
         },
       },
       {
-        test:/\.(s*)css$/,
+        test: /\.(s[ac]ss|css)$/,
         include: path.resolve(__dirname, 'scripts'),
-        use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: ''
+            }
+          },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/,
@@ -29,7 +44,7 @@ var config = {
           path.resolve(__dirname, 'scripts'),
           path.resolve(__dirname, 'assets')
         ],
-        loader: 'url-loader?limit=100000'
+        type: 'asset/resource'
       }
     ]
   }
@@ -41,4 +56,4 @@ module.exports = (env, argv) => {
   }
 
   return config;
-}
+};
