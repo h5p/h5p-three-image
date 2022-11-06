@@ -18,7 +18,12 @@
   },
   "preloadedJs": [
     {
-      "path": "dist/three-image.js"
+      "path": "dist/h5p-three-image.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/h5p-three-image.css"
     }
   ],
   "preloadedDependencies": [
