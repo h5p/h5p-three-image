@@ -28,8 +28,6 @@ jobs:
           cd dist
 
           while read -r repo; do git clone ${repo}; done < ../h5p-three-image/build_info/repos
-          
-          git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
 
           if [ -d "h5p-editor-audio-recorder" ]; then
             pushd h5p-editor-audio-recorder
@@ -40,22 +38,6 @@ jobs:
             webpack
             popd
           fi
-
-          # Override dependencies
-          rm -rf \
-            h5p-editor-three-image \
-            h5p-three-sixty \
-            h5p-video \
-            h5p-font-icons
-          mv h5p-editor-show-when h5p-h5p-editor-show-when
-          mv h5p-editor-image-radio-group h5p-h5p-editor-image-radio-group
-
-          git clone https://github.com/NDLANO/h5p-editor-three-image.git
-          git clone https://github.com/NDLANO/h5p-editor-image-radio-group.git
-          git clone https://github.com/NDLANO/h5p-three-sixty.git
-          git clone https://github.com/NDLANO/h5p-video.git
-          git clone https://github.com/NDLANO/h5p-font-icons.git
-          git clone https://github.com/NDLANO/h5p-editor-show-when.git
 
           if [ -d "h5p-editor-three-image" ]; then pushd h5p-editor-three-image && npm ci && npm run build; popd; fi
 
@@ -89,7 +71,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: |
-            ${{ 
+            ${{
               format(
                 'v{0}.{1}.{2}',
                 fromJson(steps.set_library.outputs.library).majorVersion,
