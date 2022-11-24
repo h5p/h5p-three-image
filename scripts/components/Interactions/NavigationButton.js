@@ -486,12 +486,15 @@ export default class NavigationButton extends React.Component {
       width = parseFloat(this.getHotspotValues()[0].toString());
       height = parseFloat(this.getHotspotValues()[1].toString());
 
+
       // Change default size if static scene
       if (width == 256 && height == 128) {
         width = 25;
         height =25;
+        this.setHotspotValues(width, height);
       }
     }
+    
     return (
       <div
         ref={this.navButtonWrapper}
