@@ -1,13 +1,18 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const libraryName = process.env.npm_package_name;
+var nodeEnv = process.env.NODE_ENV || 'development';
+var isDev = (nodeEnv !== 'production');
 
-var config = {
+const config = {
+  context: path.resolve(__dirname, 'scripts'),
   entry: {
-    dist: './scripts/app.js'
+    dist: './app.js'
   },
+  devtool: isDev ? 'inline-source-map' : undefined,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'three-image.js'
+    filename: `${libraryName}.js`
   },
   module: {
     rules: [
@@ -22,24 +27,36 @@ var config = {
       {
         test:/\.(s*)css$/,
         include: path.resolve(__dirname, 'scripts'),
-        use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
+        use: [
+          {
+            loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/,
-        include: [
-          path.resolve(__dirname, 'scripts'),
-          path.resolve(__dirname, 'assets')
+        test: /loading.svg$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: true,
+            },
+          },
         ],
-        loader: 'url-loader?limit=100000'
       }
     ]
   }
 };
 
-module.exports = (env, argv) => {
-  if (argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-  }
-
-  return config;
+if (isDev) {
+  config.devtool = 'inline-source-map';
 }
+else {
+  config.plugins = [new MiniCssExtractPlugin({
+    filename: `${libraryName}.css?`
+  })];
+}
+
+module.exports = config;

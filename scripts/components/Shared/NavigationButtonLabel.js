@@ -244,6 +244,7 @@ export default class NavigationButtonLabel extends React.Component {
         </div>
         {canExpand && !hoverOnly &&
           <button
+            type="button"
             onFocus={() => this.props.onFocus(true)}
             onBlur={() => this.props.onBlur(false)}
             ref={this.props.forwardRef}

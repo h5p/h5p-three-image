@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "Editor de três imagens",
+      "label": "Editor de Três Imagens",
       "fields": [
         {
           "label": "Cenas",
@@ -20,16 +20,16 @@
                 ]
               },
               {
-                "label": "Mostrar o botão de \"Volta\"",
-                "description": "Mostra o botão para navegar a sua cena anterior"
+                "label": "Mostrar o botão \"Voltar\"",
+                "description": "Mostra o botão para navegar para sua cena anterior"
               },
               {},
               {
-                "label": "Titulo da cena",
-                "description": "Utilizado para identificar a cenas aos autores"
+                "label": "Título da cena",
+                "description": "Utilizado para identificar a cena"
               },
               {
-                "label": "Fundo da cena"
+                "label": "Plano de Fundo da Cena"
               },
               {
                 "label": "Descrição da cena",
@@ -40,45 +40,45 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "label": "Rótulo",
+                      "description": "Se for deixado em branco, nenhum rótulo será exibido e tentaremos usar o campo de título para leitores de tela"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Configurações de rótulo",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Posição do rótulo",
+                          "description": "Escolha onde o rótulo deve aparecer",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Usar configuração comportamental"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Alinhado à direita"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Alinhado à esquerda"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Alinhado ao topo"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Alinhado abaixo"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Mostrar rótulo",
+                          "description": "Se escondido - as etiquetas só aparecerão com o mouse",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Usar configuração comportamental"
                             },
                             {
-                              "label": "Show"
+                              "label": "Mostrar"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Oculto"
                             }
                           ]
                         }
@@ -91,10 +91,10 @@
               },
               {
                 "label": "Estilo de botão",
-                "description": "Decide como os botões que estão apontando para esta cena deverão parecer. Para cenas que são estáticas e não levam para novas cenas, nós recomendamos o botão \"Mais informações\".",
+                "description": "Decidir como os botões que estão apontando para esta cena deverão parecer. Para cenas que são estáticas e não levam para novas cenas, nós recomendamos o botão \"Mais informações\".",
                 "options": [
                   {
-                    "label": "Nova cena (flecha)"
+                    "label": "Nova cena (seta)"
                   },
                   {
                     "label": "Mais informações (extra)"
@@ -102,29 +102,29 @@
                 ]
               },
               {
-                "label": "Faixa de audio",
-                "description": "Adicione uma faixa de audio específica para esta cena."
+                "label": "Faixa de áudio",
+                "description": "Adicione uma faixa de áudio específica para esta cena."
               }
             ]
           }
         },
         {},
         {
-          "label": "Faixa de audio"
+          "label": "Faixa de áudio"
         }
       ]
     },
     {
-      "label": "Configurações de comportamento",
+      "label": "Configurações comportamentais",
       "description": "Estas opções deixarão você controlar como o mundo se comporta.",
       "fields": [
         {
-          "label": "Audio global",
-          "description": "Adiciona uma faixa de audio que é disponível para todas as cenas por padrão."
+          "label": "Áudio Global",
+          "description": "Adiciona uma faixa de áudio que é disponível para todas as cenas, por padrão."
         },
         {
-          "label": "Qualidade de renderização da cena",
-          "description": "Escolha o segmento de altura e largura para renderizar a cena. Isto diretamente afetará o nivel de qualidade da cena, tente aumentar a qualidade se uma cena parece \"quadradinha\" ou \"ondas\" são são vistas na cena. Perceba que quanto maior a qualidade maior o tempo para renderizar e carregar.",
+          "label": "Qualidade de renderização de cenas",
+          "description": "Escolha o segmento de altura e largura para renderizar a cena. Isto afetará diretamente o nível de qualidade da cena. Tente aumentar a qualidade se em uma cena aparecem \"quadradinhos\" ou \"ondas\" . Perceba que quanto maior a qualidade maior o tempo para renderizar e carregar.",
           "options": [
             {
               "label": "Alta Qualidade (128x128)"
@@ -138,76 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Configurações de rótulo",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Posição do rótulo",
+              "description": "Posição padrão do rótulo. A posição pode ser substituída por interação",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Alinhado à direita"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Alinhado à esquerda"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Alinhado ao topo"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Alinhado abaixo"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Exibir rótulos",
+              "description": "Se desmarcado - os rótulos serão exibidos apenas ao passar o mouse"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localizar",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Rótulo Aria para tipo de conteúdo",
+          "default": "Turnê Virtual"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Rótulo para reproduzir áudio",
+          "default": "Reproduzir faixa de áudio"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Rótulo para pausar o áudio",
+          "default": "Pausar faixa de áudio"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Diálogo de título para cena",
+          "default": "Descrição da cena"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Rótulo do botão para redefinir a câmera",
+          "default": "Redefinir câmera"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Rótulo para o botão de diálogo de envio",
+          "default": "Caixa de diálogo Enviar"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Rótulo para o botão de fechar a caixa de diálogo",
+          "default": "Fechar caixa de diálogo"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Rótulo Aria para o botão expandir rótulo",
+          "default": "Expandir o rótulo visual"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Etiqueta para quando a imagem de fundo é carregada em cena 360",
+          "default": "Carregando imagem de fundo..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Rótulo para quando não houver conteúdo",
+          "default": "Sem conteúdo"
         }
       ]
     }

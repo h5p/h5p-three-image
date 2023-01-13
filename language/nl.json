@@ -1,7 +1,7 @@
 {
   "semantics": [
     {
-      "label": "3-Afbeeldingseditor",
+      "label": "Three Image editor",
       "fields": [
         {
           "label": "Scènes",
@@ -12,7 +12,7 @@
                 "label": "Scènetype",
                 "options": [
                   {
-                    "label": "360 graden foto"
+                    "label": "360°-afbeelding"
                   },
                   {
                     "label": "Statische afbeelding"
@@ -20,19 +20,19 @@
                 ]
               },
               {
-                "label": "Toon \"Terug\" knop",
+                "label": "Toon \"Terug\"-knop",
                 "description": "Toon knop om terug te gaan naar de vorige scene"
               },
               {},
               {
                 "label": "Scènetitel",
-                "description": "Deze wordt gebruikt om de scène voor de auteurs te identificeren"
+                "description": "Deze wordt gebruikt om de scène te identificeren"
               },
               {
                 "label": "Scèneachtergrond"
               },
               {
-                "label": "Scèneomschrijving",
+                "label": "Scènebeschrijving",
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
               {},
@@ -41,17 +41,17 @@
                   "fields": [
                     {
                       "label": "Label",
-                      "description": "Indien leeg gelaten wordt geen label getoond en zullen we proberen het titelveld te gebruiken voor screenreaders"
+                      "description": "Indien leeg gelaten wordt geen label getoond en zullen we proberen het titelveld te gebruiken voor schermlezers"
                     },
                     {
                       "label": "Labelinstellingen",
                       "fields": [
                         {
-                          "label": "Labelpositie",
-                          "description": "Kies waar de label moet verschijnen",
+                          "label": "De positie van het label",
+                          "description": "Kies waar het label moet verschijnen",
                           "options": [
                             {
-                              "label": "Gebruik gedragsinstelling"
+                              "label": "Gebruik de gedragsinstelling"
                             },
                             {
                               "label": "Rechts uitgelijnd"
@@ -68,8 +68,8 @@
                           ]
                         },
                         {
-                          "label": "Label weergave",
-                          "description": "Indien verborgen worden labels alleen getoond bij mouse over",
+                          "label": "Toon label",
+                          "description": "Indien verborgen worden labels alleen getoond als je de muis erover beweegt",
                           "options": [
                             {
                               "label": "Gebruik gedragsinstelling"
@@ -78,7 +78,7 @@
                               "label": "Tonen"
                             },
                             {
-                              "label": "Verbergen"
+                              "label": "Verberg"
                             }
                           ]
                         }
@@ -130,7 +130,7 @@
               "label": "Hoge kwaliteit (128x128)"
             },
             {
-              "label": "Gemiddelde kwaliteit Quality (64x64)"
+              "label": "Gemiddelde kwaliteit (64x64)"
             },
             {
               "label": "Lage kwaliteit (16x16)"
@@ -159,15 +159,15 @@
               ]
             },
             {
-              "label": "Label weergave",
-              "description": "Indien uitgevinkt worden labels alleen getoond bij mouse over"
+              "label": "Toon labels",
+              "description": "Indien uitgevinkt worden labels alleen getoond als je de muis erover beweegt"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localiseren",
+      "label": "Lokaliseren",
       "fields": [
         {
           "label": "Aria label voor inhoudstype",
@@ -175,34 +175,34 @@
         },
         {
           "label": "Label om audio af te spelen",
-          "default": "Audio Track afspelen"
+          "default": "Geluidsbestand afspelen"
         },
         {
           "label": "Label om audio te pauzeren",
-          "default": "Audio Track pauzeren"
+          "default": "Geluidsbestand pauzeren"
         },
         {
-          "label": "Titel bij scène dialaog",
-          "default": "Scène beschrijving"
+          "label": "Titel bij scène dialoog",
+          "default": "Scènebeschrijving"
         },
         {
           "label": "Label voor knop om camera te resetten",
           "default": "Camera resetten"
         },
         {
-          "label": "Label voor de dialoog indienen knop",
+          "label": "Label van knop om dialoog in te dienen",
           "default": "Dialoog indienen"
         },
         {
-          "label": "Label voor de dialoog sluiten knop",
+          "label": "Label van knop om dialoog te sluiten",
           "default": "Dialoog sluiten"
         },
         {
-          "label": "Aria label voor de label uitbreiden knop",
-          "default": "De visuele label uitbreiden"
+          "label": "Aria label voor de uitklapknop",
+          "default": "Vergroot het visuele label"
         },
         {
-          "label": "Label voor als er een achtergorndafbeelding aan het laden is in een 360 scene",
+          "label": "Het label voor wanneer de achtergrondafbeelding wordt geladen in de 360 scène",
           "default": "Achtergrondafbeelding aan het laden..."
         },
         {

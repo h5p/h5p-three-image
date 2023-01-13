@@ -69,7 +69,7 @@
                         },
                         {
                           "label": "Mostrar Etiqueta",
-                          "description": "Si se oculta - las etiquetas se mostrarán solamente al pasarles el ratón encima",
+                          "description": "Si se oculta - las etiquetas se mostrarán solamente al pasar el ratón encima",
                           "options": [
                             {
                               "label": "Usar configuraciones del comportamiento"
