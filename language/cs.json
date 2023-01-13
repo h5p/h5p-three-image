@@ -47,6 +47,10 @@
                       "label": "Nastavení popisku",
                       "fields": [
                         {
+                          "label": "Popisek",
+                          "description": "Pokud nevyplníte, pokusíme se použít název jako popisek"
+                        },
+                        {
                           "label": "Pozice popisku",
                           "description": "Vybrat, kde se má popisek objevit",
                           "options": [
@@ -84,8 +88,14 @@
                         }
                       ]
                     },
-                    {},
-                    {}
+                    {
+                      "label": "Nastavení popisku",
+                      "description": "Popisek popisující ikonu."
+                    },
+                    {
+                      "label": "Pozice interakce",
+                      "description": "Poloha interakce v rozteči a zatáčení"
+                    }
                   ]
                 }
               },
@@ -139,6 +149,7 @@
         },
         {
           "label": "Nastavení popisku",
+          "description": "Popisek popisující ikonu.",
           "fields": [
             {
               "label": "Pozice popisku",
@@ -167,10 +178,10 @@
       ]
     },
     {
-      "label": "Lokalizovat",
+      "label": "Lokalizace",
       "fields": [
         {
-          "label": "Aria label pro typ obsahu",
+          "label": "Popisek pro typ obsahu",
           "default": "Virtuální prohlídka"
         },
         {
@@ -182,33 +193,33 @@
           "default": "Pozastavit zvukovou stopu"
         },
         {
-          "label": "Nadpis dialogu scény",
+          "label": "Název scény",
           "default": "Popis scény"
         },
         {
-          "label": "Popisek pro tlačítko pro resetování kamery",
+          "label": "Popisek tlačítka pro resetování kamery",
           "default": "Resetovat kameru"
         },
         {
-          "label": "Popisek pro tlačítko pro odeslání dialogu",
+          "label": "Popisek pro dialogové okno odeslání",
           "default": "Odeslat dialog"
         },
         {
-          "label": "Popisek pro dialogové tlačítko zavřít",
+          "label": "Popisek tlačítka pro zavírání dialogu",
           "default": "Zavřít dialog"
         },
         {
-          "label": "Aria label pro popisek tlačítka rozbalit",
-          "default": "Rozbalit vizuální popisky"
+          "label": "Popisek pro rozbalení vizuálníno popisku",
+          "default": "Rozbalit vizuální popisek"
         },
         {
-          "label": "Popisek, když se obrázek na pozadí načítá ve scéně 360",
-          "default": "Načítání obrázku na pozadí ..."
+          "label": "Popisek pro načítání obrázku na pozadí ve scéně 360",
+          "default": "Načítání obrázku na pozadí ...."
         },
         {
           "label": "Popisek pro případ, že není žádný obsah",
           "default": "Bez obsahu"
-        }
+        },
       ]
     }
   ]
