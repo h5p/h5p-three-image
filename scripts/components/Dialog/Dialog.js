@@ -58,6 +58,7 @@ export default class Dialog extends React.Component {
             { children }
           </div>
           <button
+            type="button"
             ref={ el => this.closeButton = el }
             aria-label={ this.context.l10n.closeDialog }
             className='close-button-wrapper'

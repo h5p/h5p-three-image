@@ -329,6 +329,7 @@ export default class NavigationButton extends React.Component {
         onBlur={this.onBlur.bind(this)}
       >
         <button
+          type="button"
           ref={this.navButton}
           aria-label={labelText ? labelText : title}
           className='nav-button'
