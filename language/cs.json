@@ -48,7 +48,24 @@
                       "fields": [
                         {
                           "label": "Popisek",
-                          "description": "Pokud nevyplníte, pokusíme se použít název jako popisek"
+                          "description": "Pokud nevyplníte, pokusíme se použít název jako popisek",
+                          "options": [
+                            {
+                              "label": "Use behavioral setting"
+                            },
+                            {
+                              "label": "Right aligned"
+                            },
+                            {
+                              "label": "Left aligned"
+                            },
+                            {
+                              "label": "Top aligned"
+                            },
+                            {
+                              "label": "Bottom aligned"
+                            }
+                          ]
                         },
                         {
                           "label": "Pozice popisku",
@@ -219,7 +236,7 @@
         {
           "label": "Popisek pro případ, že není žádný obsah",
           "default": "Bez obsahu"
-        },
+        }
       ]
     }
   ]
