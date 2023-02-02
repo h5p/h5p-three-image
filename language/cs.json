@@ -47,27 +47,6 @@
                       "label": "Nastavení popisku",
                       "fields": [
                         {
-                          "label": "Popisek",
-                          "description": "Pokud nevyplníte, pokusíme se použít název jako popisek",
-                          "options": [
-                            {
-                              "label": "Use behavioral setting"
-                            },
-                            {
-                              "label": "Right aligned"
-                            },
-                            {
-                              "label": "Left aligned"
-                            },
-                            {
-                              "label": "Top aligned"
-                            },
-                            {
-                              "label": "Bottom aligned"
-                            }
-                          ]
-                        },
-                        {
                           "label": "Pozice popisku",
                           "description": "Vybrat, kde se má popisek objevit",
                           "options": [
@@ -105,14 +84,8 @@
                         }
                       ]
                     },
-                    {
-                      "label": "Nastavení popisku",
-                      "description": "Popisek popisující ikonu."
-                    },
-                    {
-                      "label": "Pozice interakce",
-                      "description": "Poloha interakce v rozteči a zatáčení"
-                    }
+                    {},
+                    {}
                   ]
                 }
               },
@@ -166,7 +139,6 @@
         },
         {
           "label": "Nastavení popisku",
-          "description": "Popisek popisující ikonu.",
           "fields": [
             {
               "label": "Pozice popisku",
