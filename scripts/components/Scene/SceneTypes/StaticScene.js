@@ -325,6 +325,20 @@ export default class StaticScene extends React.Component {
     };
   }
 
+  /**
+   * Process HTML escaped string for use as attribute value,
+   * e.g. for alt text or title attributes.
+   *
+   * @param {string} value
+   * @return {string} WARNING! Do NOT use for innerHTML.
+   */
+   massageAttributeOutput(value) {
+    const dparser = new DOMParser().parseFromString(value, 'text/html');
+    const div = document.createElement('div');
+    div.innerHTML = dparser.documentElement.textContent;;
+    return div.textContent || div.innerText || '';
+   };
+
   render() {
     if (!this.props.isActive) {
       return null;
@@ -358,7 +372,7 @@ export default class StaticScene extends React.Component {
         >
           <img
             tabIndex='-1'
-            alt={this.props.sceneParams.scenename}
+            alt={this.massageAttributeOutput(this.props.sceneParams.scenename)}
             className='image-scene'
             src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
             onLoad={this.onSceneLoaded.bind(this)}
