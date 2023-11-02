@@ -111,10 +111,10 @@ $labelWidth: 9em;
 }
 
 .h5p-audio-button .nav-button:before {
-  content: $audioOn;
+  content: $audioOff;
 }
 .h5p-audio-button.active .nav-button:before {
-  content: $audioOff;
+  content: $audioOn;
 }
 
 .h5p-go-back-button {
