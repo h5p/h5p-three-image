@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Scènes",
-          "entity": "Scene",
+          "entity": "Scène",
           "field": {
             "fields": [
               {
@@ -40,45 +40,45 @@
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
+                      "label": "Vignette",
                       "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
                     },
                     {
                       "label": "Label Settings",
                       "fields": [
                         {
-                          "label": "Label position",
-                          "description": "Choose where the label should appear",
+                          "label": "Position de la vignette",
+                          "description": "Choisit où la vignette devrait apparaître",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Utiliser un paramètre comportemental"
                             },
                             {
-                              "label": "Right aligned"
+                              "label": "Aligné à droite"
                             },
                             {
-                              "label": "Left aligned"
+                              "label": "Aligné à gauche"
                             },
                             {
-                              "label": "Top aligned"
+                              "label": "Aligné en haut"
                             },
                             {
-                              "label": "Bottom aligned"
+                              "label": "Aligné en bas"
                             }
                           ]
                         },
                         {
-                          "label": "Display Label",
-                          "description": "If hidden - labels will show only on mouse over",
+                          "label": "Vignette d’affichage",
+                          "description": "Si elles sont cachées, les vignettes ne s'afficheront qu'au passage de la souris",
                           "options": [
                             {
-                              "label": "Use behavioral setting"
+                              "label": "Utiliser un paramètre comportemental"
                             },
                             {
-                              "label": "Show"
+                              "label": "Afficher"
                             },
                             {
-                              "label": "Hide"
+                              "label": "Masquer"
                             }
                           ]
                         }
@@ -138,76 +138,76 @@
           ]
         },
         {
-          "label": "Label settings",
+          "label": "Paramètres de vignette",
           "fields": [
             {
-              "label": "Label position",
-              "description": "The default label position. The position may be overriden per interaction",
+              "label": "Position de la vignette",
+              "description": "La position par défaut de la vignette. La position peut être contournée par interaction",
               "options": [
                 {
-                  "label": "Right aligned"
+                  "label": "Aligné à droite"
                 },
                 {
-                  "label": "Left aligned"
+                  "label": "Aligné à gauche"
                 },
                 {
-                  "label": "Top aligned"
+                  "label": "Aligné en haut"
                 },
                 {
-                  "label": "Bottom aligned"
+                  "label": "Aligné en bas"
                 }
               ]
             },
             {
-              "label": "Display Labels",
-              "description": "If unchecked - labels will show only on mouse over"
+              "label": "Vignettes d’affichage",
+              "description": "Si cette option n'est pas cochée, les vignettes ne s'afficheront qu'au passage de la souris"
             }
           ]
         }
       ]
     },
     {
-      "label": "Localize",
+      "label": "Localiser",
       "fields": [
         {
-          "label": "Aria label for content type",
-          "default": "Virtual Tour"
+          "label": "Vignette Aria pour le type de contenu",
+          "default": "Visite virtuelle"
         },
         {
-          "label": "Label for to play audio",
-          "default": "Play Audio Track"
+          "label": "Vignette pour la lecture de l'audio",
+          "default": "Lecture de la piste audio"
         },
         {
-          "label": "Label to pause audio",
-          "default": "Pause Audio Track"
+          "label": "Vignette pour pauser l’audio",
+          "default": "Pauser la piste audio"
         },
         {
-          "label": "Title to scene dialog",
-          "default": "Scene Description"
+          "label": "Boîte de dialogue pour le titre de la scène",
+          "default": "Description de la scène"
         },
         {
-          "label": "Label for button to reset camera",
-          "default": "Reset Camera"
+          "label": "Vignette pour la touche pour réinitialiser la caméra",
+          "default": "Réinitialiser la caméra"
         },
         {
-          "label": "Label for the submit dialog button",
-          "default": "Submit Dialog"
+          "label": "Vignette de la touche de la boîte de dialogue Soumettre",
+          "default": "Boîte de dialogue Soumettre"
         },
         {
-          "label": "Label for the close dialog button",
-          "default": "Close Dialog"
+          "label": "Vignette pour la touche Fermer la boîte de dialogue",
+          "default": "Fermer la boîte de dialogue"
         },
         {
-          "label": "Aria label for the expand label button",
-          "default": "Expand the visual label"
+          "label": "Vignette Aria pour la touche d’extension de la vignette",
+          "default": "Élargir la vignette visuelle"
         },
         {
-          "label": "Label for when background image is loading in 360 scene",
-          "default": "Loading background image..."
+          "label": "Vignette pour le chargement de l'image de fond dans une scène 360",
+          "default": "Chargement de l'image de fond..."
         },
         {
-          "label": "Label for when there is no content",
-          "default": "No content"
+          "label": "Vignette pour les cas où il n'y a pas de contenu",
+          "default": "Pas de contenu"
         }
       ]
     }

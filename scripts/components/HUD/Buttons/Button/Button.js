@@ -28,6 +28,7 @@ export default class AudioButton extends React.Component {
     return (
       <div className="btn-wrap">
         <button
+          type="button"
           ref={ el => this.element = el }
           className={ 'hud-btn ' + this.props.type }
           onClick={ this.handleClick }
