@@ -83,9 +83,7 @@
                           ]
                         }
                       ]
-                    },
-                    {},
-                    {}
+                    }
                   ]
                 }
               },
@@ -142,7 +140,7 @@
           "fields": [
             {
               "label": "Etikett-position",
-              "description": "Förvald etikett-position. Positionen kan ignoreras per interaktion.",
+              "description": "Förvald etikett-position. Positionen kan ignoreras per interaktion",
               "options": [
                 {
                   "label": "Högerlinjerad"
@@ -171,7 +169,7 @@
       "fields": [
         {
           "label": "Aria-etikett för innehållstyp",
-          "default": "Virtual Tour"
+          "default": "Virtuell tur"
         },
         {
           "label": "Etikett för att spela ljud",
