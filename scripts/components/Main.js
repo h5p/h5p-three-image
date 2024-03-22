@@ -141,6 +141,7 @@ export default class Main extends React.Component {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
       focusedInteraction: null,
+      childrenCanTakeFocus: true
     });
     let nextSceneId = null;
     if (sceneId === SceneTypes.PREVIOUS_SCENE) {
@@ -411,6 +412,7 @@ export default class Main extends React.Component {
                 isEditingInteraction={this.state.isEditingInteraction}
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
+                canTakeFocus={this.state.childrenCanTakeFocus}
               />
             );
           })
