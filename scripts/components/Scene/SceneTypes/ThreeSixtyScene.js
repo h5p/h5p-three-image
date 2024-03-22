@@ -181,7 +181,10 @@ export default class ThreeSixtyScene extends React.Component {
       this.setState({
         isRendered: true
       });
-      threeSixty.focus();
+
+      if (this.props.canTakeFocus) {
+        threeSixty.focus();
+      }
     });
 
     threeSixty.startRendering();
