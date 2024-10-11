@@ -50,7 +50,7 @@ $arrowDownTop: calc(-50% + 1px);
   }
 
   &.top {
-    bottom: ($buttonSize / 2);
+    bottom: calc($buttonSize / 2);
     @include center-horizontally();
     .nav-label {
       padding-bottom: 1.5em;
@@ -61,7 +61,7 @@ $arrowDownTop: calc(-50% + 1px);
   }
 
   &.bottom {
-    top: ($buttonSize / 2);
+    top: calc($buttonSize / 2);
     @include center-horizontally();
     .nav-label {
       text-align: center;
@@ -73,7 +73,7 @@ $arrowDownTop: calc(-50% + 1px);
   }
 
   &.left {
-    right: $buttonSize / 2;
+    right: calc($buttonSize / 2);
     @include center-vertically();
     .nav-label {
       // The font-size is varying, so if em is used the padding will be to small in some cases
@@ -82,7 +82,7 @@ $arrowDownTop: calc(-50% + 1px);
   }
 
   &.right {
-    left: $buttonSize / 2;
+    left: calc($buttonSize / 2);
     @include center-vertically();
     .nav-label {
       // The font-size is varying, so if em is used the padding will be to small in some cases
