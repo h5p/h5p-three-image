@@ -277,7 +277,9 @@ export default class StaticScene extends React.Component {
     this.setState({
       isVerticalImage: ratio < this.context.getRatio(),
     });
-    imageElement.focus();
+    if (this.props.canTakeFocus) {
+      imageElement.focus();
+    }
 
     this.context.on('resize', () => {
       this.setState({

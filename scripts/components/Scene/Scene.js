@@ -31,6 +31,7 @@ export default class Scene extends React.Component {
           focusedInteraction={this.props.focusedInteraction}
           sceneWaitingForLoad={this.props.sceneWaitingForLoad}
           doneLoadingNextScene={this.props.doneLoadingNextScene}
+          canTakeFocus={this.props.canTakeFocus}
         />
       );
     }
@@ -59,6 +60,7 @@ export default class Scene extends React.Component {
         isEditingInteraction={this.props.isEditingInteraction}
         sceneWaitingForLoad={this.props.sceneWaitingForLoad}
         doneLoadingNextScene={this.props.doneLoadingNextScene}
+        canTakeFocus={this.props.canTakeFocus}
       />
     );
   }
