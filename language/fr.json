@@ -33,7 +33,7 @@
               },
               {
                 "label": "Description de la scène",
-                "description": "Un texte pour décirire la scène à l'utilisateur final"
+                "description": "Un texte pour décrire la scène à l'utilisateur final"
               },
               {},
               {
@@ -41,10 +41,10 @@
                   "fields": [
                     {
                       "label": "Vignette",
-                      "description": "If left blank no label will be displayed and we'll try to use the title field for screen readers"
+                      "description": "Si laissé vide, aucune étiquette ne sera affichée et nous essaierons d’utiliser le champ de titre pour les lecteurs d’écran"
                     },
                     {
-                      "label": "Label Settings",
+                      "label": "Paramètres de vignette",
                       "fields": [
                         {
                           "label": "Position de la vignette",
