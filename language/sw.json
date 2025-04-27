@@ -37,6 +37,7 @@
               },
               {},
               {
+                "entity": "interaction",
                 "field": {
                   "fields": [
                     {
