@@ -206,6 +206,14 @@ H5P.ThreeImage = (function () {
       this.threeSixty.setSegmentNumber(segments);
       this.sceneRenderingQuality = quality;
     };
+
+    /**
+     * Update parameters from editor.
+     * @param {object} params Parameters to update with. Passed by reference!
+     */
+    this.updateParams = (params) => {
+      this.params = params;
+    }
   }
 
   return Wrapper;
