@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Main from "./components/Main";
 import {H5PContext} from './context/H5PContext';
 import {sceneRenderingQualityMapping} from "./components/Scene/SceneTypes/ThreeSixtyScene";
+import placeholderPath from './assets/images/placeholder.png?url';
 
 // Load library
 H5P = H5P || {};
@@ -20,10 +21,11 @@ H5P.ThreeImage = (function () {
     // Initialize event inheritance
     H5P.EventDispatcher.call(self);
 
-    // Filter out scenes without a background image
-    params.threeImage.scenes = params.threeImage.scenes.filter((scene) => {
-      return scene.scenesrc?.path;
-    });
+    // Use placeholder for scenes without a background image
+    params.threeImage.scenes = params.threeImage.scenes.map((scene) => ({
+      ...scene,
+      scenesrc: scene.scenesrc?.path ? scene.scenesrc : { path: placeholderPath }
+    }));
 
     let wrapper;
     this.behavior = {

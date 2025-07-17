@@ -45,6 +45,14 @@ const config = {
             },
           },
         ],
+      },
+      {
+        test: /\.png$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          },
+        ],
       }
     ]
   }
