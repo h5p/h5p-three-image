@@ -20,6 +20,11 @@ H5P.ThreeImage = (function () {
     // Initialize event inheritance
     H5P.EventDispatcher.call(self);
 
+    // Filter out scenes without a background image
+    params.threeImage.scenes = params.threeImage.scenes.filter((scene) => {
+      return scene.scenesrc?.path;
+    });
+
     let wrapper;
     this.behavior = {
       label: {
