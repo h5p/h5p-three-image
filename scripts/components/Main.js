@@ -7,6 +7,7 @@ import './Main.scss';
 import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
+import placeholderPath from '../assets/images/placeholder.png?url';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -70,7 +71,7 @@ export default class Main extends React.Component {
         });
       }
     }
-    
+
     const validScenes = this.context.params.scenes.map(scene => {
       return scene.sceneId;
     });
@@ -386,6 +387,10 @@ export default class Main extends React.Component {
         }
         {
           this.context.params.scenes.map(sceneParams => {
+            const sceneSrc = sceneParams.scenesrc?.path
+              ? { ...sceneParams.scenesrc }
+              : { path: placeholderPath };
+
             return (
               <Scene
                 key={sceneParams.sceneId}
@@ -397,7 +402,7 @@ export default class Main extends React.Component {
                 sceneParams={sceneParams}
                 nextFocus={ this.state.nextFocus }
                 addThreeSixty={ this.addThreeSixty }
-                imageSrc={sceneParams.scenesrc}
+                imageSrc={sceneSrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
