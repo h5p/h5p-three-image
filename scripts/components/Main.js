@@ -315,6 +315,27 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+   * Determine whether the scene has a valid source.
+   * @param {object} sceneParams Scene parameters to check.
+   * @returns {boolean} True if the scene has a valid source, false otherwise.
+   */
+  hasValidSceneSrc(sceneParams) {
+    return !!sceneParams.scenesrc?.path;
+  }
+
+  /**
+   * Apply a placeholder image to the scene parameters if no valid source is found.
+   * @param {object} sceneParams Scene parameters to modify.
+   */
+  applyPlaceholderToScene(sceneParams) {
+    sceneParams.scenesrc = sceneParams.scenesrc ?? {};
+    sceneParams.scenesrc.path = sceneParams.sceneType === SceneTypes.STATIC_SCENE
+      ? placeholderPath
+      : placeholderPath360;
+    sceneParams.cameraStartPosition = '0,0';
+  }
+
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {
@@ -388,11 +409,12 @@ export default class Main extends React.Component {
         }
         {
           this.context.params.scenes.map(sceneParams => {
-            // Apply placeholder for missing scene images
-            const path = sceneParams.sceneType === SceneTypes.STATIC_SCENE ? placeholderPath : placeholderPath360;
-            const sceneSrc = sceneParams.scenesrc?.path
-              ? { ...sceneParams.scenesrc }
-              : { path: path };
+            // Avoid overriding parameters in editor that use same reference.
+            const sceneParamsClone = { ...sceneParams };
+
+            if (!this.hasValidSceneSrc(sceneParamsClone)) {
+              this.applyPlaceholderToScene(sceneParamsClone);
+            }
 
             return (
               <Scene
@@ -402,10 +424,10 @@ export default class Main extends React.Component {
                 isActive={sceneParams.sceneId === this.props.currentScene}
                 isHiddenBehindOverlay={ isHiddenBehindOverlay }
                 sceneIcons={sceneIcons}
-                sceneParams={sceneParams}
+                sceneParams={sceneParamsClone}
                 nextFocus={ this.state.nextFocus }
                 addThreeSixty={ this.addThreeSixty }
-                imageSrc={sceneSrc}
+                imageSrc={sceneParamsClone.scenesrc}
                 navigateToScene={this.navigateToScene.bind(this)}
                 forceStartCamera={this.props.forceStartCamera}
                 showInteraction={this.showInteraction.bind(this)}
