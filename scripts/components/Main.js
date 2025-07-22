@@ -8,6 +8,7 @@ import HUD from './HUD/HUD';
 import AudioButton from './HUD/Buttons/AudioButton';
 import NoScene from "./Scene/NoScene";
 import placeholderPath from '../assets/images/placeholder.png?url';
+import placeholderPath360 from '../assets/images/placeholder360.png?url';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -387,9 +388,11 @@ export default class Main extends React.Component {
         }
         {
           this.context.params.scenes.map(sceneParams => {
+            // Apply placeholder for missing scene images
+            const path = sceneParams.sceneType === SceneTypes.STATIC_SCENE ? placeholderPath : placeholderPath360;
             const sceneSrc = sceneParams.scenesrc?.path
               ? { ...sceneParams.scenesrc }
-              : { path: placeholderPath };
+              : { path: path };
 
             return (
               <Scene
