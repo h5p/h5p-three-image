@@ -1,0 +1,215 @@
+{
+  "semantics": [
+    {
+      "label": "Editor imagini 3D",
+      "fields": [
+        {
+          "label": "Scene",
+          "entity": "Scenă",
+          "field": {
+            "fields": [
+              {
+                "label": "Tip scenă",
+                "options": [
+                  {
+                    "label": "Imagine 360"
+                  },
+                  {
+                    "label": "Imagine statică"
+                  }
+                ]
+              },
+              {
+                "label": "Afișează butonul „Înapoi”",
+                "description": "Afișează butonul pentru a naviga înapoi la scena anterioară"
+              },
+              {},
+              {
+                "label": "Titlu scenă",
+                "description": "Folosit pentru a identifica scena"
+              },
+              {
+                "label": "Fundal scenă"
+              },
+              {
+                "label": "Descriere scenă",
+                "description": "Un text care poate descrie scena pentru utilizatorul final"
+              },
+              {},
+              {
+                "field": {
+                  "fields": [
+                    {
+                      "label": "Etichetă",
+                      "description": "Dacă este lăsat necompletat, nu se va afișa nicio etichetă și vom încerca să folosim câmpul de titlu pentru cititoarele de ecran"
+                    },
+                    {
+                      "label": "Setări etichetă",
+                      "fields": [
+                        {
+                          "label": "Poziție etichetă",
+                          "description": "Alegeți unde ar trebui să apară eticheta",
+                          "options": [
+                            {
+                              "label": "Folosește setarea de comportament"
+                            },
+                            {
+                              "label": "Aliniat la dreapta"
+                            },
+                            {
+                              "label": "Aliniat la stânga"
+                            },
+                            {
+                              "label": "Aliniat sus"
+                            },
+                            {
+                              "label": "Aliniat jos"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "Afișează eticheta",
+                          "description": "Dacă este ascunsă - etichetele se vor afișa doar la trecerea mouse-ului peste",
+                          "options": [
+                            {
+                              "label": "Folosește setarea de comportament"
+                            },
+                            {
+                              "label": "Arată"
+                            },
+                            {
+                              "label": "Ascunde"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {},
+                    {}
+                  ]
+                }
+              },
+              {
+                "label": "Stil buton",
+                "description": "Decideți cum ar trebui să arate butoanele care duc la această scenă. Pentru scenele statice care nu duc la scene noi, recomandăm butonul „Mai multe informații”.",
+                "options": [
+                  {
+                    "label": "Scenă nouă (săgeată)"
+                  },
+                  {
+                    "label": "Mai multe informații (plus)"
+                  }
+                ]
+              },
+              {
+                "label": "Pistă audio",
+                "description": "Adăugați o pistă audio specifică pentru această scenă."
+              }
+            ]
+          }
+        },
+        {},
+        {
+          "label": "Pistă audio"
+        }
+      ]
+    },
+    {
+      "label": "Setări de comportament",
+      "description": "Aceste opțiuni vă vor permite să controlați cum se comportă lumea virtuală.",
+      "fields": [
+        {
+          "label": "Audio global",
+          "description": "Adăugați o pistă audio care este disponibilă implicit pentru toate scenele."
+        },
+        {
+          "label": "Calitatea redării scenei",
+          "description": "Alegeți numărul de segmente de lățime și înălțime utilizate pentru a reda o scenă. Acest lucru afectează direct nivelul de calitate al scenei, încercați să creșteți calitatea dacă o scenă arată „pixelată” sau se văd „valuri” în cadrul scenelor. Rețineți că redarea de calitate superioară durează mai mult timp pentru a se încărca.",
+          "options": [
+            {
+              "label": "Calitate înaltă (128x128)"
+            },
+            {
+              "label": "Calitate medie (64x64)"
+            },
+            {
+              "label": "Calitate scăzută (16x16)"
+            }
+          ]
+        },
+        {
+          "label": "Setări etichetă",
+          "fields": [
+            {
+              "label": "Poziție etichetă",
+              "description": "Poziția implicită a etichetei. Poziția poate fi suprascrisă pentru fiecare interacțiune",
+              "options": [
+                {
+                  "label": "Aliniat la dreapta"
+                },
+                {
+                  "label": "Aliniat la stânga"
+                },
+                {
+                  "label": "Aliniat sus"
+                },
+                {
+                  "label": "Aliniat jos"
+                }
+              ]
+            },
+            {
+              "label": "Afișează etichetele",
+              "description": "Dacă nu este bifat - etichetele se vor afișa doar la trecerea mouse-ului peste"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Localizare",
+      "fields": [
+        {
+          "label": "Etichetă Aria pentru tipul de conținut",
+          "default": "Tur virtual"
+        },
+        {
+          "label": "Etichetă pentru redarea audio",
+          "default": "Redă pista audio"
+        },
+        {
+          "label": "Etichetă pentru pauză audio",
+          "default": "Pauză pistă audio"
+        },
+        {
+          "label": "Titlu pentru dialogul scenei",
+          "default": "Descriere scenă"
+        },
+        {
+          "label": "Etichetă pentru butonul de resetare a camerei",
+          "default": "Resetează camera"
+        },
+        {
+          "label": "Etichetă pentru butonul de trimitere a dialogului",
+          "default": "Trimite dialogul"
+        },
+        {
+          "label": "Etichetă pentru butonul de închidere a dialogului",
+          "default": "Închide dialogul"
+        },
+        {
+          "label": "Etichetă Aria pentru butonul de extindere a etichetei",
+          "default": "Extinde eticheta vizuală"
+        },
+        {
+          "label": "Etichetă pentru încărcarea imaginii de fundal în scena 360",
+          "default": "Se încarcă imaginea de fundal..."
+        },
+        {
+          "label": "Etichetă pentru când nu există conținut",
+          "default": "Fără conținut"
+        }
+      ]
+    }
+  ]
+}
