@@ -86,6 +86,7 @@
             },
             {
               "name": "interactions",
+              "entity": "interaction",
               "type": "list",
               "min": 0,
               "field": {
